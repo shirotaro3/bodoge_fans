@@ -70699,8 +70699,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  width: 270px;\n  padding: 3px 0;\n  text-align: center;\n  border: 1px solid #999;\n  border-radius: 4px;\n  &__mainText {\n    font-size: 25px;\n    margin: 0;\n  }\n  &__subText {\n    font-size: 10px;\n    margin: 0;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  width: 270px;\n  padding: 3px 0;\n  text-align: center;\n  border: 1px solid #999;\n  border-radius: 4px;\n  transition: .6s;\n  position: relative;\n  cursor: pointer;\n\n  ", ":hover&{\n    background: #555;\n    color: #fc7;\n    border-color: #ff9;\n  }\n  &__mainText {\n    font-size: 25px;\n    margin: 0;\n  }\n  &__subText {\n    font-size: 10px;\n    margin: 0;\n  }\n  &__link {\n    position: absolute;\n    top: 0;\n    left: 0;\n    bottom: 0;\n    right: 0;\n    width: 100%;\n    height: 100%;\n  }\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -70710,6 +70711,7 @@ function _templateObject() {
 }
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
 
 
 
@@ -70724,10 +70726,13 @@ var Logo = function Logo(_ref) {
     className: "".concat(className, "__mainText")
   }, logoText), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "".concat(className, "__subText")
-  }, subText));
+  }, subText), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+    to: "/",
+    className: "".concat(className, "__link")
+  }, " "));
 };
 
-var StyledLogo = Object(styled_components__WEBPACK_IMPORTED_MODULE_1__["default"])(Logo)(_templateObject());
+var StyledLogo = Object(styled_components__WEBPACK_IMPORTED_MODULE_1__["default"])(Logo)(_templateObject(), StyledLogo);
 /* harmony default export */ __webpack_exports__["default"] = (StyledLogo);
 
 /***/ }),
@@ -70809,7 +70814,7 @@ var FirstView = function FirstView() {
 var Home = function Home() {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "container mt-5"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Header__WEBPACK_IMPORTED_MODULE_3__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["BrowserRouter"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["BrowserRouter"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Header__WEBPACK_IMPORTED_MODULE_3__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     exact: true,
     path: "/",
     component: FirstView

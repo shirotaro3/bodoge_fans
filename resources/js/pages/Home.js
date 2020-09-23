@@ -20,8 +20,8 @@ const FirstView = () => {
 const Home = () => {
     return (
         <div className="container mt-5">
-            <Header />
             <Router>
+                <Header />
                 <Route exact path='/' component={FirstView} />
                 <Route path='/users/registration' component={UsersRegistration} />
             </Router>
