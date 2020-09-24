@@ -17,7 +17,7 @@ export const LoginButton = styled(Basic)`
   border-top: 1px solid #bbb;
   border-bottom: 1px solid #bbb;
   transition: .3s;
-  ${LoginButton}:hover&{
+  &:hover{
     background: #888;
     color: #fff;
     border-color: #fff;

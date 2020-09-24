@@ -27,6 +27,7 @@
     "dependencies": {
         "react-icons": "^3.11.0",
         "react-router-dom": "^5.2.0",
+        "react-router-hash-link": "^2.1.0",
         "styled-components": "^5.2.0",
         "styled-media-query": "^2.1.2"
     }

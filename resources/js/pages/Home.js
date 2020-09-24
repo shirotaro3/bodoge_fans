@@ -9,7 +9,7 @@ const Home = () => {
           FirstView
           <Link to='/users/registration'>ユーザー登録</Link>
       </div>
-  )
+  );
 }
 
 export default Home;

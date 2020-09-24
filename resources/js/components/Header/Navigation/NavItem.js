@@ -28,7 +28,7 @@ const StyledNavItem = styled(NavItem)`
   border-top: 7px solid #999;
   border-bottom: 2px solid #777;
   border-radius: 7px;
-  ${StyledNavItem}:hover&{
+  &:hover{
     background: #555;
     color: #5ae;
     border-top-color: #6be;

@@ -6,11 +6,11 @@ import LoginBox from './LoginBox';
 
 const Header = ({className}) => {
   return (
-    <div className={className}>
+    <header className={className} id='nav-top'>
       <Logo logoText="BodogeFans" subText="ボードゲームを愛する人とお店のポータルサイト" />
       <Navigation />
       <LoginBox />
-    </div>
+    </header>
   );
 }
 
