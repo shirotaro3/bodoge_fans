@@ -22,7 +22,7 @@
     </head>
     <body>
         
-        <div id="home">
+        <div id="index">
         </div>
 
         <script src="{{ asset('js/app.js') }}" defer></script>

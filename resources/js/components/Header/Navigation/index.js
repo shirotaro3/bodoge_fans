@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import NavItem from './NavItem';
 import { mixinIsShownTablet } from '../../shared/StyledCss';
-import { BsSearch, BsFillCalendarFill } from 'react-icons/bs';
+import { BsSearch, BsFillCalendarFill, BsChatDots } from 'react-icons/bs';
 import { IconContext } from 'react-icons';
 
 const items = [
@@ -15,6 +15,11 @@ const items = [
     to: '/users/registration',
     text: 'イベント情報',
     icon: <BsFillCalendarFill />
+  },
+  {
+    to: '/review',
+    text: 'クチコミ',
+    icon: <BsChatDots />
   }
 ]
 
