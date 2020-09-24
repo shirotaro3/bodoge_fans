@@ -3,9 +3,10 @@ import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import { mixinDivLink } from '../../shared/StyledCss';
 
-const NavItem = ({to, children, className}) => {
+const NavItem = ({to, children, icon, className}) => {
   return (
     <div className={className}>
+      <div>{icon}</div>
       {children}
       <NavLink
         to={to}
@@ -18,13 +19,14 @@ const NavItem = ({to, children, className}) => {
 
 const StyledNavItem = styled(NavItem)`
   ${mixinDivLink}
+  color: #fff;
   width: 110px;
   transition: .6s;
   text-align: center;
-  padding-top: 19px;
-  font-size: 15px;
+  padding-top: 7px;
+  font-size: 13px;
   border-top: 7px solid #999;
-  border-bottom: 2px solid #999;
+  border-bottom: 2px solid #777;
   border-radius: 7px;
   ${StyledNavItem}:hover&{
     background: #555;
