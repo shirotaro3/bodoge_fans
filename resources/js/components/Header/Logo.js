@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { mixinDivLink } from '../shared/StyledCss';
 
 const Logo = ({ className, logoText, subText }) => {
   return (
@@ -17,13 +18,13 @@ const Logo = ({ className, logoText, subText }) => {
 }
 
 const StyledLogo = styled(Logo)`
+  ${mixinDivLink}
   width: 270px;
   padding: 3px 0;
   text-align: center;
   border: 1px solid #999;
   border-radius: 4px;
   transition: .6s;
-  position: relative;
   cursor: pointer;
 
   ${StyledLogo}:hover&{
@@ -38,15 +39,6 @@ const StyledLogo = styled(Logo)`
   &__subText {
     font-size: 10px;
     margin: 0;
-  }
-  &__link {
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    width: 100%;
-    height: 100%;
   }
 `
 

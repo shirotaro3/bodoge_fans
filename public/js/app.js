@@ -70446,6 +70446,222 @@ function v(){return(v=Object.assign||function(e){for(var t=1;t<arguments.length;
 
 /***/ }),
 
+/***/ "./node_modules/styled-media-query/dist/styled-media-query.es.js":
+/*!***********************************************************************!*\
+  !*** ./node_modules/styled-media-query/dist/styled-media-query.es.js ***!
+  \***********************************************************************/
+/*! exports provided: default, pxToEm, pxToRem, defaultBreakpoints, generateMedia */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pxToEm", function() { return pxToEm; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pxToRem", function() { return pxToRem; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "defaultBreakpoints", function() { return defaultBreakpoints; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "generateMedia", function() { return generateMedia; });
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+
+
+function _taggedTemplateLiteral(strings, raw) {
+  if (!raw) {
+    raw = strings.slice(0);
+  }
+
+  return Object.freeze(Object.defineProperties(strings, {
+    raw: {
+      value: Object.freeze(raw)
+    }
+  }));
+}
+
+/**
+ * Converts breakpoint units in px to rem or em
+ * @param {Object} breakpoints - an object containing breakpoint names as keys and the width as value
+ * @param {number} ratio [16] - size of 1 rem in px. What is your main font-size in px?
+ * @param {'rem' | 'em'} unit
+ */
+function pxToEmOrRem(breakpoints) {
+  var ratio = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 16;
+  var unit = arguments.length > 2 ? arguments[2] : undefined;
+  var newBreakpoints = {};
+
+  for (var key in breakpoints) {
+    var point = breakpoints[key];
+
+    if (String(point).includes('px')) {
+      newBreakpoints[key] = +(parseInt(point) / ratio) + unit;
+      continue;
+    }
+
+    newBreakpoints[key] = point;
+  }
+
+  return newBreakpoints;
+}
+/**
+ * Converts breakpoint units in px to em 
+ * @param {Object} breakpoints - an object containing breakpoint names as keys and the width as value
+ * @param {number} ratio [16] - size of 1em in px. What is your main font-size in px?
+ */
+
+
+function pxToEm(breakpoints) {
+  var ratio = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 16;
+  return pxToEmOrRem(breakpoints, ratio, 'em');
+}
+/**
+ * Converts breakpoint units in px to rem 
+ * @param {Object} breakpoints - an object containing breakpoint names as keys and the width as value
+ * @param {number} ratio [16] - size of 1rem in px. What is your main font-size in px?
+ */
+
+function pxToRem(breakpoints) {
+  var ratio = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 16;
+  return pxToEmOrRem(breakpoints, ratio, 'rem');
+}
+
+function _templateObject5() {
+  var data = _taggedTemplateLiteral(["\n          @media (min-width: ", ") {\n            ", "\n          }\n        "]);
+
+  _templateObject5 = function _templateObject5() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject4() {
+  var data = _taggedTemplateLiteral(["\n          @media (max-width: ", ") {\n            ", "\n          }\n        "]);
+
+  _templateObject4 = function _templateObject4() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject3() {
+  var data = _taggedTemplateLiteral(["\n    @media (min-width: ", ") and\n      (max-width: ", ") {\n      ", "\n    }\n  "]);
+
+  _templateObject3 = function _templateObject3() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject2() {
+  var data = _taggedTemplateLiteral(["\n    @media (min-width: ", ") {\n      ", "\n    }\n  "]);
+
+  _templateObject2 = function _templateObject2() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject() {
+  var data = _taggedTemplateLiteral(["\n    @media (max-width: ", ") {\n      ", "\n    }\n  "]);
+
+  _templateObject = function _templateObject() {
+    return data;
+  };
+
+  return data;
+}
+/**
+ * Default media breakpoints
+ * @type {Object}
+ */
+
+var defaultBreakpoints = {
+  huge: '1440px',
+  large: '1170px',
+  medium: '768px',
+  small: '450px'
+};
+
+function getSizeFromBreakpoint(breakpointValue) {
+  var breakpoints = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+  if (breakpoints[breakpointValue]) {
+    return breakpoints[breakpointValue];
+  } else if (parseInt(breakpointValue)) {
+    return breakpointValue;
+  } else {
+    console.error('styled-media-query: No valid breakpoint or size specified for media.');
+    return '0';
+  }
+}
+/**
+ * Media query generator
+ * @param {Object} breakpoints - Map labels to breakpoint sizes
+ * @return {Object} - Media generators for each breakpoint
+ */
+
+
+function generateMedia() {
+  var breakpoints = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultBreakpoints;
+
+  var lessThan = function lessThan(breakpoint) {
+    return function () {
+      return Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["css"])(_templateObject(), getSizeFromBreakpoint(breakpoint, breakpoints), styled_components__WEBPACK_IMPORTED_MODULE_0__["css"].apply(void 0, arguments));
+    };
+  };
+
+  var greaterThan = function greaterThan(breakpoint) {
+    return function () {
+      return Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["css"])(_templateObject2(), getSizeFromBreakpoint(breakpoint, breakpoints), styled_components__WEBPACK_IMPORTED_MODULE_0__["css"].apply(void 0, arguments));
+    };
+  };
+
+  var between = function between(firstBreakpoint, secondBreakpoint) {
+    return function () {
+      return Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["css"])(_templateObject3(), getSizeFromBreakpoint(firstBreakpoint, breakpoints), getSizeFromBreakpoint(secondBreakpoint, breakpoints), styled_components__WEBPACK_IMPORTED_MODULE_0__["css"].apply(void 0, arguments));
+    };
+  };
+
+  var oldStyle = Object.keys(breakpoints).reduce(function (acc, label) {
+    var size = breakpoints[label];
+
+    acc.to[label] = function () {
+      console.warn("styled-media-query: Use media.lessThan('".concat(label, "') instead of old media.to.").concat(label, " (Probably we'll deprecate it)"));
+      return Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["css"])(_templateObject4(), size, styled_components__WEBPACK_IMPORTED_MODULE_0__["css"].apply(void 0, arguments));
+    };
+
+    acc.from[label] = function () {
+      console.warn("styled-media-query: Use media.greaterThan('".concat(label, "') instead of old media.from.").concat(label, " (Probably we'll deprecate it)"));
+      return Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["css"])(_templateObject5(), size, styled_components__WEBPACK_IMPORTED_MODULE_0__["css"].apply(void 0, arguments));
+    };
+
+    return acc;
+  }, {
+    to: {},
+    from: {}
+  });
+  return Object.assign({
+    lessThan: lessThan,
+    greaterThan: greaterThan,
+    between: between
+  }, oldStyle);
+}
+/**
+ * Media object with default breakpoints
+ * @return {object} - Media generators for each size
+ */
+
+var index = generateMedia();
+/**
+ * Usage: styled.div` ${media.from.medium`background: #000;`} `;
+ * With this code, background for small and medium sizes will be `default` and for more than medium, will be `#000`
+ */
+
+/* harmony default export */ __webpack_exports__["default"] = (index);
+
+
+
+/***/ }),
+
 /***/ "./node_modules/tiny-invariant/dist/tiny-invariant.esm.js":
 /*!****************************************************************!*\
   !*** ./node_modules/tiny-invariant/dist/tiny-invariant.esm.js ***!
@@ -70700,8 +70916,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _shared_StyledCss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../shared/StyledCss */ "./resources/js/components/shared/StyledCss.js");
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  width: 270px;\n  padding: 3px 0;\n  text-align: center;\n  border: 1px solid #999;\n  border-radius: 4px;\n  transition: .6s;\n  position: relative;\n  cursor: pointer;\n\n  ", ":hover&{\n    background: #555;\n    color: #fc7;\n    border-color: #ff9;\n  }\n  &__mainText {\n    font-size: 25px;\n    margin: 0;\n  }\n  &__subText {\n    font-size: 10px;\n    margin: 0;\n  }\n  &__link {\n    position: absolute;\n    top: 0;\n    left: 0;\n    bottom: 0;\n    right: 0;\n    width: 100%;\n    height: 100%;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  ", "\n  width: 270px;\n  padding: 3px 0;\n  text-align: center;\n  border: 1px solid #999;\n  border-radius: 4px;\n  transition: .6s;\n  cursor: pointer;\n\n  ", ":hover&{\n    background: #555;\n    color: #fc7;\n    border-color: #ff9;\n  }\n  &__mainText {\n    font-size: 25px;\n    margin: 0;\n  }\n  &__subText {\n    font-size: 10px;\n    margin: 0;\n  }\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -70711,6 +70928,7 @@ function _templateObject() {
 }
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
 
 
 
@@ -70732,8 +70950,112 @@ var Logo = function Logo(_ref) {
   }, " "));
 };
 
-var StyledLogo = Object(styled_components__WEBPACK_IMPORTED_MODULE_1__["default"])(Logo)(_templateObject(), StyledLogo);
+var StyledLogo = Object(styled_components__WEBPACK_IMPORTED_MODULE_1__["default"])(Logo)(_templateObject(), _shared_StyledCss__WEBPACK_IMPORTED_MODULE_3__["mixinDivLink"], StyledLogo);
 /* harmony default export */ __webpack_exports__["default"] = (StyledLogo);
+
+/***/ }),
+
+/***/ "./resources/js/components/Header/Navigation/NavItem.js":
+/*!**************************************************************!*\
+  !*** ./resources/js/components/Header/Navigation/NavItem.js ***!
+  \**************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+/* harmony import */ var _shared_StyledCss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../shared/StyledCss */ "./resources/js/components/shared/StyledCss.js");
+function _templateObject() {
+  var data = _taggedTemplateLiteral(["\n  ", "\n  width: 110px;\n  transition: .6s;\n  text-align: center;\n  padding-top: 19px;\n  font-size: 15px;\n  border-top: 7px solid #999;\n  border-bottom: 2px solid #999;\n  border-radius: 7px;\n  ", ":hover&{\n    background: #555;\n    color: #5ae;\n    border-top-color: #6be;\n    border-bottom-color: #6be;\n  }\n  &__activeLink {\n    background: #fff;\n    opacity: .2;\n    cursor: default;\n  }\n"]);
+
+  _templateObject = function _templateObject() {
+    return data;
+  };
+
+  return data;
+}
+
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+
+
+
+
+
+var NavItem = function NavItem(_ref) {
+  var to = _ref.to,
+      children = _ref.children,
+      className = _ref.className;
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: className
+  }, children, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
+    to: to,
+    className: "".concat(className, "__link"),
+    activeClassName: "".concat(className, "__activeLink")
+  }));
+};
+
+var StyledNavItem = Object(styled_components__WEBPACK_IMPORTED_MODULE_2__["default"])(NavItem)(_templateObject(), _shared_StyledCss__WEBPACK_IMPORTED_MODULE_3__["mixinDivLink"], StyledNavItem);
+/* harmony default export */ __webpack_exports__["default"] = (StyledNavItem);
+
+/***/ }),
+
+/***/ "./resources/js/components/Header/Navigation/index.js":
+/*!************************************************************!*\
+  !*** ./resources/js/components/Header/Navigation/index.js ***!
+  \************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+/* harmony import */ var _NavItem__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./NavItem */ "./resources/js/components/Header/Navigation/NavItem.js");
+/* harmony import */ var _shared_StyledCss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../shared/StyledCss */ "./resources/js/components/shared/StyledCss.js");
+function _templateObject() {
+  var data = _taggedTemplateLiteral(["\n  ", "\n  display: flex;\n  margin-left: 20px;\n"]);
+
+  _templateObject = function _templateObject() {
+    return data;
+  };
+
+  return data;
+}
+
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+
+
+
+
+var items = [{
+  to: '/users/registration',
+  text: '新規登録'
+}, {
+  to: '/users/mypage',
+  text: 'Mypage'
+}];
+
+var Navigation = function Navigation(_ref) {
+  var className = _ref.className;
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: className
+  }, items.map(function (item) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_NavItem__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      to: item.to,
+      key: item.to
+    }, item.text);
+  }));
+};
+
+var StyledNavigation = Object(styled_components__WEBPACK_IMPORTED_MODULE_1__["default"])(Navigation)(_templateObject(), _shared_StyledCss__WEBPACK_IMPORTED_MODULE_3__["mixinIsShownTablet"]);
+/* harmony default export */ __webpack_exports__["default"] = (StyledNavigation);
 
 /***/ }),
 
@@ -70750,8 +71072,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
 /* harmony import */ var _Logo__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Logo */ "./resources/js/components/Header/Logo.js");
+/* harmony import */ var _Navigation__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Navigation */ "./resources/js/components/Header/Navigation/index.js");
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  color: #fff;\n  background: #333;\n  padding: 10px;\n  height: 80px;\n  margin: 0;\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  color: #fff;\n  background: #333;\n  padding: 10px;\n  height: 80px;\n  margin: 0;\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -70766,6 +71089,7 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 
 
 
+
 var Header = function Header(_ref) {
   var className = _ref.className;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -70773,11 +71097,64 @@ var Header = function Header(_ref) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Logo__WEBPACK_IMPORTED_MODULE_2__["default"], {
     logoText: "BodogeFans",
     subText: "\u30DC\u30FC\u30C9\u30B2\u30FC\u30E0\u3092\u611B\u3059\u308B\u4EBA\u3068\u304A\u5E97\u3092\u7E4B\u3050\u30DD\u30FC\u30BF\u30EB\u30B5\u30A4\u30C8"
-  }));
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Navigation__WEBPACK_IMPORTED_MODULE_3__["default"], null));
 };
 
 var StyledHeader = Object(styled_components__WEBPACK_IMPORTED_MODULE_1__["default"])(Header)(_templateObject());
 /* harmony default export */ __webpack_exports__["default"] = (StyledHeader);
+
+/***/ }),
+
+/***/ "./resources/js/components/shared/StyledCss.js":
+/*!*****************************************************!*\
+  !*** ./resources/js/components/shared/StyledCss.js ***!
+  \*****************************************************/
+/*! exports provided: mixinDivLink, mixinIsShownTablet, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "mixinDivLink", function() { return mixinDivLink; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "mixinIsShownTablet", function() { return mixinIsShownTablet; });
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+/* harmony import */ var styled_media_query__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! styled-media-query */ "./node_modules/styled-media-query/dist/styled-media-query.es.js");
+function _templateObject3() {
+  var data = _taggedTemplateLiteral(["\n    /* screen width is greater than 1170px */\n    visibility: visible;\n  "]);
+
+  _templateObject3 = function _templateObject3() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject2() {
+  var data = _taggedTemplateLiteral(["\nvisibility: hidden;\n  ", "\n"]);
+
+  _templateObject2 = function _templateObject2() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject() {
+  var data = _taggedTemplateLiteral(["\n  position: relative;\n  &__link {\n    position: absolute;\n    top: 0;\n    left: 0;\n    bottom: 0;\n    right: 0;\n    width: 100%;\n    height: 100%;\n  };\n"]);
+
+  _templateObject = function _templateObject() {
+    return data;
+  };
+
+  return data;
+}
+
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+
+
+var mixinDivLink = Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["css"])(_templateObject());
+var mixinIsShownTablet = Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["css"])(_templateObject2(), styled_media_query__WEBPACK_IMPORTED_MODULE_1__["default"].greaterThan('medium')(_templateObject3()));
+/* harmony default export */ __webpack_exports__["default"] = (mixinDivLink);
 
 /***/ }),
 
@@ -70814,7 +71191,7 @@ var FirstView = function FirstView() {
 var Home = function Home() {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "container mt-5"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["BrowserRouter"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Header__WEBPACK_IMPORTED_MODULE_3__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["HashRouter"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Header__WEBPACK_IMPORTED_MODULE_3__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     exact: true,
     path: "/",
     component: FirstView
