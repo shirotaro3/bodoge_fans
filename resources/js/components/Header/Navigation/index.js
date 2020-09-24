@@ -7,12 +7,12 @@ import { IconContext } from 'react-icons';
 
 const items = [
   {
-    to: '/search',
+    to: '/facilities/search',
     text: 'お店を探す',
     icon: <BsSearch />
   },
   {
-    to: '/users/registration',
+    to: '/events',
     text: 'イベント情報',
     icon: <BsFillCalendarFill />
   },
