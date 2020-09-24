@@ -6,7 +6,7 @@ import Navigation from './Navigation';
 const Header = ({className}) => {
   return (
     <div className={className}>
-      <Logo logoText="BodogeFans" subText="ボードゲームを愛する人とお店を繋ぐポータルサイト" />
+      <Logo logoText="BodogeFans" subText="ボードゲームを愛する人とお店のポータルサイト" />
       <Navigation />
     </div>
   );

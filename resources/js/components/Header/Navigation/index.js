@@ -5,12 +5,12 @@ import { mixinIsShownTablet } from '../../shared/StyledCss';
 
 const items = [
   {
-    to: '/users/registration',
-    text: '新規登録'
+    to: '/search',
+    text: 'お店を探す'
   },
   {
-    to: '/users/mypage',
-    text: 'Mypage'
+    to: '/users/registration',
+    text: '新規登録'
   }
 ]
 
@@ -19,7 +19,11 @@ const Navigation = ({className}) => {
     <div className={className}>
       {
         items.map((item) => {
-          return <NavItem to={item.to} key={item.to}>{item.text}</NavItem>
+          return (
+            <NavItem
+              to={item.to}
+              key={item.to}
+            >{item.text}</NavItem>)
         })
       }
     </div>
