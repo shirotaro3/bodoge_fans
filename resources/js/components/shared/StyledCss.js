@@ -21,5 +21,3 @@ visibility: hidden;
     visibility: visible;
   `}
 `
-
-export default mixinDivLink;

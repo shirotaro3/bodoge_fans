@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import mixinDivLink from '../shared/StyledCss';
 import NavTop from './NavTop';
 import Credit from './Credit';
 

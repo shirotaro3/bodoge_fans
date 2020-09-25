@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import { HashLink } from 'react-router-hash-link';
-import mixinDivLink from '../shared/StyledCss';
+import { mixinDivLink } from '../shared/StyledCss';
 
 const NavTop = ({className}) => {
   return (
     <div className={className}>
-      トップへ戻る
+      ページ上部へ戻る
       <HashLink smooth to='#nav-top' className={`${className}__link`}></HashLink>
     </div>
   );

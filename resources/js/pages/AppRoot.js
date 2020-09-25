@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 
 // components
+import GlobalStyle from '../components/shared/GlobalStyle';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
@@ -50,6 +51,7 @@ const AppRoot = ({className}) => {
                 </Switch>
                 <Footer />
             </Router>
+            <GlobalStyle />
         </div>
     );
 }
