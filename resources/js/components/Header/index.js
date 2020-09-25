@@ -24,9 +24,9 @@ const StyledHeader = styled(Header)`
   margin: 0;
   &__strech {
     flex: 1;
-    margin: 13px 0 13px 20px;
-    border-top: 8px dashed #444;
-    border-bottom: 8px dashed #444;
+    margin: 11px 0 11px 20px;
+    border-top: 12px dotted #555;
+    border-bottom: 12px dotted #444;
   }
 `
 

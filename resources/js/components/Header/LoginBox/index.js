@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { LinkWhite as Link } from '../../shared/Links';
 import { LoginButton } from '../../shared/Buttons';
 
 const LoginBox = ({className}) => {
