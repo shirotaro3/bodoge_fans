@@ -14,11 +14,15 @@ const UserRegistrationForm = () => {
 
   // Submit時の処理
   const onSubmit = handleSubmit(async (data) => {
-    console.log(data);
-    setWait(true);
-    const response = await axios.post('/api/users/registration', data);
-    console.log(response);
-    setWait(false);
+      try {
+        console.log(data);
+        setWait(true);
+        const response = await axios.post('/api/users/registration', data);
+        console.log(response);
+        setWait(false);
+      } catch (err) {
+        console.log('errr');
+      }
   });
 
   // 処理に成功時、リダイレクトする
