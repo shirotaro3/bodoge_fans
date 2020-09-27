@@ -49,7 +49,7 @@ class RegisterController extends Controller
         $validate = $this->validator($request->all());
 
         if ($validate->fails()) {
-            return new JsonResponse($validate->errors());
+            return new JsonResponse($validate->errors(), 400);
         }
 
         event(new Registered($user = $this->create($request->all())));

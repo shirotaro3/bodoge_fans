@@ -7,7 +7,7 @@ import Form from './Form';
 const UserRegistrationForm = () => {
   const { register, handleSubmit, watch, errors, control } = useForm();
 
-  // wait 非同期通信の待機中を表す *boolean
+  // wait 通信の待機中を表す *boolean
   const [wait, setWait] = useState(false);
   // redirectPath 処理成功時のリダイレクト先パス *string
   const [redirectPath, redirectTo] = useState(null);
@@ -20,14 +20,15 @@ const UserRegistrationForm = () => {
         const response = await axios.post('/api/users/registration', data);
         console.log(response);
         setWait(false);
+        redirectTo('/');
       } catch (err) {
-        console.log('errr');
+        setWait(false);
       }
   });
 
   // 処理に成功時、リダイレクトする
   if (redirectPath) {
-    return <Redirect to={redirectPath} />;
+    return <Redirect to={redirectPath || '/'} />;
   }
   return (
     <Form

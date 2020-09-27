@@ -64,7 +64,7 @@ const Components = ({register, watch, errors, wait, onSubmit, control}) => {
         <Input name='password_confirmation' type='password' ref={register({ required: true })} />
         {errors.password_confirmation && <p>必須項目です。</p>}
         
-        {wait ? <ButtonDisabled disabled>送信中</ButtonDisabled> : <Button type="submit">登録</Button>}
+        {wait ? <ButtonDisabled disabled>通信中</ButtonDisabled> : <Button type="submit">登録</Button>}
       </Form>
       <Waiting wait={wait} />
     </Box>
