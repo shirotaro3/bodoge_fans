@@ -17,7 +17,7 @@ const items = [
     icon: <BsFillCalendarFill />
   },
   {
-    to: '/review',
+    to: '/users/dashboard',
     text: 'クチコミ',
     icon: <BsChatDots />
   }

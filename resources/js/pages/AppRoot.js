@@ -4,7 +4,9 @@ import styled from 'styled-components';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 
 // components
-import GlobalStyle from '../components/shared/GlobalStyle';
+import GlobalStyle from '../components/global/GlobalStyle';
+import RequireAuth from '../components/global/RequireAuth';
+import { ContextProvider } from '../components/global/ContextProvider';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
@@ -12,6 +14,7 @@ import Footer from '../components/Footer';
 import Home from './Home';
 import UsersRegistration from './users/Registration';
 import UsersLogin from './users/Login';
+import Dashboard from './users/Dash';
 import Events from './events';
 import FacilitiesSearch from './facilities';
 import NotFound from './404';
@@ -19,38 +22,35 @@ import NotFound from './404';
 const AppRoot = ({className}) => {
     return (
         <div className={className}>
-            <Router>
-                <Header />
-                <Switch>
-                    {/* Common */}
-                    <Route exact path='/'>
-                        <Home />
-                    </Route>
+            <ContextProvider>
+                <Router>
+                    <Header />
+                    <Switch>
+                        {/* Common */}
+                        <Route exact path='/' component={Home} />
 
-                    {/* Users */}
-                    <Route path='/users/registration'>
-                        <UsersRegistration />
-                    </Route>
-                    <Route path='/users/login'>
-                        <UsersLogin />
-                    </Route>
+                        {/* Users */}
+                        <Route exact path='/users/registration' component={UsersRegistration} />
+                        <Route exact path='/users/login' component={UsersLogin} />
 
-                    {/* Events */}
-                    <Router path='/events'>
-                        <Events />
-                    </Router>
+                        {/* Events */}
+                        <Route exact path='/events' component={Events} />
 
-                    {/* Facilities */}
-                    <Router path='/Facilities/Search'>
-                        <FacilitiesSearch />
-                    </Router>
+                        {/* Facilities */}
+                        <Route exact path='/Facilities/Search' component={FacilitiesSearch} />
 
-                    <Route>
-                        <NotFound />
-                    </Route>
-                </Switch>
-                <Footer />
-            </Router>
+                        {/* 認証が必要なルート */}
+                        <RequireAuth>
+                            <Switch>
+                                <Route exact path='/users/dashboard' component={Dashboard} /> 
+                            </Switch>
+                        </RequireAuth>
+
+                        <Route component={NotFound} />
+                    </Switch>
+                    <Footer />
+                </Router>
+            </ContextProvider>
             <GlobalStyle />
         </div>
     );
