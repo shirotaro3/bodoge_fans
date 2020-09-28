@@ -14,6 +14,7 @@ import Footer from '../components/Footer';
 import Home from './Home';
 import UsersRegistration from './users/Registration';
 import UsersLogin from './users/Login';
+import UsersLogout from './users/Logout';
 import Dashboard from './users/Dash';
 import Events from './events';
 import FacilitiesSearch from './facilities';
@@ -42,7 +43,9 @@ const AppRoot = ({className}) => {
                         {/* 認証が必要なルート */}
                         <RequireAuth>
                             <Switch>
-                                <Route exact path='/users/dashboard' component={Dashboard} /> 
+                                <Route exact path='/users/dashboard' component={Dashboard} />
+                                <Route exact path='/users/logout' component={UsersLogout} />
+                                <Route component={NotFound} />
                             </Switch>
                         </RequireAuth>
 

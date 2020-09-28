@@ -1,15 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
-import { LinkWhite as Link } from '../../shared/Links';
-import { LoginButton } from '../../shared/Buttons';
+import Authenticated from './Authenticated';
+import Unauthenticated from './Unauthenticated';
+import { useGlobalState } from '../../global/ContextProvider';
 
 const LoginBox = ({className}) => {
+  const [globalState, dispatch] = useGlobalState();
+
   return (
     <div className={className}>
-      <Link to='/users/login'>
-        <LoginButton>ログイン</LoginButton>
-      </Link><br />
-      <Link to='/users/registration'>→初めて利用される方</Link>
+      {globalState.auth.isLoggedIn
+      ? <Authenticated />
+      : <Unauthenticated />}
     </div>
   );
 }

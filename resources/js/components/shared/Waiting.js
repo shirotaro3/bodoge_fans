@@ -2,13 +2,13 @@ import React from 'react';
 import styled, { keyframes } from 'styled-components';
 
 // 親要素にposition: relativeが必要
-const Waiting = ({wait = false, className}) => {
+const Waiting = ({wait = false, text='通信中', className}) => {
   return (
     <>
       {wait && (
         <div className={className}>
           <div className={`${className}__icon`}></div>
-          <span>通信中</span>
+          <span>{text}</span>
         </div>
       )}
     </>

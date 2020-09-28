@@ -10,3 +10,11 @@ export const BoxRoundedBlack = styled.div`
   text-align: center;
   position: relative;
 `;
+
+export const BoxTransparent = styled.div`
+  margin: 50px auto;
+  color: #fff;
+  width: 100%;
+  min-height: 200px;
+  position: relative;
+`

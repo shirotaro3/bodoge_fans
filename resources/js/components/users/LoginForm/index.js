@@ -21,10 +21,11 @@ const UserLoginForm = () => {
         setWait(true);
         console.log(data);
         const csrf = await axios.get('/sanctum/csrf-cookie');
-        // const response = await axios.post('/api/users/login', data);
-        // console.log(response);
+        const response = await axios.post('/api/users/login', data);
+        console.log(response);
         setWait(false);
         dispatch({type: 'LOGIN', name: 'JIRO', isLoggedIn: true});
+        redirectTo('/users/dashboard');
       } catch (err) {
         setWait(false);
       }

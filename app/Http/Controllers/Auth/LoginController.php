@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -19,8 +19,6 @@ class LoginController extends Controller
     | to conveniently provide its functionality to your applications.
     |
     */
-
-    use AuthenticatesUsers;
 
     /**
      * Where to redirect users after login.
@@ -40,13 +38,17 @@ class LoginController extends Controller
     }
 
     public function login(Request $request){
-        
         $credentials = $request->only('email', 'password');
 
-        if(auth::attempt($credentials)) {
+        if(Auth::attempt($credentials)) {
             return ['result' => true];
         }
 
-        return response()->json('ユーザーが見つかりません。', 403);
+        return response()->json(['message' => 'Invalid params'], 403);
+    }
+
+    public function logout(Request $request){
+        Auth::logout();
+        return response()->json(['message' => 'Logged out'], 200);
     }
 }
