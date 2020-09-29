@@ -13,7 +13,8 @@ const initialState = {
   notice: {
     text: '',
     isShow: false,
-    type: 'MESSAGE'
+    type: 'MESSAGE',
+    color: '#fff'
   },
   tracking: {
     afterLoginPath: null,

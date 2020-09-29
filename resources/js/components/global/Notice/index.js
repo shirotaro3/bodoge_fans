@@ -9,14 +9,13 @@ const Notice = ({className}) => {
   const onEntered = () => {
     setTimeout(()=>{
       dispatch({type: 'HIDE_NOTICE'});
-    }, 4000);
+    }, 2600);
   }
   return (
     <div className={className}>
       <Transition in={globalState.notice.isShow} timeout={200} onEntered={onEntered}>
         {(state) => (
-          <Animation state={state}>
-            {globalState.notice.type === 'ALERT'? 'エラー：' : ''}
+          <Animation state={state} color={globalState.notice.color}>
             {globalState.notice.text}
           </Animation>
         )}

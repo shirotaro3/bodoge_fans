@@ -15,6 +15,6 @@ class Facility extends Model
      * @var array
      */
     protected $fillable = [
-        'm_facility_type_id', 'm_budget_id', 'm_scale_id', 'name', 'description', 'm_prefecture_id', 'address', 'building', 'postal_code'
+        'm_facility_type_id', 'm_budget_id', 'm_scale_id', 'name', 'description', 'introduction', 'm_prefecture_id', 'address', 'building', 'postal_code'
     ];
 }

@@ -21,6 +21,7 @@ class CreateFacilitiesTable extends Migration
             $table->foreignId('m_scale_id')->constrained();
             $table->string('name', 100);
             $table->text('description');
+            $table->text('introduction');
             $table->foreignId('m_prefecture_id')->constrained();
             $table->string('address', 100);
             $table->string('building', 100)->nullable();

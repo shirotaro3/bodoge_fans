@@ -16,7 +16,6 @@ class CreateMFacilityTypesTable extends Migration
         Schema::create('m_facility_types', function (Blueprint $table) {
             $table->id();
             $table->string('detail');
-            $table->timestamps();
         });
     }
 

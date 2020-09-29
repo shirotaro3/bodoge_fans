@@ -13,6 +13,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // User::factory(10)->create();
+        $this->call(MBudgetSeeder::class);
+        $this->call(MFacilityTypeSeeder::class);
+        $this->call(MPrefectureSeeder::class);
+        $this->call(MScaleSeeder::class);
+        $this->call(MServiceSeeder::class);
     }
 }
