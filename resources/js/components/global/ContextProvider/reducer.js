@@ -1,5 +1,7 @@
 const reducer = (state = {}, action) => {
   switch(action.type) {
+
+    // Authentication
     case 'LOGIN':
       return {
         ...state,
@@ -16,6 +18,8 @@ const reducer = (state = {}, action) => {
           isLoggedIn: false
         }
       }
+
+    // Notice
     case 'ALERT':
       return {
         ...state,
@@ -41,6 +45,15 @@ const reducer = (state = {}, action) => {
           text: state.notice.text,
           isShow: false,
           type: state.notice.type
+        }
+      }
+
+    // Tracking
+    case 'SET_AFTER_LOGIN_PATH':
+      return {
+        ...state,
+        tracking: {
+          afterLoginPath: action.path
         }
       }
   }

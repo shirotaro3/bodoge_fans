@@ -9,7 +9,10 @@ const initialState = {
   notice: {
     text: '',
     isShow: false,
-    type: ''
+    type: 'MESSAGE'
+  },
+  tracking: {
+    afterLoginPath: null,
   }
 }
 
