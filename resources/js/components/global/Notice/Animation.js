@@ -7,15 +7,15 @@ const Animation = styled.div`
   font-size: 13px;
   font-weight: bold;
   border-radius: 20px;
-  padding: 30px 20px 7px 20px;
+  padding: 53px 20px 7px 20px;
   transform: ${({state}) => {
     switch (state) {
       case 'entering':
           return 'translateY(0)'
       case 'entered':
-          return 'translateY(55px)'
+          return 'translateY(32px)'
       case 'exiting':
-          return 'translateY(55px)'
+          return 'translateY(32px)'
       case 'exited':
           return 'translateY(0)'
     }

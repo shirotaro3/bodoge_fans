@@ -28,7 +28,6 @@ const UserLoginForm = () => {
 
         // ログイン後遷移先が登録されていればそこに、なければダッシュボードにリダイレクトする
         dispatch({type: 'REDIRECT', to: globalState.tracking.afterLoginPath || defaultRedirectPath});
-        console.log(globalState);
       } catch (err) {
         setWait(false);
         dispatch({type: 'ALERT', text: 'メールアドレスまたはパスワードが正しくありません。'});
