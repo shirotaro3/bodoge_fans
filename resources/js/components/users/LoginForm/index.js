@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import Form from './Form';
 import { useGlobalState } from '../../global/ContextProvider';
@@ -8,12 +7,10 @@ import { useGlobalState } from '../../global/ContextProvider';
 const UserLoginForm = () => {
   const { register, handleSubmit, watch, errors } = useForm();
   const [globalState, dispatch] = useGlobalState();
+  const defaultRedirectPath = '/users/dashboard';
 
   // wait 通信の待機中を表す *boolean
   const [wait, setWait] = useState(false);
-
-  // redirectPath 処理成功時のリダイレクト先パス *string
-  const [redirectPath, redirectTo] = useState(null);
 
   // Submit時の処理
   const onSubmit = handleSubmit(async (data) => {
@@ -30,16 +27,13 @@ const UserLoginForm = () => {
         dispatch({type: 'MESSAGE', text: `ログインしました。ようこそ、${response.data.name}さん！`});
 
         // ログイン後遷移先が登録されていればそこに、なければダッシュボードにリダイレクトする
-        redirectTo(globalState.tracking.afterLoginPath || '/users/dashboard');
+        dispatch({type: 'REDIRECT', to: globalState.tracking.afterLoginPath || defaultRedirectPath});
+        console.log(globalState);
       } catch (err) {
         setWait(false);
         dispatch({type: 'ALERT', text: 'メールアドレスまたはパスワードが正しくありません。'});
       }
   });
-
-  if (redirectPath) {
-    return <Redirect to={redirectPath} />;
-  }
   return (
     <Form
       register={register}

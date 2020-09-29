@@ -6,6 +6,10 @@ const initialState = {
     name: null,
     isLoggedIn: false
   },
+  redirect: {
+    path: null,
+    isExecuted: true,
+  },
   notice: {
     text: '',
     isShow: false,

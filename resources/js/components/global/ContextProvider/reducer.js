@@ -19,7 +19,25 @@ const reducer = (state = {}, action) => {
         }
       }
 
-    // Notice
+    // Router
+    case 'REDIRECT':
+      return {
+        ...state,
+        redirect: {
+          path: action.to,
+          isExecuted: false,
+        }
+      }
+    case 'REDIRECTION_COMPLETED':
+      return {
+        ...state,
+        redirect: {
+          path: state.redirect.path,
+          isExecuted: true
+        }
+      }
+
+    // Notification
     case 'ALERT':
       return {
         ...state,

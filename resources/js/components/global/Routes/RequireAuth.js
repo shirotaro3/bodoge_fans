@@ -10,7 +10,7 @@ const RequireAuth = ({children}) => {
       dispatch({type: 'SET_AFTER_LOGIN_PATH', path: location.pathname});
       dispatch({type: 'MESSAGE', text: 'このページを見るにはログインが必要です。'});
     }
-  });
+  }, []);
   return (
     globalState.auth.isLoggedIn
     ? children
