@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 const Basic = styled.button`
   padding: 6px 17px;
-  margin: 1px;
   border-radius: 6px;
   font-size: 14px;
   outline: none;
@@ -13,6 +12,7 @@ export const LoginButton = styled(Basic)`
   color: #fff;
   background: #666;
   padding: 3px 15px;
+  margin: 1px;
   border-left: 3px solid #bbb;
   border-right: 3px solid #bbb;
   border-top: 1px solid #bbb;
@@ -25,7 +25,7 @@ export const LoginButton = styled(Basic)`
   }
 `;
 
-export const WhiteButton = styled(Basic)`
+export const ButtonWhite = styled(Basic)`
   color: #000;
   background: #fff;
   border: 3px solid #ccc;
@@ -34,6 +34,15 @@ export const WhiteButton = styled(Basic)`
     background: #ddd;
     border-color: #bbb;
   }
+`
+
+export const ButtonWhiteDisabled = styled(Basic)`
+  color: #999;
+  background: #ddd;
+  border: 3px solid #ccc;
+  border-radius: 10px;
+  border-color: #bbb;
+  cursor: default;
 `
 
 export default Basic;

@@ -4,52 +4,25 @@ import styled from 'styled-components';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 
 // components
-import Header from '../components/Header';
-import Footer from '../components/Footer';
-
-// pages
-import Home from './Home';
-import UsersRegistration from './users/Registration';
-import UsersLogin from './users/Login';
-import Events from './events';
-import FacilitiesSearch from './facilities';
-import NotFound from './404';
+import GlobalStyle from '../components/global/GlobalStyle';
+import Routes from '../components/global/Routes';
+import { ContextProvider } from '../components/global/ContextProvider';
+import Header from '../components/global/Header';
+import Footer from '../components/global/Footer';
+import Notice from '../components/global/Notice';
 
 const AppRoot = ({className}) => {
     return (
         <div className={className}>
-            <Router>
-                <Header />
-                <Switch>
-                    {/* Common */}
-                    <Route exact path='/'>
-                        <Home />
-                    </Route>
-
-                    {/* Users */}
-                    <Route path='/users/registration'>
-                        <UsersRegistration />
-                    </Route>
-                    <Route path='/users/login'>
-                        <UsersLogin />
-                    </Route>
-
-                    {/* Events */}
-                    <Router path='/events'>
-                        <Events />
-                    </Router>
-
-                    {/* Facilities */}
-                    <Router path='/Facilities/Search'>
-                        <FacilitiesSearch />
-                    </Router>
-
-                    <Route>
-                        <NotFound />
-                    </Route>
-                </Switch>
-                <Footer />
-            </Router>
+            <ContextProvider>
+                <Router>
+                    <Header />
+                    <Notice />
+                    <Routes />
+                    <Footer />
+                </Router>
+            </ContextProvider>
+            <GlobalStyle />
         </div>
     );
 }
