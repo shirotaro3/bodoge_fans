@@ -17,5 +17,6 @@ class DatabaseSeeder extends Seeder
         $this->call(MFacilityTypeSeeder::class);
         $this->call(MPrefectureSeeder::class);
         $this->call(MScaleSeeder::class);
+        $this->call(MServiceSeeder::class);
     }
 }

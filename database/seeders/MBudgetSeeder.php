@@ -17,22 +17,25 @@ class MBudgetSeeder extends Seeder
     public function run()
     {
         DB::table('m_budgets')->insert([
-            'detail' => '〜500円',
+            'detail' => '〜500円程度',
         ]);
         DB::table('m_budgets')->insert([
-            'detail' => '500円〜1000円',
+            'detail' => '〜1000円程度',
         ]);
         DB::table('m_budgets')->insert([
-            'detail' => '1000円〜2000円',
+            'detail' => '〜2000円程度',
         ]);
         DB::table('m_budgets')->insert([
-            'detail' => '2000円〜3000円',
+            'detail' => '〜3000円程度',
         ]);
         DB::table('m_budgets')->insert([
-            'detail' => '3000円〜5000円',
+            'detail' => '〜5000円程度',
         ]);
         DB::table('m_budgets')->insert([
-            'detail' => '5000円〜',
+            'detail' => '〜10000円程度',
+        ]);
+        DB::table('m_budgets')->insert([
+            'detail' => '10000円以上',
         ]);
     }
 }
