@@ -15,5 +15,6 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(MBudgetSeeder::class);
         $this->call(MFacilityTypeSeeder::class);
+        $this->call(MPrefectureSeeder::class);
     }
 }
