@@ -26,7 +26,7 @@ const UserLoginForm = () => {
         dispatch({type: 'LOGIN', name: response.data.name, isLoggedIn: true});
         dispatch({type: 'MESSAGE', text: `ログインしました。ようこそ、${response.data.name}さん！`});
 
-        // ログイン後遷移先が登録されていればそこに、なければダッシュボードにリダイレクトする
+        // afterLoginPathが登録されていればそこに、なければダッシュボードにリダイレクトする
         dispatch({type: 'REDIRECT', to: globalState.tracking.afterLoginPath || defaultRedirectPath});
       } catch (err) {
         setWait(false);

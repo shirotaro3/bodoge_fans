@@ -13,7 +13,7 @@ const Header = ({className}) => {
       <LoginBox />
     </header>
   );
-}
+};
 
 const StyledHeader = styled(Header)`
   display: flex;
@@ -29,7 +29,7 @@ const StyledHeader = styled(Header)`
     border-top: 12px dotted #555;
     border-bottom: 12px dotted #444;
   }
-`
+`;
 
 
 export default StyledHeader;
