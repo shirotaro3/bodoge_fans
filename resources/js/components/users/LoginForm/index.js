@@ -19,15 +19,15 @@ const UserLoginForm = () => {
   const onSubmit = handleSubmit(async (data) => {
       try {
         setWait(true);
-        console.log(data);
         const csrf = await axios.get('/sanctum/csrf-cookie');
         const response = await axios.post('/api/users/login', data);
-        console.log(response);
         setWait(false);
-        dispatch({type: 'LOGIN', name: 'JIRO', isLoggedIn: true});
+        dispatch({type: 'LOGIN', name: response.data.name, isLoggedIn: true});
+        dispatch({type: 'MESSAGE', text: `ログインしました。ようこそ、${response.data.name}さん！`});
         redirectTo('/users/dashboard');
       } catch (err) {
         setWait(false);
+        dispatch({type: 'ALERT', text: 'メールアドレスまたはパスワードが正しくありません。'});
       }
   });
 

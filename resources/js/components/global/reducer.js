@@ -16,6 +16,33 @@ const reducer = (state = {}, action) => {
           isLoggedIn: false
         }
       }
+    case 'ALERT':
+      return {
+        ...state,
+        notice: {
+          text: action.text,
+          isShow: true,
+          type: 'ALERT'
+        }
+      }
+    case 'MESSAGE':
+      return {
+        ...state,
+        notice: {
+          text: action.text,
+          isShow: true,
+          type: 'MESSAGE'
+        }
+      }
+    case 'HIDE_NOTICE':
+      return {
+        ...state,
+        notice: {
+          text: state.notice.text,
+          isShow: false,
+          type: state.notice.type
+        }
+      }
   }
 };
 

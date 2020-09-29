@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class LoginController extends Controller
 {
@@ -41,7 +42,8 @@ class LoginController extends Controller
         $credentials = $request->only('email', 'password');
 
         if(Auth::attempt($credentials)) {
-            return ['result' => true];
+            $user = DB::table('users')->where('email', 'aaa@aaa.com')->first();
+            return response()->json($user, 200);
         }
 
         return response()->json(['message' => 'Invalid params'], 403);

@@ -5,6 +5,11 @@ const initialState = {
   auth: {
     name: null,
     isLoggedIn: false
+  },
+  notice: {
+    text: '',
+    isShow: false,
+    type: ''
   }
 }
 

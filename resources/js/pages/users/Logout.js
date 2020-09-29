@@ -14,6 +14,7 @@ const UsersLogout = () => {
         const response = await axios.post('/api/users/logout');
         setWait(false);
         dispatch({type: 'LOGOUT'});
+        dispatch({type: 'MESSAGE', text: 'ログアウトしました。'});
       } catch(err) {
         console.log(err);
       }
