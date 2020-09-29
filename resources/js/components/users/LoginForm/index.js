@@ -30,7 +30,7 @@ const UserLoginForm = () => {
         dispatch({type: 'REDIRECT', to: globalState.tracking.afterLoginPath || defaultRedirectPath});
       } catch (err) {
         setWait(false);
-        dispatch({type: 'ALERT', text: 'メールアドレスまたはパスワードが正しくありません。'});
+        dispatch({type: 'ALERT', text: '認証に失敗しました。入力内容をご確認ください。'});
       }
   });
   return (

@@ -16,7 +16,6 @@ class CreateMScalesTable extends Migration
         Schema::create('m_scales', function (Blueprint $table) {
             $table->id();
             $table->string('detail');
-            $table->timestamps();
         });
     }
 

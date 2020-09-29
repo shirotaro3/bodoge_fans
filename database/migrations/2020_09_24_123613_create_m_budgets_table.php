@@ -16,7 +16,6 @@ class CreateMBudgetsTable extends Migration
         Schema::create('m_budgets', function (Blueprint $table) {
             $table->id();
             $table->string('detail');
-            $table->timestamps();
         });
     }
 

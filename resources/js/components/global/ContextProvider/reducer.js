@@ -32,7 +32,7 @@ const reducer = (state = {}, action) => {
       return {
         ...state,
         redirect: {
-          path: state.redirect.path,
+          ...state.redirect,
           isExecuted: true
         }
       }
@@ -42,9 +42,10 @@ const reducer = (state = {}, action) => {
       return {
         ...state,
         notice: {
-          text: action.text,
+          text: `エラー：${action.text}`,
           isShow: true,
-          type: 'ALERT'
+          type: 'ALERT',
+          color: '#f55'
         }
       }
     case 'MESSAGE':
@@ -53,16 +54,16 @@ const reducer = (state = {}, action) => {
         notice: {
           text: action.text,
           isShow: true,
-          type: 'MESSAGE'
+          type: 'MESSAGE',
+          color: '#fff'
         }
       }
     case 'HIDE_NOTICE':
       return {
         ...state,
         notice: {
-          text: state.notice.text,
+          ...state.notice,
           isShow: false,
-          type: state.notice.type
         }
       }
 
