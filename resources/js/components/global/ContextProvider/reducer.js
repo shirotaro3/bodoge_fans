@@ -6,6 +6,7 @@ const reducer = (state = {}, action) => {
       return {
         ...state,
         auth: {
+          ...state.auth,
           name: action.name,
           isLoggedIn: true
         }
@@ -14,8 +15,17 @@ const reducer = (state = {}, action) => {
       return {
         ...state,
         auth: {
+          ...state.auth,
           name: null,
           isLoggedIn: false
+        }
+      }
+    case 'RESOLVE':
+      return {
+        ...state,
+        auth: {
+          ...state.auth,
+          resolved: true
         }
       }
 

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Redirect, useLocation } from 'react-router-dom';
+import { useLocation, Redirect } from 'react-router-dom';
 import { useGlobalState } from '../ContextProvider';
 
 const RequireAuth = ({children}) => {
@@ -11,11 +11,7 @@ const RequireAuth = ({children}) => {
       dispatch({type: 'MESSAGE', text: 'このページを見るにはログインが必要です。'});
     }
   }, []);
-  return (
-    globalState.auth.isLoggedIn
-    ? children
-    : <Redirect to={'/users/login'} />
-  )
+  return globalState.auth.isLoggedIn ? children : <Redirect to='/users/login' />;
 };
 
 export default RequireAuth;

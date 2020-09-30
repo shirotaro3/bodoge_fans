@@ -27,6 +27,8 @@
         </div>
 
         <script src="{{ asset('js/app.js') }}" defer></script>
-
+        <script>
+            var sessionUserName = '{{ $userName ?? '' }}';
+        </script>
     </body>
 </html>

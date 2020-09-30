@@ -4,7 +4,8 @@ import reducer from './reducer';
 const initialState = {
   auth: {
     name: null,
-    isLoggedIn: false
+    isLoggedIn: false,
+    resolved: false,
   },
   redirect: {
     path: null,
