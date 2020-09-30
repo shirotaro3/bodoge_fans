@@ -1,7 +1,8 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
-import RequireAuth from './RequireAuth';
+import AuthRoute from './AuthRoute';
+import NoAuthRoute from './NoAuthRoute';
 
 // pages
 import Home from '../../../pages/Home';
@@ -22,8 +23,6 @@ const Routes = () => {
       <Route exact path='/' component={Home} />
 
       {/* Users */}
-      <Route exact path='/users/registration' component={UsersRegistration} />
-      <Route exact path='/users/login' component={UsersLogin} />
 
       {/* Events */}
       <Route exact path='/events' component={Events} />
@@ -32,16 +31,16 @@ const Routes = () => {
       <Route exact path='/facilities/search' component={FacilitiesSearch} />
       <Route exact path='/facilities/show' component={FacilitiesShow} />
 
-      {/* 認証が必要なルート */}
-      <RequireAuth>
-          <Switch>
-              <Route exact path='/users/dashboard' component={Dashboard} />
-              <Route exact path='/users/logout' component={UsersLogout} />
-              <Route exact path='/facilities/create' component={FacilitiesCreate} />
-              <Route component={NotFound} />
-          </Switch>
-      </RequireAuth>
+      {/* 認証がない状態でのみ適用されるルート */}
+      <NoAuthRoute exact path='/users/registration' component={UsersRegistration} />
+      <NoAuthRoute exact path='/users/login' component={UsersLogin} />
 
+      {/* 認証が必要なルート */}
+      <AuthRoute exact path='/users/dashboard' component={Dashboard} />
+      <AuthRoute exact path='/users/logout' component={UsersLogout} />
+      <AuthRoute exact path='/facilities/create' component={FacilitiesCreate} />
+
+      {/* 上記のどれにも該当しない場合に表示される */}
       <Route component={NotFound} />
     </Switch>
   );
