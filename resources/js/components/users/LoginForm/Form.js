@@ -1,6 +1,5 @@
 import React from 'react';
 import 'react-datepicker/dist/react-datepicker.css'
-import ja from 'date-fns/locale/ja';
 import { FormVertical as Form, Input, Radio, Container } from '../../shared/FormParts';
 import { ButtonWhite as Button, ButtonWhiteDisabled as ButtonDisabled } from '../../shared/Buttons';
 import { BoxRoundedBlack as Box } from '../../shared/Boxes';

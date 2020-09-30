@@ -16,7 +16,7 @@ class CreateMServicesTable extends Migration
         Schema::create('m_services', function (Blueprint $table) {
             $table->id();
             $table->string('detail');
-            $table->string('iconUrl');
+            $table->string('icon_url');
         });
     }
 
