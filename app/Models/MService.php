@@ -15,6 +15,6 @@ class MService extends Model
      * @var array
      */
     protected $fillable = [
-        'detail', 'iconUrl'
+        'detail', 'icon_url'
     ];
 }

@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useState, forwardRef } from 'react';
 import styled from 'styled-components';
+import AutosizeTextarea from 'react-autosize-textarea';
+
+const createObjectURL = (window.URL || window.webkitURL).createObjectURL || window.createObjectURL;
 
 export const FormVertical = styled.form`
   width: 100%;
   height: 100%;
   padding: 0 25%;
-  input, button, label, p {
+  input, button, label, p, textarea {
     display: block;
     margin-bottom: 20px;
   }
@@ -105,5 +108,73 @@ export const Radio = styled(Container)`
   }
   input:checked + label {
     background: #999;
+  }
+`;
+
+export const Textarea = styled(AutosizeTextarea)`
+  width: 240px;
+  min-height: 40px;
+  padding: 5px 2px;
+  font-size: 15px;
+  border: 4px solid #fff;
+  border-radius: 10px;
+  background: #fff;
+  outline: none;
+  cursor: pointer;
+  &:hover {
+    border-color: #ddd;
+  }
+  &:focus {
+    background: #eee;
+    border-color: #ddd;
+    cursor: text;
+  }
+`;
+
+const InputFileDiv = forwardRef((props, ref) => {
+  const [imgUrl, setImgUrl] = useState('');
+  const [fileName, setFileName] = useState('');
+
+  const handleChange = (e) => {
+    const files = e.target.files;
+    setFileName(files[0].name);
+    setImgUrl(createObjectURL(files[0]));
+  };
+
+  return (
+    <div className={props.className}>
+      {imgUrl && <img src={imgUrl} />}
+      {fileName || props.placeholder}
+      <input {...props} ref={ref} type='file' onChange={handleChange} />
+    </div>
+  );
+});
+
+export const InputFile = styled(InputFileDiv)`
+  position: relative;
+  width: 240px;
+  min-height: 40px;
+  font-size: 15px;
+  border: 4px solid #fff;
+  border-radius: 10px;
+  background: #fff;
+  margin-bottom: 20px;
+  text-align: left;
+  padding: 5px 2px;
+  color: #555;
+  cursor: pointer;
+  &:hover {
+    border-color: #ddd;
+  }
+  img {
+    width: 100%;
+  }
+  input[type=file] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
   }
 `;

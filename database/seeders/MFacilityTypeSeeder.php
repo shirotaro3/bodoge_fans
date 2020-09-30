@@ -34,5 +34,8 @@ class MFacilityTypeSeeder extends Seeder
         DB::table('m_facility_types')->insert([
             'detail' => '休憩スペース',
         ]);
+        DB::table('m_facility_types')->insert([
+            'detail' => 'その他',
+        ]);
     }
 }
