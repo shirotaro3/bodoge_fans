@@ -3,13 +3,12 @@ import reducer from './reducer';
 
 const initialState = {
   auth: {
-    name: null,
+    name: '',
     isLoggedIn: false,
-    resolved: false,
+    initialized: false,
   },
   redirect: {
-    path: null,
-    isExecuted: true,
+    path: '',
   },
   notice: {
     text: '',
@@ -18,7 +17,7 @@ const initialState = {
     color: '#fff'
   },
   tracking: {
-    afterLoginPath: null,
+    afterLoginPath: '',
   },
   selectValues: {
     facilityTypes: [{value: '', label: ''}],

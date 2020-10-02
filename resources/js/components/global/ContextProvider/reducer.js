@@ -20,12 +20,12 @@ const reducer = (state = {}, action) => {
           isLoggedIn: false
         }
       }
-    case 'AUTH_RESOLVED':
+    case 'AUTH_INITIALIZED':
       return {
         ...state,
         auth: {
           ...state.auth,
-          resolved: true
+          initialized: true
         }
       }
 
@@ -35,15 +35,13 @@ const reducer = (state = {}, action) => {
         ...state,
         redirect: {
           path: action.to,
-          isExecuted: false,
         }
       }
-    case 'REDIRECTION_COMPLETED':
+    case 'REDIRECT_OK':
       return {
         ...state,
         redirect: {
-          ...state.redirect,
-          isExecuted: true
+          path: ''
         }
       }
 
@@ -87,7 +85,7 @@ const reducer = (state = {}, action) => {
       }
     
     // selectValue
-    case 'SET_SELECT_VALUES':
+    case 'GET_SELECT_VALUES_OK':
       return {
         ...state,
         selectValues: {
@@ -97,8 +95,8 @@ const reducer = (state = {}, action) => {
         }
       }
 
-    // facilitiesSlider
-    case 'SET_FACILITY_PICKUP':
+    // facilitiesPickup
+    case 'GET_FACILITY_PICKUP_OK':
       return {
         ...state,
         facilityPickup: {

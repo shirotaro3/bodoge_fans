@@ -14,17 +14,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/masters', 'App\Http\Controllers\Api\MasterController@index');
+
 // users
-Route::post('/users/registration', 'App\Http\Controllers\Auth\RegisterController@register');
-Route::post('/users/login', 'App\Http\Controllers\Auth\LoginController@login');
-Route::post('/users/logout', 'App\Http\Controllers\Auth\LoginController@logout');
+Route::prefix('users')->group(function () {
+    Route::post('registration', 'App\Http\Controllers\Auth\RegisterController@register');
+    Route::post('login', 'App\Http\Controllers\Auth\LoginController@login');
+    Route::post('logout', 'App\Http\Controllers\Auth\LoginController@logout');
+});
 
-Route::get('/budgets', 'App\Http\Controllers\Api\MBudgetController@index');
-Route::get('/facilityTypes', 'App\Http\Controllers\Api\MFacilityTypeController@index');
-Route::get('/scales', 'App\Http\Controllers\Api\MScaleController@index');
-Route::get('/prefectures' ,'App\Http\Controllers\Api\MPrefectureController@index');
+// facilities
+Route::prefix('facilities')->group(function () {
+    Route::get('/', 'App\Http\Controllers\Api\FacilityController@index');
+    Route::get('/{id}', 'App\Http\Controllers\Api\FacilityController@show');
+});
 
+// require auth
 Route::middleware('auth:sanctum')->group(function () {
-    Route::get('/facilities', 'App\Http\Controllers\Api\FacilityController@index');
-    Route::post('/facilities/store', 'App\Http\Controllers\Api\FacilityController@store');
+    Route::post('facilities/store', 'App\Http\Controllers\Api\FacilityController@store');
 });
