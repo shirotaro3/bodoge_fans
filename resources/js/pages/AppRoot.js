@@ -7,7 +7,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import GlobalStyle from '../components/global/GlobalStyle';
 import Routes from '../components/global/Routes';
 import Redirector from '../components/global/Redirector';
-import SessionManager from '../components/global/SessionManager';
+import Resolver from '../components/global/Resolver';
 import { ContextProvider } from '../components/global/ContextProvider';
 import Header from '../components/global/Header';
 import Footer from '../components/global/Footer';
@@ -17,7 +17,7 @@ const AppRoot = ({className}) => {
     return (
         <div className={className}>
             <ContextProvider>
-                <SessionManager>
+                <Resolver>
                     <Router>
                         <Redirector />
                         <Header />
@@ -25,7 +25,7 @@ const AppRoot = ({className}) => {
                         <Routes />
                         <Footer />
                     </Router>
-                </SessionManager>
+                </Resolver>
             </ContextProvider>
             <GlobalStyle />
         </div>

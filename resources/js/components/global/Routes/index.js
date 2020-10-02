@@ -29,13 +29,13 @@ const Routes = () => {
 
       {/* Facilities */}
       <Route exact path='/facilities/search' component={FacilitiesSearch} />
-      <Route exact path='/facilities/show' component={FacilitiesShow} />
+      <Route exact path='/facilities/:id(\d+)' component={FacilitiesShow} />
 
-      {/* 認証がない状態でのみ適用されるルート */}
+      {/* 認証がない状態でのみ利用できるルート */}
       <NoAuthRoute exact path='/users/registration' component={UsersRegistration} />
       <NoAuthRoute exact path='/users/login' component={UsersLogin} />
 
-      {/* 認証が必要なルート */}
+      {/* 認証で保護されたルート */}
       <AuthRoute exact path='/users/dashboard' component={Dashboard} />
       <AuthRoute exact path='/users/logout' component={UsersLogout} />
       <AuthRoute exact path='/facilities/create' component={FacilitiesCreate} />

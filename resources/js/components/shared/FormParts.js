@@ -1,13 +1,14 @@
 import React, { useState, forwardRef } from 'react';
 import styled from 'styled-components';
 import AutosizeTextarea from 'react-autosize-textarea';
+import ReactSelect from 'react-select';
 
 const createObjectURL = (window.URL || window.webkitURL).createObjectURL || window.createObjectURL;
 
 export const FormVertical = styled.form`
   width: 100%;
   height: 100%;
-  padding: 0 25%;
+  padding: 0 20%;
   input, button, label, p, textarea {
     display: block;
     margin-bottom: 20px;
@@ -30,7 +31,7 @@ export const FormVertical = styled.form`
   /* override css */
   .react-datepicker-wrapper {
     input {
-      width: 240px;
+      width: 100%;
       height: 40px;
       font-size: 15px;
       border: 4px solid #fff;
@@ -52,7 +53,7 @@ export const FormVertical = styled.form`
 `;
 
 export const Input = styled.input`
-  width: 240px;
+  width: 100%;
   height: 40px;
   font-size: 15px;
   border: 4px solid #fff;
@@ -112,7 +113,7 @@ export const Radio = styled(Container)`
 `;
 
 export const Textarea = styled(AutosizeTextarea)`
-  width: 240px;
+  width: 100%;
   min-height: 40px;
   padding: 5px 2px;
   font-size: 15px;
@@ -152,7 +153,7 @@ const InputFileDiv = forwardRef((props, ref) => {
 
 export const InputFile = styled(InputFileDiv)`
   position: relative;
-  width: 240px;
+  width: 100%;
   min-height: 40px;
   font-size: 15px;
   border: 4px solid #fff;
@@ -176,5 +177,75 @@ export const InputFile = styled(InputFileDiv)`
     width: 100%;
     height: 100%;
     opacity: 0;
+  }
+`;
+
+export const Select = (props) => {
+  const customStyles = {
+    menu: (provided) => ({
+      ...provided,
+      width: '100%',
+      borderBottom: '1px dotted pink',
+      color: '#555',
+      textAlign: 'left',
+      outline: 'none',
+    }),
+    control: (provided, state) => ({
+      ...provided,
+      width: '100%',
+      height: '40px',
+      borderRadius: '10px',
+      border: '4px solid #fff',
+      marginBottom: '20px',
+      outline: 'none',
+      boxShadow: 'none',
+      '&:hover': {
+        borderColor: '#ddd'
+      }
+    }),
+    input: (provided) => ({
+      ...provided,
+      height: '20px',
+    }),
+  }
+  return (
+    <ReactSelect {...props} styles={customStyles} />
+  );
+};
+
+const ProgressBase = ({className, steps, current}) => {
+  return (
+    <div className={className}>
+      {steps.map((step, i) => {
+        return <span
+          className={i + 1 <= current ?
+            `${className}__step_current` :
+            `${className}__step`}
+          key={step}
+        >
+          {step}
+        </span>
+      })}
+    </div>    
+  );
+};
+
+export const Progress = styled(ProgressBase)`
+  font-size: 14px;
+  width: 240px;
+  margin: 0 auto 15px auto;
+  padding: 6px 0;
+  span {
+    padding: 5px 10px;
+    border-radius: 4px;
+    margin: 0 4px;
+  }
+  &__step {
+    color: #333;
+    background: #fff;
+  }
+  &__step_current {
+    color: #fff;
+    background: #44f;
   }
 `;

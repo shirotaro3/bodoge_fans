@@ -22,7 +22,7 @@ Route::get('/{any}', function () {
         $userName = '';
     }
     return view('app', compact('userName'));
-})->where('any', '.*');
+})->where('any', '^(?!.*api).*');
 
 // Auth::routes();
 
