@@ -6,6 +6,7 @@ const Resolver = ({children}) => {
   const [globalState, dispatch] = useGlobalState();
   useEffect(() => {
     const fetchData = async () => {
+      // フェッチ処理 改善の余地あり
       const response = await Promise.all([
         axios.get('/api/facilityTypes'),
         axios.get('/api/budgets'),
@@ -35,10 +36,14 @@ const Resolver = ({children}) => {
         data: response[4].data
       });
     };
+
+    // リロード時のセッション確認
     if (sessionUserName) {
       dispatch({type: 'LOGIN', name: sessionUserName});
     }
     dispatch({type: 'AUTH_RESOLVED'});
+
+    // フェッチ実行
     fetchData();
   }, []);
   return globalState.auth.resolved ? children : <></>;

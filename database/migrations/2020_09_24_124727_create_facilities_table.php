@@ -20,9 +20,11 @@ class CreateFacilitiesTable extends Migration
             $table->foreignId('m_budget_id')->constrained();
             $table->foreignId('m_scale_id')->constrained();
             $table->string('name', 100);
+            $table->string('header_image_url')->nullable();
             $table->text('description');
             $table->text('introduction')->nullable();
             $table->foreignId('m_prefecture_id')->constrained();
+            $table->string('phone_number', 100)->nullable();
             $table->string('address', 100);
             $table->string('building', 100)->nullable();
             $table->string('postal_code', 100);
