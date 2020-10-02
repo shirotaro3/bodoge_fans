@@ -26,7 +26,7 @@ const FacilityCreateEditForm = () => {
         setWait(true);
         const response = await axios.post('/api/facilities/store', data);
         setWait(false);
-        dispatch({type: 'MESSAGE', text: '保存しました。'});
+        dispatch({type: 'MESSAGE', text: '登録しました。'});
         dispatch({type: 'REDIRECT', to: `/facilities/${response.data.id}`});
       } catch (err) {
         setWait(false);

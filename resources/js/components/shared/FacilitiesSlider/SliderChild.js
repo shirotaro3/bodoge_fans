@@ -27,22 +27,20 @@ const StyledSliderChild = styled(SliderChild).attrs(props => ({
   outline: none;
   background-image: url(${props => props.imgUrl});
   background-size: cover;
+  font-size: 14px;
   &__child {
     position: absolute;
-    top: 150px;
+    top: 140px;
     width: 100%;
-    height: 70px;
+    height: 80px;
     text-align: center;
     background: rgba(0,0,0,.5);
     color: #fff;
     padding: 10px 30px;
-    h3 {
-      font-size:15px;
-      margin: 0 auto;
-    }
   }
   &__title {
     font-weight: bold;
+    font-size: 16px;
   }
   &__link {
     cursor: pointer;
