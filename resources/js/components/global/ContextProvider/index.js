@@ -26,6 +26,10 @@ const initialState = {
     scales: [{value: '', label: ''}],
     prefectures: [{value: '', label: ''}],
     resolved: false
+  },
+  facilityPickup: {
+    data: [],
+    resolved: false
   }
 }
 

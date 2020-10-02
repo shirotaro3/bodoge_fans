@@ -13,15 +13,19 @@ registerLocale('ja', ja);
 // props: { register, watch, errors, wait, onSubmit, control, handleSubmit, setFormValue, formValue }
 const Components = props => {
   const [currentPage, setCurrentPage] = useState(1);
+
+  // 進むを押した時の処理
   const next = props.handleSubmit((data) => {
     props.setFormValue({...props.formValue, ...data});
     setCurrentPage(currentPage + 1);
   });
+  // 戻るを押したときの処理
   const prev = () => {
     setCurrentPage(currentPage - 1);
   };
   const steps = ['1.基本情報', '2.住所', '3.SNS'];
-  const pagenation = () => {
+  // ページネーション　もっと簡潔な書き方が出来そう
+  const pagination = () => {
     switch(currentPage) {
       case 1:
         { return <Page1 {...props} next={next} />;};
@@ -38,7 +42,7 @@ const Components = props => {
       <h2>お店/施設の登録</h2>
       <p>*は必須項目です。登録情報は全て公開されます。</p>
         <Progress steps={steps} current={currentPage} />
-        {pagenation()}
+        {pagination()}
       <Waiting wait={props.wait} />
     </Box>
   )

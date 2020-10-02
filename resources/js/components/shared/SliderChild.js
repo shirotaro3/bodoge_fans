@@ -13,7 +13,9 @@ const SliderChild = ({className, children}) => {
 
 const StyledSliderChild = styled(SliderChild)`
   height: 250px;
-  border: 3px solid rgba(0,0,0,0);
+  border-left: 5px solid rgba(0,0,0,0);
+  border-top: 3px solid rgba(0,0,0,0);
+  border-right: 5px solid rgba(0,0,0,0);
   position: relative;
   transition: .3s;
   outline: none;
@@ -25,7 +27,7 @@ const StyledSliderChild = styled(SliderChild)`
     position: absolute;
     top: 180px;
     width: 100%;
-    height: 64px;
+    height: 67px;
     text-align: center;
     background: rgba(0,0,0,.5);
     color: #fff;

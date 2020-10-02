@@ -4,15 +4,22 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Facility;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Facility;
 
 class FacilityController extends Controller
 {
+    public function index() {
+        $facilities = Facility::all();
+        return response()->json($facilities);
+    }
+
     public function store(Request $request) {
         $facility = new Facility();
         $facility->fill($request->all());
+        $facility->user_id = Auth::user()->id;
         $facility->save();
-        return responce()->json($facility);
+        return response()->json($facility);
     }
     
     public function show($id) {

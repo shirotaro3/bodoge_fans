@@ -5,23 +5,24 @@ import axios from 'axios';
 const Resolver = ({children}) => {
   const [globalState, dispatch] = useGlobalState();
   useEffect(() => {
-    const fetchSelectValues = async () => {
-      const selectValues = await Promise.all([
+    const fetchData = async () => {
+      const response = await Promise.all([
         axios.get('/api/facilityTypes'),
         axios.get('/api/budgets'),
         axios.get('/api/scales'),
-        axios.get('/api/prefectures')
+        axios.get('/api/prefectures'),
+        axios.get('/api/facilities')
       ]);
-      const facilityTypes = selectValues[0].data.map(v => {
+      const facilityTypes = response[0].data.map(v => {
         return { value: v.id, label: v.detail }
       });
-      const budgets = selectValues[1].data.map(v => {
+      const budgets = response[1].data.map(v => {
         return { value: v.id, label: v.detail }
       });
-      const scales = selectValues[2].data.map(v => {
+      const scales = response[2].data.map(v => {
         return { value: v.id, label: v.detail }
       });
-      const prefectures = selectValues[3].data.map(v => {
+      const prefectures = response[3].data.map(v => {
         return { value: v.id, label: v.name }
       });
       
@@ -29,12 +30,16 @@ const Resolver = ({children}) => {
         type: 'SET_SELECT_VALUES',
         values: { facilityTypes, budgets, scales, prefectures }
       });
+      dispatch({
+        type: 'SET_FACILITY_PICKUP',
+        data: response[4].data
+      });
     };
     if (sessionUserName) {
       dispatch({type: 'LOGIN', name: sessionUserName});
     }
     dispatch({type: 'AUTH_RESOLVED'});
-    fetchSelectValues();
+    fetchData();
   }, []);
   return globalState.auth.resolved ? children : <></>;
 };

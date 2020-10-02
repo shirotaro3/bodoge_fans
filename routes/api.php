@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// users
 Route::post('/users/registration', 'App\Http\Controllers\Auth\RegisterController@register');
 Route::post('/users/login', 'App\Http\Controllers\Auth\LoginController@login');
 Route::post('/users/logout', 'App\Http\Controllers\Auth\LoginController@logout');
@@ -23,6 +24,7 @@ Route::get('/facilityTypes', 'App\Http\Controllers\Api\MFacilityTypeController@i
 Route::get('/scales', 'App\Http\Controllers\Api\MScaleController@index');
 Route::get('/prefectures' ,'App\Http\Controllers\Api\MPrefectureController@index');
 
-Route::middleware(['auth:sanctum'])->group(function (Request $request) {
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/facilities', 'App\Http\Controllers\Api\FacilityController@index');
     Route::post('/facilities/store', 'App\Http\Controllers\Api\FacilityController@store');
 });

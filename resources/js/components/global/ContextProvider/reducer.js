@@ -96,6 +96,17 @@ const reducer = (state = {}, action) => {
           resolved: true
         }
       }
+
+    // facilitiesSlider
+    case 'SET_FACILITY_PICKUP':
+      return {
+        ...state,
+        facilityPickup: {
+          ...state.facilityPickup,
+          data: action.data,
+          resolved: true
+        }
+      }
   }
 };
 

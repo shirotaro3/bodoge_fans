@@ -1,9 +1,9 @@
 import React from 'react';
 
-const FacilitiesShow = () => {
+const FacilitiesShow = ({match}) => {
   return (
     <div>
-      FacilitiesShow
+      FacilityID:{match.params.id}
     </div>
   );
 };
