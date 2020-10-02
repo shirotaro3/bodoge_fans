@@ -1,10 +1,11 @@
 import React from 'react';
 import DashBox from '../../components/users/Dashboard';
+import Slider from '../../components/users/FacilitiesSlider';
 
 const Dashboard = () => {
   return (
     <div>
-      dashboard
+      <Slider />
       <DashBox />
     </div>
   )

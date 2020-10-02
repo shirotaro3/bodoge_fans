@@ -19,6 +19,13 @@ const initialState = {
   },
   tracking: {
     afterLoginPath: null,
+  },
+  selectValues: {
+    facilityTypes: [{value: '', label: ''}],
+    budgets: [{value: '', label: ''}],
+    scales: [{value: '', label: ''}],
+    prefectures: [{value: '', label: ''}],
+    resolved: false
   }
 }
 

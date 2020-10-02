@@ -20,7 +20,7 @@ const reducer = (state = {}, action) => {
           isLoggedIn: false
         }
       }
-    case 'RESOLVE':
+    case 'AUTH_RESOLVED':
       return {
         ...state,
         auth: {
@@ -83,6 +83,17 @@ const reducer = (state = {}, action) => {
         ...state,
         tracking: {
           afterLoginPath: action.path
+        }
+      }
+    
+    // selectValue
+    case 'SET_SELECT_VALUES':
+      return {
+        ...state,
+        selectValues: {
+          ...state.selectValues,
+          ...action.values,
+          resolved: true
         }
       }
   }

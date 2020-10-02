@@ -10,12 +10,22 @@ const FacilityCreateEditForm = () => {
 
   // wait 通信の待機中を表す *boolean
   const [wait, setWait] = useState(false);
+
+  const [formValue, setFormValue] = useState(false);
   // Submit時の処理
-  const onSubmit = handleSubmit(async (data) => {
+  const submit = handleSubmit(async (data) => {
+      console.log({
+        ...formValue,
+        ...data,
+        m_budget_id: formValue.m_budget_id.value,
+        m_facility_type_id: formValue.m_facility_type_id.value,
+        m_prefecture_id: formValue.m_prefecture_id.value,
+        m_scale_id: formValue.m_scale_id.value
+      });
       try {
+        setValues(data);
         setWait(true);
         // const response = await axios.post('/api/facilities/store', data);
-        console.log(data);
         setWait(false);
         dispatch({type: 'MESSAGE', text: '保存しました。'});
         dispatch({type: 'REDIRECT', to: '/users/dashboard'});
@@ -30,8 +40,11 @@ const FacilityCreateEditForm = () => {
       watch={watch}
       errors={errors}
       wait={wait}
-      onSubmit={onSubmit}
+      submit={submit}
+      setFormValue={setFormValue}
       control={control}
+      formValue={formValue}
+      handleSubmit={handleSubmit}
     />
   )
 };
