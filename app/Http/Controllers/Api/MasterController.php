@@ -9,6 +9,7 @@ use App\Models\MBudget;
 use App\Models\MFacilityType;
 use App\Models\MPrefecture;
 
+// フロント側でリロード時にcallするAPIを少なくしたいため、マスタデータのフェッチ先を一つにまとめている。
 class MasterController extends Controller
 {
     public function index() {

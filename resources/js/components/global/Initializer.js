@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useGlobalState } from './ContextProvider';
 import axios from 'axios';
+import _ from 'lodash';
 
 const Initializer = ({children}) => {
   const [globalState, dispatch] = useGlobalState();
@@ -12,31 +13,23 @@ const Initializer = ({children}) => {
         dispatch({type: 'ALERT', text: 'アプリの読み込みに失敗しました。リロードしても改善されない場合は管理者にご連絡ください。'});
       });
       // ピックアップデータのフェッチ
-      const facilityPickup = await axios.get('/api/facilities').catch((err) => {
+      const pickedUpFacilities = await axios.get('/api/facilities').catch((err) => {
         console.log(err);
         dispatch({type: 'ALERT', text: 'アプリの読み込みに失敗しました。リロードしても改善されない場合は管理者にご連絡ください。'});
       });
-      // アプリで使用する形に整形
-      const facilityTypes = masters.data.facilityTypes.map(v => {
-        return { value: v.id, label: v.detail }
-      });
-      const budgets = masters.data.budgets.map(v => {
-        return { value: v.id, label: v.detail }
-      });
-      const scales = masters.data.scales.map(v => {
-        return { value: v.id, label: v.detail }
-      });
-      const prefectures = masters.data.prefectures.map(v => {
-        return { value: v.id, label: v.name }
-      });
+      const { facilityTypes, budgets, scales, prefectures } = masters.data;
       // 値をセット
+
       dispatch({
-        type: 'GET_SELECT_VALUES_OK',
-        values: { facilityTypes, budgets, scales, prefectures }
+        type: 'SET_SELECT_VALUES',
+        facilityTypes,
+        budgets,
+        scales,
+        prefectures
       });
       dispatch({
-        type: 'GET_FACILITY_PICKUP_OK',
-        data: facilityPickup.data
+        type: 'SET_FACILITY_PICKUP',
+        data: pickedUpFacilities.data
       });
     };
 
@@ -49,6 +42,8 @@ const Initializer = ({children}) => {
     // フェッチ実行
     fetchData();
   }, []);
+  // ログインの有無でアクセスできるルートが変わるため、
+  // ログイン状態が初期化されるまでは、アプリを表示しない
   return globalState.auth.initialized ? children : <></>;
 };
 

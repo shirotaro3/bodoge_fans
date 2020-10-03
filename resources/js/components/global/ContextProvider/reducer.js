@@ -1,3 +1,11 @@
+import _ from 'lodash';
+
+const formatSelectValue = (selectValueArr) => {
+  selectValueArr.map(v => {
+    return { value: v.id, label: v.detail }
+  });
+};
+
 const reducer = (state = {}, action) => {
   switch(action.type) {
 
@@ -85,24 +93,47 @@ const reducer = (state = {}, action) => {
       }
     
     // selectValue
-    case 'GET_SELECT_VALUES_OK':
+    case 'SET_SELECT_VALUES':
       return {
         ...state,
         selectValues: {
           ...state.selectValues,
-          ...action.values,
+          facilityTypes: formatSelectValue(action.facilityTypes),
+          budgets: formatSelectValue(action.budgets),
+          scales: formatSelectValue(action.scales),
+          prefectures: formatSelectValue(action.prefectures),
           resolved: true
         }
       }
 
     // facilitiesPickup
-    case 'GET_FACILITY_PICKUP_OK':
+    case 'SET_FACILITY_PICKUP':
       return {
         ...state,
-        facilityPickup: {
-          ...state.facilityPickup,
-          data: action.data,
+        pickedUpFacilitiesId: {
+          ...state.pickedUpFacilitiesId,
+          data: action.data.map(v => v.id),
           resolved: true
+        },
+        facilities: {
+          ...state.facilities,
+          data: {
+            ...state.facilities.data,
+            ..._.keyBy(action.data, 'id')
+          }
+        }
+      }
+    
+    // facilitiesのデータをオブジェクトで保持
+    case 'SET_FACILITIES':
+      return {
+        ...state,
+        facilities: {
+          ...state.facilities,
+          data: {
+            ...state.facilities.data,
+            ..._.keyBy(action.data, 'id')
+          }
         }
       }
   }

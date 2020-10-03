@@ -17,25 +17,25 @@ const FacilitiesSlider = ({className}) => {
       <Slider {...settings}>
         {/* resolve後にデータを表示 */}
         {
-          globalState.facilityPickup.resolved &&
-          globalState.facilityPickup.data.map((v, i) => {
+          globalState.pickedUpFacilitiesId.resolved &&
+          globalState.pickedUpFacilitiesId.data.map((id, i) => {
             return (
               <SliderChild
                 key={`fs_${i}`}
-                linkPath={`/facilities/${v.id}`}
-                imgUrl={v.header_image_url}
-                title={v.name}
-                body={v.description}
+                linkPath={`/facilities/${id}`}
+                imgUrl={globalState.facilities.data[id].header_image_url}
+                title={globalState.facilities.data[id].name}
+                body={globalState.facilities.data[id].description}
               />
             )
           })
         }
 
         {/* placeholder */}
-        { globalState.facilityPickup.resolved || placeholder.map(v => {return v}) }
+        { globalState.pickedUpFacilitiesId.resolved || placeholder.map(v => {return v}) }
       </Slider>
       <h2 className={`${className}__child`}>Pickup!</h2>
-      <Loading resolved={globalState.facilityPickup.resolved} />
+      <Loading resolved={globalState.pickedUpFacilitiesId.resolved} />
     </div>
   );
 };

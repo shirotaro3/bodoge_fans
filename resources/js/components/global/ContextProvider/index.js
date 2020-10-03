@@ -26,9 +26,12 @@ const initialState = {
     prefectures: [{value: '', label: ''}],
     resolved: false
   },
-  facilityPickup: {
+  pickedUpFacilitiesId: {
     data: [],
     resolved: false
+  },
+  facilities: {
+    data: {}
   }
 }
 
