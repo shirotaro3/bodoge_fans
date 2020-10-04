@@ -16,8 +16,9 @@ const UserRegistrationForm = () => {
         setWait(true);
         const response = await axios.post('/api/users/registration', data);
         setWait(false);
-        dispatch({type: 'MESSAGE', text: 'ご登録ありがとうございます！'});
-        dispatch({type: 'REDIRECT', to: '/users/login'});
+        dispatch({type: 'LOGIN', name: response.data.name, id: response.data.id});
+        dispatch({type: 'MESSAGE', text: '登録しました。'});
+        dispatch({type: 'REDIRECT', to: '/users/dashboard'});
       } catch (err) {
         setWait(false);
         dispatch({type: 'ALERT', text: '処理に失敗しました。再度お試しください。'});

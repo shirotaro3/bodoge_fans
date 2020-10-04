@@ -4,6 +4,7 @@ import reducer from './reducer';
 const initialState = {
   auth: {
     name: '',
+    id: null,
     isLoggedIn: false,
     initialized: false,
   },
@@ -19,11 +20,12 @@ const initialState = {
   tracking: {
     afterLoginPath: '',
   },
-  selectValues: {
+  masters: {
     facilityTypes: [{value: '', label: ''}],
     budgets: [{value: '', label: ''}],
     scales: [{value: '', label: ''}],
     prefectures: [{value: '', label: ''}],
+    services: [{value: '', label: '', iconUrl: ''}],
     resolved: false
   },
   pickedUpFacilitiesId: {
@@ -32,7 +34,7 @@ const initialState = {
   },
   facilities: {
     data: {}
-  }
+  },
 }
 
 const Context = React.createContext();

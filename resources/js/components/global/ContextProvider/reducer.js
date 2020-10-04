@@ -10,6 +10,7 @@ const reducer = (state = {}, action) => {
         auth: {
           ...state.auth,
           name: action.name,
+          id: action.id,
           isLoggedIn: true
         }
       }
@@ -18,7 +19,8 @@ const reducer = (state = {}, action) => {
         ...state,
         auth: {
           ...state.auth,
-          name: null,
+          name: '',
+          id: null,
           isLoggedIn: false
         }
       }
@@ -87,10 +89,10 @@ const reducer = (state = {}, action) => {
       }
     
     // selectValue
-    case 'SET_SELECT_VALUES':
+    case 'SET_MASTERS':
       return {
         ...state,
-        selectValues: {
+        masters: {
           ...state.selectValues,
           facilityTypes: formatSelectValue(action.facilityTypes),
           budgets: formatSelectValue(action.budgets),

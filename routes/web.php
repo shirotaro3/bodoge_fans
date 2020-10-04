@@ -17,11 +17,13 @@ use Illuminate\Http\Request;
 
 Route::get('/{any}', function () {
     if (Auth::check()) {
-        $userName = Auth::user()->name;
+        $user = Auth::user();
+        $id = $user->id;
+        $name = $user->name;
     } else {
         $userName = '';
     }
-    return view('app', compact('userName'));
+    return view('app', compact('name', 'id'));
 })->where('any', '^(?!.*api).*');
 
 // Auth::routes();

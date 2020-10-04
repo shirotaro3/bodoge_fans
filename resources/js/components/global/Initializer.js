@@ -20,7 +20,7 @@ const Initializer = ({children}) => {
       const { facilityTypes, budgets, scales, prefectures, services } = masters.data;
       // 値をセット
       dispatch({
-        type: 'SET_SELECT_VALUES',
+        type: 'SET_MASTERS',
         facilityTypes,
         budgets,
         scales,
@@ -34,8 +34,8 @@ const Initializer = ({children}) => {
     };
 
     // リロード時のセッション確認
-    if (sessionUserName) {
-      dispatch({type: 'LOGIN', name: sessionUserName});
+    if (sessionUserName && sessionUserId) {
+      dispatch({type: 'LOGIN', name: sessionUserName, id: sessionUserId});
     }
     dispatch({type: 'AUTH_INITIALIZED'});
 

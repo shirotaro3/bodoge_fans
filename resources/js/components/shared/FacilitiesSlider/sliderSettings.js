@@ -3,13 +3,19 @@ const settings = {
   infinite: true,
   speed: 2000,
   autoplaySpeed: 3000,
-  slidesToShow: 3,
+  slidesToShow: 4,
   slidesToScroll: 1,
   autoplay: true,
   arrows: false,
   cssEase: 'linear',
   lazyLoad: true,
   responsive: [
+    {
+      breakpoint: 1400,
+      settings: {
+        slidesToShow: 3,
+      }
+    },
     {
       breakpoint: 1024,
       settings: {

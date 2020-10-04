@@ -6,7 +6,7 @@ import { ButtonWhite as Button } from '../../../shared/Buttons';
 
 const Page2 = ({register, watch, errors, control, next, prev, formValue}) => {
   const [globalState, dispatch] = useGlobalState();
-  const prefectures = globalState.selectValues.prefectures;
+  const { prefectures } = globalState.masters;
   return (
     <Form onSubmit={next}>
       <label>*郵便番号</label>

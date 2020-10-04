@@ -1,32 +1,36 @@
 import React, { useEffect } from 'react';
 import axios from 'axios';
 import HeaderContainer from '../../components/facilities/HeaderContainer';
+import FacilityServices from '../../components/facilities/FacilityServices';
 import Loading from '../../components/shared/Loading';
 import { useGlobalState } from '../../components/global/ContextProvider';
 
 const FacilitiesShow = ({match}) => {
   const [globalState, dispatch] = useGlobalState();
-  const id = match.params.id;
+  const facilityId = match.params.id;
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axios.get(`/api/facilities/${id}`).catch(err => {
+      const response = await axios.get(`/api/facilities/${facilityId}`).catch(err => {
         console.log(err);
         dispatch({type: 'ALERT', text: 'アプリの読み込みに失敗しました。リロードしても改善されない場合は管理者にご連絡ください。'});
       });
-      console.log(response.data);
       dispatch({ type: 'SET_FACILITIES', data: [response.data]});
     };
-    if (!globalState.facilities.data[id]) {
+    if (!globalState.facilities.data[facilityId]) {
       fetchData();
     }
-  }, [id]);
+  }, [facilityId]);
   return (
     <div>
       {
-        globalState.facilities.data[id] ?
+        globalState.facilities.data[facilityId] ?
         <>
-          <HeaderContainer id={id} imgUrl={globalState.facilities.data[id].header_image_url} />
-          FacilityID:{id}
+          <HeaderContainer
+            facilityId={facilityId}
+            imgUrl={globalState.facilities.data[facilityId].header_image_url}
+          />
+          <FacilityServices facilityId={facilityId} />
+          FacilityID:{facilityId}
         </> :
         <Loading />
       }
