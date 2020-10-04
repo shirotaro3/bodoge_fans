@@ -44,7 +44,7 @@ class Facility extends Model
 
     // belongsToMany
     public function m_services() {
-        return $this->belongsToMany('App\Models\Service');
+        return $this->belongsToMany('App\Models\MService');
     }
     
     // hasMany

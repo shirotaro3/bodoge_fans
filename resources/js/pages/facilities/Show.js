@@ -13,9 +13,10 @@ const FacilitiesShow = ({match}) => {
         console.log(err);
         dispatch({type: 'ALERT', text: 'アプリの読み込みに失敗しました。リロードしても改善されない場合は管理者にご連絡ください。'});
       });
+      console.log(response.data);
       dispatch({ type: 'SET_FACILITIES', data: [response.data]});
-    }
-    if (globalState.facilities.data[id]) {
+    };
+    if (!globalState.facilities.data[id]) {
       fetchData();
     }
   }, [id]);

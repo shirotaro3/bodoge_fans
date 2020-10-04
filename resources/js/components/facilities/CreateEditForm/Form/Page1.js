@@ -38,7 +38,7 @@ const Page1 = ({register, watch, errors, control, next, formValue}) => {
         placeholder='選択してください'
         rules={{ required: true }}
       />
-      {errors.m_facility_type_id && <p>必須項目です。</p>}
+      {errors.facility_type && <p>必須項目です。</p>}
 
       <label>*収容可能人数</label>
       <Controller
@@ -50,7 +50,7 @@ const Page1 = ({register, watch, errors, control, next, formValue}) => {
         placeholder='選択してください'
         rules={{ required: true }}
       />
-      {errors.m_scale_id && <p>必須項目です。</p>}
+      {errors.scale && <p>必須項目です。</p>}
 
       <label>*予算</label>
       <Controller
@@ -62,20 +62,20 @@ const Page1 = ({register, watch, errors, control, next, formValue}) => {
         placeholder='選択してください'
         rules={{ required: true }}
       />
-      {errors.m_budget_id && <p>必須項目です。</p>}
+      {errors.budget && <p>必須項目です。</p>}
 
       <label>*提供サービス</label>
       <Controller
         as={Select}
-        name='service'
+        name='services'
         isMulti
         control={control}
         options={services}
-        defaultValue={formValue.service || ''}
+        defaultValue={formValue.services || ''}
         placeholder='選択してください'
         rules={{ required: true }}
       />
-      {errors.m_budget_id && <p>必須項目です。</p>}
+      {errors.services && <p>必須項目です。</p>}
 
       <Button type='submit'>進む</Button>
     </Form>

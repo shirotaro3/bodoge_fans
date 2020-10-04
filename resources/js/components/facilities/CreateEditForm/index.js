@@ -21,7 +21,7 @@ const FacilityCreateEditForm = () => {
         m_facility_type_id: formValue.facility_type.value,
         m_prefecture_id: formValue.prefecture.value,
         m_scale_id: formValue.scale.value,
-        m_service_id: formValue.service.map(o => o.value)
+        m_service_id: formValue.services.map(o => o.value)
       };
       try {
         setWait(true);

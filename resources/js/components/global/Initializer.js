@@ -19,7 +19,6 @@ const Initializer = ({children}) => {
       });
       const { facilityTypes, budgets, scales, prefectures, services } = masters.data;
       // 値をセット
-
       dispatch({
         type: 'SET_SELECT_VALUES',
         facilityTypes,
