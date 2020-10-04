@@ -8,6 +8,7 @@ use App\Models\MScale;
 use App\Models\MBudget;
 use App\Models\MFacilityType;
 use App\Models\MPrefecture;
+use App\Models\MService;
 
 // フロント側でリロード時にcallするAPIを少なくしたいため、マスタデータのフェッチ先を一つにまとめている。
 class MasterController extends Controller
@@ -17,11 +18,13 @@ class MasterController extends Controller
         $budgets = MBudget::all();
         $facilityTypes = MFacilityType::all();
         $prefectures = MPrefecture::all();
+        $services = MService::all();
         return response()->json([
             'scales' => $scales,
             'budgets' => $budgets,
             'facilityTypes' => $facilityTypes,
-            'prefectures' => $prefectures
+            'prefectures' => $prefectures,
+            'services' => $services
         ]);
     }
 }

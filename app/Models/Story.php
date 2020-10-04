@@ -17,4 +17,11 @@ class Story extends Model
     protected $fillable = [
         'facility_id', 'post_id',
     ];
+
+    public function post() {
+        return $this->belongsTo('App\Models\Post');
+    }
+    public function facility() {
+        return $this->belongsTo('App\Models\Facility');
+    }
 }

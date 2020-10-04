@@ -18,6 +18,7 @@ const Components = props => {
   const next = props.handleSubmit((data) => {
     props.setFormValue({...props.formValue, ...data});
     setCurrentPage(currentPage + 1);
+    console.log(data);
   });
   // 戻るを押したときの処理
   const prev = () => {

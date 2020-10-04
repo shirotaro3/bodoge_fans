@@ -17,4 +17,8 @@ class Review extends Model
     protected $fillable = [
         'user_id', 'facility_id', 'title', 'body',
     ];
+
+    public function facility() {
+        return $this->belongsTo('App\Models\Review');
+    }
 }

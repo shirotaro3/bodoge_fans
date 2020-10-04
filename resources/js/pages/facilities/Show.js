@@ -13,7 +13,7 @@ const FacilitiesShow = ({match}) => {
         console.log(err);
         dispatch({type: 'ALERT', text: 'アプリの読み込みに失敗しました。リロードしても改善されない場合は管理者にご連絡ください。'});
       });
-      dispatch({ type: 'SET_FACILITIES', data: response.data});
+      dispatch({ type: 'SET_FACILITIES', data: [response.data]});
     }
     if (globalState.facilities.data[id]) {
       fetchData();
@@ -24,11 +24,7 @@ const FacilitiesShow = ({match}) => {
       {
         globalState.facilities.data[id] ?
         <>
-          <HeaderContainer
-            imgUrl={globalState.facilities.data[id].header_image_url}
-            name={globalState.facilities.data[id].name}
-            description={globalState.facilities.data[id].description}
-          />
+          <HeaderContainer id={id} imgUrl={globalState.facilities.data[id].header_image_url} />
           FacilityID:{id}
         </> :
         <Loading />

@@ -1,11 +1,5 @@
 import _ from 'lodash';
 
-const formatSelectValue = (selectValueArr) => {
-  selectValueArr.map(v => {
-    return { value: v.id, label: v.detail }
-  });
-};
-
 const reducer = (state = {}, action) => {
   switch(action.type) {
 
@@ -101,7 +95,8 @@ const reducer = (state = {}, action) => {
           facilityTypes: formatSelectValue(action.facilityTypes),
           budgets: formatSelectValue(action.budgets),
           scales: formatSelectValue(action.scales),
-          prefectures: formatSelectValue(action.prefectures),
+          prefectures: formatPrefecture(action.prefectures),
+          services: formatService(action.services),
           resolved: true
         }
       }
@@ -125,6 +120,7 @@ const reducer = (state = {}, action) => {
       }
     
     // facilitiesのデータをオブジェクトで保持
+    // data: array
     case 'SET_FACILITIES':
       return {
         ...state,
@@ -137,6 +133,22 @@ const reducer = (state = {}, action) => {
         }
       }
   }
+};
+
+const formatSelectValue = (selectValueArr) => {
+  return selectValueArr.map(v => {
+    return { value: v.id, label: v.detail }
+  });
+};
+const formatPrefecture = (prefectureArr) => {
+  return prefectureArr.map(v => {
+    return { value: v.id, label: v.name}
+  });
+};
+const formatService = (serviceArr) => {
+  return serviceArr.map(v => {
+    return { value: v.id, label: v.detail, iconUrl: v.icon_url }
+  });
 };
 
 export default reducer;

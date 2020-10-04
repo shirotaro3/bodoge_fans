@@ -17,10 +17,11 @@ const FacilityCreateEditForm = () => {
       const data = {
         ...formValue,
         ...d,
-        m_budget_id: formValue.m_budget_id.value,
-        m_facility_type_id: formValue.m_facility_type_id.value,
-        m_prefecture_id: formValue.m_prefecture_id.value,
-        m_scale_id: formValue.m_scale_id.value
+        m_budget_id: formValue.budget.value,
+        m_facility_type_id: formValue.facility_type.value,
+        m_prefecture_id: formValue.prefecture.value,
+        m_scale_id: formValue.scale.value,
+        m_service_id: formValue.service.map(o => o.value)
       };
       try {
         setWait(true);

@@ -17,4 +17,14 @@ class Like extends Model
     protected $fillable = [
         'post_id', 'facility_id', 'user_id',
     ];
+
+    public function post() {
+        return $this->belongsTo('App\Models\Post');
+    }
+    public function facility() {
+        return $this->belongsTo('App\Models\Facility');
+    }
+    public function user() {
+        return $this->belongsTo('App\Models\User');
+    }
 }

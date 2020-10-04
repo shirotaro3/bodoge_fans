@@ -17,7 +17,7 @@ const Initializer = ({children}) => {
         console.log(err);
         dispatch({type: 'ALERT', text: 'アプリの読み込みに失敗しました。リロードしても改善されない場合は管理者にご連絡ください。'});
       });
-      const { facilityTypes, budgets, scales, prefectures } = masters.data;
+      const { facilityTypes, budgets, scales, prefectures, services } = masters.data;
       // 値をセット
 
       dispatch({
@@ -25,7 +25,8 @@ const Initializer = ({children}) => {
         facilityTypes,
         budgets,
         scales,
-        prefectures
+        prefectures,
+        services
       });
       dispatch({
         type: 'SET_FACILITY_PICKUP',

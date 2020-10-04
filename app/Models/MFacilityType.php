@@ -17,4 +17,8 @@ class MFacilityType extends Model
     protected $fillable = [
         'detail',
     ];
+
+    public function facilities() {
+        return $this->hasMany('App\Models\Facility');
+    }
 }

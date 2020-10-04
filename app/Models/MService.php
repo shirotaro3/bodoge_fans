@@ -17,4 +17,8 @@ class MService extends Model
     protected $fillable = [
         'detail', 'icon_url'
     ];
+
+    public function facilities() {
+        return $this->belongsToMany('App\Models\Facility');
+    }
 }

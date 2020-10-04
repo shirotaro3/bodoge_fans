@@ -193,7 +193,7 @@ export const Select = (props) => {
     control: (provided, state) => ({
       ...provided,
       width: '100%',
-      height: '40px',
+      minHeight: '40px',
       borderRadius: '10px',
       border: '4px solid #fff',
       marginBottom: '20px',

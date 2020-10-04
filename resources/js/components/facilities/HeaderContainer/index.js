@@ -1,17 +1,20 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useGlobalState } from '../../../components/global/ContextProvider';
 
-const HeaderContainer = ({className, name, description}) => {
+const HeaderContainer = ({className, id}) => {
+  const [globalState, dispatch] = useGlobalState();
+  const facilities = globalState.facilities.data[id];
   return (
     <div className={className}>
-      <h2>{name}</h2>
-      <p>{description}</p>
+      <h2>{facilities.name}</h2>
+      <p>{facilities.description}</p>
     </div>
   );
 };
 
 const StyledHeaderContainer = styled(HeaderContainer).attrs(props => ({
-  imgUrl: props.imgUrl ? `url(${props.imgUrl})` : 'none'
+  imgUrl: props.imgUrl ? `url(${props.imgUrl})` : '#555'
 }))`
   width: 100%;
   height: 400px;
