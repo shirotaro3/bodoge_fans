@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useGlobalState } from '../../../components/global/ContextProvider';
 import NameDescription from './NameDescription';
 import TimeTable from './TimeTable';
+import OptionBox from './OptionBox';
 
 const HeaderContainer = ({className, facilityId}) => {
   const [globalState, dispatch] = useGlobalState();
@@ -11,6 +12,7 @@ const HeaderContainer = ({className, facilityId}) => {
     <div className={className}>
       <NameDescription facilityId={facilityId} />
       <TimeTable facilityId={facilityId} />
+      <OptionBox facilityId={facilityId} />
     </div>
   );
 };
@@ -24,6 +26,7 @@ const StyledHeaderContainer = styled(HeaderContainer).attrs(props => ({
   background-size: cover;
   padding: 40px;
   display: flex;
+  position: relative;
 `;
 
 export default StyledHeaderContainer;

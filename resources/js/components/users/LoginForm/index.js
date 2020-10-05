@@ -23,7 +23,7 @@ const UserLoginForm = () => {
         setWait(false);
 
         // ログイン情報の保持とメッセージ通知のアクションを実行する
-        dispatch({type: 'LOGIN', name: response.data.name, isLoggedIn: true});
+        dispatch({type: 'LOGIN', data: response.data});
         dispatch({type: 'MESSAGE', text: `ログインしました。ようこそ、${response.data.name}さん！`});
 
         // afterLoginPathが登録されていればそこに、なければダッシュボードにリダイレクトする

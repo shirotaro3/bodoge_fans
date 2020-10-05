@@ -12,7 +12,8 @@ const ServiceIcon = ({className, text}) => {
 };
 
 const StyledServiceIcon = styled(ServiceIcon).attrs(props => ({
-  bgColor: props.isLit ? '#bbb' : '#777',
+  bgColor: props.isLit ? '#ccc' : '#777',
+  textColor: props.isLit ? '#fff' : '#999',
   iconUrl: props.iconUrl ? `url(${props.iconUrl})` :'none'
 }))`
   width: 80px;
@@ -34,7 +35,7 @@ const StyledServiceIcon = styled(ServiceIcon).attrs(props => ({
       display: inline-block;
       width: 100%;
       text-align: center;
-      color: #fff;
+      color: ${props=>props.textColor};
       font-size: 8px;
     }
 `;

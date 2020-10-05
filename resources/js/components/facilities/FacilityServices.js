@@ -1,14 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
-import _ from 'lodash';
 import ServiceIcon from '../shared/ServiceIcon';
 import { useGlobalState } from '../global/ContextProvider';
 
 const Services = ({className, facilityId}) => {
   const [globalState, dispatch] = useGlobalState();
   const facility = globalState.facilities.data[facilityId];
+  const facilityServicesId = facility.m_services.map(o=>o.id);
   const { services, resolved } = globalState.masters;
-  console.log(globalState);
   return (
     <div className={className}>
       {
@@ -18,7 +17,7 @@ const Services = ({className, facilityId}) => {
             <ServiceIcon
               key={`s_${s.value}`}
               iconUrl={s.iconUrl}
-              isLit={true}
+              isLit={facilityServicesId.indexOf(s.value) >= 0}
               text={s.label}
             />
           );

@@ -29,7 +29,7 @@ const Routes = () => {
 
       {/* Facilities */}
       <Route exact path='/facilities/search' component={FacilitiesSearch} />
-      <Route exact path='/facilities/:id(\d+)' component={FacilitiesShow} />
+      <Route path='/facilities/:id(\d+)' component={FacilitiesShow} />
 
       {/* 認証がない状態でのみ利用できるルート */}
       <NoAuthRoute exact path='/users/registration' component={UsersRegistration} />

@@ -9,8 +9,9 @@ const reducer = (state = {}, action) => {
         ...state,
         auth: {
           ...state.auth,
-          name: action.name,
-          id: action.id,
+          name: action.data.name,
+          id: action.data.id,
+          likes: action.data.likes.map(o=>o.facility_id),
           isLoggedIn: true
         }
       }
@@ -132,6 +133,17 @@ const reducer = (state = {}, action) => {
             ...state.facilities.data,
             ..._.keyBy(action.data, 'id')
           }
+        }
+      }
+    
+    // likes
+    // data: array
+    case 'SET_LIKES':
+      return {
+        ...state,
+        auth: {
+          ...state.auth,
+          likes: action.data.map(o=>o.facility_id),
         }
       }
   }

@@ -3,6 +3,7 @@ import axios from 'axios';
 import HeaderContainer from '../../components/facilities/HeaderContainer';
 import FacilityServices from '../../components/facilities/FacilityServices';
 import Loading from '../../components/shared/Loading';
+import Tabs from '../../components/facilities/Tabs';
 import { useGlobalState } from '../../components/global/ContextProvider';
 
 const FacilitiesShow = ({match}) => {
@@ -20,22 +21,19 @@ const FacilitiesShow = ({match}) => {
       fetchData();
     }
   }, [facilityId]);
-  return (
-    <div>
-      {
-        globalState.facilities.data[facilityId] ?
-        <>
-          <HeaderContainer
-            facilityId={facilityId}
-            imgUrl={globalState.facilities.data[facilityId].header_image_url}
-          />
-          <FacilityServices facilityId={facilityId} />
-          FacilityID:{facilityId}
-        </> :
-        <Loading />
-      }
-    </div>
-  );
+  if (globalState.facilities.data[facilityId]) {
+    return (
+      <div>
+        <HeaderContainer
+          facilityId={facilityId}
+          imgUrl={globalState.facilities.data[facilityId].header_image_url}
+        />
+        <FacilityServices facilityId={facilityId} />
+        <Tabs facilityId={facilityId} />
+      </div>
+    );
+  }
+  return <Loading />;
 };
 
 export default FacilitiesShow;

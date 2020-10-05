@@ -15,7 +15,7 @@ class Like extends Model
      * @var array
      */
     protected $fillable = [
-        'post_id', 'facility_id', 'user_id',
+        'facility_id', 'user_id',
     ];
 
     public function post() {

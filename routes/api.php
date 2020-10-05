@@ -31,5 +31,11 @@ Route::prefix('facilities')->group(function () {
 
 // require auth
 Route::middleware('auth:sanctum')->group(function () {
+
+    // auth|facilities
     Route::post('facilities/store', 'App\Http\Controllers\Api\FacilityController@store');
+
+    // auth|likes
+    Route::post('likes/store', 'App\Http\Controllers\Api\LikeController@store');
+    Route::get('likes', 'App\Http\Controllers\Api\LikeController@index');
 });

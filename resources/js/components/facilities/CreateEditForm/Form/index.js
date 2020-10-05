@@ -23,7 +23,7 @@ const Components = props => {
   const prev = () => {
     setCurrentPage(currentPage - 1);
   };
-  const steps = ['1.基本情報', '2.住所', '3.SNS'];
+  const steps = ['1.基本情報', '2.住所', '3.その他'];
   // ページネーション　もっと簡潔な書き方が出来そう
   const pagination = () => {
     switch(currentPage) {

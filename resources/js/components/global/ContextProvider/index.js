@@ -32,6 +32,9 @@ const initialState = {
     data: [],
     resolved: false
   },
+  likedFacilitiesId: {
+    data: [],
+  },
   facilities: {
     data: {}
   },

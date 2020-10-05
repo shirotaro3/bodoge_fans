@@ -2,8 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 import { useGlobalState } from '../../global/ContextProvider';
 
-const TimeTable = ({className}) => {
+const TimeTable = ({className, facilityId}) => {
   const [globalState, dispatch] = useGlobalState();
+  const facility = globalState.facilities.data[facilityId];
+  const { monStart, monEnd, tueStart, tueEnd, wedStart, wedEnd,
+    thuStart, thuEnd, friStart, friEnd, satStart, satEnd,
+    sunStart, sunEnd, footnote } = facility.facility_time;
   return (
     <div className={className}>
       <ul className={`${className}__ul`}>
@@ -19,25 +23,25 @@ const TimeTable = ({className}) => {
         <li className={`${className}__li ${className}__sat`}>Sat</li>
 
         {/* startTime */}
-        <li className={`${className}__li`}>10:00</li>
-        <li className={`${className}__li`}>12:00</li>
-        <li className={`${className}__li`}>cds</li>
-        <li className={`${className}__li`}>cds</li>
-        <li className={`${className}__li`}>cds</li>
-        <li className={`${className}__li`}>cds</li>
-        <li className={`${className}__li`}>cds</li>
+        <li className={`${className}__li`}>{sunStart || '-'}</li>
+        <li className={`${className}__li`}>{monStart || '-'}</li>
+        <li className={`${className}__li`}>{tueStart || '-'}</li>
+        <li className={`${className}__li`}>{wedStart || '-'}</li>
+        <li className={`${className}__li`}>{thuStart || '-'}</li>
+        <li className={`${className}__li`}>{friStart || '-'}</li>
+        <li className={`${className}__li`}>{satStart || '-'}</li>
 
         {/* endTime */}
-        <li className={`${className}__li`}>24:00</li>
-        <li className={`${className}__li`}>cds</li>
-        <li className={`${className}__li`}>cds</li>
-        <li className={`${className}__li`}>cds</li>
-        <li className={`${className}__li`}>cds</li>
-        <li className={`${className}__li`}>cds</li>
-        <li className={`${className}__li`}>cds</li>
+        <li className={`${className}__li`}>{sunEnd || '-'}</li>
+        <li className={`${className}__li`}>{monEnd || '-'}</li>
+        <li className={`${className}__li`}>{tueEnd || '-'}</li>
+        <li className={`${className}__li`}>{wedEnd || '-'}</li>
+        <li className={`${className}__li`}>{thuEnd || '-'}</li>
+        <li className={`${className}__li`}>{friEnd || '-'}</li>
+        <li className={`${className}__li`}>{satEnd || '-'}</li>
 
         {/* footnote */}
-        <li className={`${className}__footnote`}>祝日はお休みです。</li>
+        <li className={`${className}__footnote`}>{footnote}</li>
       </ul>
     </div>
   );
