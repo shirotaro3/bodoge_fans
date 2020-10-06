@@ -35,7 +35,7 @@ const Tabs = ({className, facilityId}) => {
           className={`${className}__tab`}
           activeClassName={`${className}__active_tab`}
         >
-          アクセス
+          地図
         </NavLink>
       </div>
       {/* tabルート */}

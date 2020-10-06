@@ -13,7 +13,9 @@ const TimeTable = ({className, facilityId}) => {
     sat_end: satEnd, sun_start: sunStart, sun_end: sunEnd, 
     footnote
   } = facility.facility_time;
-  const { phone_number : phoneNumber } = facility;
+  const { phone_number : phoneNumber, address,
+    m_prefecture: prefecture, building
+  } = facility;
   return (
     <div className={className}>
       <ul className={`${className}__ul`}>
@@ -51,7 +53,10 @@ const TimeTable = ({className, facilityId}) => {
           <li className={`${className}__footnote`}>{footnote}</li>
         }
         {/* phoneNumber */}
-        <li className={`${className}__tel`}>TEL:{phoneNumber}</li>
+        <li className={`${className}__tel`}>
+          {`${prefecture.name}${address}${building}`}<br />
+          TEL:{phoneNumber}
+        </li>
       </ul>
     </div>
   );

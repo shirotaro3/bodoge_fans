@@ -21,7 +21,9 @@ class FacilityController extends Controller
             'm_budget',
             'm_facility_type',
             'm_services',
-            'facility_time'
+            'facility_time',
+            'events',
+            'reviews'
             ])->get();
 
         Log::info('[API_FACILITIES_INDEX_QUERY_SUCCESS]');
@@ -62,7 +64,9 @@ class FacilityController extends Controller
             'm_budget',
             'm_facility_type',
             'm_services',
-            'facility_time'
+            'facility_time',
+            'events',
+            'reviews'
             ])->find($id);
 
         Log::info('[API_FACILITIES_SHOW_GET_SUCCESS]');

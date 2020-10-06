@@ -79,15 +79,6 @@ const reducer = (state = {}, action) => {
           isShow: false,
         }
       }
-
-    // Tracking
-    case 'SET_AFTER_LOGIN_PATH':
-      return {
-        ...state,
-        tracking: {
-          afterLoginPath: action.path
-        }
-      }
     
     // selectValue
     case 'SET_MASTERS':
@@ -119,7 +110,7 @@ const reducer = (state = {}, action) => {
             ...state.facilities.data,
             ..._.keyBy(action.data, 'id')
           }
-        }
+        },
       }
     
     // facilitiesのデータをオブジェクトで保持
