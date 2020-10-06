@@ -13,7 +13,7 @@ use App\Models\Facility;
 class FacilityController extends Controller
 {
     public function index() {
-        Log::info('[FACILITIES_INDEX_API_QUERY_START]');
+        Log::info('[API_FACILITIES_INDEX_QUERY_START]');
 
         $facilities = Facility::with([
             'm_prefecture',
@@ -24,35 +24,38 @@ class FacilityController extends Controller
             'facility_time'
             ])->get();
 
-        Log::info('[FACILITIES_API_QUERY_SUCCESS]');
+        Log::info('[API_FACILITIES_INDEX_QUERY_SUCCESS]');
         return response()->json($facilities);
     }
 
     public function store(Request $request) {
-        Log::info('[FACILITIES_STORE_API_POST_START]');
+        Log::info('[API_FACILITIES_STORE_POST_START]');
 
         $facility = DB::transaction(function () use ($request) {
             $facility = new Facility();
             $facility->fill($request->all());
             $facility->user_id = Auth::user()->id;
+
+            // ヘッダー画像の保存
             if ($request->header_image){
                 $path = Storage::disk('s3')->putFile('facilities/header', $request->file('header_image'), 'public');
                 $facility->header_image_url = Storage::disk('s3')->url($path);
             }
             $facility->save();
             $services = $request->input('m_service_ids');
-            Log::info($services);
             $facility->m_services()->sync($services);
 
             $facility_time = $facility->facility_time()->create();
             return $facility;
         });
 
-        Log::info('[FACILITIES_STORE_API_POST_SUCCESS]');
+        Log::info('[API_FACILITIES_STORE_POST_SUCCESS]');
         return response()->json($facility);
     }
     
     public function show($id) {
+        Log::info('[API_FACILITIES_SHOW_GET_START]');
+
         $facility = Facility::with([
             'm_prefecture',
             'm_scale',
@@ -61,6 +64,8 @@ class FacilityController extends Controller
             'm_services',
             'facility_time'
             ])->find($id);
+
+        Log::info('[API_FACILITIES_SHOW_GET_SUCCESS]');
         return response()->json($facility);
     }
 }

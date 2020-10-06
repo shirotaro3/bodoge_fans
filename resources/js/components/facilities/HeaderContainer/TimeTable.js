@@ -5,9 +5,15 @@ import { useGlobalState } from '../../global/ContextProvider';
 const TimeTable = ({className, facilityId}) => {
   const [globalState, dispatch] = useGlobalState();
   const facility = globalState.facilities.data[facilityId];
-  const { monStart, monEnd, tueStart, tueEnd, wedStart, wedEnd,
-    thuStart, thuEnd, friStart, friEnd, satStart, satEnd,
-    sunStart, sunEnd, footnote } = facility.facility_time;
+  const {
+    mon_start: monStart, mon_end: monEnd,
+    tue_start: tueStart, tue_end: tueEnd, wed_start: wedStart,
+    wed_start: wedEnd, thu_start: thuStart, thu_end: thuEnd,
+    fri_start: friStart, fri_end: friEnd, sat_start: satStart,
+    sat_end: satEnd, sun_start: sunStart, sun_end: sunEnd, 
+    footnote
+  } = facility.facility_time;
+  const { phone_number : phoneNumber } = facility;
   return (
     <div className={className}>
       <ul className={`${className}__ul`}>
@@ -41,7 +47,11 @@ const TimeTable = ({className, facilityId}) => {
         <li className={`${className}__li`}>{satEnd || '-'}</li>
 
         {/* footnote */}
-        <li className={`${className}__footnote`}>{footnote}</li>
+        {footnote &&
+          <li className={`${className}__footnote`}>{footnote}</li>
+        }
+        {/* phoneNumber */}
+        <li className={`${className}__tel`}>TEL:{phoneNumber}</li>
       </ul>
     </div>
   );
@@ -69,6 +79,16 @@ const StyledTimeTable = styled(TimeTable)`
     background: rgba(0,0,0,.3);
   }
   &__footnote {
+    width: calc(91% + 12px);
+    padding: 6px 5px;
+    border: 1px solid #fff;
+    list-style: none;
+    box-sizing: border-box;
+    margin: 3px 1px 1px 1px;
+    background: rgba(0,0,0,.3);
+    font-size: 12px;
+  }
+  &__tel {
     width: calc(91% + 12px);
     padding: 6px 5px;
     border-radius: 0 0 8px 8px;

@@ -1,9 +1,11 @@
 import React from 'react';
+import GoogleMap from '../../../shared/GoogleMap';
 
 const Access = () => {
   return (
     <div>
-      Access
+      Accessss
+      <GoogleMap />
     </div>
   );
 };
