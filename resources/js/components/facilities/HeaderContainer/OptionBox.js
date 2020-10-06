@@ -20,21 +20,24 @@ const OptionBox = ({className, facilityId}) => {
       dispatch({type: 'ALERT', text: 'エラーが発生しました。再度お試しください。'});
     }
   };
-  return (
-    <div className={className}>
-      {
-        // likeボタン
-        likes.indexOf(Number(facilityId)) < 0 ?
-          <BsStar className={`${className}__icon`} onClick={like} /> :
-          <BsStarFill className={`${className}__iconLiked`} onClick={like} />
-      }
-      {
-        // 表示中のFacilityがユーザー所有であれば編集ボタンを表示
-        facilityUserId === sessionUserId &&
-          <BsGear className={`${className}__icon`} />
-      }
-    </div>
-  )
+  if (globalState.auth.isLoggedIn) {
+    return (
+      <div className={className}>
+        {
+          // likeボタン
+          likes.indexOf(Number(facilityId)) < 0 ?
+            <BsStar className={`${className}__icon`} onClick={like} /> :
+            <BsStarFill className={`${className}__iconLiked`} onClick={like} />
+        }
+        {
+          // 表示中のFacilityがユーザー所有であれば編集ボタンを表示
+          facilityUserId === sessionUserId &&
+            <BsGear className={`${className}__icon`} />
+        }
+      </div>
+    )
+  }
+  return <></>
 };
 
 const StyledOptionBox = styled(OptionBox)`

@@ -66,7 +66,7 @@ const StyledTimeTable = styled(TimeTable)`
     list-style: none;
     box-sizing: border-box;
     margin: 1px 1px 3px 1px;
-    background: rgba(0,0,0,.2);
+    background: rgba(0,0,0,.3);
   }
   &__footnote {
     width: calc(91% + 12px);
@@ -76,7 +76,7 @@ const StyledTimeTable = styled(TimeTable)`
     list-style: none;
     box-sizing: border-box;
     margin: 3px 1px 1px 1px;
-    background: rgba(0,0,0,.2);
+    background: rgba(0,0,0,.3);
     font-size: 12px;
   }
   &__li {
@@ -87,7 +87,7 @@ const StyledTimeTable = styled(TimeTable)`
     list-style: none;
     box-sizing: border-box;
     margin: 1px;
-    background: rgba(0,0,0,.2);
+    background: rgba(0,0,0,.3);
   }
   &__sun {
     color: #f99;

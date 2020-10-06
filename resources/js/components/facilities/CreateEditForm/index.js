@@ -13,19 +13,38 @@ const FacilityCreateEditForm = () => {
   const [formValue, setFormValue] = useState(false);
 
   // Submit時の処理
-  const submit = handleSubmit(async (d) => {
-      const data = {
-        ...formValue,
-        ...d,
-        m_budget_id: formValue.budget.value,
-        m_facility_type_id: formValue.facility_type.value,
-        m_prefecture_id: formValue.prefecture.value,
-        m_scale_id: formValue.scale.value,
-        m_service_id: formValue.services.map(o => o.value)
-      };
+  const submit = handleSubmit(async (inputData) => {
+      const submitData = new FormData();
+      submitData.append('name', formValue.name);
+      submitData.append('description', formValue.description);
+      submitData.append('building', formValue.building);
+      submitData.append('postal_code', formValue.postal_code);
+      submitData.append('address', formValue.address);
+      submitData.append('phone_number', formValue.phone_number);
+      submitData.append('line', inputData.line);
+      submitData.append('twitter', inputData.twitter);
+      submitData.append('instagram', inputData.instagram);
+      submitData.append('facebook', inputData.facebook);
+      submitData.append('hp_url', inputData.hp_url);
+      submitData.append('m_budget_id', formValue.budget.value);
+      submitData.append('m_facility_type_id', formValue.facility_type.value);
+      submitData.append('m_prefecture_id', formValue.prefecture.value);
+      submitData.append('m_scale_id', formValue.scale.value);
+      submitData.append('header_image', inputData.header_image[0]);
+      formValue.services.forEach((o, i) => {
+        submitData.append('m_service_ids[]', o.value)  // arrayデータを分割して入れ直す
+      });
       try {
         setWait(true);
-        const response = await axios.post('/api/facilities/store', data);
+        const response = await axios.post(
+          '/api/facilities/store',
+          submitData,
+          {
+            headers: {
+              'content-type': 'multipart/form-data',
+            },
+          }
+        );
         setWait(false);
         dispatch({type: 'MESSAGE', text: '登録しました。'});
         dispatch({type: 'REDIRECT', to: `/facilities/${response.data.id}`});

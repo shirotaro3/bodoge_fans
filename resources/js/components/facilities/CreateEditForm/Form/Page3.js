@@ -4,10 +4,10 @@ import { ButtonWhite as Button, ButtonWhiteDisabled as ButtonDisabled } from '..
 
 const Page3 = ({register, watch, errors, control, wait, prev, submit}) => {
   return (
-    <Form onSubmit={submit}>
+    <Form onSubmit={submit} enctype='multipart/form-data'>
       <label>ヘッダー画像</label>
-      <InputFile name='header_image_url' placeholder='選択してください' ref={register()} />
-      {errors.header_image_url && <p>必須項目です。</p>}
+      <InputFile name='header_image' placeholder='選択してください' ref={register()} />
+      {errors.header_image && <p>必須項目です。</p>}
 
       <label>ホームページURL</label>
       <Input name='hp_url' placeholder='任意（例：https://bdg-fans.xyz）' ref={register()} />

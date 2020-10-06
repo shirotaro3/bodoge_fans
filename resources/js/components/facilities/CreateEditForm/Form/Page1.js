@@ -8,7 +8,7 @@ const Page1 = ({register, watch, errors, control, next, formValue}) => {
   const [globalState, dispatch] = useGlobalState();
   const { facilityTypes, budgets, scales, services } = globalState.masters;
   return (
-    <Form onSubmit={next} enctype='multipart/form-data'>
+    <Form onSubmit={next}>
       <label>*お店/施設名</label>
       <Input
         name='name'

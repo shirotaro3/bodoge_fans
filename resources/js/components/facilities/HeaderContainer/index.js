@@ -22,7 +22,7 @@ const StyledHeaderContainer = styled(HeaderContainer).attrs(props => ({
 }))`
   width: 100%;
   min-height: 400px;
-  background: linear-gradient(0deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, .3)), ${props => props.imgUrl};
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, .5)), ${props => props.imgUrl};
   background-size: cover;
   padding: 40px;
   display: flex;
