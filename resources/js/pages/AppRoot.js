@@ -12,11 +12,17 @@ import { ContextProvider } from '../components/global/ContextProvider';
 import Header from '../components/global/Header';
 import Footer from '../components/global/Footer';
 import Notice from '../components/global/Notice';
+import Overlay from '../components/global/Overlay';
+import WaitingOverlay from '../components/global/WaitingOverlay';
+import Modal from '../components/global/Modal';
 
 const AppRoot = ({className}) => {
     return (
         <div className={className}>
             <ContextProvider>
+                <WaitingOverlay />
+                <Overlay />
+                <Modal />
                 <Initializer>
                     <Router>
                         <Redirector />

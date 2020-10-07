@@ -6,11 +6,10 @@ import ja from 'date-fns/locale/ja';
 import { FormVertical as Form, Input, Radio, Container } from '../../shared/FormParts';
 import { ButtonWhite as Button, ButtonWhiteDisabled as ButtonDisabled } from '../../shared/Buttons';
 import { BoxRoundedBlack as Box } from '../../shared/Boxes';
-import Waiting from '../../shared/Waiting';
 
 registerLocale('ja', ja);
 
-const Components = ({register, watch, errors, wait, onSubmit, control}) => {
+const Components = ({register, watch, errors, onSubmit, control}) => {
   return (
     <Box>
       <h2>ユーザー登録</h2>
@@ -64,9 +63,8 @@ const Components = ({register, watch, errors, wait, onSubmit, control}) => {
         <Input name='password_confirmation' type='password' ref={register({ required: true })} />
         {errors.password_confirmation && <p>必須項目です。</p>}
         
-        {wait ? <ButtonDisabled disabled>通信中</ButtonDisabled> : <Button type="submit">登録</Button>}
+        <Button type="submit">登録</Button>
       </Form>
-      <Waiting wait={wait} />
     </Box>
   )
 };

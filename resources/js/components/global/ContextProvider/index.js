@@ -3,8 +3,7 @@ import reducer from './reducer';
 
 const initialState = {
   auth: {
-    name: '',
-    id: null,
+    user: {},
     isLoggedIn: false,
     initialized: false,
   },
@@ -16,6 +15,17 @@ const initialState = {
     isShow: false,
     type: 'MESSAGE',
     color: '#fff'
+  },
+  visibility: {
+    userMenu: false,
+    facilityMenu: false,
+    modal: false,
+    waiting: false,
+  },
+  modalConfig: {
+    type: 'CONFIRM',
+    text: '',
+    callback: function() { return; }
   },
   tracking: {
     afterLoginPath: '',
@@ -31,9 +41,6 @@ const initialState = {
   pickedUpFacilitiesId: {
     data: [],
     resolved: false
-  },
-  likedFacilitiesId: {
-    data: [],
   },
   facilities: {
     data: {}

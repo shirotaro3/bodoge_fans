@@ -15,6 +15,7 @@ class FacilityController extends Controller
     public function index() {
         Log::info('[API_FACILITIES_INDEX_QUERY_START]');
 
+        // APIを叩く回数を減らすため、まとめて色々返す
         $facilities = Facility::with([
             'm_prefecture',
             'm_scale',
@@ -23,7 +24,8 @@ class FacilityController extends Controller
             'm_services',
             'facility_time',
             'events',
-            'reviews'
+            'reviews',
+            'likes'
             ])->get();
 
         Log::info('[API_FACILITIES_INDEX_QUERY_SUCCESS]');
@@ -50,7 +52,17 @@ class FacilityController extends Controller
             $facility_time = $facility->facility_time()->create();
             return $facility;
         });
-
+        $facility->load(
+            'm_services',
+            'facility_time',
+            'likes',
+            'reviews',
+            'events',
+            'm_budget',
+            'm_prefecture',
+            'm_scale',
+            'm_facility_type'
+        );
         Log::info('[API_FACILITIES_STORE_POST_SUCCESS]');
         return response()->json($facility);
     }
@@ -58,6 +70,7 @@ class FacilityController extends Controller
     public function show($id) {
         Log::info('[API_FACILITIES_SHOW_GET_START]');
 
+        // APIを叩く回数を減らすため、まとめて色々返す
         $facility = Facility::with([
             'm_prefecture',
             'm_scale',
@@ -66,7 +79,8 @@ class FacilityController extends Controller
             'm_services',
             'facility_time',
             'events',
-            'reviews'
+            'reviews',
+            'likes'
             ])->find($id);
 
         Log::info('[API_FACILITIES_SHOW_GET_SUCCESS]');

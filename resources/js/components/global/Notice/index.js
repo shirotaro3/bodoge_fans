@@ -29,7 +29,7 @@ const StyledNotice = styled(Notice)`
   width: 100%;
   top: 0;
   text-align: center;
-  z-index: 9;
+  z-index: 10;
 `;
 
 export default StyledNotice;

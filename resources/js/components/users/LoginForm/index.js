@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import Form from './Form';
@@ -9,18 +9,16 @@ const UserLoginForm = () => {
   const [globalState, dispatch] = useGlobalState();
   const defaultRedirectPath = '/users/dashboard';
 
-  // wait 通信の待機中を表す *boolean
-  const [wait, setWait] = useState(false);
-
   // Submit時の処理
   const onSubmit = handleSubmit(async (data) => {
       try {
-        setWait(true);
+        dispatch({type: 'API_CALL_START'});
 
         // SanctumのCSRF対策
         const csrf = await axios.get('/sanctum/csrf-cookie');
         const response = await axios.post('/api/users/login', data);
-        setWait(false);
+
+        dispatch({type: 'API_CALL_END'});
 
         // ログイン情報の保持とメッセージ通知のアクションを実行する
         dispatch({type: 'LOGIN', data: response.data});
@@ -29,7 +27,7 @@ const UserLoginForm = () => {
         // afterLoginPathが登録されていればそこに、なければダッシュボードにリダイレクトする
         dispatch({type: 'REDIRECT', to: globalState.tracking.afterLoginPath || defaultRedirectPath});
       } catch (err) {
-        setWait(false);
+        dispatch({type: 'API_CALL_END'});
         dispatch({type: 'ALERT', text: '認証に失敗しました。入力内容をご確認ください。'});
       }
   });
@@ -38,7 +36,6 @@ const UserLoginForm = () => {
       register={register}
       watch={watch}
       errors={errors}
-      wait={wait}
       onSubmit={onSubmit}
     />
   )

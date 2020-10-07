@@ -2,7 +2,7 @@ import React from 'react';
 import { FormVertical as Form, Input, Container, InputFile } from '../../../shared/FormParts';
 import { ButtonWhite as Button, ButtonWhiteDisabled as ButtonDisabled } from '../../../shared/Buttons';
 
-const Page3 = ({register, watch, errors, control, wait, prev, submit}) => {
+const Page3 = ({register, watch, errors, control, prev, submit}) => {
   return (
     <Form onSubmit={submit} enctype='multipart/form-data'>
       <label>ヘッダー画像</label>
@@ -29,13 +29,10 @@ const Page3 = ({register, watch, errors, control, wait, prev, submit}) => {
       <Input name='instagram' ref={register()} placeholder='任意' />
       {errors.instagram && <p>必須項目です。</p>}
 
-      {wait
-      ? <ButtonDisabled disabled>通信中</ButtonDisabled>
-      : <Container>
-          <Button onClick={prev} type='button'>戻る</Button>
-          <Button type="submit">確認画面へ</Button>
-        </Container>
-      }
+      <Container>
+        <Button onClick={prev} type='button'>戻る</Button>
+        <Button type="submit">確認画面へ</Button>
+      </Container>
     </Form>
   );
 };

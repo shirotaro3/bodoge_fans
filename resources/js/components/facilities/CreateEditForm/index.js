@@ -7,9 +7,7 @@ import { useGlobalState } from '../../global/ContextProvider';
 const FacilityCreateEditForm = () => {
   const { register, handleSubmit, watch, errors, control } = useForm();
   const [globalState, dispatch] = useGlobalState();
-
-  // wait 通信の待機中を表す *boolean
-  const [wait, setWait] = useState(false);
+  // ページ切り替え時にセットする
   const [formValue, setFormValue] = useState(false);
 
   // Submit時の処理
@@ -35,7 +33,7 @@ const FacilityCreateEditForm = () => {
         submitData.append('m_service_ids[]', o.value)  // arrayデータを分割して入れ直す
       });
       try {
-        setWait(true);
+        dispatch({type: 'API_CALL_START'});
         const response = await axios.post(
           '/api/facilities/store',
           submitData,
@@ -45,11 +43,12 @@ const FacilityCreateEditForm = () => {
             },
           }
         );
-        setWait(false);
+        dispatch({type: 'API_CALL_END'});
+        dispatch({type: 'SET_FACILITIES', data: [response.data]});
         dispatch({type: 'MESSAGE', text: '登録しました。'});
         dispatch({type: 'REDIRECT', to: `/facilities/${response.data.id}`});
       } catch (err) {
-        setWait(false);
+        dispatch({type: 'API_CALL_END'});
         dispatch({type: 'ALERT', text: '処理に失敗しました。再度お試しください。'});
       }
   });
@@ -58,7 +57,6 @@ const FacilityCreateEditForm = () => {
       register={register}
       watch={watch}
       errors={errors}
-      wait={wait}
       submit={submit}
       setFormValue={setFormValue}
       control={control}

@@ -9,9 +9,10 @@ const reducer = (state = {}, action) => {
         ...state,
         auth: {
           ...state.auth,
-          name: action.data.name,
-          id: action.data.id,
-          likes: action.data.likes.map(o=>o.facility_id),
+          user: {
+            ...action.data,
+            likes: action.data.likes.map(o=>o.facility_id),
+          },
           isLoggedIn: true
         }
       }
@@ -20,8 +21,7 @@ const reducer = (state = {}, action) => {
         ...state,
         auth: {
           ...state.auth,
-          name: '',
-          id: null,
+          user: {},
           isLoggedIn: false
         }
       }
@@ -80,7 +80,71 @@ const reducer = (state = {}, action) => {
         }
       }
     
-    // selectValue
+    // ComponentVisibility
+    case 'USER_MENU_OPEN':
+      return {
+        ...state,
+        visibility: {
+          ...state.visibility,
+          userMenu: true,
+          facilityMenu: false,
+          modal: false
+        }
+      }
+    case 'FACILITY_MENU_OPEN':
+      return {
+        ...state,
+        visibility: {
+          ...state.visibility,
+          userMenu: false,
+          facilityMenu: true,
+          modal: false
+        }
+      }
+    case 'MODAL_OPEN':
+      return {
+        ...state,
+        visibility: {
+          ...state.visibility,
+          userMenu: false,
+          facilityMenu: false,
+          modal: true
+        },
+        modalConfig: {
+          // デフォルトはCONFIRM
+          type: action.modalType || 'CONFIRM',
+          text: action.text || '',
+          callback: action.callback || function() { return; }
+        }
+      }
+    case 'CLOSE_ALL':
+      return {
+        ...state,
+        visibility: {
+          ...state.visibility,
+          userMenu: false,
+          facilityMenu: false,
+          modal: false,
+        }
+      }
+    case 'API_CALL_START':
+      return {
+        ...state,
+        visibility: {
+          ...state.visibility,
+          waiting: true
+        }
+      }
+    case 'API_CALL_END':
+      return {
+        ...state,
+        visibility: {
+          ...state.visibility,
+          waiting: false
+        }
+      }
+
+    //  MasterData
     case 'SET_MASTERS':
       return {
         ...state,
@@ -134,7 +198,10 @@ const reducer = (state = {}, action) => {
         ...state,
         auth: {
           ...state.auth,
-          likes: action.data.map(o=>o.facility_id),
+          user: {
+            ...state.auth.user,
+            likes: action.data.map(o=>o.facility_id),
+          }
         }
       }
   }

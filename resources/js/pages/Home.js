@@ -5,7 +5,7 @@ import Slider from '../components/shared/FacilitiesSlider';
 
 const Home = () => {
   return (
-      <div>
+      <div className='page'>
           <HeroBox />
           <Slider />
           <Link to='/users/registration'>ユーザー登録</Link>
