@@ -23,6 +23,6 @@ const StyledLoginBox = styled(LoginBox)`
   border-radius: 4px;
   font-size: 11px;
   text-align: center;
-`
+`;
 
 export default StyledLoginBox;

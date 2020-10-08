@@ -16,7 +16,7 @@ const SliderChild = ({className, title, body, linkPath, imgUrl}) => {
 };
 
 const StyledSliderChild = styled(SliderChild).attrs(props => ({
-  imgUrl: props.imgUrl || 'none'
+  imgUrl: props.imgUrl ? `url(${props.imgUrl})` :'none'
 }))`
   ${mixinDivLink}
   height: 250px;
@@ -25,7 +25,7 @@ const StyledSliderChild = styled(SliderChild).attrs(props => ({
   position: relative;
   transition: .3s;
   outline: none;
-  background-image: url(${props => props.imgUrl});
+  background-image: ${props => props.imgUrl};
   background-size: cover;
   font-size: 14px;
   &__child {

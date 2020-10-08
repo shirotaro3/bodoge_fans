@@ -6,11 +6,9 @@ import { ButtonWhite as Button } from '../../../shared/Buttons';
 
 const Page1 = ({register, watch, errors, control, next, formValue}) => {
   const [globalState, dispatch] = useGlobalState();
-  const facilityTypes = globalState.selectValues.facilityTypes;
-  const budgets = globalState.selectValues.budgets;
-  const scales = globalState.selectValues.scales;
+  const { facilityTypes, budgets, scales, services } = globalState.masters;
   return (
-    <Form onSubmit={next} enctype='multipart/form-data'>
+    <Form onSubmit={next}>
       <label>*お店/施設名</label>
       <Input
         name='name'
@@ -33,38 +31,51 @@ const Page1 = ({register, watch, errors, control, next, formValue}) => {
       <label>*お店/施設のタイプ</label>
       <Controller
         as={Select}
-        name='m_facility_type_id'
+        name='facility_type'
         control={control}
         options={facilityTypes}
-        defaultValue={formValue.m_facility_type_id || ''}
+        defaultValue={formValue.facility_type || ''}
         placeholder='選択してください'
         rules={{ required: true }}
       />
-      {errors.m_facility_type_id && <p>必須項目です。</p>}
+      {errors.facility_type && <p>必須項目です。</p>}
 
       <label>*収容可能人数</label>
       <Controller
         as={Select}
-        name='m_scale_id'
+        name='scale'
         control={control}
         options={scales}
-        defaultValue={formValue.m_scale_id || ''}
+        defaultValue={formValue.scale || ''}
         placeholder='選択してください'
         rules={{ required: true }}
       />
-      {errors.m_scale_id && <p>必須項目です。</p>}
+      {errors.scale && <p>必須項目です。</p>}
 
       <label>*予算</label>
       <Controller
         as={Select}
-        name='m_budget_id'
+        name='budget'
         control={control}
         options={budgets}
-        defaultValue={formValue.m_budget_id || ''}
+        defaultValue={formValue.budget || ''}
         placeholder='選択してください'
         rules={{ required: true }}
       />
-      {errors.m_budget_id && <p>必須項目です。</p>}
+      {errors.budget && <p>必須項目です。</p>}
+
+      <label>*提供サービス</label>
+      <Controller
+        as={Select}
+        name='services'
+        isMulti
+        control={control}
+        options={services}
+        defaultValue={formValue.services || ''}
+        placeholder='選択してください'
+        rules={{ required: true }}
+      />
+      {errors.services && <p>必須項目です。</p>}
 
       <Button type='submit'>進む</Button>
     </Form>

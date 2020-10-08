@@ -7,29 +7,48 @@ import { useGlobalState } from '../../global/ContextProvider';
 const FacilityCreateEditForm = () => {
   const { register, handleSubmit, watch, errors, control } = useForm();
   const [globalState, dispatch] = useGlobalState();
-
-  // wait 通信の待機中を表す *boolean
-  const [wait, setWait] = useState(false);
+  // ページ切り替え時にセットする
   const [formValue, setFormValue] = useState(false);
 
   // Submit時の処理
-  const submit = handleSubmit(async (d) => {
-      const data = {
-        ...formValue,
-        ...d,
-        m_budget_id: formValue.m_budget_id.value,
-        m_facility_type_id: formValue.m_facility_type_id.value,
-        m_prefecture_id: formValue.m_prefecture_id.value,
-        m_scale_id: formValue.m_scale_id.value
-      };
+  const submit = handleSubmit(async (inputData) => {
+      const submitData = new FormData();
+      submitData.append('name', formValue.name);
+      submitData.append('description', formValue.description);
+      submitData.append('building', formValue.building);
+      submitData.append('postal_code', formValue.postal_code);
+      submitData.append('address', formValue.address);
+      submitData.append('phone_number', formValue.phone_number);
+      submitData.append('line', inputData.line);
+      submitData.append('twitter', inputData.twitter);
+      submitData.append('instagram', inputData.instagram);
+      submitData.append('facebook', inputData.facebook);
+      submitData.append('hp_url', inputData.hp_url);
+      submitData.append('m_budget_id', formValue.budget.value);
+      submitData.append('m_facility_type_id', formValue.facility_type.value);
+      submitData.append('m_prefecture_id', formValue.prefecture.value);
+      submitData.append('m_scale_id', formValue.scale.value);
+      submitData.append('header_image', inputData.header_image[0]);
+      formValue.services.forEach((o, i) => {
+        submitData.append('m_service_ids[]', o.value)  // arrayデータを分割して入れ直す
+      });
       try {
-        setWait(true);
-        const response = await axios.post('/api/facilities/store', data);
-        setWait(false);
+        dispatch({type: 'API_CALL_START'});
+        const response = await axios.post(
+          '/api/facilities/store',
+          submitData,
+          {
+            headers: {
+              'content-type': 'multipart/form-data',
+            },
+          }
+        );
+        dispatch({type: 'API_CALL_END'});
+        dispatch({type: 'SET_FACILITIES', data: [response.data]});
         dispatch({type: 'MESSAGE', text: '登録しました。'});
         dispatch({type: 'REDIRECT', to: `/facilities/${response.data.id}`});
       } catch (err) {
-        setWait(false);
+        dispatch({type: 'API_CALL_END'});
         dispatch({type: 'ALERT', text: '処理に失敗しました。再度お試しください。'});
       }
   });
@@ -38,7 +57,6 @@ const FacilityCreateEditForm = () => {
       register={register}
       watch={watch}
       errors={errors}
-      wait={wait}
       submit={submit}
       setFormValue={setFormValue}
       control={control}

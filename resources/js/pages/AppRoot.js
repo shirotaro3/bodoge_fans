@@ -7,17 +7,23 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import GlobalStyle from '../components/global/GlobalStyle';
 import Routes from '../components/global/Routes';
 import Redirector from '../components/global/Redirector';
-import Resolver from '../components/global/Resolver';
+import Initializer from '../components/global/Initializer';
 import { ContextProvider } from '../components/global/ContextProvider';
 import Header from '../components/global/Header';
 import Footer from '../components/global/Footer';
 import Notice from '../components/global/Notice';
+import Overlay from '../components/global/Overlay';
+import WaitingOverlay from '../components/global/WaitingOverlay';
+import Modal from '../components/global/Modal';
 
 const AppRoot = ({className}) => {
     return (
         <div className={className}>
             <ContextProvider>
-                <Resolver>
+                <WaitingOverlay />
+                <Overlay />
+                <Modal />
+                <Initializer>
                     <Router>
                         <Redirector />
                         <Header />
@@ -25,7 +31,7 @@ const AppRoot = ({className}) => {
                         <Routes />
                         <Footer />
                     </Router>
-                </Resolver>
+                </Initializer>
             </ContextProvider>
             <GlobalStyle />
         </div>

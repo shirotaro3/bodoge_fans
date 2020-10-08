@@ -20,4 +20,9 @@ class FacilityTime extends Model
         'fry_end', 'sat_start', 'sat_end', 'sun_start', 'sun_end',
         'hol_start', 'hol_end', 'footnote'
     ];
+
+    // belongsTo
+    public function facility() {
+        return $this->belongsTo('App\Models\Facility');
+    }
 }

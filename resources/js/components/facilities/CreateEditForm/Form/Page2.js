@@ -6,7 +6,7 @@ import { ButtonWhite as Button } from '../../../shared/Buttons';
 
 const Page2 = ({register, watch, errors, control, next, prev, formValue}) => {
   const [globalState, dispatch] = useGlobalState();
-  const prefectures = globalState.selectValues.prefectures;
+  const { prefectures } = globalState.masters;
   return (
     <Form onSubmit={next}>
       <label>*郵便番号</label>
@@ -21,14 +21,14 @@ const Page2 = ({register, watch, errors, control, next, prev, formValue}) => {
       <label>*都道府県</label>
       <Controller
         as={Select}
-        name='m_prefecture_id'
+        name='prefecture'
         control={control}
         options={prefectures}
-        defaultValue={formValue.m_prefecture_id || ''}
+        defaultValue={formValue.prefecture || ''}
         placeholder='選択してください'
         rules={{ required: true }}
       />
-      {errors.m_prefecture_id && <p>必須項目です。</p>}
+      {errors.prefecture && <p>必須項目です。</p>}
 
       <label>*市区町村・番地</label>
       <Input

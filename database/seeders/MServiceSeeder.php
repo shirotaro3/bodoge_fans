@@ -17,48 +17,48 @@ class MServiceSeeder extends Seeder
     public function run()
     {
         DB::table('m_services')->insert([
-            'detail' => '飲食の提供あり',
-            'icon_url' => '/img/service/01.jpg'
+            'detail' => '飲食の提供',
+            'icon_url' => '/img/service/01.png'
         ]);
         DB::table('m_services')->insert([
-            'detail' => '酒類の提供あり',
-            'icon_url' => '/img/service/02.jpg'
+            'detail' => '酒類の提供',
+            'icon_url' => '/img/service/02.png'
         ]);
         DB::table('m_services')->insert([
-            'detail' => '飲食の持ち込みOK',
-            'icon_url' => '/img/service/03.jpg'
+            'detail' => '飲食の持込',
+            'icon_url' => '/img/service/03.png'
         ]);
         DB::table('m_services')->insert([
-            'detail' => '持ち込みゲーム',
-            'icon_url' => '/img/service/04.jpg'
+            'detail' => '持込ゲーム',
+            'icon_url' => '/img/service/04.png'
         ]);
         DB::table('m_services')->insert([
             'detail' => 'ボードゲーム',
-            'icon_url' => '/img/service/05.jpg'
+            'icon_url' => '/img/service/05.png'
         ]);
         DB::table('m_services')->insert([
             'detail' => 'TCG',
-            'icon_url' => '/img/service/06.jpg'
+            'icon_url' => '/img/service/06.png'
         ]);
         DB::table('m_services')->insert([
             'detail' => 'TRPG',
-            'icon_url' => '/img/service/07.jpg'
+            'icon_url' => '/img/service/07.png'
         ]);
         DB::table('m_services')->insert([
             'detail' => '人狼',
-            'icon_url' => '/img/service/08.jpg'
+            'icon_url' => '/img/service/08.png'
         ]);
         DB::table('m_services')->insert([
-            'detail' => '喫煙スペースあり',
-            'icon_url' => '/img/service/09.jpg'
+            'detail' => '喫煙スペース',
+            'icon_url' => '/img/service/09.png'
         ]);
         DB::table('m_services')->insert([
             'detail' => '全席禁煙',
-            'icon_url' => '/img/service/10.jpg'
+            'icon_url' => '/img/service/10.png'
         ]);
         DB::table('m_services')->insert([
-            'detail' => 'ボドゲ販売あり',
-            'icon_url' => '/img/service/11.jpg'
+            'detail' => 'ボドゲ販売',
+            'icon_url' => '/img/service/11.png'
         ]);
     }
 }

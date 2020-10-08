@@ -1,18 +1,21 @@
 import React from 'react';
+import styled from 'styled-components';
 import { LinkWhite as Link } from '../../../shared/Links';
-import { LoginButton } from '../../../shared/Buttons';
 import { useGlobalState } from '../../ContextProvider';
+import PullDownMenu from './PullDownMenu';
 
-const Authenticated = () => {
+const Authenticated = ({className}) => {
   const [globalState, dispatch] = useGlobalState();
+  const menuIsOpen = globalState.visibility.userMenu;
   return (
-    <div>
-      <Link to='/users/dashboard'>
-      <LoginButton>{globalState.auth.name}さん</LoginButton>
-      </Link><br />
-      <Link to='/users/logout'>ログアウト</Link>
+    <div className={className}>
+      <PullDownMenu />
     </div>
   );
 }
 
-export default Authenticated;
+const StyledAuthenticated = styled(Authenticated)`
+  
+`;
+
+export default StyledAuthenticated;

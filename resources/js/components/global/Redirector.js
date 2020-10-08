@@ -4,8 +4,8 @@ import { useGlobalState } from './ContextProvider';
 
 const Redirector = () => {
   const [globalState, dispatch] = useGlobalState();
-  // リダイレクトが実行済みでない時、コンポーネントを出現させる。
-  if (!globalState.redirect.isExecuted) {
+  // リダイレクト先登録時、リダイレクトする
+  if (globalState.redirect.path) {
     return <RedirectWrapper to={globalState.redirect.path} />;
   }
   return <></>;
@@ -14,7 +14,7 @@ const Redirector = () => {
 const RedirectWrapper = ({to}) => {
   const [globalState, dispatch] = useGlobalState();
   useEffect(() => {
-    dispatch({type: 'REDIRECTION_COMPLETED'});
+    dispatch({type: 'REDIRECT_OK'});
   }, []);
   return (
     <Redirect to={to} />

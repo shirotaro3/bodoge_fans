@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Like;
 use Illuminate\Http\Request;
 
 /*
@@ -17,11 +18,13 @@ use Illuminate\Http\Request;
 
 Route::get('/{any}', function () {
     if (Auth::check()) {
-        $userName = Auth::user()->name;
+        $user = Auth::user();
+        $likes = Like::where('user_id', $user->id)->get();
+        $user['likes'] = $likes;
     } else {
-        $userName = '';
+        $user = '';
     }
-    return view('app', compact('userName'));
+    return view('app', ['user' => $user]);
 })->where('any', '^(?!.*api).*');
 
 // Auth::routes();

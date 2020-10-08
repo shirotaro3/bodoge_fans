@@ -30,7 +30,7 @@
 
         <script src="{{ asset('js/app.js') }}" defer></script>
         <script>
-            var sessionUserName = '{{ $userName ?? '' }}';
+            var sessionUser = @json($user);
         </script>
     </body>
 </html>

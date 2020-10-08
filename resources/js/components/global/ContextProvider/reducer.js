@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 const reducer = (state = {}, action) => {
   switch(action.type) {
 
@@ -7,7 +9,10 @@ const reducer = (state = {}, action) => {
         ...state,
         auth: {
           ...state.auth,
-          name: action.name,
+          user: {
+            ...action.data,
+            likes: action.data.likes.map(o=>o.facility_id),
+          },
           isLoggedIn: true
         }
       }
@@ -16,16 +21,16 @@ const reducer = (state = {}, action) => {
         ...state,
         auth: {
           ...state.auth,
-          name: null,
+          user: {},
           isLoggedIn: false
         }
       }
-    case 'AUTH_RESOLVED':
+    case 'AUTH_INITIALIZED':
       return {
         ...state,
         auth: {
           ...state.auth,
-          resolved: true
+          initialized: true
         }
       }
 
@@ -35,15 +40,13 @@ const reducer = (state = {}, action) => {
         ...state,
         redirect: {
           path: action.to,
-          isExecuted: false,
         }
       }
-    case 'REDIRECTION_COMPLETED':
+    case 'REDIRECT_OK':
       return {
         ...state,
         redirect: {
-          ...state.redirect,
-          isExecuted: true
+          path: ''
         }
       }
 
@@ -76,38 +79,148 @@ const reducer = (state = {}, action) => {
           isShow: false,
         }
       }
-
-    // Tracking
-    case 'SET_AFTER_LOGIN_PATH':
+    
+    // ComponentVisibility
+    case 'USER_MENU_OPEN':
       return {
         ...state,
-        tracking: {
-          afterLoginPath: action.path
+        visibility: {
+          ...state.visibility,
+          userMenu: true,
+          facilityMenu: false,
+          modal: false
         }
       }
-    
-    // selectValue
-    case 'SET_SELECT_VALUES':
+    case 'FACILITY_MENU_OPEN':
       return {
         ...state,
-        selectValues: {
+        visibility: {
+          ...state.visibility,
+          userMenu: false,
+          facilityMenu: true,
+          modal: false
+        }
+      }
+    case 'MODAL_OPEN':
+      return {
+        ...state,
+        visibility: {
+          ...state.visibility,
+          userMenu: false,
+          facilityMenu: false,
+          modal: true
+        },
+        modalConfig: {
+          // デフォルトはCONFIRM
+          type: action.modalType || 'CONFIRM',
+          text: action.text || '',
+          callback: action.callback || function() { return; }
+        }
+      }
+    case 'CLOSE_ALL':
+      return {
+        ...state,
+        visibility: {
+          ...state.visibility,
+          userMenu: false,
+          facilityMenu: false,
+          modal: false,
+        }
+      }
+    case 'API_CALL_START':
+      return {
+        ...state,
+        visibility: {
+          ...state.visibility,
+          waiting: true
+        }
+      }
+    case 'API_CALL_END':
+      return {
+        ...state,
+        visibility: {
+          ...state.visibility,
+          waiting: false
+        }
+      }
+
+    //  MasterData
+    case 'SET_MASTERS':
+      return {
+        ...state,
+        masters: {
           ...state.selectValues,
-          ...action.values,
+          facilityTypes: formatSelectValue(action.facilityTypes),
+          budgets: formatSelectValue(action.budgets),
+          scales: formatSelectValue(action.scales),
+          prefectures: formatPrefecture(action.prefectures),
+          services: formatService(action.services),
           resolved: true
         }
       }
 
-    // facilitiesSlider
+    // facilitiesPickup
     case 'SET_FACILITY_PICKUP':
       return {
         ...state,
-        facilityPickup: {
-          ...state.facilityPickup,
-          data: action.data,
+        pickedUpFacilitiesId: {
+          ...state.pickedUpFacilitiesId,
+          data: action.data.map(v => v.id),
           resolved: true
+        },
+        facilities: {
+          ...state.facilities,
+          data: {
+            ...state.facilities.data,
+            ..._.keyBy(action.data, 'id')
+          }
+        },
+      }
+    
+    // facilitiesのデータをオブジェクトで保持
+    // data: array
+    case 'SET_FACILITIES':
+      return {
+        ...state,
+        facilities: {
+          ...state.facilities,
+          data: {
+            ...state.facilities.data,
+            ..._.keyBy(action.data, 'id')
+          }
+        }
+      }
+    
+    // likes
+    // data: array
+    case 'SET_LIKES':
+      return {
+        ...state,
+        auth: {
+          ...state.auth,
+          user: {
+            ...state.auth.user,
+            likes: action.data.map(o=>o.facility_id),
+          }
         }
       }
   }
+};
+
+const formatSelectValue = (selectValueArr) => {
+  return selectValueArr.map(v => {
+    return { value: v.id, label: v.detail }
+  });
+};
+const formatPrefecture = (prefectureArr) => {
+  return prefectureArr.map(v => {
+    return { value: v.id, label: v.name}
+  });
+};
+const formatService = (serviceArr) => {
+  return serviceArr.map(v => {
+    return { value: v.id, label: v.detail, iconUrl: v.icon_url }
+  });
 };
 
 export default reducer;

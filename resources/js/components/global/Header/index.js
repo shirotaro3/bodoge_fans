@@ -22,7 +22,7 @@ const StyledHeader = styled(Header)`
   padding: 10px 20px;
   height: 80px;
   margin: 0;
-  z-index: 10;
+  z-index: 30;
   &__strech {
     flex: 1;
     margin: 11px 0 11px 20px;

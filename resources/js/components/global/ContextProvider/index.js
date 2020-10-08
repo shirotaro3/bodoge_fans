@@ -3,13 +3,12 @@ import reducer from './reducer';
 
 const initialState = {
   auth: {
-    name: null,
+    user: {},
     isLoggedIn: false,
-    resolved: false,
+    initialized: false,
   },
   redirect: {
-    path: null,
-    isExecuted: true,
+    path: '',
   },
   notice: {
     text: '',
@@ -17,20 +16,35 @@ const initialState = {
     type: 'MESSAGE',
     color: '#fff'
   },
-  tracking: {
-    afterLoginPath: null,
+  visibility: {
+    userMenu: false,
+    facilityMenu: false,
+    modal: false,
+    waiting: false,
   },
-  selectValues: {
+  modalConfig: {
+    type: 'CONFIRM',
+    text: '',
+    callback: function() { return; }
+  },
+  tracking: {
+    afterLoginPath: '',
+  },
+  masters: {
     facilityTypes: [{value: '', label: ''}],
     budgets: [{value: '', label: ''}],
     scales: [{value: '', label: ''}],
     prefectures: [{value: '', label: ''}],
+    services: [{value: '', label: '', iconUrl: ''}],
     resolved: false
   },
-  facilityPickup: {
+  pickedUpFacilitiesId: {
     data: [],
     resolved: false
-  }
+  },
+  facilities: {
+    data: {}
+  },
 }
 
 const Context = React.createContext();

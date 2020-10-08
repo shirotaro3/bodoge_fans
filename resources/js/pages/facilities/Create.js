@@ -3,7 +3,7 @@ import FacilitiesCreateForm from '../../components/facilities/CreateEditForm';
 
 const FacilitiesCreate = () => {
   return (
-    <div>
+    <div className='page'>
       <FacilitiesCreateForm />
     </div>
   );

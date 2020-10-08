@@ -4,7 +4,7 @@ import Slider from '../../components/shared/FacilitiesSlider';
 
 const Dashboard = () => {
   return (
-    <div>
+    <div className='page'>
       <Slider />
       <DashBox />
     </div>

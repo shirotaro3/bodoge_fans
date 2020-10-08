@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFacilityMServicesTable extends Migration
+class CreateFacilityMServiceTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateFacilityMServicesTable extends Migration
      */
     public function up()
     {
-        Schema::create('facility_m_services', function (Blueprint $table) {
+        Schema::create('facility_m_service', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('facility_id')->constrained();
-            $table->foreignId('m_service_id')->constrained();
+            $table->foreignId('facility_id')->constrained()->onDelete('cascade');
+            $table->foreignId('m_service_id')->constrained()->onDelete('cascade');
+            $table->unique(['facility_id', 'm_service_id']);
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ class CreateFacilityMServicesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('facility_m_services');
+        Schema::dropIfExists('facility_m_service');
     }
 }

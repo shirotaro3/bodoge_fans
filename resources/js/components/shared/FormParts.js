@@ -193,7 +193,7 @@ export const Select = (props) => {
     control: (provided, state) => ({
       ...provided,
       width: '100%',
-      height: '40px',
+      minHeight: '40px',
       borderRadius: '10px',
       border: '4px solid #fff',
       marginBottom: '20px',
@@ -232,7 +232,7 @@ const ProgressBase = ({className, steps, current}) => {
 
 export const Progress = styled(ProgressBase)`
   font-size: 14px;
-  width: 240px;
+  width: 100%;
   margin: 0 auto 15px auto;
   padding: 6px 0;
   span {

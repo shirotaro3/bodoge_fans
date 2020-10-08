@@ -7,7 +7,6 @@ const AuthRoute = ({component, ...props}) => {
   const [globalState, dispatch] = useGlobalState();
   useEffect(() => {
     if (!globalState.auth.isLoggedIn) {
-      dispatch({type: 'SET_AFTER_LOGIN_PATH', path: location.pathname});
       dispatch({type: 'MESSAGE', text: 'このページを見るにはログインが必要です。'});
     }
   }, []);

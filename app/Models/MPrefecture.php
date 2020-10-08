@@ -17,4 +17,8 @@ class MPrefecture extends Model
     protected $fillable = [
         'name',
     ];
+
+    public function facilities() {
+        return $this->hasMany('App\Models\Facility');
+    }
 }

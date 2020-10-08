@@ -5,7 +5,7 @@ export const BoxRoundedBlack = styled.div`
   color: #fff;
   margin: 50px auto;
   padding: 30px;
-  max-width: 500px;
+  max-width: 600px;
   border-radius: 20px;
   text-align: center;
   position: relative;

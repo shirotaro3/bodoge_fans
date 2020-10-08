@@ -1,5 +1,6 @@
 import React from 'react';
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
+import { spin } from './keyframes';
 
 // 親要素にposition: relativeが必要
 const Loading = ({resolved = false, className}) => {
@@ -14,16 +15,9 @@ const Loading = ({resolved = false, className}) => {
   )
 };
 
-const spin = keyframes`
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-`;
-
-const StyledLoading = styled(Loading)`
+const StyledLoading = styled(Loading).attrs(props => ({
+  size: props.size || '40px'
+}))`
   position: absolute;
   top: 50%;
   left: 50%;
@@ -35,8 +29,8 @@ const StyledLoading = styled(Loading)`
   font-weight: bold;
   &__icon {
     border-radius: 50%;
-    width: 40px;
-    height: 40px;
+    width: ${props => props.size};
+    height: ${props => props.size};
     border: .35rem solid #888;
     border-top-color: #ddd;
     animation: ${spin} 1s infinite linear;
