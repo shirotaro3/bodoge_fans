@@ -12,10 +12,13 @@ const Page1 = ({register, watch, errors, control, next, formValue}) => {
       <label>*お店/施設名</label>
       <Input
         name='name'
-        ref={register({ required: true })}
+        ref={register({
+          required: '必須項目です。',
+          maxLength: { value: 15, message: '「お店/施設名」は15文字以内で入力してください。'},
+        })}
         defaultValue={formValue.name || ''}
       />
-      {errors.name && <p>必須項目です。</p>}
+      {errors.name && <span>{errors.name.message}</span>}
 
       <label>*簡単な紹介</label>
       <Textarea
@@ -23,10 +26,13 @@ const Page1 = ({register, watch, errors, control, next, formValue}) => {
         placeholder='1文字以内'
         rows={3}
         maxRows={6}
-        ref={register({ required: true })}
+        ref={register({
+          required: '必須項目です。',
+          maxLength: { value: 50, message: '「簡単な紹介」は50文字以内で入力してください。' }
+        })}
         defaultValue={formValue.description || ''}
       />
-      {errors.description && <p>必須項目です。</p>}
+      {errors.description && <span>{errors.description.message}</span>}
 
       <label>*お店/施設のタイプ</label>
       <Controller
@@ -38,7 +44,7 @@ const Page1 = ({register, watch, errors, control, next, formValue}) => {
         placeholder='選択してください'
         rules={{ required: true }}
       />
-      {errors.facility_type && <p>必須項目です。</p>}
+      {errors.facility_type && <span>必須項目です。</span>}
 
       <label>*収容可能人数</label>
       <Controller
@@ -50,7 +56,7 @@ const Page1 = ({register, watch, errors, control, next, formValue}) => {
         placeholder='選択してください'
         rules={{ required: true }}
       />
-      {errors.scale && <p>必須項目です。</p>}
+      {errors.scale && <span>必須項目です。</span>}
 
       <label>*予算</label>
       <Controller
@@ -62,9 +68,9 @@ const Page1 = ({register, watch, errors, control, next, formValue}) => {
         placeholder='選択してください'
         rules={{ required: true }}
       />
-      {errors.budget && <p>必須項目です。</p>}
+      {errors.budget && <span>必須項目です。</span>}
 
-      <label>*提供サービス</label>
+      <label>*提供サービス[複数選択]</label>
       <Controller
         as={Select}
         name='services'
@@ -75,7 +81,7 @@ const Page1 = ({register, watch, errors, control, next, formValue}) => {
         placeholder='選択してください'
         rules={{ required: true }}
       />
-      {errors.services && <p>必須項目です。</p>}
+      {errors.services && <span>必須項目です。</span>}
 
       <Button type='submit'>進む</Button>
     </Form>

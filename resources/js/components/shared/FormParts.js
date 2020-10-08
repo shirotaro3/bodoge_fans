@@ -9,7 +9,7 @@ export const FormVertical = styled.form`
   width: 100%;
   height: 100%;
   padding: 0 20%;
-  input, button, label, p, textarea {
+  input, button, label, span, textarea {
     display: block;
     margin-bottom: 20px;
   }
@@ -21,9 +21,9 @@ export const FormVertical = styled.form`
     padding: 0;
     text-align: left;
   }
-  p {
+  span {
     margin: -20px 0 20px 0;
-    color: #f00;
+    color: #f77;
     font-size: 12px;
     font-weight: bold;
     text-align: left;
@@ -137,9 +137,21 @@ const InputFileDiv = forwardRef((props, ref) => {
   const [fileName, setFileName] = useState('');
 
   const handleChange = (e) => {
-    const files = e.target.files;
-    setFileName(files[0].name);
-    setImgUrl(createObjectURL(files[0]));
+    // エラーを初期化
+    const file = e.target.files[0];
+    if (!file) return;
+    if (file.type != 'image/jpeg' &&
+      file.type != 'image/gif' &&
+      file.type != 'image/png') {
+        setFileName(file.name);
+        return setImgUrl('');
+    }
+    if (file.size > 3000000) {
+      setFileName(file.name);
+      return setImgUrl('');
+    };
+      setFileName(file.name);
+      setImgUrl(createObjectURL(file));
   };
 
   return (
@@ -207,6 +219,10 @@ export const Select = (props) => {
       ...provided,
       height: '20px',
     }),
+    indicatorSeparator: (provided) => ({
+      ...provided,
+      height: '0'
+    })
   }
   return (
     <ReactSelect {...props} styles={customStyles} />

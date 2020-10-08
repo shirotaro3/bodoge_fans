@@ -1,33 +1,68 @@
 import React from 'react';
 import { FormVertical as Form, Input, Container, InputFile } from '../../../shared/FormParts';
-import { ButtonWhite as Button, ButtonWhiteDisabled as ButtonDisabled } from '../../../shared/Buttons';
+import { ButtonWhite as Button } from '../../../shared/Buttons';
 
 const Page3 = ({register, watch, errors, control, prev, submit}) => {
   return (
-    <Form onSubmit={submit} enctype='multipart/form-data'>
+    <Form onSubmit={submit}>
       <label>ヘッダー画像</label>
-      <InputFile name='header_image' placeholder='選択してください' ref={register()} />
-      {errors.header_image && <p>必須項目です。</p>}
+      <InputFile name='header_image'
+        placeholder='選択してください'
+        ref={register({
+          validate: {
+            filesize: files => files[0]?.size < 3000000,
+            filetype: files => files[0]?.type === 'image/jpeg' ||
+            files[0]?.type === 'image/gif' ||
+            files[0]?.type === 'image/png'
+          }
+        })}
+      />
+      {errors.header_image && <span>3MB以下の「画像ファイル」のみ利用できます。</span>}
 
       <label>ホームページURL</label>
-      <Input name='hp_url' placeholder='任意（例：https://bdg-fans.xyz）' ref={register()} />
-      {errors.hp_url && <p>必須項目です。</p>}
+      <Input name='hp_url'
+        placeholder='任意（例：https://bdg-fans.xyz）'
+        ref={register({
+          maxLength: { value: 50, message: '「ホームページURL」は50文字以内で入力してください。'}
+        })}
+      />
+      {errors.hp_url && <span>{errors.hp_url.message}</span>}
 
       <label>Facebookアカウント</label>
-      <Input name='facebook' ref={register()} placeholder='任意' />
-      {errors.facebook && <p>必須項目です。</p>}
+      <Input name='facebook'
+        ref={register({
+          maxLength: { value: 25, message: '「Facebookアカウント」は25文字以内で入力してください。'}
+        })}
+        placeholder='任意'
+      />
+      {errors.facebook && <span>{errors.facebook.message}</span>}
 
       <label>Twitterアカウント</label>
-      <Input name='twitter' ref={register()} placeholder='任意' />
-      {errors.twitter && <p>必須項目です。</p>}
+      <Input name='twitter'
+        ref={register({
+          maxLength: { value: 25, message: '「Twitterアカウント」は25文字以内で入力してください。'}
+        })}
+        placeholder='任意'
+      />
+      {errors.twitter && <span>{errors.twitter.message}</span>}
 
       <label>Line@アカウント</label>
-      <Input name='line' ref={register()} placeholder='任意' />
-      {errors.line && <p>必須項目です。</p>}
+      <Input name='line'
+        ref={register({
+          maxLength: { value: 25, message: '「Line@アカウント」は25文字以内で入力してください。'}
+        })}
+        placeholder='任意'
+      />
+      {errors.line && <span>{errors.line.message}</span>}
 
       <label>Instagramアカウント</label>
-      <Input name='instagram' ref={register()} placeholder='任意' />
-      {errors.instagram && <p>必須項目です。</p>}
+      <Input name='instagram'
+        ref={register({
+          maxLength: { value: 25, message: '「Instagramアカウント」は25文字以内で入力してください。'}
+        })}
+        placeholder='任意'
+      />
+      {errors.instagram && <span>{errors.instagram.message}</span>}
 
       <Container>
         <Button onClick={prev} type='button'>戻る</Button>
