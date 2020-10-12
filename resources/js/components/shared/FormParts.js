@@ -60,6 +60,7 @@ export const Input = styled.input`
   border-radius: 10px;
   background: #fff;
   outline: none;
+  font-family: inherit;
   cursor: pointer;
   &:hover {
     border-color: #ddd;
@@ -121,6 +122,7 @@ export const Textarea = styled(AutosizeTextarea)`
   border-radius: 10px;
   background: #fff;
   outline: none;
+  font-family: inherit;
   cursor: pointer;
   &:hover {
     border-color: #ddd;

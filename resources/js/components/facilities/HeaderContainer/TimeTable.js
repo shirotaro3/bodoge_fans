@@ -55,7 +55,7 @@ const TimeTable = ({className, facilityId}) => {
         {/* phoneNumber */}
         <li className={`${className}__tel`}>
           {`${prefecture.name}${address}${building}`}<br />
-          TEL:{phoneNumber}
+          {phoneNumber && `TEL:${phoneNumber}`}
         </li>
       </ul>
     </div>

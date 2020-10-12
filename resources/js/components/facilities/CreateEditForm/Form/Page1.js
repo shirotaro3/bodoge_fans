@@ -12,6 +12,7 @@ const Page1 = ({register, watch, errors, control, next, formValue}) => {
       <label>*お店/施設名</label>
       <Input
         name='name'
+        placeholder='15文字以内'
         ref={register({
           required: '必須項目です。',
           maxLength: { value: 15, message: '「お店/施設名」は15文字以内で入力してください。'},
@@ -23,7 +24,7 @@ const Page1 = ({register, watch, errors, control, next, formValue}) => {
       <label>*簡単な紹介</label>
       <Textarea
         name='description'
-        placeholder='1文字以内'
+        placeholder='50文字以内'
         rows={3}
         maxRows={6}
         ref={register({

@@ -15,12 +15,18 @@ const Components = ({register, watch, errors, onSubmit, control}) => {
       <h2>ユーザー登録</h2>
       <Form onSubmit={onSubmit}>
         <label>メールアドレス:</label>
-        <Input name='email' placeholder='example@bdg-fans.xyz' ref={register({ required: true })} />
-        {errors.email && <p>必須項目です。</p>}
+        <Input name='email'
+          placeholder='example@bdg-fans.xyz'
+          ref={register({
+            required: '必須項目です。',
+            pattern: { value: /^([a-zA-Z0-9])+([a-zA-Z0-9\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\._-]+)+$/, message: '正しいメールアドレスを入力してください。'}
+          })}
+        />
+        {errors.email && <span>{errors.email.message}</span>}
 
         <label>ユーザー名:</label>
         <Input name='name' placeholder='1文字以内' ref={register({ required: true })} />
-        {errors.name && <p>必須項目です。</p>}
+        {errors.name && <span>{errors.name.message}</span>}
 
         <label>性別:</label>
         <Container>
@@ -57,11 +63,11 @@ const Components = ({register, watch, errors, onSubmit, control}) => {
         
         <label>パスワード:</label>
         <Input name='password' placeholder='8文字以上' type='password' ref={register({ required: true })} />
-        {errors.password && <p>必須項目です。</p>}
+        {errors.password && <span>必須項目です。</span>}
 
         <label>パスワード（確認）:</label>
         <Input name='password_confirmation' type='password' ref={register({ required: true })} />
-        {errors.password_confirmation && <p>必須項目です。</p>}
+        {errors.password_confirmation && <span>必須項目です。</span>}
         
         <Button type="submit">登録</Button>
       </Form>

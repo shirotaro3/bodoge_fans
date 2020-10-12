@@ -6,7 +6,8 @@ export const IconRounded = styled.div.attrs(props => ({
 }))`
   height: ${props => props.size};
   width: ${props => props.size};
-  background-image: ${props => props.bgImage};
+  background: #bbb;
+  background-image:  ${props => props.bgImage};
   background-size: cover;
   border-radius: 50%;
 `;

@@ -29,13 +29,22 @@ Route::prefix('facilities')->group(function () {
     Route::get('/{id}', 'App\Http\Controllers\Api\FacilityController@show');
 });
 
+// reviews
+Route::prefix('reviews')->group(function () {
+    Route::post('/', 'App\Http\Controllers\Api\ReviewController@store');
+    Route::delete('/{id}', 'App\Http\Controllers\Api\ReviewController@destroy');
+});
+
 // require auth
 Route::middleware('auth:sanctum')->group(function () {
 
     // auth|facilities
-    Route::post('facilities/store', 'App\Http\Controllers\Api\FacilityController@store');
+    Route::prefix('facilities')->group(function () {
+        Route::post('/', 'App\Http\Controllers\Api\FacilityController@store');
+    });
 
     // auth|likes
     Route::post('likes/store', 'App\Http\Controllers\Api\LikeController@store');
     Route::get('likes', 'App\Http\Controllers\Api\LikeController@index');
+
 });

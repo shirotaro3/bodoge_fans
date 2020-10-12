@@ -24,7 +24,8 @@ const initialState = {
   },
   modalConfig: {
     type: 'CONFIRM',
-    text: '',
+    title: '',
+    body: '',
     callback: function() { return; }
   },
   tracking: {

@@ -15,7 +15,7 @@ class FacilityController extends Controller
     public function index() {
         Log::info('[API_FACILITIES_INDEX_QUERY_START]');
 
-        // APIを叩く回数を減らすため、まとめて色々返す
+        // APIを叩く回数を減らすため、できる限りまとめてデータを渡す
         $facilities = Facility::with([
             'm_prefecture',
             'm_scale',
@@ -24,7 +24,7 @@ class FacilityController extends Controller
             'm_services',
             'facility_time',
             'events',
-            'reviews',
+            'reviews.user',
             'likes'
             ])->get();
 
@@ -56,7 +56,7 @@ class FacilityController extends Controller
             'm_services',
             'facility_time',
             'likes',
-            'reviews',
+            'reviews.user',
             'events',
             'm_budget',
             'm_prefecture',
@@ -79,7 +79,7 @@ class FacilityController extends Controller
             'm_services',
             'facility_time',
             'events',
-            'reviews',
+            'reviews.user',
             'likes'
             ])->find($id);
 

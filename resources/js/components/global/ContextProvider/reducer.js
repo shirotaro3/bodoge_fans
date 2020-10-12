@@ -113,7 +113,8 @@ const reducer = (state = {}, action) => {
         modalConfig: {
           // デフォルトはCONFIRM
           type: action.modalType || 'CONFIRM',
-          text: action.text || '',
+          title: action.title || '',
+          body: action.body || '',
           callback: action.callback || function() { return; }
         }
       }
@@ -203,6 +204,31 @@ const reducer = (state = {}, action) => {
             likes: action.data.map(o=>o.facility_id),
           }
         }
+      }
+
+    // reviews
+    // data: array
+    case 'SET_REVIEW':
+      {
+        const facilityId = action.data.facility_id;
+        const context = {...state};
+        context.facilities.data[facilityId].reviews.push(
+          {
+            ...action.data
+          });
+        return context;
+      }
+
+    case 'DELETE_REVIEW':
+      {
+        const facilityId = action.data.facility_id;
+        const id = action.data.id;
+        const context = {...state};
+        context.facilities.data[facilityId].reviews =
+          context.facilities.data[facilityId].reviews.filter((o) => {
+            return o.id !== id;
+        });
+        return context;
       }
   }
 };

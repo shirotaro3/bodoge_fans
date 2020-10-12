@@ -11,11 +11,11 @@ const Components = ({register, watch, errors, onSubmit}) => {
       <Form onSubmit={onSubmit}>
         <label>メールアドレス:</label>
         <Input name='email' ref={register({ required: true })} />
-        {errors.email && <p>入力してください。</p>}
+        {errors.email && <span>入力してください。</span>}
         
         <label>パスワード:</label>
         <Input name='password' type='password' ref={register({ required: true })} />
-        {errors.password && <p>入力してください。</p>}
+        {errors.password && <span>入力してください。</span>}
 
         <Button type="submit">認証</Button>
       </Form>

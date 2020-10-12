@@ -10,7 +10,8 @@ const Menu = ({className, facilityId}) => {
     dispatch({
       type: 'MODAL_OPEN',
       modalType: 'CONFIRM',
-      text: 'この施設またはお店を本当に削除してもよろしいですか？',
+      title: 'お店/施設の削除',
+      body: '本当に削除してもよろしいですか？',
       callback: deleteFacility
     });
   };

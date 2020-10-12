@@ -20,6 +20,7 @@ const UserMenu = ({className}) => {
 
 const StyledUserMenu = styled(UserMenu)`
   background: #eee;
+  min-width: 140px;
   position: relative;
   margin: 0;
   padding: 0;
@@ -38,7 +39,8 @@ const StyledUserMenu = styled(UserMenu)`
   }
   &__link {
     display: block;
-    padding: 8px 14px;
+    padding: 8px 0;
+    text-align: center;
   }
 `;
 
