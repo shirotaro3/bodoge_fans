@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { HashLink } from 'react-router-hash-link';
+import { BsFillCaretLeftFill, BsFillCaretRightFill } from 'react-icons/bs';
 
 const Pagination = ({collection, Component, maxItems}) => {
   const [current, changeCurrent] = useState(0);
@@ -33,25 +34,34 @@ const Pagination = ({collection, Component, maxItems}) => {
 const PrevNextBase = ({className, prev, next, current, maxPages}) => {
   return (
     <div className={`${className} page`}>
-      <HashLink
-        className={`${className}__button`}
-        onClick={prev}
-        to='#pagination-top'
-        smooth
-      >
-        ←
-      </HashLink>
-      <span>
-        {`${current + 1} / ${maxPages + 1}ページ`}
-      </span>
-      <HashLink
-        className={`${className}__button`}
-        onClick={next}
-        to='#pagination-top'
-        smooth
-      >
-        →
-      </HashLink>
+      {
+        current > 0 &&
+        <HashLink
+          className={`${className}__button`}
+          onClick={prev}
+          to='#pagination-top'
+          smooth
+        >
+          <BsFillCaretLeftFill size='15px' />
+        </HashLink>
+      }
+      {
+        maxPages > 0 &&
+        <span>
+          {`${current + 1} / ${maxPages + 1}ページ`}
+        </span>
+      }
+      {
+        current < maxPages &&
+        <HashLink
+          className={`${className}__button`}
+          onClick={next}
+          to='#pagination-top'
+          smooth
+        >
+          <BsFillCaretRightFill size='15px' />
+        </HashLink>
+      }
     </div>
   );
 };
@@ -62,7 +72,7 @@ const PrevNext = styled(PrevNextBase)`
   align-items: center;
   margin: 10px 0;
   &__button {
-    padding: 6px 10px;
+    padding: 10px 10px;
     border-radius: 4px;
     margin: 0 10px;
     background: #eee;

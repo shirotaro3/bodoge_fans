@@ -41,7 +41,7 @@ class FacilityController extends Controller
             $facility->user_id = Auth::user()->id;
 
             // ヘッダー画像の保存
-            if ($request->header_image){
+            if ($request->file('header_image')){
                 $path = Storage::disk('s3')->putFile('facilities/header', $request->file('header_image'), 'public');
                 $facility->header_image_url = Storage::disk('s3')->url($path);
             }

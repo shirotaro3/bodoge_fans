@@ -16,11 +16,13 @@ const Reviews = ({match, className}) => {
       {
         reviews.length > 0 ?
         <Pagination
-          maxItems={6}
+          maxItems={5}
           collection={reviews}
           Component={ReviewItem} 
         /> :
-        <div>口コミはまだありません。あなたの口コミを投稿してみませんか？</div>
+        <div className={`${className}__text`}>
+          口コミはまだありません。あなたの口コミを投稿してみませんか？
+        </div>
       }
       <ReviewForm facilityId={facilityId} />
     </div>
@@ -31,6 +33,10 @@ const StyledReviews = styled(Reviews)`
   width: 100%;
   max-width: 800px;
   margin: 0 auto;
+  &__text {
+    text-align: center;
+    margin: 20px 0;
+  }
 `;
 
 export default StyledReviews;

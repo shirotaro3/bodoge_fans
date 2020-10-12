@@ -44,7 +44,9 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
     // auth|likes
-    Route::post('likes/store', 'App\Http\Controllers\Api\LikeController@store');
-    Route::get('likes', 'App\Http\Controllers\Api\LikeController@index');
+    Route::prefix('likes')->group(function () {
+        Route::post('/', 'App\Http\Controllers\Api\LikeController@store');
+        Route::get('/', 'App\Http\Controllers\Api\LikeController@index');
+    });
 
 });

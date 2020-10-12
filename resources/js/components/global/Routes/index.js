@@ -9,6 +9,7 @@ import Home from '../../../pages/Home';
 import UsersRegistration from '../../../pages/users/Registration';
 import UsersLogin from '../../../pages/users/Login';
 import UsersLogout from '../../../pages/users/Logout';
+import UsersLikes from '../../../pages/users/Likes';
 import Dashboard from '../../../pages/users/Dashboard';
 import Events from '../../../pages/events';
 import FacilitiesCreate from '../../../pages/facilities/Create';
@@ -35,12 +36,13 @@ const Routes = () => {
       <NoAuthRoute exact path='/users/registration' component={UsersRegistration} />
       <NoAuthRoute exact path='/users/login' component={UsersLogin} />
 
-      {/* 認証で保護されたルート */}
+      {/* 認証が必要なルート */}
       <AuthRoute exact path='/users/dashboard' component={Dashboard} />
       <AuthRoute exact path='/users/logout' component={UsersLogout} />
       <AuthRoute exact path='/facilities/create' component={FacilitiesCreate} />
+      <AuthRoute exact path='/users/likes' component={UsersLikes} />
 
-      {/* 上記のどれにも該当しない場合に表示される */}
+      {/* 上記のどれにも一致しない場合に表示される */}
       <Route component={NotFound} />
     </Switch>
   );

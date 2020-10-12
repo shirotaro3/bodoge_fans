@@ -8,7 +8,8 @@ const createObjectURL = (window.URL || window.webkitURL).createObjectURL || wind
 export const FormVertical = styled.form`
   width: 100%;
   height: 100%;
-  padding: 0 20%;
+  max-width: 600px;
+  margin: 0 auto;
   input, button, label, span, textarea {
     display: block;
     margin-bottom: 20px;

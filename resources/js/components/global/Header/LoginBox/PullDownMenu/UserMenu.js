@@ -9,7 +9,7 @@ const UserMenu = ({className}) => {
         <Link  to='/users/dashboard' className={`${className}__link`}>ダッシュボード</Link>
       </li>
       <li className={`${className}__li`}>
-        <Link  to='/users/dashboard' className={`${className}__link`}>お気に入り</Link>
+        <Link  to='/users/likes' className={`${className}__link`}>お気に入り</Link>
       </li>
       <li className={`${className}__li`}>
         <Link to='/users/logout' className={`${className}__link`}>ログアウト</Link>

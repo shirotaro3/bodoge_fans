@@ -4,16 +4,17 @@ import { ButtonWhite as Button } from '../../../shared/Buttons';
 
 const Page3 = ({register, watch, errors, control, prev, submit}) => {
   return (
-    <Form onSubmit={submit}>
+    <Form onSubmit={submit} className='page'>
       <label>ヘッダー画像</label>
       <InputFile name='header_image'
         placeholder='選択してください'
         ref={register({
           validate: {
-            filesize: files => files[0]?.size < 3000000,
+            filesize: files => files[0]?.size < 3000000 || !files[0],
             filetype: files => files[0]?.type === 'image/jpeg' ||
             files[0]?.type === 'image/gif' ||
-            files[0]?.type === 'image/png'
+            files[0]?.type === 'image/png' ||
+            !files[0]
           }
         })}
       />

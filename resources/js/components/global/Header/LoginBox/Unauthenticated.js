@@ -8,7 +8,7 @@ const Unauthenticated = () => {
       <Link to='/users/login'>
         <LoginButton>ログイン</LoginButton>
       </Link><br />
-      <Link to='/users/registration'>→初めて利用される方</Link>
+      <Link to='/users/registration'>新規登録はこちら</Link>
     </div>
   );
 }
