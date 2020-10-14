@@ -1,5 +1,5 @@
 import React from 'react';
-import FacilitiesCreateForm from '../../components/facilities/CreateEditForm';
+import FacilitiesCreateForm from '../../components/facilities/CreateForm';
 
 const FacilitiesCreate = () => {
   return (

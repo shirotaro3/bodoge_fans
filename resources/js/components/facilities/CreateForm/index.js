@@ -15,6 +15,7 @@ const FacilityCreateEditForm = () => {
       const submitData = new FormData();
       submitData.append('name', formValue.name);
       submitData.append('description', formValue.description);
+      submitData.append('introduction', formValue.description);
       submitData.append('building', formValue.building);
       submitData.append('postal_code', formValue.postal_code);
       submitData.append('address', formValue.address);
@@ -35,7 +36,7 @@ const FacilityCreateEditForm = () => {
       try {
         dispatch({type: 'API_CALL_START'});
         const response = await axios.post(
-          '/api/facilities/store',
+          '/api/facilities',
           submitData,
           {
             headers: {

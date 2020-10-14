@@ -2,14 +2,16 @@ import React, { useState, forwardRef } from 'react';
 import styled from 'styled-components';
 import AutosizeTextarea from 'react-autosize-textarea';
 import ReactSelect from 'react-select';
+import DatePicker from 'react-datepicker';
 
 const createObjectURL = (window.URL || window.webkitURL).createObjectURL || window.createObjectURL;
 
 export const FormVertical = styled.form`
   width: 100%;
   height: 100%;
-  padding: 0 20%;
-  input, button, label, p, textarea {
+  max-width: 600px;
+  margin: 0 auto;
+  input, button, label, span, textarea, a {
     display: block;
     margin-bottom: 20px;
   }
@@ -21,34 +23,12 @@ export const FormVertical = styled.form`
     padding: 0;
     text-align: left;
   }
-  p {
+  span {
     margin: -20px 0 20px 0;
-    color: #f00;
+    color: #f77;
     font-size: 12px;
     font-weight: bold;
     text-align: left;
-  }
-  /* override css */
-  .react-datepicker-wrapper {
-    input {
-      width: 100%;
-      height: 40px;
-      font-size: 15px;
-      border: 4px solid #fff;
-      border-radius: 10px;
-      background: #fff;
-      outline: none;
-      color: #000;
-      cursor: pointer;
-      &:hover {
-        border-color: #ddd;
-      }
-      &:focus {
-        background: #eee;
-        border-color: #ddd;
-        cursor: text;
-      }
-    }
   }
 `;
 
@@ -60,6 +40,7 @@ export const Input = styled.input`
   border-radius: 10px;
   background: #fff;
   outline: none;
+  font-family: inherit;
   cursor: pointer;
   &:hover {
     border-color: #ddd;
@@ -73,7 +54,10 @@ export const Input = styled.input`
 
 export const Container = styled.div`
   display: flex;
-  margin-bottom: 20px;
+  justify-content: center;
+  button, a {
+    margin: 0 5px 20px 5px;
+  }
 `;
 
 export const Radio = styled(Container)`
@@ -121,6 +105,7 @@ export const Textarea = styled(AutosizeTextarea)`
   border-radius: 10px;
   background: #fff;
   outline: none;
+  font-family: inherit;
   cursor: pointer;
   &:hover {
     border-color: #ddd;
@@ -137,9 +122,21 @@ const InputFileDiv = forwardRef((props, ref) => {
   const [fileName, setFileName] = useState('');
 
   const handleChange = (e) => {
-    const files = e.target.files;
-    setFileName(files[0].name);
-    setImgUrl(createObjectURL(files[0]));
+    // エラーを初期化
+    const file = e.target.files[0];
+    if (!file) return;
+    if (file.type != 'image/jpeg' &&
+      file.type != 'image/gif' &&
+      file.type != 'image/png') {
+        setFileName(file.name);
+        return setImgUrl('');
+    }
+    if (file.size > 3000000) {
+      setFileName(file.name);
+      return setImgUrl('');
+    };
+      setFileName(file.name);
+      setImgUrl(createObjectURL(file));
   };
 
   return (
@@ -207,6 +204,10 @@ export const Select = (props) => {
       ...provided,
       height: '20px',
     }),
+    indicatorSeparator: (provided) => ({
+      ...provided,
+      height: '0'
+    })
   }
   return (
     <ReactSelect {...props} styles={customStyles} />
@@ -249,3 +250,17 @@ export const Progress = styled(ProgressBase)`
     background: #44f;
   }
 `;
+
+export const TimePicker = props => {
+  return (
+    <DatePicker
+      showTimeSelect
+      showTimeSelectOnly
+      timeIntervals={15}
+      timeCaption="時間"
+      timeFormat='HH:mm'
+      dateFormat="HH:mm"
+      {...props}
+    />
+  );
+};

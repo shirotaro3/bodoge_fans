@@ -9,7 +9,7 @@ const UserMenu = ({className}) => {
         <Link  to='/users/dashboard' className={`${className}__link`}>ダッシュボード</Link>
       </li>
       <li className={`${className}__li`}>
-        <Link  to='/users/dashboard' className={`${className}__link`}>お気に入り</Link>
+        <Link  to='/users/likes' className={`${className}__link`}>お気に入り</Link>
       </li>
       <li className={`${className}__li`}>
         <Link to='/users/logout' className={`${className}__link`}>ログアウト</Link>
@@ -20,6 +20,7 @@ const UserMenu = ({className}) => {
 
 const StyledUserMenu = styled(UserMenu)`
   background: #eee;
+  min-width: 140px;
   position: relative;
   margin: 0;
   padding: 0;
@@ -38,7 +39,8 @@ const StyledUserMenu = styled(UserMenu)`
   }
   &__link {
     display: block;
-    padding: 8px 14px;
+    padding: 8px 0;
+    text-align: center;
   }
 `;
 

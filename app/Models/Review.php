@@ -21,4 +21,8 @@ class Review extends Model
     public function facility() {
         return $this->belongsTo('App\Models\Review');
     }
+
+    public function user() {
+        return $this->belongsTo('App\Models\User');
+    }
 }

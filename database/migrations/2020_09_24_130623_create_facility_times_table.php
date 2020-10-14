@@ -24,8 +24,8 @@ class CreateFacilityTimesTable extends Migration
             $table->time('wed_end', 0)->nullable();
             $table->time('thu_start', 0)->nullable();
             $table->time('thu_end', 0)->nullable();
-            $table->time('fry_start', 0)->nullable();
-            $table->time('fry_end', 0)->nullable();
+            $table->time('fri_start', 0)->nullable();
+            $table->time('fri_end', 0)->nullable();
             $table->time('sat_start', 0)->nullable();
             $table->time('sat_end', 0)->nullable();
             $table->time('sun_start', 0)->nullable();

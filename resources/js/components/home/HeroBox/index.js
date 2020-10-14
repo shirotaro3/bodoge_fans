@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { mixinIsShownTablet } from '../shared/StyledCss';
+import { mixinIsShownTablet } from '../../shared/StyledCss';
 import SearchBox from './SearchBox';
 
 const Hero = ({ className }) => {

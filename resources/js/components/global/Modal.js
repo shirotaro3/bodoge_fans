@@ -6,7 +6,7 @@ import { fade } from '../shared/keyframes';
 const Modal = ({className}) => {
   const [globalState, dispatch] = useGlobalState();
   const isShow = globalState.visibility.modal;
-  const { type, text, callback } = globalState.modalConfig;
+  const { type, title, body, callback } = globalState.modalConfig;
   const ok = async () => {
     dispatch({type: 'CLOSE_ALL'});
     await callback();
@@ -17,7 +17,8 @@ const Modal = ({className}) => {
   if (isShow) {
     return (
       <div className={className}>
-        <div className={`${className}__text`}>{text}</div>
+        <div className={`${className}__title`}>{title}</div>
+        <div className={`${className}__body`}>{body}</div>
         <div className={`${className}__button_group`}>
           <button
             role='button'
@@ -42,17 +43,29 @@ const Modal = ({className}) => {
 
 const StyledModal = styled(Modal)`
   animation: ${fade} .3s 1;
-  min-width: 200px;
-  padding: 50px 80px 30px 80px;
+  width: 100%;
+  max-width: 500px;
+  padding-bottom: 30px;
   border-radius: 4px;
   position: fixed;
-  background: #eee;
+  background: #fff;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
   z-index:30;
   box-shadow: 2px 2px 6px 1px rgba(0,0,0,.3);
-  &__text {
+  overflow: hidden;
+  &__title {
+    background: #777;
+    color: #fff;
+    font-weight: bold;
+    padding: 8px 50px;
+    font-size: 18px;
+  }
+  &__body {
+    margin-top: 30px;
+    padding: 0 40px;
+    white-space: pre-wrap;
   }
   &__button_group {
     display: flex;

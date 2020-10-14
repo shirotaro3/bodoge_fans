@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->date('birthday');
             $table->enum('sex', ['male', 'female', 'other']);
-            $table->string('icon_url')->nullable();
+            $table->string('icon_url')->nullable()->default('/img/user_icon.png');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

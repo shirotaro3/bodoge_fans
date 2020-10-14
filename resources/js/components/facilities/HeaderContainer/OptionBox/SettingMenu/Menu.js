@@ -10,7 +10,8 @@ const Menu = ({className, facilityId}) => {
     dispatch({
       type: 'MODAL_OPEN',
       modalType: 'CONFIRM',
-      text: 'この施設またはお店を本当に削除してもよろしいですか？',
+      title: 'お店/施設の削除',
+      body: '本当に削除してもよろしいですか？',
       callback: deleteFacility
     });
   };
@@ -30,6 +31,9 @@ const Menu = ({className, facilityId}) => {
 
   return (
     <ul className={className}>
+      <li className={`${className}__li`}>
+        <Link to={`/facilities/${facilityId}/edit`} className={`${className}__link`}>設定</Link>
+      </li>
       <li className={`${className}__li`} onClick={confirmDelete}>
         <span className={`${className}__link`}>削除する</span>
       </li>

@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import { BrowserRouter as Router } from 'react-router-dom';
+import dayjs from 'dayjs';
 
 // components
 import GlobalStyle from '../components/global/GlobalStyle';
@@ -15,6 +16,11 @@ import Notice from '../components/global/Notice';
 import Overlay from '../components/global/Overlay';
 import WaitingOverlay from '../components/global/WaitingOverlay';
 import Modal from '../components/global/Modal';
+
+// dayjsのi18n対応
+dayjs.locale('ja');
+// SmoothScrollPolyfill : ネイティブのスクロール変数を常にoverrideする
+window.__forceSmoothScrollPolyfill__ = true;
 
 const AppRoot = ({className}) => {
     return (

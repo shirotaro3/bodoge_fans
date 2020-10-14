@@ -31,7 +31,7 @@ const StyledLoading = styled(Loading).attrs(props => ({
     border-radius: 50%;
     width: ${props => props.size};
     height: ${props => props.size};
-    border: .35rem solid #888;
+    border: .46rem solid #888;
     border-top-color: #ddd;
     animation: ${spin} 1s infinite linear;
     margin: 0 auto 10px auto;

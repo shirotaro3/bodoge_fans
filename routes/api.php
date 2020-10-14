@@ -29,13 +29,31 @@ Route::prefix('facilities')->group(function () {
     Route::get('/{id}', 'App\Http\Controllers\Api\FacilityController@show');
 });
 
+// reviews
+Route::prefix('reviews')->group(function () {
+    Route::post('/', 'App\Http\Controllers\Api\ReviewController@store');
+    Route::delete('/{id}', 'App\Http\Controllers\Api\ReviewController@destroy');
+});
+
 // require auth
 Route::middleware('auth:sanctum')->group(function () {
 
     // auth|facilities
-    Route::post('facilities/store', 'App\Http\Controllers\Api\FacilityController@store');
+    Route::prefix('facilities')->group(function () {
+        Route::post('/', 'App\Http\Controllers\Api\FacilityController@store');
+        Route::put('/{id}', 'App\Http\Controllers\Api\FacilityController@update');
+        Route::delete('/{id}', 'App\Http\Controllers\Api\FacilityController@destroy');
+    });
+
+    // auth|facility_times
+    Route::prefix('facility_times')->group(function () {
+        Route::put('/{id}', 'App\Http\Controllers\Api\FacilityTimeController@update');
+    });
 
     // auth|likes
-    Route::post('likes/store', 'App\Http\Controllers\Api\LikeController@store');
-    Route::get('likes', 'App\Http\Controllers\Api\LikeController@index');
+    Route::prefix('likes')->group(function () {
+        Route::post('/', 'App\Http\Controllers\Api\LikeController@store');
+        Route::get('/', 'App\Http\Controllers\Api\LikeController@index');
+    });
+
 });

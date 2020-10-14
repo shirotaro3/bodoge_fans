@@ -3,8 +3,13 @@ import styled from 'styled-components';
 import { Switch, Route, NavLink } from 'react-router-dom';
 import Access from './Access';
 import Reviews from './Reviews';
+import Events from './Events';
+import Top from './Top';
+import { useGlobalState } from '../../global/ContextProvider';
 
 const Tabs = ({className, facilityId}) => {
+  const [globalState, dispatch] = useGlobalState();
+  const facility = globalState.facilities.data[facilityId];
   return (
     <div className={className}>
       <div className={`${className}__tabs`}>
@@ -28,21 +33,22 @@ const Tabs = ({className, facilityId}) => {
           className={`${className}__tab`}
           activeClassName={`${className}__active_tab`}
         >
-          口コミ
+          クチコミ({facility.reviews.length})
         </NavLink>
         <NavLink
           to={`/facilities/${facilityId}/access`}
           className={`${className}__tab`}
           activeClassName={`${className}__active_tab`}
         >
-          地図
+          アクセス
         </NavLink>
       </div>
       {/* tabルート */}
       <Switch>
-        <Route exact path='/facilities/:id(\d+)' component={Reviews} />
+        <Route exact path='/facilities/:id(\d+)' component={Top} />
         <Route path='/facilities/:id(\d+)/access' component={Access} />
         <Route path='/facilities/:id(\d+)/reviews' component={Reviews} />
+        <Route path='/facilities/:id(\d+)/events' component={Events} />
       </Switch>
     </div>
   );
