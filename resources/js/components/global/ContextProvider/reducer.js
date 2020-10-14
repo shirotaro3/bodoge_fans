@@ -206,8 +206,16 @@ const reducer = (state = {}, action) => {
         }
       }
 
+    // facilityTimes
+    case 'SET_FACILITY_TIME':
+      {
+        const facilityId = action.data.facility_id;
+        const context = {...state};
+        context.facilities.data[facilityId].facility_time = action.data;
+        return context;
+      }
+
     // reviews
-    // data: array
     case 'SET_REVIEW':
       {
         const facilityId = action.data.facility_id;

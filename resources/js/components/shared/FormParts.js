@@ -2,6 +2,7 @@ import React, { useState, forwardRef } from 'react';
 import styled from 'styled-components';
 import AutosizeTextarea from 'react-autosize-textarea';
 import ReactSelect from 'react-select';
+import DatePicker from 'react-datepicker';
 
 const createObjectURL = (window.URL || window.webkitURL).createObjectURL || window.createObjectURL;
 
@@ -10,7 +11,7 @@ export const FormVertical = styled.form`
   height: 100%;
   max-width: 600px;
   margin: 0 auto;
-  input, button, label, span, textarea {
+  input, button, label, span, textarea, a {
     display: block;
     margin-bottom: 20px;
   }
@@ -28,28 +29,6 @@ export const FormVertical = styled.form`
     font-size: 12px;
     font-weight: bold;
     text-align: left;
-  }
-  /* override css */
-  .react-datepicker-wrapper {
-    input {
-      width: 100%;
-      height: 40px;
-      font-size: 15px;
-      border: 4px solid #fff;
-      border-radius: 10px;
-      background: #fff;
-      outline: none;
-      color: #000;
-      cursor: pointer;
-      &:hover {
-        border-color: #ddd;
-      }
-      &:focus {
-        background: #eee;
-        border-color: #ddd;
-        cursor: text;
-      }
-    }
   }
 `;
 
@@ -75,7 +54,10 @@ export const Input = styled.input`
 
 export const Container = styled.div`
   display: flex;
-  margin-bottom: 20px;
+  justify-content: center;
+  button, a {
+    margin: 0 5px 20px 5px;
+  }
 `;
 
 export const Radio = styled(Container)`
@@ -268,3 +250,17 @@ export const Progress = styled(ProgressBase)`
     background: #44f;
   }
 `;
+
+export const TimePicker = props => {
+  return (
+    <DatePicker
+      showTimeSelect
+      showTimeSelectOnly
+      timeIntervals={15}
+      timeCaption="時間"
+      timeFormat='HH:mm'
+      dateFormat="HH:mm"
+      {...props}
+    />
+  );
+};

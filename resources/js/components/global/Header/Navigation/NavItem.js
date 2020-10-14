@@ -9,6 +9,7 @@ const NavItem = ({to, children, icon, className}) => {
       <div>{icon}</div>
       {children}
       <NavLink
+        exact
         to={to}
         className={`${className}__link`}
         activeClassName={`${className}__activeLink`}

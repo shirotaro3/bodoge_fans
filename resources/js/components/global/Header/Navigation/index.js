@@ -7,7 +7,7 @@ import { IconContext } from 'react-icons';
 
 const items = [
   {
-    to: '/facilities/search',
+    to: '/',
     text: 'お店を探す',
     icon: <BsSearch />
   },

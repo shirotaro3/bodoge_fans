@@ -41,6 +41,13 @@ Route::middleware('auth:sanctum')->group(function () {
     // auth|facilities
     Route::prefix('facilities')->group(function () {
         Route::post('/', 'App\Http\Controllers\Api\FacilityController@store');
+        Route::put('/{id}', 'App\Http\Controllers\Api\FacilityController@update');
+        Route::delete('/{id}', 'App\Http\Controllers\Api\FacilityController@destroy');
+    });
+
+    // auth|facility_times
+    Route::prefix('facility_times')->group(function () {
+        Route::put('/{id}', 'App\Http\Controllers\Api\FacilityTimeController@update');
     });
 
     // auth|likes

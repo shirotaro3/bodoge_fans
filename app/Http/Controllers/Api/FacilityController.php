@@ -70,7 +70,6 @@ class FacilityController extends Controller
     public function show($id) {
         Log::info('[API_FACILITIES_SHOW_GET_START]');
 
-        // APIを叩く回数を減らすため、まとめて色々返す
         $facility = Facility::with([
             'm_prefecture',
             'm_scale',
@@ -84,6 +83,54 @@ class FacilityController extends Controller
             ])->find($id);
 
         Log::info('[API_FACILITIES_SHOW_GET_SUCCESS]');
+        return response()->json($facility);
+    }
+
+    public function update(Request $request, $id) {
+        Log::info('[API_FACILITIES_UPDATE_START]');
+
+        $facility = DB::transaction(function () use ($request, $id) {
+            $facility = Facility::find($id);
+            if (!$facility) {
+                abort(400, 'Invalid param');
+                Log::info('[API_FACILITIES_UPDATE_FAILURE]');
+            }
+            if ($facility->user_id !== Auth::user()->id) {
+                abort(403, 'Forbidden');
+                Log::info('[API_FACILITIES_UPDATE_FAILURE]');
+            }
+            $services = $request->input('m_service_ids');
+            if ($services) {
+                $facility->m_services()->sync($services);
+            }
+            $facility->update($request->all());
+
+            return $facility;
+        });
+        $facility->load(
+            'm_services',
+            'facility_time',
+            'likes',
+            'reviews.user',
+            'events',
+            'm_budget',
+            'm_prefecture',
+            'm_scale',
+            'm_facility_type'
+        );
+        Log::info('[API_FACILITIES_UPDATE_SUCCESS]');
+        return response()->json($facility);
+    }
+
+    public function destroy($id) {
+        Log::info('[API_FACILITIES_DESTROY_DELETE_START]');
+        $facility = Facility::find($id);
+        if ($facility->user_id !== Auth::user()->id) {
+            abort(403, 'Forbidden');
+            Log::info('[API_FACILITIES_DESTROY_DELETE_FAILURE]');
+        }
+        $facility->delete();
+        Log::info('[API_FACILITIES_DESTROY_DELETE_SUCCESS]');
         return response()->json($facility);
     }
 }

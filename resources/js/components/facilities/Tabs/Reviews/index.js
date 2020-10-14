@@ -4,6 +4,7 @@ import { useGlobalState } from '../../../global/ContextProvider';
 import ReviewItem from './ReviewItem';
 import ReviewForm from './ReviewForm';
 import Pagination from '../../../shared/Pagination';
+import { Link } from '../../../shared/Links';
 import _ from 'lodash';
 
 const Reviews = ({match, className}) => {
@@ -24,7 +25,13 @@ const Reviews = ({match, className}) => {
           口コミはまだありません。あなたの口コミを投稿してみませんか？
         </div>
       }
-      <ReviewForm facilityId={facilityId} />
+      {
+        globalState.auth.isLoggedIn ?
+        <ReviewForm facilityId={facilityId} /> :
+        <div className={`${className}__text`}>
+           今すぐ<Link to='/users/login'>ログイン</Link>して口コミを投稿しましょう。
+        </div>
+      }
     </div>
   );
 };
