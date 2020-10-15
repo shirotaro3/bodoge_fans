@@ -27,7 +27,6 @@ class CreateFacilitiesTable extends Migration
             $table->string('phone_number', 100)->nullable();
             $table->string('address', 100);
             $table->string('building', 100)->nullable();
-            $table->string('postal_code', 100);
             $table->string('hp_url', 100)->nullable();
             $table->string('facebook', 100)->nullable();
             $table->string('twitter', 100)->nullable();

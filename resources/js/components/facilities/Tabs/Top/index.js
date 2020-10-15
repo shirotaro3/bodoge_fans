@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { BsPencilSquare } from 'react-icons/bs';
 import { useGlobalState } from '../../../global/ContextProvider';
 import Edit from './Edit';
-import Sns from './Sns';
+import Sidebar from './Sidebar';
 
 const Top = ({className, match}) => {
   const facilityId = match.params.id;
@@ -21,7 +21,6 @@ const Top = ({className, match}) => {
     <div className={`${className} page`}>
       <div className={`${className}__main`}>
         <h3>{facility.name}より</h3>
-        {/* 紹介文の表示・編集などに関わる部分 */}
         {
           isEditing ?
           <Edit facilityId={facilityId} cancel={handleClick} /> :
@@ -34,7 +33,7 @@ const Top = ({className, match}) => {
         }
       </div>
       <div className={`${className}__sidebar`}>
-        <Sns facilityId={facilityId} />
+        <Sidebar facilityId={facilityId} />
       </div>
     </div>
   );
@@ -62,10 +61,12 @@ const StyledTop = styled(Top).attrs(props => {
   }
   &__main {
     flex: 1;
+    padding: 10px 20px;
+    margin: 10px;
   }
   &__sidebar {
     width: 100%;
-    max-width: 160px;
+    max-width: 250px;
   }
   ${
     props => props.isMine &&

@@ -17,7 +17,6 @@ const FacilityCreateEditForm = () => {
       submitData.append('description', formValue.description);
       submitData.append('introduction', formValue.description);
       submitData.append('building', formValue.building);
-      submitData.append('postal_code', formValue.postal_code);
       submitData.append('address', formValue.address);
       submitData.append('phone_number', formValue.phone_number);
       submitData.append('line', inputData.line);
