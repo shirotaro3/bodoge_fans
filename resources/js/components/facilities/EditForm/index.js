@@ -11,12 +11,13 @@ import { useGlobalState } from '../../global/ContextProvider';
 const EditForm = ({facilityId}) => {
   const [globalState, dispatch] = useGlobalState();
   const { register, handleSubmit, errors, control } = useForm();
-  const { facilityTypes, budgets, scales, services } = globalState.masters;
+  const { facilityTypes, budgets, scales, services, prefectures } = globalState.masters;
   const facility = globalState.facilities.data[facilityId];
   const defaultFacilityType = _.find(facilityTypes, o => o.value === facility.m_facility_type_id);
   const defaultBudget = _.find(budgets, o => o.value === facility.m_budget_id);
   const defaultScale = _.find(scales, o => o.value === facility.m_scale_id);
   const defaultServices = facility.m_services.map(o => ({value: o.id, label: o.detail}));
+  const defaultPrefecture = _.find(prefectures, o => o.value === facility.m_prefecture_id);
   const onSubmit = handleSubmit( async (data) => {
     try {
       const submitData = {
@@ -24,7 +25,8 @@ const EditForm = ({facilityId}) => {
         m_budget_id: data.budget.value,
         m_facility_type_id: data.facility_type.value,
         m_scale_id: data.scale.value,
-        m_service_ids: data.services.map(o => o.value)
+        m_service_ids: data.services.map(o => o.value),
+        m_prefecture_id: data.prefecture.value
       }
       dispatch({type: 'API_CALL_START'});
       const response = await axios.put(`/api/facilities/${facilityId}`, submitData);
@@ -91,6 +93,52 @@ const EditForm = ({facilityId}) => {
         defaultValue={defaultServices}
       />
       {errors.services && <span>選択してください。</span>}
+
+      <label>*都道府県</label>
+      <Controller
+        as={Select}
+        name='prefecture'
+        control={control}
+        options={prefectures}
+        placeholder='選択してください'
+        rules={{ required: true }}
+        defaultValue={defaultPrefecture}
+      />
+      {errors.prefecture && <span>選択してください。</span>}
+
+      <label>*市区町村・番地</label>
+      <Input
+        name='address'
+        placeholder='○○町○○1-3-19'
+        ref={register({
+          required: '必須項目です。',
+          maxLength: { value: 50, message: '「市区町村・番地」は50文字以内で入力してください。' }
+        })}
+        defaultValue={facility.address}
+      />
+      {errors.address && <span>{errors.address.message}</span>}
+
+      <label>建物名・部屋番号</label>
+      <Input
+        name='building'
+        placeholder='○○ビル7F'
+        ref={register({
+          maxLength: {value: 25, message: '「建物名・部屋番号」は25文字以内で入力してください。'}
+        })}
+        defaultValue={facility.building}
+      />
+      {errors.building && <span>{errors.building.message}</span>}
+
+      <label>電話番号</label>
+      <Input
+        name='phone_number'
+        placeholder='ハイフンを含む半角英数字'
+        ref={register({
+          pattern: { value: /^0\d{1,4}-\d{1,4}-\d{3,4}$/, message: 'ハイフンを含めて正しく入力してください。' }
+        })}
+        defaultValue={facility.phone_number}
+      />
+      {errors.phone_number && <span>{errors.phone_number.message}</span>}
 
       <label>ホームページURL</label>
       <Input name='hp_url'

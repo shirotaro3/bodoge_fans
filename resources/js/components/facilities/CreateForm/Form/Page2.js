@@ -9,20 +9,6 @@ const Page2 = ({register, watch, errors, control, next, prev, formValue}) => {
   const { prefectures } = globalState.masters;
   return (
     <Form onSubmit={next} className='page'>
-      <label>*郵便番号</label>
-      <Input
-        name='postal_code'
-        placeholder='半角数字7桁'
-        ref={register({
-          required: '必須項目です。',
-          minLength: { value: 7, message: '「郵便番号」は7桁で入力してください。' },
-          maxLength: { value: 7, message: '「郵便番号」は7桁で入力してください。' },
-          pattern: { value: /^[0-9]+$/, message: '「郵便番号」は半角数字で入力してください。' }
-        })}
-        defaultValue={formValue.postal_code || ''}
-      />
-      {errors.postal_code && <span>{errors.postal_code.message}</span>}
-      
       <label>*都道府県</label>
       <Controller
         as={Select}
