@@ -24,7 +24,7 @@ const UsersLogout = () => {
     callApi();
   },[]);
   return (
-    <div className='page'>
+    <div className='fadein'>
       <Box>
         ログアウトしています...
       </Box>

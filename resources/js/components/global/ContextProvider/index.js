@@ -46,6 +46,7 @@ const initialState = {
   facilities: {
     data: {}
   },
+  searchResults: {}
 }
 
 const Context = React.createContext();

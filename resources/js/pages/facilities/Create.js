@@ -3,7 +3,7 @@ import FacilitiesCreateForm from '../../components/facilities/CreateForm';
 
 const FacilitiesCreate = () => {
   return (
-    <div className='page'>
+    <div className='fadein'>
       <FacilitiesCreateForm />
     </div>
   );

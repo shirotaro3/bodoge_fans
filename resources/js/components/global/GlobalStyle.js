@@ -8,7 +8,11 @@ const GlobalStyle = createGlobalStyle`
   input:-webkit-autofill {
     box-shadow: 0 0 0px 1000px #fff inset;
   }
-  .page {
+  h1, h2, h3, h4, h5, h6 {
+    font-size: 1em;
+    margin: 10px 0;
+  }
+  .fadein {
     animation: ${fade} .7s 1;
   }
   /* override */

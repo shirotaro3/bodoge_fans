@@ -2,9 +2,9 @@ import React from 'react';
 import { FormVertical as Form, Input, Container, InputFile } from '../../../shared/FormParts';
 import { ButtonWhite as Button } from '../../../shared/Buttons';
 
-const Page3 = ({register, watch, errors, control, prev, submit}) => {
+const Page3 = ({register, errors, control, prev, submit}) => {
   return (
-    <Form onSubmit={submit} className='page'>
+    <Form onSubmit={submit} className='fadein'>
       <label>ヘッダー画像</label>
       <InputFile name='header_image'
         placeholder='選択してください'

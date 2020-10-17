@@ -27,6 +27,7 @@ const StyledSliderChild = styled(SliderChild).attrs(props => ({
   outline: none;
   background-image: ${props => props.imgUrl};
   background-size: cover;
+  background-position: center;
   font-size: 14px;
   &__child {
     position: absolute;

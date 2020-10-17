@@ -8,7 +8,7 @@ const Page2 = ({register, watch, errors, control, next, prev, formValue}) => {
   const [globalState, dispatch] = useGlobalState();
   const { prefectures } = globalState.masters;
   return (
-    <Form onSubmit={next} className='page'>
+    <Form onSubmit={next} className='fadein'>
       <label>*都道府県</label>
       <Controller
         as={Select}
