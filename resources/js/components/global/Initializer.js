@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useGlobalState } from './ContextProvider';
 import axios from 'axios';
 import _ from 'lodash';
+import networkService from './services/networkService';
 
 const Initializer = ({children}) => {
   const [globalState, dispatch] = useGlobalState();
@@ -35,17 +36,23 @@ const Initializer = ({children}) => {
       } catch (err) {
         handleError(err);
       }
-    }
+    };
     const handleError = (err) => {
       console.log(err);
       dispatch({type: 'ALERT', text: 'アプリの読み込みに失敗しました。リロードしても改善されない場合は管理者にご連絡ください。'});
     };
 
-    // リロード時のセッション確認
+    // セッションの確認
     if (sessionUser) {
       dispatch({type: 'LOGIN', data: sessionUser});
-    }
+    };
     dispatch({type: 'AUTH_INITIALIZED'});
+
+    // サービス初期化
+    const onUnauthenticated = () => {
+      return dispatch({type: 'LOGOUT'});
+    };
+    networkService.setOnUnauthenticated(onUnauthenticated);
 
     // フェッチ実行
     fetchMasterData();

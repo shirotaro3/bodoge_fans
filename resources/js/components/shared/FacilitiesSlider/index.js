@@ -9,7 +9,7 @@ import settings from './sliderSettings';
 const FacilitiesSlider = ({className}) => {
   const [ globalState, dispatch ] = useGlobalState();
   const placeholder = [];
-  for(let i = 0; i < 3; i++) {
+  for(let i = 0; i < 4; i++) {
     placeholder.push(<SliderChild key={`ph_${i}`} />); 
   };
   return (
@@ -32,7 +32,7 @@ const FacilitiesSlider = ({className}) => {
         }
 
         {/* placeholder */}
-        { globalState.pickedUpFacilitiesId.resolved || placeholder.map(v => {return v}) }
+        { globalState.pickedUpFacilitiesId.resolved || placeholder }
       </Slider>
       <h2 className={`${className}__child`}>Pickup!</h2>
       <Loading resolved={globalState.pickedUpFacilitiesId.resolved} />

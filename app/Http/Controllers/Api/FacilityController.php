@@ -187,7 +187,7 @@ class FacilityController extends Controller
             'm_prefecture',
             'm_scale',
             'm_facility_type'
-        )->paginate(1);
+        )->paginate(5);
 
         Log::info('[API_FACILITIES_SEARCH_QUERY_SUCCESS]');
         return response()->json($facilities);

@@ -24,7 +24,7 @@ const StyledHeaderContainer = styled(HeaderContainer).attrs(props => ({
   min-height: 400px;
   background: linear-gradient(0deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, .5)), ${props => props.imgUrl};
   background-size: cover;
-  background-attachment: fixed;
+  background-position: center;
   padding: 40px;
   display: flex;
   position: relative;
