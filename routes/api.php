@@ -26,6 +26,8 @@ Route::prefix('users')->group(function () {
 // facilities
 Route::prefix('facilities')->group(function () {
     Route::get('/', 'App\Http\Controllers\Api\FacilityController@index');
+    Route::get('/search', 'App\Http\Controllers\Api\FacilityController@search');
+    Route::get('/pickup', 'App\Http\Controllers\Api\FacilityController@random_pick');
     Route::get('/{id}', 'App\Http\Controllers\Api\FacilityController@show');
 });
 
@@ -53,7 +55,7 @@ Route::middleware('auth:sanctum')->group(function () {
     // auth|likes
     Route::prefix('likes')->group(function () {
         Route::post('/', 'App\Http\Controllers\Api\LikeController@store');
-        Route::get('/', 'App\Http\Controllers\Api\LikeController@index');
+        Route::get('/mine', 'App\Http\Controllers\Api\LikeController@mine');
     });
 
 });

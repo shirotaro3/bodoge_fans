@@ -7,6 +7,7 @@ import { useGlobalState } from '../../../global/ContextProvider';
 const Sidebar = ({className, facilityId}) => {
   const [globalState, dispatch] = useGlobalState();
   const facility = globalState.facilities.data[facilityId];
+  const isShowSns = facility.twitter || facility.instagram || facility.facebook || facility.line;
   return (
     <div className={className}>
       <h3>Information</h3>
@@ -21,32 +22,35 @@ const Sidebar = ({className, facilityId}) => {
           最大人数：{facility.m_scale.detail}
         </li>
       </ul>
-      <div className={`${className}__sns_group`}>
-        {
-          facility.twitter &&
-          <a href={`https://twitter.com/${facility.twitter}`} target="_blank" rel="noopener noreferrer">
-            <AiFillTwitterSquare size='40px' />
-          </a>
-        }
-        {
-          facility.instagram &&
-          <a href={`https://www.instagram.com/${facility.instagram}`} target="_blank" rel="noopener noreferrer">
-            <AiFillInstagram size='40px' />
-          </a>
-        }
-        {
-          facility.facebook &&
-          <a href={`https://www.facebook.com/${facility.facebook}`} target="_blank" rel="noopener noreferrer">
-            <AiFillFacebook size='40px' />
-          </a>
-        }
-        {
-          facility.line &&
-          <a href={`${facility.line}`} target="_blank" rel="noopener noreferrer">
-            <FaLine size='40px' />
-          </a>
-        }
-      </div>
+      {
+        isShowSns &&
+        <div className={`${className}__sns_group`}>
+          {
+            facility.twitter &&
+            <a href={`https://twitter.com/${facility.twitter}`} target="_blank" rel="noopener noreferrer">
+              <AiFillTwitterSquare size='40px' />
+            </a>
+          }
+          {
+            facility.instagram &&
+            <a href={`https://www.instagram.com/${facility.instagram}`} target="_blank" rel="noopener noreferrer">
+              <AiFillInstagram size='40px' />
+            </a>
+          }
+          {
+            facility.facebook &&
+            <a href={`https://www.facebook.com/${facility.facebook}`} target="_blank" rel="noopener noreferrer">
+              <AiFillFacebook size='40px' />
+            </a>
+          }
+          {
+            facility.line &&
+            <a href={`${facility.line}`} target="_blank" rel="noopener noreferrer">
+              <FaLine size='40px' />
+            </a>
+          }
+        </div>
+      }
     </div>
   );
 };

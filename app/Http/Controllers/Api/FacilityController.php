@@ -11,7 +11,9 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Facility;
 
 class FacilityController extends Controller
-{
+{   
+    // index
+
     public function index() {
         Log::info('[API_FACILITIES_INDEX_QUERY_START]');
 
@@ -31,6 +33,8 @@ class FacilityController extends Controller
         Log::info('[API_FACILITIES_INDEX_QUERY_SUCCESS]');
         return response()->json($facilities);
     }
+
+    // store
 
     public function store(Request $request) {
         Log::info('[API_FACILITIES_STORE_POST_START]');
@@ -63,10 +67,13 @@ class FacilityController extends Controller
             'm_scale',
             'm_facility_type'
         );
+
         Log::info('[API_FACILITIES_STORE_POST_SUCCESS]');
         return response()->json($facility);
     }
     
+    // show
+
     public function show($id) {
         Log::info('[API_FACILITIES_SHOW_GET_START]');
 
@@ -85,6 +92,8 @@ class FacilityController extends Controller
         Log::info('[API_FACILITIES_SHOW_GET_SUCCESS]');
         return response()->json($facility);
     }
+
+    // update
 
     public function update(Request $request, $id) {
         Log::info('[API_FACILITIES_UPDATE_START]');
@@ -118,19 +127,76 @@ class FacilityController extends Controller
             'm_scale',
             'm_facility_type'
         );
+
         Log::info('[API_FACILITIES_UPDATE_SUCCESS]');
         return response()->json($facility);
     }
 
+    // destroy
+
     public function destroy($id) {
         Log::info('[API_FACILITIES_DESTROY_DELETE_START]');
+
         $facility = Facility::find($id);
         if ($facility->user_id !== Auth::user()->id) {
             abort(403, 'Forbidden');
             Log::info('[API_FACILITIES_DESTROY_DELETE_FAILURE]');
         }
         $facility->delete();
+
         Log::info('[API_FACILITIES_DESTROY_DELETE_SUCCESS]');
         return response()->json($facility);
+    }
+
+    // search
+
+    public function search(Request $request) {
+        Log::info('[API_FACILITIES_SEARCH_QUERY_START]');
+        
+        $name = $request->query('name');
+        $m_facility_type_id = $request->query('m_facility_type_id');
+        $m_budget_id = $request->query('m_budget_id');
+        $m_scale_id = $request->query('m_scale_id');
+        $m_prefecture_id = $request->query('m_prefecture_id');
+        
+        $query = Facility::query();
+        // 検索条件を追加していく
+        if ($name) {
+            $query->where('name', 'like', "%$name%");
+        }
+        if ($m_budget_id) {
+            $query->where('m_budget_id', $m_budget_id);
+        }
+        if ($m_scale_id) {
+            $query->where('m_scale_id', $m_scale_id);
+        }
+        if ($m_prefecture_id) {
+            $query->where('m_prefecture_id', $m_prefecture_id);
+        }
+        if ($m_facility_type_id) {
+            $query->where('m_facility_type_id', $m_facility_type_id);
+        }
+        // データを取得
+        $facilities = $query->with(
+            'm_services',
+            'facility_time',
+            'likes',
+            'reviews.user',
+            'events',
+            'm_budget',
+            'm_prefecture',
+            'm_scale',
+            'm_facility_type'
+        )->paginate(1);
+
+        Log::info('[API_FACILITIES_SEARCH_QUERY_SUCCESS]');
+        return response()->json($facilities);
+    }
+
+    public function random_pick() {
+        Log::info('[API_FACILITIES_RANDOM_PICK_QUERY_START]');
+        $facilities = Facility::inRandomOrder()->take(5)->get();
+        Log::info('[API_FACILITIES_RANDOM_PICK_QUERY_SUCCESS]');
+        return response()->json($facilities);
     }
 }

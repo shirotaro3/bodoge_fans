@@ -28,7 +28,7 @@ const FacilitiesShow = ({match}) => {
 
   if (globalState.facilities.data[facilityId]) {
     return (
-      <div className='page'>
+      <div className='fadein'>
         <HeaderContainer
           facilityId={facilityId}
           imgUrl={globalState.facilities.data[facilityId].header_image_url}

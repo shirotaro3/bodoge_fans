@@ -238,6 +238,24 @@ const reducer = (state = {}, action) => {
         });
         return context;
       }
+    
+    case 'SET_SEARCH_RESULT':
+      const context = {
+        ...state,
+        facilities: {
+          ...state.facilities,
+          data: {
+            ...state.facilities.data,
+            ..._.keyBy(action.data, 'id')
+          }
+        }
+      };
+      const propertyName = action.queryString;
+      context.searchResults[propertyName] = {
+        result: action.result,
+        paginate: action.paginate
+      };
+      return context;
   }
 };
 

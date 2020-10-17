@@ -3,7 +3,7 @@ import UserRegistrationForm from '../../components/users/RegistrationForm';
 
 const UsersRegistration = () => {
   return (
-    <div className='page'>
+    <div className='fadein'>
       <UserRegistrationForm />
     </div>
   )

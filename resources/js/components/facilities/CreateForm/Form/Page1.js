@@ -4,11 +4,11 @@ import { FormVertical as Form, Input, Textarea, Select } from '../../../shared/F
 import { useGlobalState } from '../../../global/ContextProvider';
 import { ButtonWhite as Button } from '../../../shared/Buttons';
 
-const Page1 = ({register, watch, errors, control, next, formValue}) => {
+const Page1 = ({register, errors, control, next, formValue}) => {
   const [globalState, dispatch] = useGlobalState();
   const { facilityTypes, budgets, scales, services } = globalState.masters;
   return (
-    <Form onSubmit={next} className='page'>
+    <Form onSubmit={next} className='fadein'>
       <label>*お店/施設名</label>
       <Input
         name='name'

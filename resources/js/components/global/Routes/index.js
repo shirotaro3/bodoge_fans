@@ -15,6 +15,7 @@ import Events from '../../../pages/events';
 import FacilitiesCreate from '../../../pages/facilities/Create';
 import FacilitiesShow from '../../../pages/facilities/Show';
 import FacilitiesEdit from '../../../pages/facilities/Edit';
+import FacilitiesSearch from '../../../pages/facilities/Search';
 import NotFound from '../../../pages/404';
 
 const Routes = () => {
@@ -36,6 +37,7 @@ const Routes = () => {
       {/* Facilities */}
       <Route path='/facilities/:id(\d+)/edit' component={FacilitiesEdit} />
       <Route path='/facilities/:id(\d+)' component={FacilitiesShow} />
+      <Route path='/facilities/search' component ={FacilitiesSearch} />
       <AuthRoute exact path='/facilities/create' component={FacilitiesCreate} />
 
       {/* 上記のどれにも一致しない場合に表示される */}

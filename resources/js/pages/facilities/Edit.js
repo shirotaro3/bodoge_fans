@@ -35,7 +35,7 @@ const FacilitiesEdit = ({match}) => {
   if (facility && mastersResolved) {
     // facilityデータとマスタデータがあるとき
     return (
-      <div className='page'>
+      <div className='fadein'>
         <FacilitiesEditForm facilityId={facilityId} />
       </div>
     );

@@ -49,4 +49,16 @@ const StyledServices = styled(Services)`
   }
 `;
 
+export const ServicesSearchResult = styled(Services)`
+  border-bottom: 12px solid #555;
+  border-top: 12px solid #555;
+  background: #555;
+  height: 74px;
+  display: flex;
+  justify-content: center;
+  &__headline {
+    display: none;
+  }
+`
+
 export default StyledServices;
