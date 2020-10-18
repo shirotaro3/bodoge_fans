@@ -23,6 +23,8 @@ const FacilityListPaginate = ({className, facilityIds, paginate, params}) => {
 };
 
 const StyledFacilityListPaginate = styled(FacilityListPaginate)`
+  max-width: 1000px;
+  margin: 0 auto;
   &__not_found {
     margin: 30px 10px;
     padding: 20px;
