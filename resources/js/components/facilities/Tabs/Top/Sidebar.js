@@ -60,6 +60,7 @@ const StyledSidebar = styled(Sidebar)`
   padding: 10px;
   border-radius: 10px;
   margin: 10px;
+  background: #eee;
   h3 {
     text-align: center;
   }

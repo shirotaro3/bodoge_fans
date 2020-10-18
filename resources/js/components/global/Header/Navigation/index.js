@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import media from 'styled-media-query';
 import NavItem from './NavItem';
-import { mixinIsShownTablet } from '../../../shared/StyledCss';
 import { BsSearch, BsFillCalendarFill, BsChatDots } from 'react-icons/bs';
 import { IconContext } from 'react-icons';
 
@@ -17,11 +17,11 @@ const items = [
     icon: <BsFillCalendarFill />
   },
   {
-    to: '/users/dashboard',
+    to: '/reviews',
     text: 'クチコミ',
     icon: <BsChatDots />
   }
-]
+];
 
 const Navigation = ({className}) => {
   return (
@@ -43,9 +43,12 @@ const Navigation = ({className}) => {
 }
 
 const StyledNavigation = styled(Navigation)`
-  ${mixinIsShownTablet}
   display: flex;
   margin-left: 20px;
+  ${media.lessThan('medium')`
+    padding: 10px 0;
+    margin: 0;
+  `}
 `
 
 export default StyledNavigation;

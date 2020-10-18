@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import media from 'styled-media-query';
 import { useForm, Controller } from 'react-hook-form';
 import { setHours, setMinutes } from 'date-fns';
 import { useGlobalState } from '../../../global/ContextProvider';
@@ -321,6 +322,9 @@ const StyledTimeTableEdit = styled(TimeTableEdit)`
   width: 40%;
   color: #fff;
   padding-top: 40px;
+  ${media.lessThan('medium')`
+    width: 100%;
+  `}
   &__ul {
     display: flex;
     flex-wrap: wrap;

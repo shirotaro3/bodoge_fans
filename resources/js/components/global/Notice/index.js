@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import media from 'styled-media-query';
 import { Transition } from 'react-transition-group';
 import { useGlobalState } from '../ContextProvider';
 import Animation from './Animation';
@@ -30,6 +31,9 @@ const StyledNotice = styled(Notice)`
   top: 0;
   text-align: center;
   z-index: 10;
+  ${media.lessThan('medium')`
+    top: 45px;
+  `}
 `;
 
 export default StyledNotice;

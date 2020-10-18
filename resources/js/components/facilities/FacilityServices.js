@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import media from 'styled-media-query';
 import ServiceIcon from '../shared/ServiceIcon';
 import { useGlobalState } from '../global/ContextProvider';
 
@@ -32,11 +33,14 @@ const StyledServices = styled(Services)`
   box-shadow: 0 -8px 3px -3px rgba(0,0,0,.5);
   border-bottom: 12px solid #555;
   border-top: 12px solid #555;
-  height: 74px;
   background: #555;
   position: relative;
   display: flex;
   justify-content: center;
+  margin: 0 auto;
+  ${media.lessThan('medium')`
+    flex-wrap: wrap;
+  `}
   &__headline {
     position: absolute;
     top: -35px;
@@ -46,6 +50,11 @@ const StyledServices = styled(Services)`
     background: #555;
     border-radius: 20px 20px 0 0;
     padding: 8px 40px 0 40px;
+    ${media.lessThan('medium')`
+      left: 10px;
+      font-size: 12px;
+      padding: 6px 25px 0 25px;
+    `}
   }
 `;
 
@@ -59,6 +68,10 @@ export const ServicesSearchResult = styled(Services)`
   &__headline {
     display: none;
   }
+  ${media.lessThan('medium')`
+    flex-wrap: wrap;
+    height: 68px;
+  `}
 `
 
 export default StyledServices;

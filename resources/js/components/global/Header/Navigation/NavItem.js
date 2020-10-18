@@ -1,7 +1,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
-import { mixinDivLink } from '../../../shared/StyledCss';
+import media from 'styled-media-query';
+import { divLink } from '../../../shared/mixinCss';
 
 const NavItem = ({to, children, icon, className}) => {
   return (
@@ -19,7 +20,7 @@ const NavItem = ({to, children, icon, className}) => {
 }
 
 const StyledNavItem = styled(NavItem)`
-  ${mixinDivLink}
+  ${divLink}
   color: #fff;
   width: 110px;
   transition: .6s;
@@ -35,6 +36,13 @@ const StyledNavItem = styled(NavItem)`
     border-top-color: #6be;
     border-bottom-color: #6be;
   }
+  ${media.lessThan('medium')`
+    font-size: 10px;
+    width: 33%;
+    border-radius: 0;
+    border-top: 5px solid #999;
+    border-bottom: none;
+  `}
   &__activeLink {
     background: #fff;
     opacity: .2;

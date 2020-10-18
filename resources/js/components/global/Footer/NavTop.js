@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import media from 'styled-media-query';
 import { HashLink } from 'react-router-hash-link';
-import { mixinDivLink } from '../../shared/StyledCss';
+import { divLink } from '../../shared/mixinCss';
 
 const NavTop = ({className}) => {
   return (
@@ -13,7 +14,7 @@ const NavTop = ({className}) => {
 }
 
 const StyledNavTop = styled(NavTop)`
-  ${mixinDivLink}
+  ${divLink}
   height: 47px;
   background: #444;
   color: #fff;
@@ -22,6 +23,9 @@ const StyledNavTop = styled(NavTop)`
   &:hover {
     background: #555;
   }
+  ${media.lessThan('medium')`
+    height: 40px;
+  `}
 `
 
 export default StyledNavTop;

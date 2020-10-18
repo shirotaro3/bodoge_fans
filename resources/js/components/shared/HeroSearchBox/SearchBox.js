@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import media from 'styled-media-query';
 import { BiSearchAlt } from 'react-icons/bi';
 import { Input, FormVertical as Form, Select, Container } from '../../shared/FormParts';
 import { useForm, Controller } from 'react-hook-form';
@@ -19,7 +20,7 @@ const SearchBox = ({className, defaultParams}) => {
 
   const onSubmit = handleSubmit ((data) => {
     const { name, prefecture, scale, facilityType, budget } = data;
-    const params = {};
+    const params = { page: 1 };
     if (name) params.name = name;
     if (prefecture) params.m_prefecture_id = prefecture.value;
     if (scale) params.m_scale_id = scale.value;
@@ -52,7 +53,7 @@ const SearchBox = ({className, defaultParams}) => {
               name='prefecture'
               control={control}
               options={prefectures}
-              placeholder='地域で探す'
+              placeholder='地域'
               defaultValue={getMasterDefaultValue(prefectures, defaultParams.m_prefecture_id)}
               isClearable
             />
@@ -63,7 +64,7 @@ const SearchBox = ({className, defaultParams}) => {
               name='scale'
               control={control}
               options={scales}
-              placeholder='収容規模で探す'
+              placeholder='収容規模'
               defaultValue={getMasterDefaultValue(scales, defaultParams.m_scale_id)}
               isClearable
             />
@@ -77,7 +78,7 @@ const SearchBox = ({className, defaultParams}) => {
               name='budget'
               control={control}
               options={budgets}
-              placeholder='予算で探す'
+              placeholder='予算'
               defaultValue={getMasterDefaultValue(budgets, defaultParams.m_budget_id)}
               isClearable
             />
@@ -88,7 +89,7 @@ const SearchBox = ({className, defaultParams}) => {
               name='facilityType'
               control={control}
               options={facilityTypes}
-              placeholder='タイプで探す'
+              placeholder='タイプ'
               defaultValue={getMasterDefaultValue(facilityTypes, defaultParams.m_facility_type_id)}
               isClearable
             />
@@ -110,6 +111,8 @@ const StyledSearchBox = styled(SearchBox)`
   border-radius: 10px;
   height: 100%;
   width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
   &__heading {
     display: flex;
     align-items: center;
