@@ -18,6 +18,8 @@ const FacilityListPlaceholder = ({className}) => {
 
 const StyledFacilityListPlaceholder = styled(FacilityListPlaceholder)`
   padding-top: 26px;
+  max-width: 1000px;
+  margin: 0 auto;
 `;
 
 export default StyledFacilityListPlaceholder;
