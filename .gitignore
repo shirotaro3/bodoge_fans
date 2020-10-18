@@ -3,7 +3,11 @@
 /public/storage
 /storage/*.key
 /vendor
-/pgadmin
+/docker/pgadmin
+/docker/pgsql
+/docker/minio
+/docker/apache
+/docker/php
 .env
 .env.backup
 .phpunit.result.cache

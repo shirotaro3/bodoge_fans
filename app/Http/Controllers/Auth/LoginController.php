@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class LoginController extends Controller
 {
@@ -18,8 +20,6 @@ class LoginController extends Controller
     | to conveniently provide its functionality to your applications.
     |
     */
-
-    use AuthenticatesUsers;
 
     /**
      * Where to redirect users after login.
@@ -36,5 +36,21 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    public function login(Request $request){
+        $credentials = $request->only('email', 'password');
+
+        if(Auth::attempt($credentials)) {
+            $user = User::with('likes')->where('email', 'aaa@aaa.com')->first();
+            return response()->json($user, 200);
+        }
+
+        return response()->json(['message' => 'Invalid params'], 403);
+    }
+
+    public function logout(Request $request){
+        Auth::logout();
+        return response()->json(['message' => 'Logged out'], 200);
     }
 }

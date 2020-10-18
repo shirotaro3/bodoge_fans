@@ -1,13 +1,15 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import HeroBox from '../components/HeroBox';
+import { Link } from '../components/shared/Links';
+import HeroSearchBox from '../components/shared/HeroSearchBox';
+import Slider from '../components/shared/FacilitiesSlider';
+import Events from '../components/home/Events';
 
 const Home = () => {
   return (
-      <div>
-          <HeroBox />
-          FirstView
-          <Link to='/users/registration'>ユーザー登録</Link>
+      <div className='fadein'>
+          <HeroSearchBox />
+          <Slider />
+          {/* <Events /> */}
       </div>
   );
 }

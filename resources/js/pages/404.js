@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from '../components/shared/Links';
 import styled from 'styled-components';
 import { FaChess } from 'react-icons/fa';
 import { IconContext } from 'react-icons';

@@ -1,55 +1,45 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
+import dayjs from 'dayjs';
 
 // components
-import Header from '../components/Header';
-import Footer from '../components/Footer';
+import GlobalStyle from '../components/global/GlobalStyle';
+import Routes from '../components/global/Routes';
+import Redirector from '../components/global/Redirector';
+import Initializer from '../components/global/Initializer';
+import { ContextProvider } from '../components/global/ContextProvider';
+import Header from '../components/global/Header';
+import Footer from '../components/global/Footer';
+import Notice from '../components/global/Notice';
+import Overlay from '../components/global/Overlay';
+import WaitingOverlay from '../components/global/WaitingOverlay';
+import Modal from '../components/global/Modal';
 
-// pages
-import Home from './Home';
-import UsersRegistration from './users/Registration';
-import UsersLogin from './users/Login';
-import Events from './events';
-import FacilitiesSearch from './facilities';
-import NotFound from './404';
+// dayjsのi18n対応
+dayjs.locale('ja');
+// SmoothScrollPolyfill : ネイティブのスクロール変数を常にoverrideする
+window.__forceSmoothScrollPolyfill__ = true;
 
 const AppRoot = ({className}) => {
     return (
         <div className={className}>
-            <Router>
-                <Header />
-                <Switch>
-                    {/* Common */}
-                    <Route exact path='/'>
-                        <Home />
-                    </Route>
-
-                    {/* Users */}
-                    <Route path='/users/registration'>
-                        <UsersRegistration />
-                    </Route>
-                    <Route path='/users/login'>
-                        <UsersLogin />
-                    </Route>
-
-                    {/* Events */}
-                    <Router path='/events'>
-                        <Events />
+            <ContextProvider>
+                <WaitingOverlay />
+                <Overlay />
+                <Modal />
+                <Initializer>
+                    <Router>
+                        <Redirector />
+                        <Header />
+                        <Notice />
+                        <Routes />
+                        <Footer />
                     </Router>
-
-                    {/* Facilities */}
-                    <Router path='/Facilities/Search'>
-                        <FacilitiesSearch />
-                    </Router>
-
-                    <Route>
-                        <NotFound />
-                    </Route>
-                </Switch>
-                <Footer />
-            </Router>
+                </Initializer>
+            </ContextProvider>
+            <GlobalStyle />
         </div>
     );
 }

@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'birthday', 'sex', 'icon_url'
     ];
 
     /**
@@ -26,7 +26,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token', 'birthday', 'sex', 'email',
+        'created_at', 'updated_at', 'email_verified_at'
     ];
 
     /**
@@ -37,4 +38,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function facilities() {
+        return $this->hasMany('App\Models\Facility');
+    }
+    public function likes() {
+        return $this->hasMany('App\Models\Like');
+    }
+    public function reviews() {
+        return $this->hasMany('App\Models\Review');
+    }
 }

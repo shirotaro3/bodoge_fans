@@ -14,6 +14,48 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::get('/masters', 'App\Http\Controllers\Api\MasterController@index');
+
+// users
+Route::prefix('users')->group(function () {
+    Route::post('registration', 'App\Http\Controllers\Auth\RegisterController@register');
+    Route::post('login', 'App\Http\Controllers\Auth\LoginController@login');
+    Route::post('logout', 'App\Http\Controllers\Auth\LoginController@logout');
+});
+
+// facilities
+Route::prefix('facilities')->group(function () {
+    Route::get('/', 'App\Http\Controllers\Api\FacilityController@index');
+    Route::get('/search', 'App\Http\Controllers\Api\FacilityController@search');
+    Route::get('/pickup', 'App\Http\Controllers\Api\FacilityController@random_pick');
+    Route::get('/{id}', 'App\Http\Controllers\Api\FacilityController@show');
+});
+
+// reviews
+Route::prefix('reviews')->group(function () {
+    Route::post('/', 'App\Http\Controllers\Api\ReviewController@store');
+    Route::delete('/{id}', 'App\Http\Controllers\Api\ReviewController@destroy');
+});
+
+// require auth
+Route::middleware('auth:sanctum')->group(function () {
+
+    // auth|facilities
+    Route::prefix('facilities')->group(function () {
+        Route::post('/', 'App\Http\Controllers\Api\FacilityController@store');
+        Route::put('/{id}', 'App\Http\Controllers\Api\FacilityController@update');
+        Route::delete('/{id}', 'App\Http\Controllers\Api\FacilityController@destroy');
+    });
+
+    // auth|facility_times
+    Route::prefix('facility_times')->group(function () {
+        Route::put('/{id}', 'App\Http\Controllers\Api\FacilityTimeController@update');
+    });
+
+    // auth|likes
+    Route::prefix('likes')->group(function () {
+        Route::post('/', 'App\Http\Controllers\Api\LikeController@store');
+        Route::get('/mine', 'App\Http\Controllers\Api\LikeController@mine');
+    });
+
 });

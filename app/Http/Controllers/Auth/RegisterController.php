@@ -5,9 +5,14 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Models\Like;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Auth\Events\Registered;
 
 class RegisterController extends Controller
 {
@@ -41,6 +46,26 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
+    public function register(Request $request)
+    {
+        $validate = $this->validator($request->all());
+
+        if ($validate->fails()) {
+            return response()->json($validate->errors(), 422);
+        }
+
+        // ユーザー作成
+        event(new Registered($user = $this->create($request->all())));
+
+        // ログイン
+        $credentials = $request->only('email', 'password');
+        Auth::attempt($credentials);
+
+        $user['likes'] = [];
+
+        return response()->json($user);
+    }
+
     /**
      * Get a validator for an incoming registration request.
      *
@@ -64,10 +89,13 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'birthday' => $data['birthday'],
+            'sex' => $data['sex'],
         ]);
+        return $user;
     }
 }

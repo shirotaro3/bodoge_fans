@@ -1,11 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import UserRegistrationForm from '../../components/users/RegistrationForm';
 
 const UsersRegistration = () => {
   return (
-    <div>
-      UsersRegistration
-      <Link to='/'>戻る</Link>
+    <div className='fadein'>
+      <UserRegistrationForm />
     </div>
   )
 }
