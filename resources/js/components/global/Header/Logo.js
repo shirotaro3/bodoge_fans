@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import media from 'styled-media-query';
 import { Link } from 'react-router-dom';
-import { mixinDivLink } from '../../shared/StyledCss';
+import { divLink } from '../../shared/mixinCss';
 
 const Logo = ({ className, logoText, subText }) => {
   return (
@@ -18,7 +19,7 @@ const Logo = ({ className, logoText, subText }) => {
 }
 
 const StyledLogo = styled(Logo)`
-  ${mixinDivLink}
+  ${divLink}
   width: 270px;
   padding: 3px 0;
   text-align: center;
@@ -26,19 +27,28 @@ const StyledLogo = styled(Logo)`
   border-radius: 4px;
   transition: .6s;
   cursor: pointer;
-
+  ${media.lessThan('small')`
+    flex: 1;
+    width: auto;
+  `}
   ${StyledLogo}:hover&{
     background: #555;
     color: #fc7;
     border-color: #ff9;
   }
   &__mainText {
-    font-size: 25px;
+    font-size: 24px;
     margin: 0;
+    ${media.lessThan('medium')`
+      font-size: 18px;
+    `}
   }
   &__subText {
     font-size: 10px;
     margin: 0;
+    ${media.lessThan('medium')`
+      font-size: 8px;
+    `}
   }
 `
 

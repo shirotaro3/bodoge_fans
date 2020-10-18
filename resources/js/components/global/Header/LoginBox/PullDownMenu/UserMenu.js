@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import media from 'styled-media-query';
 import { Link } from 'react-router-dom';
 
 const UserMenu = ({className}) => {
@@ -27,6 +28,9 @@ const StyledUserMenu = styled(UserMenu)`
   color: #333;
   border-radius: 4px;
   box-shadow: 2px 2px 6px 1px rgba(0,0,0,.3);
+  ${media.lessThan('medium')`
+    width: 50vw;
+  `}
   &__li {
     margin: 0;
     padding: 0;

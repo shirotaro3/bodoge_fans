@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { mixinDivLink } from '../../shared/StyledCss';
+import { divLink } from '../../shared/mixinCss';
 import { Link } from '../../shared/Links';
 
 const SliderChild = ({className, title, body, linkPath, imgUrl}) => {
@@ -18,7 +18,7 @@ const SliderChild = ({className, title, body, linkPath, imgUrl}) => {
 const StyledSliderChild = styled(SliderChild).attrs(props => ({
   imgUrl: props.imgUrl ? `url(${props.imgUrl})` :'none'
 }))`
-  ${mixinDivLink}
+  ${divLink}
   height: 250px;
   border-left: 5px solid #555;
   border-right: 5px solid #555;

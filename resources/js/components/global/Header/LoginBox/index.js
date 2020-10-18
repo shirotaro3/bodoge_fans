@@ -18,8 +18,6 @@ const LoginBox = ({className}) => {
 
 const StyledLoginBox = styled(LoginBox)`
   margin-left: 20px;
-  padding: 7px 13px;
-  border: 1px solid #999;
   border-radius: 4px;
   font-size: 11px;
   text-align: center;

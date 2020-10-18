@@ -62,12 +62,13 @@ const StyledReviewBox = styled(ReviewBox).attrs(props => ({
     flex-direction: column;
     align-items: center;
     font-size: 13px;
+    width: 40px;
   }
   &__container {
     display: flex;
+    flex: 1;
     flex-direction: column;
     background: #fff;
-    width: 80%;
     padding: 15px 20px;
     border-radius: 15px;
     position: relative;

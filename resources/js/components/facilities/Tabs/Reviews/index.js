@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import media from 'styled-media-query';
 import { useGlobalState } from '../../../global/ContextProvider';
 import ReviewItem from './ReviewItem';
 import ReviewForm from './ReviewForm';
@@ -14,6 +15,7 @@ const Reviews = ({match, className}) => {
   const reviews = _.orderBy(facility.reviews, ['created_at'], ['desc']);
   return (
     <div className={`${className} page`}>
+      <h2>{facility.name}のクチコミ</h2>
       {
         reviews.length > 0 ?
         <Pagination
@@ -38,8 +40,11 @@ const Reviews = ({match, className}) => {
 
 const StyledReviews = styled(Reviews)`
   width: 100%;
-  max-width: 800px;
+  max-width: 1000px;
   margin: 0 auto;
+  ${media.lessThan('large')`
+    max-width: 800px;
+  `}
   &__text {
     text-align: center;
     margin: 20px 0;

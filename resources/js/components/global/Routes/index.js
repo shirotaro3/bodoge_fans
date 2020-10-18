@@ -12,6 +12,7 @@ import UsersLogout from '../../../pages/users/Logout';
 import UsersLikes from '../../../pages/users/Likes';
 import Dashboard from '../../../pages/users/Dashboard';
 import Events from '../../../pages/events';
+import Reviews from '../../../pages/reviews';
 import FacilitiesCreate from '../../../pages/facilities/Create';
 import FacilitiesShow from '../../../pages/facilities/Show';
 import FacilitiesEdit from '../../../pages/facilities/Edit';
@@ -33,6 +34,9 @@ const Routes = () => {
 
       {/* Events */}
       <Route exact path='/events' component={Events} />
+
+      {/* Reviews */}
+      <Route exact path='/reviews' component={Reviews} />
 
       {/* Facilities */}
       <Route path='/facilities/:id(\d+)/edit' component={FacilitiesEdit} />

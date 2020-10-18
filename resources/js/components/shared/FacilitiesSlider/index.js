@@ -34,7 +34,7 @@ const FacilitiesSlider = ({className}) => {
         {/* placeholder */}
         { globalState.pickedUpFacilitiesId.resolved || placeholder }
       </Slider>
-      <h2 className={`${className}__child`}>Pickup!</h2>
+      <h2 className={`${className}__pickup_text`}>Pickup!</h2>
       <Loading resolved={globalState.pickedUpFacilitiesId.resolved} />
     </div>
   );
@@ -47,11 +47,11 @@ const StyledSlider = styled(FacilitiesSlider)`
   height: 260px;
   background: #ccc;
   overflow: hidden;
-  &__child {
+  &__pickup_text {
     position:absolute;
     font-size: 20px;
     margin: 0;
-    top: 0;
+    top: -1px;
     left: 0;
     background: #555;
     color: #fff;

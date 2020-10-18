@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import media from 'styled-media-query';
 
 const Credit = ({className}) => {
   return (
@@ -12,10 +13,13 @@ const Credit = ({className}) => {
 const StyledCredit = styled(Credit)`
   width: 100%;
   height: 50px;
-  padding: 13px 10px;
+  padding: 13px 0;
   text-align: center;
   color: #fff;
   background: #333;
+  ${media.lessThan('medium')`
+    height: 45px;
+  `}
 `
 
 export default StyledCredit;

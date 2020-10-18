@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import media from 'styled-media-query';
 import { useGlobalState } from '../../../../components/global/ContextProvider';
 import { BsPencilSquare } from 'react-icons/bs';
 import Edit from './Edit';
@@ -21,7 +22,7 @@ const NameDescription = ({className, facilityId}) => {
         isEditing ?
         <Edit cancel={handleClick} facilityId={facilityId} /> :
         <div className={`${className}__container`} onClick={handleClick}>
-          <h2 className={`${className}__h2`}>{facility.name}</h2>
+          <h1 className={`${className}__h1`}>{facility.name}</h1>
           <p className={`${className}__p`}>{facility.description}</p>
           <div className={`${className}__edit`}>
             <BsPencilSquare size='25px' />
@@ -41,12 +42,21 @@ const StyledND = styled(NameDescription).attrs(props => {
 })`
   color: #fff;
   width: 60%;
-  &__h2 {
+  ${media.lessThan('medium')`
+    width: 100%;
+  `}
+  &__h1 {
     margin: 0;
     font-size: 36px;
+    ${media.lessThan('small')`
+      font-size: 24px;
+    `}
   }
   &__p {
     font-size: 18px;
+    ${media.lessThan('small')`
+      font-size: 15px;
+    `}
   }
   &__edit {
     opacity: 0;
@@ -68,6 +78,15 @@ const StyledND = styled(NameDescription).attrs(props => {
     &__container:hover &__edit {
       opacity: .6;
     }`
+  }
+  ${
+    props => props.isMine &&
+      media.lessThan('medium')`
+        background: rgba(255,255,255,.1);
+        &__edit {
+          opacity: .6;
+        }
+      `
   }
 `;
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import media from 'styled-media-query';
 import { Switch, Route, NavLink } from 'react-router-dom';
 import Access from './Access';
 import Reviews from './Reviews';
@@ -55,6 +56,17 @@ const Tabs = ({className, facilityId}) => {
 };
 
 const StyledTabs = styled(Tabs)`
+h2 {
+  font-size: 20px;
+  margin: 25px 0 15px 50px;
+  ${media.lessThan('medium')`
+    font-size: 17px;
+    margin: 20px;
+  `}
+}
+h3 {
+  font-size: 17px;
+}
 &__tabs {
   width: 100%;
   display: flex;
@@ -72,6 +84,9 @@ const StyledTabs = styled(Tabs)`
   &:hover {
     background: #777;
   }
+  ${media.lessThan('medium')`
+    font-size: 12px;
+  `}
 }
 &__active_tab {
   background: #888;

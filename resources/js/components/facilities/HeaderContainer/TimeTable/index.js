@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import media from 'styled-media-query';
 import { BsPencilSquare } from 'react-icons/bs';
 import { useGlobalState } from '../../../global/ContextProvider';
 import { formatTime } from '../../../shared/utilities';
@@ -95,8 +96,18 @@ const StyledTimeTable = styled(TimeTable).attrs(props => {
   return ({ isMine });
 })`
   width: 40%;
+  max-width: 500px;
   color: #fff;
   padding-top: 40px;
+  margin: 0 0 0 auto;
+  ${media.lessThan('medium')`
+    width: 100%;
+    max-width: 400px;
+  `}
+  ${media.lessThan('small')`
+    max-width: 100%;
+    margin: 0;
+  `}
   &__ul {
     display: flex;
     flex-wrap: wrap;
@@ -172,6 +183,16 @@ const StyledTimeTable = styled(TimeTable).attrs(props => {
     &__ul:hover &__edit {
       opacity: .8;
     }`
+  }
+  ${
+    props => props.isMine &&
+      media.lessThan('medium')`
+        background: rgba(255,255,255,.1);
+        width: 100%;
+        &__edit {
+          opacity: .8;
+        }
+      `
   }
 `;
 

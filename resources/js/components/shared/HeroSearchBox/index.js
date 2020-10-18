@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { mixinIsShownTablet } from '../../shared/StyledCss';
 import SearchBox from './SearchBox';
 
 const Hero = ({ className, params = {} }) => {
@@ -12,10 +11,9 @@ const Hero = ({ className, params = {} }) => {
 }
 
 const StyledHero = styled(Hero)`
-  ${mixinIsShownTablet}
   width: 100%;
   background: #777;
-  padding: 60px 200px;
+  padding: 60px 0;
   background-image: url('/img/boardgames.jpg');
   background-position: center;
   background-size: cover;

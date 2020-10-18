@@ -50,7 +50,8 @@ const Initializer = ({children}) => {
 
     // サービス初期化
     const onUnauthenticated = () => {
-      return dispatch({type: 'LOGOUT'});
+      dispatch({type: 'LOGOUT'});
+      dispatch({type: 'MESSAGE', text: '時間経過または長い時間操作されなかったため、再度ログインしてください。'})
     };
     networkService.setOnUnauthenticated(onUnauthenticated);
 

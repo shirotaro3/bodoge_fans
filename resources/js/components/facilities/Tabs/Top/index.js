@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
+import media from 'styled-media-query';
 import { BsPencilSquare } from 'react-icons/bs';
 import { useGlobalState } from '../../../global/ContextProvider';
 import Edit from './Edit';
@@ -20,7 +21,7 @@ const Top = ({className, match}) => {
   return (
     <div className={`${className} page`}>
       <div className={`${className}__main`}>
-        <h3>{facility.name}より</h3>
+        <h2>{facility.name}より</h2>
         {
           isEditing ?
           <Edit facilityId={facilityId} cancel={handleClick} /> :
@@ -48,10 +49,23 @@ const StyledTop = styled(Top).attrs(props => {
   return ({ isMine });
 })`
   display: flex;
+  max-width: 1000px;
+  margin: 0 auto;
+  ${media.lessThan('large')`
+    max-width: 800px;
+  `}
+  ${media.lessThan('medium')`
+    flex-wrap: wrap;
+  `}
   &__intr {
     min-height: 50px;
     white-space: pre-wrap;
     position: relative;
+    padding: 20px 15px;
+    font-size: 15px;
+    ${media.lessThan('medium')`
+      width: 100%;
+    `}
   }
   &__edit {
     opacity: 0;
@@ -61,12 +75,14 @@ const StyledTop = styled(Top).attrs(props => {
   }
   &__main {
     flex: 1;
-    padding: 10px 20px;
-    margin: 10px;
+    margin-right: 10px;
   }
   &__sidebar {
     width: 100%;
     max-width: 250px;
+    ${media.lessThan('medium')`
+      max-width: 100%;
+    `}
   }
   ${
     props => props.isMine &&
@@ -79,6 +95,18 @@ const StyledTop = styled(Top).attrs(props => {
     &__intr:hover &__edit {
       opacity: .6;
     }`
+  }
+  ${
+    props => props.isMine &&
+      media.lessThan('medium')`
+        &__intr {
+          background: rgba(0,0,0,.05);
+          width: 100%;
+        }
+        &__edit {
+          opacity: .6;
+        }
+      `
   }
 `;
 
