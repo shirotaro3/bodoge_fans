@@ -20,7 +20,7 @@ class CreateFacilitiesTable extends Migration
             $table->foreignId('m_budget_id')->constrained();
             $table->foreignId('m_scale_id')->constrained();
             $table->string('name', 100);
-            $table->string('header_image_url')->nullable();
+            $table->string('header_image_url')->nullable()->default('/img/boardgames.jpg');
             $table->text('description');
             $table->text('introduction')->nullable();
             $table->foreignId('m_prefecture_id')->constrained();
