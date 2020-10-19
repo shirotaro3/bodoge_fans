@@ -6,8 +6,6 @@
 /docker/pgadmin
 /docker/pgsql
 /docker/minio
-/docker/apache
-/docker/php
 /public/js
 /public/css
 .env
