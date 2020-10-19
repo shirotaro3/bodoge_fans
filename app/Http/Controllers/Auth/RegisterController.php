@@ -61,7 +61,8 @@ class RegisterController extends Controller
         $credentials = $request->only('email', 'password');
         Auth::attempt($credentials);
 
-        $user['likes'] = [];
+        $user->refresh();
+        $user->load('likes');
 
         return response()->json($user);
     }

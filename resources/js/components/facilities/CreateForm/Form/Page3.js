@@ -67,7 +67,7 @@ const Page3 = ({register, errors, control, prev, submit}) => {
 
       <Container>
         <Button onClick={prev} type='button'>戻る</Button>
-        <Button type="submit">確認画面へ</Button>
+        <Button type="submit">登録する</Button>
       </Container>
     </Form>
   );
