@@ -15,7 +15,6 @@ const UserRegistrationForm = () => {
         const response = await axios.post('/api/users/registration', data);
         // 登録成功時
         dispatch({type: 'API_CALL_END'});
-        console.log(response.data);
         dispatch({type: 'LOGIN', data: response.data});
         dispatch({type: 'MESSAGE', text: `登録が完了しました。ようこそ、${response.data.name}さん！`});
         dispatch({type: 'REDIRECT', to: '/users/dashboard'});
