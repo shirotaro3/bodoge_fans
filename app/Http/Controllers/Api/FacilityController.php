@@ -56,6 +56,7 @@ class FacilityController extends Controller
             $facility_time = $facility->facility_time()->create();
             return $facility;
         });
+        $facility->refresh();
         $facility->load(
             'm_services',
             'facility_time',
