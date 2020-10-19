@@ -65,20 +65,27 @@ const Components = ({register, watch, errors, onSubmit, control}) => {
 
         <label>生年月日:</label>
         <Controller
-          as={DatePicker}
-          valueName='selected'
           name='birthday'
-          onChange={([selected]) => selected}
           control={control}
-          autoComplete='off'
-          placeholderText='日付を選択'
-          defaultValue={new Date()}
-          showMonthDropdown
-          showYearDropdown
-          dropdownMode='select'
-          locale='ja'
-          maxDate={new Date()}
+          defaultValue={null}
+          rules={{ required: '選択してください。' }}
+          render={({ onChange, value, name }) => (
+            <DatePicker
+              onChange={date => onChange(date)}
+              name={name}
+              selected={value}
+              autoComplete='off'
+              placeholderText='日付を選択'
+              showMonthDropdown
+              showYearDropdown
+              dropdownMode='select'
+              locale='ja'
+              dateFormat='yyyy年MM月dd日'
+              maxDate={new Date()}
+            />
+          )}
         />
+        {errors.birthday && <span>{errors.birthday.message}</span>}
         
         <label>パスワード:</label>
         <Input name='password'
@@ -91,14 +98,14 @@ const Components = ({register, watch, errors, onSubmit, control}) => {
             pattern: { value: /^[a-zA-Z0-9!#$%&()*+,.:;=?@\[\]^_{}-]+$/, message: '半角英数字と「@」「&」「!」の記号のみ使用できます。' }
           })}
         />
-        {errors.password && <span>{errors.passwords.message}</span>}
+        {errors.password && <span>{errors.password.message}</span>}
 
         <label>パスワード（確認）:</label>
         <Input name='password_confirmation'
           type='password'
-          ref={register({ required: true })}
+          ref={register({ required: '必須項目です。' })}
         />
-        {errors.password_confirmation && <span>必須項目です。</span>}
+        {errors.password_confirmation && <span>{errors.password_confirmation.message}</span>}
         
         <Button type="submit">登録</Button>
       </Form>
