@@ -10,6 +10,9 @@ const networkService = {
       if (status === 419) {
         onUnauthenticated();
       };
+      if (status === 401) {
+        onUnauthenticated();
+      };
       return Promise.reject(error);
     }
   )
