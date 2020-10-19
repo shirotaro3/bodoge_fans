@@ -8,6 +8,8 @@
 /docker/minio
 /docker/apache
 /docker/php
+/public/js
+/public/css
 .env
 .env.backup
 .phpunit.result.cache
