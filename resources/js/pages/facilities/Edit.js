@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import axios from 'axios';
 import FacilitiesEditForm from '../../components/facilities/EditForm';
 import { useGlobalState } from '../../components/global/ContextProvider';
-import Loading from '../../components/shared/Loading';
 
 const FacilitiesEdit = ({match}) => {
   const [globalState, dispatch] = useGlobalState();
@@ -17,8 +16,6 @@ const FacilitiesEdit = ({match}) => {
         const response = await axios.get(`/api/facilities/${facilityId}`);
         dispatch({ type: 'SET_FACILITIES', data: [response.data]});
       } catch (err) {
-        console.log(err);
-        dispatch({type: 'ALERT', text: 'アプリの読み込みに失敗しました。リロードしても改善されない場合は管理者にご連絡ください。'});
       }
     };
 
@@ -40,7 +37,7 @@ const FacilitiesEdit = ({match}) => {
       </div>
     );
   }
-  return <Loading />
+  return <></>
 };
 
 export default FacilitiesEdit;

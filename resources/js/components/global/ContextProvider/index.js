@@ -46,7 +46,12 @@ const initialState = {
   facilities: {
     data: {}
   },
-  searchResults: {}
+  reviews: {
+    data: {}
+  },
+  searchResults: {},
+  likedFacilityResults: {},
+  reviewsIndexResults: {},
 }
 
 const Context = React.createContext();

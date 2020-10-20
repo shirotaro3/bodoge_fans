@@ -33,6 +33,7 @@ Route::prefix('facilities')->group(function () {
 
 // reviews
 Route::prefix('reviews')->group(function () {
+    Route::get('/', 'App\Http\Controllers\Api\ReviewController@index');
     Route::post('/', 'App\Http\Controllers\Api\ReviewController@store');
     Route::delete('/{id}', 'App\Http\Controllers\Api\ReviewController@destroy');
 });

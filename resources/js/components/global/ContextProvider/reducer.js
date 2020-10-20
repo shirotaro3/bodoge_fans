@@ -203,7 +203,8 @@ const reducer = (state = {}, action) => {
             ...state.auth.user,
             likes: action.data.map(o=>o.facility_id),
           }
-        }
+        },
+        likedFacilityResults: {}
       }
 
     // facilityTimes
@@ -219,7 +220,10 @@ const reducer = (state = {}, action) => {
     case 'SET_REVIEW':
       {
         const facilityId = action.data.facility_id;
-        const context = {...state};
+        const context = {
+          ...state,
+          reviewsIndexResults: {}
+        };
         context.facilities.data[facilityId].reviews.push(
           {
             ...action.data
@@ -231,7 +235,10 @@ const reducer = (state = {}, action) => {
       {
         const facilityId = action.data.facility_id;
         const id = action.data.id;
-        const context = {...state};
+        const context = {
+          ...state,
+          reviewsIndexResults: {}
+        };
         context.facilities.data[facilityId].reviews =
           context.facilities.data[facilityId].reviews.filter((o) => {
             return o.id !== id;
@@ -239,23 +246,65 @@ const reducer = (state = {}, action) => {
         return context;
       }
     
-    case 'SET_SEARCH_RESULT':
-      const context = {
-        ...state,
-        facilities: {
-          ...state.facilities,
-          data: {
-            ...state.facilities.data,
-            ..._.keyBy(action.data, 'id')
+    case 'SET_FACILITIES_SEARCH_RESULT':
+      {
+        const context = {
+          ...state,
+          facilities: {
+            ...state.facilities,
+            data: {
+              ...state.facilities.data,
+              ..._.keyBy(action.data, 'id')
+            }
           }
-        }
-      };
-      const propertyName = action.queryString;
-      context.searchResults[propertyName] = {
-        result: action.result,
-        paginate: action.paginate
-      };
-      return context;
+        };
+        const propertyName = action.queryString;
+        context.searchResults[propertyName] = {
+          result: action.result,
+          paginate: action.paginate
+        };
+        return context;
+      }
+
+    case 'SET_USER_LIKES_RESULT':
+      {
+        const context = {
+          ...state,
+          facilities: {
+            ...state.facilities,
+            data: {
+              ...state.facilities.data,
+              ..._.keyBy(action.data, 'id')
+            }
+          }
+        };
+        const propertyName = action.page;
+        context.likedFacilityResults[propertyName] = {
+          result: action.result,
+          paginate: action.paginate
+        };
+        return context;
+      }
+  
+    case 'SET_REVIEWS_INDEX_RESULT':
+      {
+        const context = {
+          ...state,
+          reviews: {
+            ...state.reviews,
+            data: {
+              ...state.reviews.data,
+              ..._.keyBy(action.data, 'id')
+            }
+          }
+        };
+        const propertyName = action.page;
+        context.reviewsIndexResults[propertyName] = {
+          result: action.result,
+          paginate: action.paginate
+        };
+        return context;
+      }
   }
 };
 

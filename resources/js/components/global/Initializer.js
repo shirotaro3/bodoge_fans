@@ -22,44 +22,56 @@ const Initializer = ({children}) => {
           services
         });
       } catch (err) {
-        handleError(err);
+        dispatch({type: 'ALERT', text: 'サイトの読み込みに失敗しました。'});
       }
     };
     const fetchPickupFacilities = async () => {
       // ピックアップデータのフェッチ
       try {
-        const response = await axios.get('/api/facilities');
+        const response = await axios.get('/api/facilities/pickup');
         dispatch({
           type: 'SET_FACILITY_PICKUP',
           data: response.data
         });
       } catch (err) {
-        handleError(err);
+        dispatch({type: 'ALERT', text: 'サイトの読み込みに失敗しました。'});
       }
     };
-    const handleError = (err) => {
-      console.log(err);
-      dispatch({type: 'ALERT', text: 'アプリの読み込みに失敗しました。リロードしても改善されない場合は管理者にご連絡ください。'});
-    };
 
-    // セッションの確認
+    // ログインステータスの初期化
     if (sessionUser) {
       dispatch({type: 'LOGIN', data: sessionUser});
     };
     dispatch({type: 'AUTH_INITIALIZED'});
 
-    // サービス初期化
-    const onUnauthenticated = () => {
-      dispatch({type: 'LOGOUT'});
-      dispatch({type: 'MESSAGE', text: '時間経過または長い時間操作されなかったため、再度ログインしてください。'})
-    };
-    networkService.setOnUnauthenticated(onUnauthenticated);
-
-    // フェッチ実行
+    // 初期表示データ取得
     fetchMasterData();
     fetchPickupFacilities();
+
+    // networkService初期化
+    const onUnauthenticated = () => {
+      dispatch({type: 'LOGOUT'});
+      window.scrollTo({top: 0, left: 0, behavior: 'smooth' });
+      dispatch({type: 'MESSAGE', text: '時間が経過したため、ログアウトされました。'})
+    };
+    const onInternalServerError = () => {
+      window.scrollTo({top: 0, left: 0, behavior: 'smooth' });
+      dispatch({type: 'ALERT', text: 'サーバーの処理に失敗しました。管理者までお問い合わせください。'});
+    };
+    const onRequest = () => {
+      dispatch({type: 'API_CALL_START'});
+    };
+    const onResponse = () => {
+      dispatch({type: 'API_CALL_END'});
+    };
+    networkService.init({
+      onUnauthenticated,
+      onInternalServerError,
+      onRequest,
+      onResponse
+    });
   }, []);
-  // ログイン状態が初期化されるまでは、アプリを表示しない
+  // ログインステータスが初期化されるまでは、アプリを表示しない
   return globalState.auth.initialized ? children : <></>;
 };
 

@@ -29,16 +29,11 @@ const TimeTableEdit = ({className, facilityId, cancel}) => {
   const onSubmit = handleSubmit (async (data) => {
     console.log(data);
     try {
-      dispatch({type: 'API_CALL_START'});
       const response = await axios.put(`/api/facility_times/${facility.facility_time.id}`, data);
-      dispatch({type: 'API_CALL_END'});
       dispatch({type: 'SET_FACILITY_TIME', data: response.data});
       dispatch({type: 'MESSAGE', text: '保存しました。'});
       cancel();
-    } catch(err) {
-      console.log(err);
-      dispatch({type: 'API_CALL_END'});
-      dispatch({type: 'ALERT', text: '処理に失敗しました。'});
+    } catch (err) {
     }
   });
   return (

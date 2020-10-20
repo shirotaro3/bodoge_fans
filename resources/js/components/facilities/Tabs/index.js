@@ -66,6 +66,9 @@ h2 {
 }
 h3 {
   font-size: 17px;
+  ${media.lessThan('medium')`
+    font-size: 15px;
+  `}
 }
 &__tabs {
   width: 100%;

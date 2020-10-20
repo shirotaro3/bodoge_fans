@@ -16,11 +16,13 @@ import Notice from '../components/global/Notice';
 import Overlay from '../components/global/Overlay';
 import WaitingOverlay from '../components/global/WaitingOverlay';
 import Modal from '../components/global/Modal';
+import smoothscroll from 'smoothscroll-polyfill';
 
 // dayjsのi18n対応
 dayjs.locale('ja');
-// SmoothScrollPolyfill : ネイティブのスクロール変数を常にoverrideする
+// SmoothScrollPolyfill
 window.__forceSmoothScrollPolyfill__ = true;
+smoothscroll.polyfill();
 
 const AppRoot = ({className}) => {
     return (

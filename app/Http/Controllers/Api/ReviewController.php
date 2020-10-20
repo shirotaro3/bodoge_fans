@@ -12,6 +12,17 @@ use App\Models\Review;
 
 class ReviewController extends Controller
 {
+    public function index () {
+        Log::info('[API_REVIEWS_INDEX_QUERY_START]');
+        $reviews = Review::with(
+            'user',
+            'facility:id,name'
+        )->orderBy('created_at', 'desc')->take(18)->paginate(6);
+
+        Log::info('[API_REVIEWS_INDEX_QUERY_SUCCESS]');
+        return response()->json($reviews);
+    }
+
     public function store (Request $request) {
         Log::info('[API_REVIEWS_STORE_POST_START]');
         $review = new Review;

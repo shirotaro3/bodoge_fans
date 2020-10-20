@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import axios from 'axios';
 import HeaderContainer from '../../components/facilities/HeaderContainer';
-import FacilityServices from '../../components/facilities/FacilityServices';
-import Loading from '../../components/shared/Loading';
+import FacilityServices from '../../components/shared/FacilityServices';
 import Tabs from '../../components/facilities/Tabs';
 import { useGlobalState } from '../../components/global/ContextProvider';
+import NotFound from '../404';
 
 const FacilitiesShow = ({match}) => {
   const [globalState, dispatch] = useGlobalState();
@@ -16,14 +16,13 @@ const FacilitiesShow = ({match}) => {
         const response = await axios.get(`/api/facilities/${facilityId}`);
         dispatch({ type: 'SET_FACILITIES', data: [response.data]});
       } catch (err) {
-        console.log(err);
-        dispatch({type: 'ALERT', text: 'アプリの読み込みに失敗しました。リロードしても改善されない場合は管理者にご連絡ください。'});
       }
     };
 
     if (!globalState.facilities.data[facilityId]) {
       fetchData();
     }
+    window.scrollTo({top: 0, left: 0, behavior: 'smooth' });
   }, [facilityId]);
 
   if (globalState.facilities.data[facilityId]) {
@@ -38,7 +37,7 @@ const FacilitiesShow = ({match}) => {
       </div>
     );
   }
-  return <Loading />;
+  return <></>;
 };
 
 export default FacilitiesShow;

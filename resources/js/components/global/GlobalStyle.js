@@ -3,7 +3,7 @@ import { fade } from '../shared/keyframes';
 
 const GlobalStyle = createGlobalStyle`
   body {
-    background: #ddd;
+    background: #ccc;
   }
   input:-webkit-autofill {
     /* オートコンプリートから入力時、色がつかないようにする */
@@ -15,6 +15,9 @@ const GlobalStyle = createGlobalStyle`
   }
   .fadein {
     animation: ${fade} .7s 1;
+  }
+  .text-center {
+    text-align: center;
   }
   /* override */
   .react-datepicker__input-container input {

@@ -18,15 +18,11 @@ const Menu = ({className, facilityId}) => {
   };
   const deleteFacility = async () => {
     try {
-      dispatch({type: 'API_CALL_START'});
       const response = await axios.delete('/api/facilities/delete', { id: facilityId });
-      dispatch({type: 'API_CALL_END'});
       dispatch({type: 'DELETE_FACILITY', id: facilityId});
       dispatch({type: 'MESSAGE', text: '削除しました。'});
       dispatch({type: 'REDIRECT', to: '/users/dashboard' });
     } catch (err) {
-      dispatch({type: 'API_CALL_END'});
-      dispatch({type: 'ALERT', text: '処理に失敗しました。再度お試しください。'});
     }
   };
 

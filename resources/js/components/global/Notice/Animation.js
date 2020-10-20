@@ -4,8 +4,6 @@ const Animation = styled.div`
   transition: .8s;
   background: #333;
   color: ${({color}) => {return color}};
-  font-size: 13px;
-  font-weight: bold;
   border-radius: 20px;
   padding: 53px 20px 7px 20px;
   transform: ${({state}) => {
