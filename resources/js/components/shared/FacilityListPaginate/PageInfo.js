@@ -11,7 +11,7 @@ const PageInfo = ({className, paginate}) => {
       {
         total ?
         `${total}件中${currentPage}ページ目` :
-        '検索結果0件'
+        ''
       }
     </div>
   );

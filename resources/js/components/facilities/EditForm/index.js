@@ -28,16 +28,12 @@ const EditForm = ({facilityId}) => {
         m_service_ids: data.services.map(o => o.value),
         m_prefecture_id: data.prefecture.value
       }
-      dispatch({type: 'API_CALL_START'});
       const response = await axios.put(`/api/facilities/${facilityId}`, submitData);
-      dispatch({type: 'API_CALL_END'});
       dispatch({type: 'SET_FACILITIES', data: [response.data]});
       dispatch({type: 'REDIRECT', to: `/facilities/${facilityId}`});
       dispatch({type: 'MESSAGE', text: '保存しました。'});
     } catch (err) {
       console.log(err);
-      dispatch({type: 'API_CALL_END'});
-      dispatch({type: 'ALERT', text: '処理に失敗しました。'});
     }
   });
   return (

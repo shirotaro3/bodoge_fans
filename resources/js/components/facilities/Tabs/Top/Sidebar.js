@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import media from 'styled-media-query';
 import { AiFillTwitterSquare, AiFillInstagram, AiFillFacebook } from 'react-icons/ai';
 import { FaLine } from 'react-icons/fa';
 import { useGlobalState } from '../../../global/ContextProvider';
@@ -56,13 +57,15 @@ const Sidebar = ({className, facilityId}) => {
 };
 
 const StyledSidebar = styled(Sidebar)`
-  border: 1px solid #888;
+  border: 1px solid #ccc;
   padding: 10px;
-  border-radius: 10px;
+  color: #333;
+  border-radius: 20px;
   margin: 10px;
   background: #eee;
   h3 {
     text-align: center;
+    margin: 10px;
   }
   li {
     list-style: none;

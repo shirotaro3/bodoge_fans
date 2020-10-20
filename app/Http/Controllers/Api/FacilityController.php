@@ -28,7 +28,7 @@ class FacilityController extends Controller
             'events',
             'reviews.user',
             'likes'
-            ])->get();
+            ])->paginate(5);
 
         Log::info('[API_FACILITIES_INDEX_QUERY_SUCCESS]');
         return response()->json($facilities);
@@ -89,7 +89,11 @@ class FacilityController extends Controller
             'reviews.user',
             'likes'
             ])->find($id);
-
+        if (!$facility) {
+            Log::info('[API_FACILITIES_SHOW_GET_FAILURE]');
+            abort(404, 'Not found');
+        }
+        
         Log::info('[API_FACILITIES_SHOW_GET_SUCCESS]');
         return response()->json($facility);
     }
@@ -102,12 +106,12 @@ class FacilityController extends Controller
         $facility = DB::transaction(function () use ($request, $id) {
             $facility = Facility::find($id);
             if (!$facility) {
-                abort(400, 'Invalid param');
                 Log::info('[API_FACILITIES_UPDATE_FAILURE]');
+                abort(400, 'Invalid param');
             }
             if ($facility->user_id !== Auth::user()->id) {
-                abort(403, 'Forbidden');
                 Log::info('[API_FACILITIES_UPDATE_FAILURE]');
+                abort(403, 'Forbidden');
             }
             $services = $request->input('m_service_ids');
             if ($services) {
@@ -159,6 +163,8 @@ class FacilityController extends Controller
         $m_budget_id = $request->query('m_budget_id');
         $m_scale_id = $request->query('m_scale_id');
         $m_prefecture_id = $request->query('m_prefecture_id');
+        // 検索では使用しないがIDの配列からデータを取得するために使用する
+        $id = $request->query('id');
         
         $query = Facility::query();
         // 検索条件を追加していく
@@ -176,6 +182,9 @@ class FacilityController extends Controller
         }
         if ($m_facility_type_id) {
             $query->where('m_facility_type_id', $m_facility_type_id);
+        }
+        if ($id) {
+            $query->whereIn('id', $id);
         }
         // データを取得
         $facilities = $query->with(
@@ -196,7 +205,17 @@ class FacilityController extends Controller
 
     public function random_pick() {
         Log::info('[API_FACILITIES_RANDOM_PICK_QUERY_START]');
-        $facilities = Facility::inRandomOrder()->take(5)->get();
+        $facilities = Facility::with(
+            'm_services',
+            'facility_time',
+            'likes',
+            'reviews.user',
+            'events',
+            'm_budget',
+            'm_prefecture',
+            'm_scale',
+            'm_facility_type'
+        )->inRandomOrder()->take(5)->get();
         Log::info('[API_FACILITIES_RANDOM_PICK_QUERY_SUCCESS]');
         return response()->json($facilities);
     }

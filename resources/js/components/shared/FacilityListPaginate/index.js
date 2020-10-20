@@ -2,7 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import FacilityListItem from './FacilityListItem';
 import PageInfo from './PageInfo';
-import Paginate from './Paginate';
+import Paginate from '../PaginateLinks';
+import { BoxRoundedNegative as Box } from '../Boxes';
 
 const FacilityListPaginate = ({className, facilityIds, paginate, params}) => {
   return (
@@ -15,8 +16,8 @@ const FacilityListPaginate = ({className, facilityIds, paginate, params}) => {
       }
       {
         facilityIds.length === 0 ?
-          <div className={`${className}__not_found fadein`}>条件に合うお店は見つかりませんでした。</div> :
-          <Paginate paginate={paginate} params={params} />
+          <Box>条件に合うお店は見つかりませんでした。</Box> :
+          <Paginate paginate={paginate} path='/facilities/search' params={params} />
       }
     </div>
   );
@@ -25,14 +26,6 @@ const FacilityListPaginate = ({className, facilityIds, paginate, params}) => {
 const StyledFacilityListPaginate = styled(FacilityListPaginate)`
   max-width: 1000px;
   margin: 0 auto;
-  &__not_found {
-    margin: 30px 10px;
-    padding: 20px;
-    background: #888;
-    text-align: center;
-    border-radius: 10px;
-    color: #ddd;
-  }
 `;
 
 export default StyledFacilityListPaginate;

@@ -26,10 +26,10 @@ const Components = ({register, watch, errors, onSubmit, control}) => {
 
         <label>ユーザー名:</label>
         <Input name='name'
-          placeholder='8文字以内'
+          placeholder='10文字以内'
           ref={register({
             required: '必須項目です',
-            maxLength: { value: 8 , message: '「ユーザー名」は8文字以内で入力してください。' }
+            maxLength: { value: 10 , message: '「ユーザー名」は10文字以内で入力してください。' }
           })}
         />
         {errors.name && <span>{errors.name.message}</span>}

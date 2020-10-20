@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import media from 'styled-media-query';
-import ServiceIcon from '../shared/ServiceIcon';
-import { useGlobalState } from '../global/ContextProvider';
+import ServiceIcon from './ServiceIcon';
+import { useGlobalState } from '../../global/ContextProvider';
 
 const Services = ({className, facilityId}) => {
   const [globalState, dispatch] = useGlobalState();
@@ -71,6 +71,10 @@ export const ServicesSearchResult = styled(Services)`
   ${media.lessThan('medium')`
     flex-wrap: wrap;
     height: 68px;
+  `}
+  ${media.lessThan('small')`
+    flex-wrap: wrap;
+    height: 48px;
   `}
 `
 

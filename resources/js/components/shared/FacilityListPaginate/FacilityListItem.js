@@ -4,7 +4,7 @@ import media from 'styled-media-query';
 import { useGlobalState } from '../../global/ContextProvider';
 import { divLink } from '../../shared/mixinCss';
 import { Link } from 'react-router-dom';
-import { ServicesSearchResult as Services } from '../../facilities/FacilityServices';
+import { ServicesSearchResult as Services } from '../FacilityServices';
 
 const FacilityListItem = ({className, facilityId}) => {
   const [globalState, dispatch] = useGlobalState();
