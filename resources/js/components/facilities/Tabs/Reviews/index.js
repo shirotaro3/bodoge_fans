@@ -2,10 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import media from 'styled-media-query';
 import { useGlobalState } from '../../../global/ContextProvider';
-import ReviewItem from './ReviewItem';
+import ReviewItem from '../../../shared/ReviewItem';
 import ReviewForm from './ReviewForm';
-import Pagination from '../../../shared/Pagination';
+import Pagination from '../../../shared/EasyPagination';
 import { Link } from '../../../shared/Links';
+import { BoxRoundedWhite as Box } from '../../../shared/Boxes';
 import _ from 'lodash';
 
 const Reviews = ({match, className}) => {
@@ -24,12 +25,15 @@ const Reviews = ({match, className}) => {
           Component={ReviewItem} 
         /> :
         <div className={`${className}__text`}>
-          口コミはまだありません。あなたの口コミを投稿してみませんか？
+          クチコミはまだありません。<br />あなたのクチコミを投稿してみませんか？
         </div>
       }
       {
         globalState.auth.isLoggedIn ?
-        <ReviewForm facilityId={facilityId} /> :
+        <Box>
+          <h3>クチコミを投稿</h3>
+          <ReviewForm facilityId={facilityId} />
+        </Box> :
         <div className={`${className}__text`}>
            今すぐ<Link to='/users/login'>ログイン</Link>して口コミを投稿しましょう。
         </div>
@@ -45,9 +49,15 @@ const StyledReviews = styled(Reviews)`
   ${media.lessThan('large')`
     max-width: 800px;
   `}
+  h3 {
+    text-align: center;
+  }
   &__text {
     text-align: center;
     margin: 20px 0;
+    ${media.lessThan('small')`
+      font-size: 14px;
+    `}
   }
 `;
 

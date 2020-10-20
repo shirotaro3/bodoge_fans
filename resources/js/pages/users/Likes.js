@@ -11,7 +11,7 @@ const Likes = ({location}) => {
   const { page } = queryString.parse(location.search);
   const { likes, name: userName } = globalState.auth.user;
   const params = { page, id: likes };
-  const data = globalState.likedFacilityResults[location.search];
+  const data = globalState.likedFacilityResults[page || 1];
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -24,8 +24,8 @@ const Likes = ({location}) => {
             responseData.map(o => o.id) :
             [];
         dispatch({
-          type: 'SET_LIKED_FACILITY_RESULT',
-          queryString: location.search,
+          type: 'SET_USER_LIKES_RESULT',
+          page: page || 1,
           result: searchResult,
           paginate: paginate,
           data: responseData

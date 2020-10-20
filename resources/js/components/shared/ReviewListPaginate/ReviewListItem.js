@@ -1,17 +1,20 @@
 import React from 'react';
 import styled from 'styled-components';
+import media from 'styled-media-query';
 import axios from 'axios';
 import { BsFillTrashFill } from 'react-icons/bs';
-import { formatDate } from '../../../shared/utilities';
-import { IconRounded as Icon } from '../../../shared/Icons';
-import { useGlobalState } from '../../../global/ContextProvider';
+import { formatDate } from '../utilities';
+import { IconRounded as Icon } from '../Icons';
+import { useGlobalState } from '../../global/ContextProvider';
+import { Link } from '../Links';
 
-const ReviewBox = ({className, id, title, body, user, created_at: postedAt}) => {
+const ReviewBox = ({className, reviewId}) => {
   const [globalState, dispatch] = useGlobalState();
   const authUser = globalState.auth.user;
+  const review = globalState.reviews.data[reviewId];
   const deleteReview = async () => {
     try {
-      const response = await axios.delete(`/api/reviews/${id}`);
+      const response = await axios.delete(`/api/reviews/${reviewId}`);
       dispatch({type: 'DELETE_REVIEW', data: response.data});
       dispatch({type: 'MESSAGE', text: '削除しました。'});
     } catch (err) {
@@ -26,17 +29,20 @@ const ReviewBox = ({className, id, title, body, user, created_at: postedAt}) => 
     });
   };
   return (
-    <div className={className}>
+    <div className={`${className} fadein`}>
       <div className={`${className}__user`}>
-        <Icon iconUrl={user?.icon_url} size='30px' />
-        <div>{user.name}</div>
+        <Icon iconUrl={review.user.icon_url} size='30px' />
+        <div>{review.user.name}</div>
       </div>
-      <div className={`${className}__container`}>      
-        <span className={`${className}__title`}>{title}</span>
-        <span className={`${className}__body`}>{body}</span>
-        <span className={`${className}__date`}>{formatDate(postedAt)}に投稿されました</span>
+      <div className={`${className}__container`}>
+        <span className={`${className}__facilink`}>
+          <Link to={`/facilities/${review.facility_id}`}>「{review.facility.name}」のを利用しました♪</Link> 
+        </span>
+        <span className={`${className}__title`}>{review.title}</span>
+        <span className={`${className}__body`}>{review.body}</span>
+        <span className={`${className}__date`}>{formatDate(review.created_at)}に投稿</span>
         {
-          user.id === authUser.id &&
+          review.user.id === authUser.id &&
           <div role='button' onClick={handleClick} className={`${className}__delete`}>
             <BsFillTrashFill size='20px' />
           </div>
@@ -49,9 +55,11 @@ const ReviewBox = ({className, id, title, body, user, created_at: postedAt}) => 
 const StyledReviewBox = styled(ReviewBox).attrs(props => ({
   bgImage: props.iconUrl ? `url(${props.iconUrl})` : 'none'
 }))`
-  padding: 20px;
+  padding: 20px 0;
   display: flex;
   align-items: center;
+  text-align: left;
+  color: #333;
   &__user {
     display: flex;
     flex-direction: column;
@@ -64,10 +72,14 @@ const StyledReviewBox = styled(ReviewBox).attrs(props => ({
     flex: 1;
     flex-direction: column;
     background: #fff;
-    padding: 15px 20px;
+    padding: 35px 50px;
     border-radius: 15px;
     position: relative;
     margin-left: 20px;
+    box-shadow: 0 0.5em 1em -0.125em rgba(0,0,0, 0.1), 0 0px 0 1px rgba(0,0,0, 0.05);
+    ${media.lessThan('medium')`
+      padding: 15px 20px;
+    `}
     &::after {
       content: "";
       display: inline-block;
@@ -78,6 +90,16 @@ const StyledReviewBox = styled(ReviewBox).attrs(props => ({
       border-right: 12px solid #fff;
     }
   }
+  &__facilink {
+    font-size: 15px;
+    margin-bottom: 30px;
+    margin-left: -8px;
+    color: #777;
+    ${media.lessThan('medium')`
+      font-size: 11px;
+      margin-bottom: 15px;
+    `}
+  }
   &__title {
     font-weight: bold;
     margin-bottom: 7px;
@@ -86,11 +108,18 @@ const StyledReviewBox = styled(ReviewBox).attrs(props => ({
   &__body {
     white-space: pre-wrap;
     word-wrap: break-word;
+    margin-bottom: 25px;
+    ${media.lessThan('medium')`
+      margin-bottom: 15px;
+    `}
   }
   &__date {
     text-align: right;
-    font-size: 13px;
+    font-size: 15px;
     color: #777;
+    ${media.lessThan('medium')`
+      font-size: 11px;
+    `}
   }
   &__delete {
     position: absolute;

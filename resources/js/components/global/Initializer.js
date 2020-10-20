@@ -51,9 +51,11 @@ const Initializer = ({children}) => {
     // networkService初期化
     const onUnauthenticated = () => {
       dispatch({type: 'LOGOUT'});
+      window.scrollTo({top: 0, left: 0, behavior: 'smooth' });
       dispatch({type: 'MESSAGE', text: '時間が経過したため、ログアウトされました。'})
     };
     const onInternalServerError = () => {
+      window.scrollTo({top: 0, left: 0, behavior: 'smooth' });
       dispatch({type: 'ALERT', text: 'サーバーの処理に失敗しました。管理者までお問い合わせください。'});
     };
     const onRequest = () => {

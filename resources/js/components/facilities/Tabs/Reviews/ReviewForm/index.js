@@ -3,9 +3,6 @@ import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import Form from './Form';
 import { useGlobalState } from '../../../../global/ContextProvider';
-import smoothscroll from 'smoothscroll-polyfill';
-
-smoothscroll.polyfill();
 
 const ReviewForm = ({facilityId}) => {
   const { register, handleSubmit, watch, errors, control, reset } = useForm();

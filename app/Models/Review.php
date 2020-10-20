@@ -19,7 +19,7 @@ class Review extends Model
     ];
 
     public function facility() {
-        return $this->belongsTo('App\Models\Review');
+        return $this->belongsTo('App\Models\Facility');
     }
 
     public function user() {

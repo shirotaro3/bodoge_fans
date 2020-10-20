@@ -22,7 +22,7 @@ const Search = ({location}) => {
             responseData.map(o => o.id) :
             [];
         dispatch({
-          type: 'SET_SEARCH_RESULT',
+          type: 'SET_FACILITIES_SEARCH_RESULT',
           queryString: location.search,
           result: searchResult,
           paginate: paginate,

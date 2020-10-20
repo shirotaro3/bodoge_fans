@@ -3,7 +3,7 @@ import { fade } from '../shared/keyframes';
 
 const GlobalStyle = createGlobalStyle`
   body {
-    background: #ddd;
+    background: #ccc;
   }
   input:-webkit-autofill {
     /* オートコンプリートから入力時、色がつかないようにする */
