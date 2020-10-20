@@ -28,7 +28,7 @@ const Initializer = ({children}) => {
     const fetchPickupFacilities = async () => {
       // ピックアップデータのフェッチ
       try {
-        const response = await axios.get('/api/facilities');
+        const response = await axios.get('/api/facilities/pickup');
         dispatch({
           type: 'SET_FACILITY_PICKUP',
           data: response.data

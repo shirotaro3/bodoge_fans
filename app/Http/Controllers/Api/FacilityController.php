@@ -200,7 +200,17 @@ class FacilityController extends Controller
 
     public function random_pick() {
         Log::info('[API_FACILITIES_RANDOM_PICK_QUERY_START]');
-        $facilities = Facility::inRandomOrder()->take(5)->get();
+        $facilities = Facility::with(
+            'm_services',
+            'facility_time',
+            'likes',
+            'reviews.user',
+            'events',
+            'm_budget',
+            'm_prefecture',
+            'm_scale',
+            'm_facility_type'
+        )->inRandomOrder()->take(5)->get();
         Log::info('[API_FACILITIES_RANDOM_PICK_QUERY_SUCCESS]');
         return response()->json($facilities);
     }
