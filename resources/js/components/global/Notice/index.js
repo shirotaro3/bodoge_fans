@@ -31,8 +31,11 @@ const StyledNotice = styled(Notice)`
   top: 0;
   text-align: center;
   z-index: 10;
+  font-size: 13px;
+  font-weight: bold;
   ${media.lessThan('medium')`
     top: 45px;
+    font-size: 11px;
   `}
 `;
 

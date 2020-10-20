@@ -12,14 +12,11 @@ const Like = ({className, facilityId}) => {
 
   const like = async () => {
     try {
-      dispatch({type: 'API_CALL_START'});
       const response = await axios.post('/api/likes', { facility_id: facilityId });
-      dispatch({type: 'API_CALL_END'});
       dispatch({type: 'SET_LIKES', data: response.data});
       dispatch({type: 'MESSAGE', text: 'お気に入りが変更されました。'});
     } catch (err) {
       console.log(err);
-      dispatch({type: 'ALERT', text: 'エラーが発生しました。再度お試しください。'});
     }
   };
   // likeボタン

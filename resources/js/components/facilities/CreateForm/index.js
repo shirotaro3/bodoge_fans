@@ -33,7 +33,6 @@ const FacilityCreateEditForm = () => {
         submitData.append('m_service_ids[]', o.value)  // arrayデータを分割して入れ直す
       });
       try {
-        dispatch({type: 'API_CALL_START'});
         const response = await axios.post(
           '/api/facilities',
           submitData,
@@ -43,13 +42,10 @@ const FacilityCreateEditForm = () => {
             },
           }
         );
-        dispatch({type: 'API_CALL_END'});
         dispatch({type: 'SET_FACILITIES', data: [response.data]});
         dispatch({type: 'MESSAGE', text: '登録しました。'});
         dispatch({type: 'REDIRECT', to: `/facilities/${response.data.id}`});
       } catch (err) {
-        dispatch({type: 'API_CALL_END'});
-        dispatch({type: 'ALERT', text: '処理に失敗しました。再度お試しください。'});
       }
   });
   return (

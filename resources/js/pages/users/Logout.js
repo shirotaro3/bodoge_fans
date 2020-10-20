@@ -8,17 +8,12 @@ const UsersLogout = () => {
   useEffect(() => {
     async function callApi() {
       try {
-        dispatch({type: 'API_CALL_START'});
         const response = await axios.post('/api/users/logout');
-        dispatch({type: 'API_CALL_END'});
         dispatch({type: 'LOGOUT'});
         dispatch({type: 'MESSAGE', text: 'ログアウトしました。'});
         dispatch({type: 'REDIRECT', to: '/'});
-      } catch(err) {
-        console.log(err);
-        dispatch({type: 'API_CALL_END'});
+      } catch (err) {
         dispatch({type: 'REDIRECT', to: '/'});
-        dispatch({type: 'ALERT', text: 'エラーが発生しました。'});
       }
     }
     callApi();

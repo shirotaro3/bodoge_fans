@@ -11,16 +11,12 @@ const UserRegistrationForm = () => {
   // Submit時の処理
   const onSubmit = handleSubmit(async (data) => {
       try {
-        dispatch({type: 'API_CALL_START'});
         const response = await axios.post('/api/users/registration', data);
         // 登録成功時
-        dispatch({type: 'API_CALL_END'});
         dispatch({type: 'LOGIN', data: response.data});
         dispatch({type: 'MESSAGE', text: `登録が完了しました。ようこそ、${response.data.name}さん！`});
         dispatch({type: 'REDIRECT', to: '/users/dashboard'});
       } catch (err) {
-        dispatch({type: 'API_CALL_END'});
-        dispatch({type: 'ALERT', text: '処理に失敗しました。再度お試しください。'});
       }
   });
   return (

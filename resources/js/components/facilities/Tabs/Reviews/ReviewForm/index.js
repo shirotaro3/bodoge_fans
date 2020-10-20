@@ -19,16 +19,12 @@ const ReviewForm = ({facilityId}) => {
           ...data,
           facility_id: facilityId
         }
-        dispatch({type: 'API_CALL_START'});
         const response = await axios.post(`/api/reviews`,submitData);
         reset();
-        dispatch({type: 'API_CALL_END'});
         dispatch({type: 'SET_REVIEW', data: response.data});
         window.scrollTo({top: 0, left: 0, behavior: 'smooth' });
         dispatch({type: 'MESSAGE', text: 'レビューを投稿しました。'});
       } catch (err) {
-        dispatch({type: 'API_CALL_END'});
-        dispatch({type: 'ALERT', text: '処理に失敗しました。再度お試しください。'});
       }
     }
     const modalText = <div>

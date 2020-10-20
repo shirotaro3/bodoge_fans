@@ -37,8 +37,12 @@ const StyledHeader = styled(Header)`
     height: 125px;
     padding: 10px 0;
   `}
+  ${media.lessThan('small')`
+    height: 120px;
+    padding: 10px 0;
+  `}
   ${media.lessThan('321px')`
-    height: 138px;
+    height: 135px;
   `}
   &__flex {
     display: flex;

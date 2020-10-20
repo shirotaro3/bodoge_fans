@@ -89,7 +89,11 @@ class FacilityController extends Controller
             'reviews.user',
             'likes'
             ])->find($id);
-
+        if (!$facility) {
+            Log::info('[API_FACILITIES_SHOW_GET_FAILURE]');
+            abort(404, 'Not found');
+        }
+        
         Log::info('[API_FACILITIES_SHOW_GET_SUCCESS]');
         return response()->json($facility);
     }
@@ -102,12 +106,12 @@ class FacilityController extends Controller
         $facility = DB::transaction(function () use ($request, $id) {
             $facility = Facility::find($id);
             if (!$facility) {
-                abort(400, 'Invalid param');
                 Log::info('[API_FACILITIES_UPDATE_FAILURE]');
+                abort(400, 'Invalid param');
             }
             if ($facility->user_id !== Auth::user()->id) {
-                abort(403, 'Forbidden');
                 Log::info('[API_FACILITIES_UPDATE_FAILURE]');
+                abort(403, 'Forbidden');
             }
             $services = $request->input('m_service_ids');
             if ($services) {

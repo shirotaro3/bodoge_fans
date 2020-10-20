@@ -11,15 +11,10 @@ const ReviewBox = ({className, id, title, body, user, created_at: postedAt}) => 
   const authUser = globalState.auth.user;
   const deleteReview = async () => {
     try {
-      dispatch({type: 'API_CALL_START'});
       const response = await axios.delete(`/api/reviews/${id}`);
-      dispatch({type: 'API_CALL_END'});
       dispatch({type: 'DELETE_REVIEW', data: response.data});
       dispatch({type: 'MESSAGE', text: '削除しました。'});
     } catch (err) {
-      console.log(err);
-      dispatch({type: 'API_CALL_END'});
-      dispatch({type: 'ALERT', text: '処理に失敗しました。'});
     }
   };
   const handleClick = () => {
