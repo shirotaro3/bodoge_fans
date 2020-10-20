@@ -13,7 +13,7 @@ const Search = ({location}) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('/api/facilities/search', { params: params });
+        const response = await axios.get('/api/facilities/search', { params });
         const { current_page, last_page, per_page, total, data: responseData } = response.data;
         const paginate = { current_page, last_page, per_page, total };
         // 検索結果としてfacilityIDの配列を作成

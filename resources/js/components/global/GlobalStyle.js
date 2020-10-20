@@ -16,6 +16,9 @@ const GlobalStyle = createGlobalStyle`
   .fadein {
     animation: ${fade} .7s 1;
   }
+  .text-center {
+    text-align: center;
+  }
   /* override */
   .react-datepicker__input-container input {
     height: 40px;

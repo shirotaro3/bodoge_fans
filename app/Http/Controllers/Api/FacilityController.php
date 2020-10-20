@@ -28,7 +28,7 @@ class FacilityController extends Controller
             'events',
             'reviews.user',
             'likes'
-            ])->get();
+            ])->paginate(5);
 
         Log::info('[API_FACILITIES_INDEX_QUERY_SUCCESS]');
         return response()->json($facilities);
@@ -163,6 +163,8 @@ class FacilityController extends Controller
         $m_budget_id = $request->query('m_budget_id');
         $m_scale_id = $request->query('m_scale_id');
         $m_prefecture_id = $request->query('m_prefecture_id');
+        // 検索では使用しないがIDの配列からデータを取得するために使用する
+        $id = $request->query('id');
         
         $query = Facility::query();
         // 検索条件を追加していく
@@ -180,6 +182,9 @@ class FacilityController extends Controller
         }
         if ($m_facility_type_id) {
             $query->where('m_facility_type_id', $m_facility_type_id);
+        }
+        if ($id) {
+            $query->whereIn('id', $id);
         }
         // データを取得
         $facilities = $query->with(

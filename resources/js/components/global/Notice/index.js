@@ -37,6 +37,10 @@ const StyledNotice = styled(Notice)`
     top: 45px;
     font-size: 11px;
   `}
+  ${media.lessThan('medium')`
+    top: 40px;
+    font-size: 11px;
+  `}
 `;
 
 export default StyledNotice;

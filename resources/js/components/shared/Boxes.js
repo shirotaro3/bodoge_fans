@@ -20,3 +20,12 @@ export const BoxRoundedBlack = styled.div`
     max-width: 95%;
   `}
 `;
+
+export const BoxRoundedNegative = styled.div`
+  margin: 30px 10px;
+  padding: 20px;
+  background: #888;
+  text-align: center;
+  border-radius: 10px;
+  color: #ddd;
+`;

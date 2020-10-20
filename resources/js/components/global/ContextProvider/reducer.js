@@ -203,7 +203,8 @@ const reducer = (state = {}, action) => {
             ...state.auth.user,
             likes: action.data.map(o=>o.facility_id),
           }
-        }
+        },
+        likedFacilityResults: {}
       }
 
     // facilityTimes
@@ -240,22 +241,44 @@ const reducer = (state = {}, action) => {
       }
     
     case 'SET_SEARCH_RESULT':
-      const context = {
-        ...state,
-        facilities: {
-          ...state.facilities,
-          data: {
-            ...state.facilities.data,
-            ..._.keyBy(action.data, 'id')
+      {
+        const context = {
+          ...state,
+          facilities: {
+            ...state.facilities,
+            data: {
+              ...state.facilities.data,
+              ..._.keyBy(action.data, 'id')
+            }
           }
-        }
-      };
-      const propertyName = action.queryString;
-      context.searchResults[propertyName] = {
-        result: action.result,
-        paginate: action.paginate
-      };
-      return context;
+        };
+        const propertyName = action.queryString;
+        context.searchResults[propertyName] = {
+          result: action.result,
+          paginate: action.paginate
+        };
+        return context;
+      }
+
+    case 'SET_LIKED_FACILITY_RESULT':
+      {
+        const context = {
+          ...state,
+          facilities: {
+            ...state.facilities,
+            data: {
+              ...state.facilities.data,
+              ..._.keyBy(action.data, 'id')
+            }
+          }
+        };
+        const propertyName = action.queryString;
+        context.likedFacilityResults[propertyName] = {
+          result: action.result,
+          paginate: action.paginate
+        };
+        return context;
+      }
   }
 };
 
