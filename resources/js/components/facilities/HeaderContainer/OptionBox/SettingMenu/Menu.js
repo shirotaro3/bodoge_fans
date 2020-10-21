@@ -18,7 +18,7 @@ const Menu = ({className, facilityId}) => {
   };
   const deleteFacility = async () => {
     try {
-      const response = await axios.delete('/api/facilities/delete', { id: facilityId });
+      const response = await axios.delete(`/api/facilities/${facilityId}`);
       dispatch({type: 'DELETE_FACILITY', id: facilityId});
       dispatch({type: 'MESSAGE', text: '削除しました。'});
       dispatch({type: 'REDIRECT', to: '/users/dashboard' });

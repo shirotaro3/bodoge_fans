@@ -36,8 +36,6 @@ Route::prefix('facilities')->group(function () {
 // reviews
 Route::prefix('reviews')->group(function () {
     Route::get('/', 'App\Http\Controllers\Api\ReviewController@index');
-    Route::post('/', 'App\Http\Controllers\Api\ReviewController@store');
-    Route::delete('/{id}', 'App\Http\Controllers\Api\ReviewController@destroy');
 });
 
 // require auth
@@ -48,6 +46,12 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/', 'App\Http\Controllers\Api\FacilityController@store');
         Route::put('/{id}', 'App\Http\Controllers\Api\FacilityController@update');
         Route::delete('/{id}', 'App\Http\Controllers\Api\FacilityController@destroy');
+    });
+
+    // auth|reviews
+    Route::prefix('reviews')->group(function () {
+        Route::post('/', 'App\Http\Controllers\Api\ReviewController@store');
+        Route::delete('/{id}', 'App\Http\Controllers\Api\ReviewController@destroy');
     });
 
     // auth|facility_times

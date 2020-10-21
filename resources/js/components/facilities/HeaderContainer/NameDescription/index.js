@@ -82,7 +82,9 @@ const StyledND = styled(NameDescription).attrs(props => {
   ${
     props => props.isMine &&
       media.lessThan('medium')`
-        background: rgba(255,255,255,.1);
+        &__container {
+          background: rgba(255,255,255,.1);
+        }
         &__edit {
           opacity: .6;
         }

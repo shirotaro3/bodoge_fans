@@ -156,8 +156,12 @@ class FacilityController extends Controller
 
         $facility = Facility::find($id);
         if ($facility->user_id !== Auth::user()->id) {
-            abort(403, 'Forbidden');
             Log::info('[API_FACILITIES_DESTROY_DELETE_FAILURE]');
+            abort(403, 'Forbidden');
+        }
+        if (!$facility) {
+            Log::info('[API_FACILITIES_DESTROY_DELETE_FAILURE]');
+            abort(400, 'Invalid param');
         }
         $facility->delete();
 
