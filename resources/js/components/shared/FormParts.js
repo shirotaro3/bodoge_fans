@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import AutosizeTextarea from 'react-autosize-textarea';
 import ReactSelect from 'react-select';
 import DatePicker from 'react-datepicker';
+import { truncate } from 'lodash';
 
 const createObjectURL = (window.URL || window.webkitURL).createObjectURL || window.createObjectURL;
 
@@ -210,7 +211,11 @@ export const Select = (props) => {
     })
   }
   return (
-    <ReactSelect {...props} styles={customStyles} />
+    <ReactSelect {...props}
+      autoComplete='off'
+      onFocus={e => e.target.readOnly = true}
+      styles={customStyles}
+    />
   );
 };
 
@@ -254,8 +259,8 @@ export const Progress = styled(ProgressBase)`
 export const TimePicker = props => {
   return (
     <DatePicker
-      disabledKeyboardNavigation
-      autoComplete={false}
+      onFocus={e => e.target.readOnly = true}
+      autoComplete='off'
       showTimeSelect
       showTimeSelectOnly
       timeIntervals={15}

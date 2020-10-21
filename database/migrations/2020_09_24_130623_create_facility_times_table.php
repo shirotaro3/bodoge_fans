@@ -15,7 +15,7 @@ class CreateFacilityTimesTable extends Migration
     {
         Schema::create('facility_times', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('facility_id')->unique()->constrained();
+            $table->foreignId('facility_id')->unique()->constrained()->onDelete('cascade');
             $table->time('mon_start', 0)->nullable();
             $table->time('mon_end', 0)->nullable();
             $table->time('tue_start', 0)->nullable();

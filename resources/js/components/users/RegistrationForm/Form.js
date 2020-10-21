@@ -72,7 +72,8 @@ const Components = ({register, watch, errors, onSubmit, control}) => {
           render={({ onChange, value, name }) => (
             <DatePicker
               onChange={date => onChange(date)}
-              disabledKeyboardNavigation
+              autoComplete='off'
+              onFocus={e => e.target.readOnly = true}
               name={name}
               selected={value}
               autoComplete='off'
@@ -96,7 +97,7 @@ const Components = ({register, watch, errors, onSubmit, control}) => {
             required: '必須項目です。',
             maxLength: { value: 16, message: '「パスワード」は16文字以内で入力してください。' },
             minLength: { value: 8, message: '「パスワード」は8文字以上で入力してください。' },
-            pattern: { value: /^[a-zA-Z0-9!#$%&()*+,.:;=?@\[\]^_{}-]+$/, message: '半角英数字と「@」「&」「!」の記号のみ使用できます。' }
+            pattern: { value: /^[a-zA-Z0-9!#$&]+$/, message: '半角英数字と「!#$&」の記号のみ使用できます。' }
           })}
         />
         {errors.password && <span>{errors.password.message}</span>}
@@ -104,9 +105,12 @@ const Components = ({register, watch, errors, onSubmit, control}) => {
         <label>パスワード（確認）:</label>
         <Input name='password_confirmation'
           type='password'
-          ref={register({ required: '必須項目です。' })}
+          ref={register({
+            required: '必須項目です。',
+            validate: value => value === watch('password')
+          })}
         />
-        {errors.password_confirmation && <span>{errors.password_confirmation.message}</span>}
+        {errors.password_confirmation && <span>{errors.password_confirmation.message || 'パスワードが一致しません。'}</span>}
         
         <Button type="submit">登録</Button>
       </Form>

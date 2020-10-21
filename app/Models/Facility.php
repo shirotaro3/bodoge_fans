@@ -60,9 +60,6 @@ class Facility extends Model
     public function events() {
         return $this->hasMany('App\Models\Event');
     }
-    public function stories() {
-        return $this->hasMany('App\Models\Story');
-    }
     
 
     // アクセサ

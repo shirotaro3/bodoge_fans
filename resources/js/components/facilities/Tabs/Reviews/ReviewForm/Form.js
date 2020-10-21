@@ -9,18 +9,18 @@ const Component = ({register, watch, errors, onSubmit}) => {
       <Input name='title'
         ref={register({
           required: '「タイトル」を入力してください。',
-          maxLength: { value: 15, message: '「タイトル」は15文字以内で入力してください。' }
+          maxLength: { value: 20, message: '「タイトル」は20文字以内で入力してください。' }
         })}
       />
       {errors.title && <span>{errors.title.message}</span>}
 
-      <label>本文（500文字以内）</label>
+      <label>本文（250文字以内）</label>
       <Textarea name='body'
         rows={5}
         maxRows={10}
         ref={register({
           required: '「本文」を入力してください。',
-          maxLength: { value: 500, message: '「本文」は500文字以内で入力してください。' },
+          maxLength: { value: 250, message: '「本文」は250文字以内で入力してください。' },
           minLength: { value: 10, message: '「本文」は10文字以上お書きください。' }
         })}
       />

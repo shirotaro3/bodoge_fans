@@ -187,8 +187,10 @@ const StyledTimeTable = styled(TimeTable).attrs(props => {
   ${
     props => props.isMine &&
       media.lessThan('medium')`
-        background: rgba(255,255,255,.1);
-        width: 100%;
+        &__ul {
+          background: rgba(255,255,255,.1);
+          width: 100%;
+        }
         &__edit {
           opacity: .8;
         }
