@@ -21,7 +21,7 @@ const HeaderContainer = ({className, facilityId}) => {
 };
 
 const StyledHeaderContainer = styled(HeaderContainer).attrs(props => ({
-  imgUrl: props.imgUrl ? `url(${props.imgUrl})` : '#555'
+  imgUrl: props.imgUrl ? `url(${props.imgUrl})` : 'url(/img/boardgames.jpg)'
 }))`
   width: 100%;
   min-height: 400px;

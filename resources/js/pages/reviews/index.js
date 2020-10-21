@@ -14,7 +14,6 @@ const Reviews = ({location}) => {
     const fetchData = async () => {
       try {
         const response = await axios.get('/api/reviews', { params: { page } });
-        console.log(response.data);
         const { current_page, last_page, per_page, total, data: responseData } = response.data;
         const paginate = { current_page, last_page, per_page, total };
         // 検索結果としてreviewIDの配列を作成

@@ -4,7 +4,7 @@ import media from 'styled-media-query';
 import axios from 'axios';
 import { BsFillTrashFill } from 'react-icons/bs';
 import { formatDate } from './utilities';
-import { IconRounded as Icon } from './Icons';
+import Icon from './UserIcon';
 import { useGlobalState } from '../global/ContextProvider';
 
 const ReviewBox = ({className, id, title, body, user, created_at: postedAt}) => {
@@ -47,9 +47,7 @@ const ReviewBox = ({className, id, title, body, user, created_at: postedAt}) => 
   );
 };
 
-const StyledReviewBox = styled(ReviewBox).attrs(props => ({
-  bgImage: props.iconUrl ? `url(${props.iconUrl})` : 'none'
-}))`
+const StyledReviewBox = styled(ReviewBox)`
   padding: 20px 0;
   display: flex;
   align-items: center;

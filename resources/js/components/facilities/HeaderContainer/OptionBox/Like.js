@@ -6,7 +6,6 @@ import { useGlobalState } from '../../../../components/global/ContextProvider';
 
 const Like = ({className, facilityId}) => {
   const [globalState, dispatch] = useGlobalState();
-  const facility = globalState.facilities.data[facilityId];
   const { likes } = globalState.auth.user;
   // const likesCount = facility.likes.length;
 

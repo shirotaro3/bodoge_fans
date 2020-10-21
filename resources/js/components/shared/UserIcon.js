@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-export const IconRounded = styled.div.attrs(props => ({
-  bgImage: `url(${props.iconUrl})` || 'url(/img/user/icon.png)',
+const UserIcon = styled.div.attrs(props => ({
+  bgImage: props.iconUrl ? `url(${props.iconUrl})` : 'url(/img/usericon.jpeg)',
   size: props.size || '40px',
 }))`
   height: ${props => props.size};
@@ -11,3 +11,5 @@ export const IconRounded = styled.div.attrs(props => ({
   background-size: cover;
   border-radius: 50%;
 `;
+
+export default UserIcon;

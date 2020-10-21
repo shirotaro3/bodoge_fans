@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useGlobalState } from '../../../../components/global/ContextProvider';
 import SettingMenu from './SettingMenu';
 import Like from './Like';
+import EditImage from './EditImage';
 
 const OptionBox = ({className, facilityId}) => {
   const [globalState, dispatch] = useGlobalState();
@@ -10,6 +11,7 @@ const OptionBox = ({className, facilityId}) => {
     return (
       <div className={className}>
         <Like facilityId={facilityId} />
+        <EditImage facilityId={facilityId} />
         <SettingMenu facilityId={facilityId} />
       </div>
     )

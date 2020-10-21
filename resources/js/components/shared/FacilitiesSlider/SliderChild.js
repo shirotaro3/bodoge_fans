@@ -16,7 +16,7 @@ const SliderChild = ({className, title, body, linkPath, imgUrl}) => {
 };
 
 const StyledSliderChild = styled(SliderChild).attrs(props => ({
-  imgUrl: props.imgUrl ? `url(${props.imgUrl})` :'none'
+  imgUrl: props.imgUrl ? `url(${props.imgUrl})` : 'url(/img/boardgames.jpg)'
 }))`
   ${divLink}
   height: 250px;

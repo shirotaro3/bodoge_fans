@@ -111,7 +111,7 @@ const reducer = (state = {}, action) => {
           modal: true
         },
         modalConfig: {
-          // デフォルトはCONFIRM
+          // CONFIRM, IMAGE_UPLOADが利用可能
           type: action.modalType || 'CONFIRM',
           title: action.title || '',
           body: action.body || '',

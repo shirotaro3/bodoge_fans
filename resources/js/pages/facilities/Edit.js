@@ -1,10 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import FacilitiesEditForm from '../../components/facilities/EditForm';
 import { useGlobalState } from '../../components/global/ContextProvider';
+import NotFound from '../404';
 
 const FacilitiesEdit = ({match}) => {
   const [globalState, dispatch] = useGlobalState();
+  const [isNotFound, setIsNotFound] = useState(false);
   const facilityId = match.params.id;
   const facility = globalState.facilities.data[facilityId];
   const mastersResolved = globalState.masters.resolved;
@@ -16,6 +18,7 @@ const FacilitiesEdit = ({match}) => {
         const response = await axios.get(`/api/facilities/${facilityId}`);
         dispatch({ type: 'SET_FACILITIES', data: [response.data]});
       } catch (err) {
+        setIsNotFound(true);
       }
     };
 
@@ -28,6 +31,10 @@ const FacilitiesEdit = ({match}) => {
       dispatch({type: 'MESSAGE', text: 'アクセス権限がありません。'});
     }
   }, [facilityId]);
+
+  if (isNotFound) {
+    return <NotFound />
+  };
 
   if (facility && mastersResolved) {
     // facilityデータとマスタデータがあるとき

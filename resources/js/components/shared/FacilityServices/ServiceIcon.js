@@ -7,7 +7,8 @@ const ServiceIcon = ({className, text}) => {
     <div className={className}>
       <div className={`${className}__icon`}>
       </div>
-      <span>{text}</span>
+      <span className={`${className}__text`}>{text}</span>
+      <div className={`${className}__window`}>{text}</div>
     </div>
   );
 };
@@ -22,6 +23,9 @@ const StyledServiceIcon = styled(ServiceIcon).attrs(props => ({
   position: relative;
   margin: 0 2px;
   padding-bottom: 18px;
+  &:hover &__window {
+    display: block;
+  }
   ${media.lessThan('medium')`
     padding-bottom: 20px;
   `}
@@ -50,7 +54,7 @@ const StyledServiceIcon = styled(ServiceIcon).attrs(props => ({
       border: 1px solid ${props=>props.bgColor};
     `}
   }
-  span {
+  &__text {
     position: absolute;
     top: 42px;
     display: inline-block;
@@ -64,6 +68,21 @@ const StyledServiceIcon = styled(ServiceIcon).attrs(props => ({
     `}
     ${media.lessThan('small')`
     display: none;
+    `}
+  }
+  &__window {
+    position: absolute;
+    background: #fff;
+    display: none;
+    width: 100%;
+    font-size: 14px;
+    padding: 4px;
+    border-radius: 4px;
+    text-align: center;
+    ${media.lessThan('small')`
+      width: 50px;
+      font-size: 12px;
+      left: -8px;
     `}
   }
 `;
