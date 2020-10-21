@@ -22,9 +22,6 @@ class Post extends Model
     public function event() {
         return $this->hasOne('App\Models\Event');
     }
-    public function story() {
-        return $this->hasOne('App\Models\Story');
-    }
     
     // hasMany
     public function likes() {

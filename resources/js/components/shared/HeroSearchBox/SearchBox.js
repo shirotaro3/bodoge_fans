@@ -34,7 +34,7 @@ const SearchBox = ({className, defaultParams}) => {
     <div className={className}>
       <div className={`${className}__heading`}>
         <BiSearchAlt size='30px' />
-        <h2>お店を探す</h2>
+        <h2>ボードゲームが遊べるお店を探す</h2>
       </div>
       <Form onSubmit={onSubmit}>
         <label>名前で探す</label>

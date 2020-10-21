@@ -15,7 +15,7 @@ class CreateEventsTable extends Migration
     {
         Schema::create('events', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('facility_id')->constrained();
+            $table->foreignId('facility_id')->constrained()->onDelete('cascade');
             $table->foreignId('post_id')->constrained();
             $table->foreignId('m_scale_id')->constrained();
             $table->foreignId('m_budget_id')->constrained();

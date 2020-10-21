@@ -4,10 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\CreateReviewRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\DB;
 use App\Models\Review;
 
 class ReviewController extends Controller
@@ -23,7 +22,7 @@ class ReviewController extends Controller
         return response()->json($reviews);
     }
 
-    public function store (Request $request) {
+    public function store (CreateReviewRequest $request) {
         Log::info('[API_REVIEWS_STORE_POST_START]');
         $review = new Review;
         $review->fill($request->all());

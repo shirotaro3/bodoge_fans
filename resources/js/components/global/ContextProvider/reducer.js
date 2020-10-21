@@ -192,7 +192,13 @@ const reducer = (state = {}, action) => {
         },
         myFacilitiesResults: {}
       }
-    
+    case 'DELETE_FACILITY': {
+        delete state.facilities.data[action.id];
+        return {
+          ...state,
+          myFacilitiesResults: {}
+        };
+      }
     // likes
     // data: array
     case 'SET_LIKES':
@@ -212,44 +218,43 @@ const reducer = (state = {}, action) => {
     case 'SET_FACILITY_TIME':
       {
         const facilityId = action.data.facility_id;
-        const context = {...state};
-        context.facilities.data[facilityId].facility_time = action.data;
-        return context;
+        state.facilities.data[facilityId].facility_time = action.data;
+        return state;
       }
 
     // reviews
     case 'SET_REVIEW':
       {
         const facilityId = action.data.facility_id;
-        const context = {
+        const newState = {
           ...state,
           reviewsIndexResults: {}
         };
-        context.facilities.data[facilityId].reviews.push(
+        newState.facilities.data[facilityId].reviews.push(
           {
             ...action.data
           });
-        return context;
+        return newState;
       }
 
     case 'DELETE_REVIEW':
       {
         const facilityId = action.data.facility_id;
         const id = action.data.id;
-        const context = {
+        const newState = {
           ...state,
           reviewsIndexResults: {}
         };
-        context.facilities.data[facilityId].reviews =
-          context.facilities.data[facilityId].reviews.filter((o) => {
+        newState.facilities.data[facilityId].reviews =
+          newState.facilities.data[facilityId].reviews.filter((o) => {
             return o.id !== id;
         });
-        return context;
+        return newState;
       }
     
     case 'SET_FACILITIES_SEARCH_RESULT':
       {
-        const context = {
+        const newState = {
           ...state,
           facilities: {
             ...state.facilities,
@@ -260,16 +265,16 @@ const reducer = (state = {}, action) => {
           }
         };
         const propertyName = action.queryString;
-        context.searchResults[propertyName] = {
+        newState.searchResults[propertyName] = {
           result: action.result,
           paginate: action.paginate
         };
-        return context;
+        return newState;
       }
 
     case 'SET_USER_LIKES_RESULT':
       {
-        const context = {
+        const newState = {
           ...state,
           facilities: {
             ...state.facilities,
@@ -280,16 +285,16 @@ const reducer = (state = {}, action) => {
           }
         };
         const propertyName = action.page;
-        context.likedFacilityResults[propertyName] = {
+        newState.likedFacilityResults[propertyName] = {
           result: action.result,
           paginate: action.paginate
         };
-        return context;
+        return newState;
       }
   
     case 'SET_REVIEWS_INDEX_RESULT':
       {
-        const context = {
+        const newState = {
           ...state,
           reviews: {
             ...state.reviews,
@@ -300,16 +305,16 @@ const reducer = (state = {}, action) => {
           }
         };
         const propertyName = action.page;
-        context.reviewsIndexResults[propertyName] = {
+        newState.reviewsIndexResults[propertyName] = {
           result: action.result,
           paginate: action.paginate
         };
-        return context;
+        return newState;
       }
     
     case 'SET_MY_FACILITIES_RESULTS':
       {
-        const context = {
+        const newState = {
           ...state,
           facilities: {
             ...state.facilities,
@@ -320,11 +325,11 @@ const reducer = (state = {}, action) => {
           }
         };
         const propertyName = action.page;
-        context.myFacilitiesResults[propertyName] = {
+        newState.myFacilitiesResults[propertyName] = {
           result: action.result,
           paginate: action.paginate
         };
-        return context;
+        return newState;
       }
   }
 };
