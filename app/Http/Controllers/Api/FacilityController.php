@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use App\Models\Facility;
+use App\Http\Requests\CreateFacilityRequest;
+use App\Http\Requests\UpdateFacilityRequest;
 
 class FacilityController extends Controller
 {   
@@ -35,7 +37,7 @@ class FacilityController extends Controller
 
     // store
 
-    public function store(Request $request) {
+    public function store(CreateFacilityRequest $request) {
         Log::info('[API_FACILITIES_STORE_POST_START]');
 
         $facility = DB::transaction(function () use ($request) {
@@ -99,7 +101,7 @@ class FacilityController extends Controller
 
     // update
 
-    public function update(Request $request, $id) {
+    public function update(UpdateFacilityRequest $request, $id) {
         Log::info('[API_FACILITIES_UPDATE_START]');
 
         $facility = DB::transaction(function () use ($request, $id) {

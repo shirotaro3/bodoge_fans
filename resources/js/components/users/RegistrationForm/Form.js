@@ -72,7 +72,8 @@ const Components = ({register, watch, errors, onSubmit, control}) => {
           render={({ onChange, value, name }) => (
             <DatePicker
               onChange={date => onChange(date)}
-              disabledKeyboardNavigation
+              autoComplete='off'
+              onFocus={e => e.target.readOnly = true}
               name={name}
               selected={value}
               autoComplete='off'
@@ -96,7 +97,7 @@ const Components = ({register, watch, errors, onSubmit, control}) => {
             required: '必須項目です。',
             maxLength: { value: 16, message: '「パスワード」は16文字以内で入力してください。' },
             minLength: { value: 8, message: '「パスワード」は8文字以上で入力してください。' },
-            pattern: { value: /^[a-zA-Z0-9!#$%&()*+,.:;=?@\[\]^_{}-]+$/, message: '半角英数字と「@」「&」「!」の記号のみ使用できます。' }
+            pattern: { value: /^[a-zA-Z0-9!#$&]+$/, message: '半角英数字と「!#$&」の記号のみ使用できます。' }
           })}
         />
         {errors.password && <span>{errors.password.message}</span>}
