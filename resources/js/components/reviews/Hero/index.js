@@ -9,7 +9,7 @@ const Hero = ({className}) => {
       <div className={`${className}__innerbox`}>
         <div className={`${className}__heading`}>
           <BsChatDots size='30px' />
-          <h1>みんなのクチコミ</h1>
+          <h1>新着のクチコミ</h1>
         </div>
       </div>
     </div>

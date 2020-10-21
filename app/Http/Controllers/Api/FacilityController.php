@@ -17,7 +17,6 @@ class FacilityController extends Controller
     public function index() {
         Log::info('[API_FACILITIES_INDEX_QUERY_START]');
 
-        // APIを叩く回数を減らすため、できる限りまとめてデータを渡す
         $facilities = Facility::with([
             'm_prefecture',
             'm_scale',

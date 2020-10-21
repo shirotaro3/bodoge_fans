@@ -254,6 +254,8 @@ export const Progress = styled(ProgressBase)`
 export const TimePicker = props => {
   return (
     <DatePicker
+      disabledKeyboardNavigation
+      autoComplete={false}
       showTimeSelect
       showTimeSelectOnly
       timeIntervals={15}

@@ -189,7 +189,8 @@ const reducer = (state = {}, action) => {
             ...state.facilities.data,
             ..._.keyBy(action.data, 'id')
           }
-        }
+        },
+        myFacilitiesResults: {}
       }
     
     // likes
@@ -255,7 +256,7 @@ const reducer = (state = {}, action) => {
             data: {
               ...state.facilities.data,
               ..._.keyBy(action.data, 'id')
-            }
+            },
           }
         };
         const propertyName = action.queryString;
@@ -300,6 +301,26 @@ const reducer = (state = {}, action) => {
         };
         const propertyName = action.page;
         context.reviewsIndexResults[propertyName] = {
+          result: action.result,
+          paginate: action.paginate
+        };
+        return context;
+      }
+    
+    case 'SET_MY_FACILITIES_RESULTS':
+      {
+        const context = {
+          ...state,
+          facilities: {
+            ...state.facilities,
+            data: {
+              ...state.facilities.data,
+              ..._.keyBy(action.data, 'id')
+            }
+          }
+        };
+        const propertyName = action.page;
+        context.myFacilitiesResults[propertyName] = {
           result: action.result,
           paginate: action.paginate
         };

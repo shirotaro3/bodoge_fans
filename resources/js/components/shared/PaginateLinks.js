@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { HashLink } from 'react-router-hash-link';
 import queryString from 'query-string';
 
-const Paginate = ({className, paginate, params, path}) => {
+const Paginate = ({className, paginate, params = {}, path}) => {
   const {
     current_page: currentPage,
     last_page: lastPage,

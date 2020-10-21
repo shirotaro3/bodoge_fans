@@ -6,7 +6,7 @@ import { BsFillTrashFill } from 'react-icons/bs';
 import { formatDate } from './utilities';
 import Icon from './UserIcon';
 import { useGlobalState } from '../global/ContextProvider';
-
+// ReviewListPaginateに統合予定　こちらは削除
 const ReviewBox = ({className, id, title, body, user, created_at: postedAt}) => {
   const [globalState, dispatch] = useGlobalState();
   const authUser = globalState.auth.user;

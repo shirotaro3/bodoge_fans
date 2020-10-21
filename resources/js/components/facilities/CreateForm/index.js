@@ -44,7 +44,7 @@ const FacilityCreateEditForm = () => {
         );
         dispatch({type: 'SET_FACILITIES', data: [response.data]});
         dispatch({type: 'MESSAGE', text: '登録しました。'});
-        dispatch({type: 'REDIRECT', to: `/facilities/${response.data.id}`});
+        dispatch({type: 'REDIRECT', to: '/users/dashboard/owner'});
       } catch (err) {
       }
   });

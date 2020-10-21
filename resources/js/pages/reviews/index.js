@@ -17,10 +17,7 @@ const Reviews = ({location}) => {
         const { current_page, last_page, per_page, total, data: responseData } = response.data;
         const paginate = { current_page, last_page, per_page, total };
         // 検索結果としてreviewIDの配列を作成
-        const searchResult =
-          responseData.length > 0 ?
-            responseData.map(o => o.id) :
-            [];
+        const searchResult = responseData.map(o => o.id);
         dispatch({
           type: 'SET_REVIEWS_INDEX_RESULT',
           page: page || 1,
