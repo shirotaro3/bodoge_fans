@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import media from 'styled-media-query';
-import { IconRounded as Icon } from '../Icons';
+import Icon from '../UserIcon';
 
 const ReviewListPlaceholder = () => {
   const items = [];
@@ -29,9 +29,7 @@ const ReviewListItemBase = ({className}) => {
   );
 };
 
-const ReviewListItem = styled(ReviewListItemBase).attrs(props => ({
-  bgImage: props.iconUrl ? `url(${props.iconUrl})` : 'none'
-}))`
+const ReviewListItem = styled(ReviewListItemBase)`
   padding: 20px 0;
   display: flex;
   align-items: center;

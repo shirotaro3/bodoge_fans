@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Facility extends Model
 {
@@ -17,8 +18,10 @@ class Facility extends Model
     protected $fillable = [
         'm_facility_type_id', 'm_budget_id', 'm_scale_id', 'name', 'description',
         'introduction', 'm_prefecture_id', 'address', 'building',
-        'hp_url', 'facebook', 'twitter', 'line', 'instagram', 'phone_number', 'header_image_url'
+        'hp_url', 'facebook', 'twitter', 'line', 'instagram', 'phone_number', 'header_image_path'
     ];
+
+    protected $appends = ['header_image_url'];
 
     // hasOne
     public function facility_time() {
@@ -61,4 +64,11 @@ class Facility extends Model
         return $this->hasMany('App\Models\Story');
     }
     
+
+    // アクセサ
+    public function getHeaderImageUrlAttribute()
+    {
+        // pathがあればURLに変換する
+        return $this->header_image_path ? Storage::disk('s3')->url($this->header_image_path) : '';
+    }
 }

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { divLink } from '../../shared/mixinCss';
 import { Link } from '../../shared/Links';
 
-const SliderChild = ({className, title, body, linkPath, imgUrl}) => {
+const SliderPlaceholder = ({className, title, body, linkPath, imgUrl}) => {
   return (
     <div className={className}>
       <div className={`${className}__child`}>
@@ -15,9 +15,7 @@ const SliderChild = ({className, title, body, linkPath, imgUrl}) => {
   );
 };
 
-const StyledSliderChild = styled(SliderChild).attrs(props => ({
-  imgUrl: props.imgUrl ? `url(${props.imgUrl})` : 'url(/img/boardgames.jpg)'
-}))`
+const StyledSliderPlaceholder = styled(SliderPlaceholder)`
   ${divLink}
   height: 250px;
   border-left: 5px solid #555;
@@ -25,7 +23,7 @@ const StyledSliderChild = styled(SliderChild).attrs(props => ({
   position: relative;
   transition: .3s;
   outline: none;
-  background-image: ${props => props.imgUrl};
+  background-image: #888;
   background-size: cover;
   background-position: center;
   font-size: 14px;
@@ -53,4 +51,4 @@ const StyledSliderChild = styled(SliderChild).attrs(props => ({
   }
 `;
 
-export default StyledSliderChild;
+export default StyledSliderPlaceholder;

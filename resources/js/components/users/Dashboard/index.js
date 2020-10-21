@@ -1,10 +1,10 @@
 import React from 'react';
-import { Link } from '../../shared/Links';
+import Tabs from './Tabs';
 
 const Dashboard = () => {
   return (
     <div>
-      <Link to='/facilities/create'>お店の登録</Link>
+      <Tabs />
     </div>
   );
 };

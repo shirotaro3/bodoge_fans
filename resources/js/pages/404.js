@@ -10,7 +10,7 @@ const NotFound = ({className}) => {
       <IconContext.Provider value={{ size: 22, style: { display: 'inline-block' } }}>
         <FaChess />
       </IconContext.Provider>
-      <h2>404 NotFound</h2>
+      <h1>404 NotFound</h1>
       <p>The page you specified may no longer exist or has been deleted.</p>
       <p>ご指定のページは存在しないか削除された可能性があります。</p>
       <Link to='/'>トップページへ戻る</Link>
@@ -24,6 +24,9 @@ const StyledNotFound = styled(NotFound)`
   margin: 30px;
   padding: 40px;
   border-radius: 10px;
+  h1 {
+    font-size: 30px;
+  }
 `
 
 export default StyledNotFound;

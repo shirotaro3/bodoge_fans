@@ -18,9 +18,11 @@ Route::get('/masters', 'App\Http\Controllers\Api\MasterController@index');
 
 // users
 Route::prefix('users')->group(function () {
-    Route::post('registration', 'App\Http\Controllers\Auth\RegisterController@register');
-    Route::post('login', 'App\Http\Controllers\Auth\LoginController@login');
-    Route::post('logout', 'App\Http\Controllers\Auth\LoginController@logout');
+    Route::post('/registration', 'App\Http\Controllers\Auth\RegisterController@register');
+    Route::post('/login', 'App\Http\Controllers\Auth\LoginController@login');
+    Route::post('/logout', 'App\Http\Controllers\Auth\LoginController@logout');
+    // users facility
+    Route::get('/{id}/facilities', 'App\Http\Controllers\Api\UsersFacilityController@index');
 });
 
 // facilities

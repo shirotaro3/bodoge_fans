@@ -5,7 +5,7 @@ import PageInfo from './PageInfo';
 import Paginate from '../PaginateLinks';
 import { BoxRoundedNegative as Box } from '../Boxes';
 
-const FacilityListPaginate = ({className, facilityIds, paginate, params}) => {
+const FacilityListPaginate = ({className, facilityIds, paginate, params, path}) => {
   return (
     <div className={className}>
       <PageInfo paginate={paginate} />
@@ -17,7 +17,7 @@ const FacilityListPaginate = ({className, facilityIds, paginate, params}) => {
       {
         facilityIds.length === 0 ?
           <Box>条件に合うお店は見つかりませんでした。</Box> :
-          <Paginate paginate={paginate} path='/facilities/search' params={params} />
+          <Paginate paginate={paginate} params={params} path={path} />
       }
     </div>
   );

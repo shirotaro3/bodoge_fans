@@ -36,7 +36,7 @@ const StyledFacilityListItem = styled(FacilityListItem).attrs(props => {
     const facility = globalState.facilities.data[props.facilityId];
     const imgUrl = facility.header_image_url;
     return ({
-      bgImg: imgUrl ? `url(${imgUrl})` : 'none'
+      bgImg: imgUrl ? `url(${imgUrl})` : 'url(/img/boardgames.jpg)'
     });
 })`
   ${divLink}

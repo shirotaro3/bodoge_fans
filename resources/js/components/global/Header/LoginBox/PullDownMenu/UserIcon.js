@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { IconRounded as Icon } from '../../../../shared/Icons';
+import Icon from '../../../../shared/UserIcon';
 import { useGlobalState } from '../../../../global/ContextProvider';
 import { BsFillCaretDownFill, BsX } from 'react-icons/bs';
 

@@ -4,7 +4,7 @@ import media from 'styled-media-query';
 import axios from 'axios';
 import { BsFillTrashFill } from 'react-icons/bs';
 import { formatDate } from '../utilities';
-import { IconRounded as Icon } from '../Icons';
+import Icon from '../UserIcon';
 import { useGlobalState } from '../../global/ContextProvider';
 import { Link } from '../Links';
 
@@ -36,7 +36,7 @@ const ReviewBox = ({className, reviewId}) => {
       </div>
       <div className={`${className}__container`}>
         <span className={`${className}__facilink`}>
-          <Link to={`/facilities/${review.facility_id}`}>「{review.facility.name}」のを利用しました♪</Link> 
+          <Link to={`/facilities/${review.facility_id}`}>「{review.facility.name}」を利用しました♪</Link> 
         </span>
         <span className={`${className}__title`}>{review.title}</span>
         <span className={`${className}__body`}>{review.body}</span>
@@ -52,9 +52,7 @@ const ReviewBox = ({className, reviewId}) => {
   );
 };
 
-const StyledReviewBox = styled(ReviewBox).attrs(props => ({
-  bgImage: props.iconUrl ? `url(${props.iconUrl})` : 'none'
-}))`
+const StyledReviewBox = styled(ReviewBox)`
   padding: 20px 0;
   display: flex;
   align-items: center;
