@@ -105,9 +105,12 @@ const Components = ({register, watch, errors, onSubmit, control}) => {
         <label>パスワード（確認）:</label>
         <Input name='password_confirmation'
           type='password'
-          ref={register({ required: '必須項目です。' })}
+          ref={register({
+            required: '必須項目です。',
+            validate: value => value === watch('password')
+          })}
         />
-        {errors.password_confirmation && <span>{errors.password_confirmation.message}</span>}
+        {errors.password_confirmation && <span>{errors.password_confirmation.message || 'パスワードが一致しません。'}</span>}
         
         <Button type="submit">登録</Button>
       </Form>

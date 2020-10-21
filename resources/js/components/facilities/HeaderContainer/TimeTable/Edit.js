@@ -27,7 +27,6 @@ const TimeTableEdit = ({className, facilityId, cancel}) => {
     return time && new Date(`2020/11/11 ${time}`);
   }
   const onSubmit = handleSubmit (async (data) => {
-    console.log(data);
     try {
       const response = await axios.put(`/api/facility_times/${facility.facility_time.id}`, data);
       dispatch({type: 'SET_FACILITY_TIME', data: response.data});
