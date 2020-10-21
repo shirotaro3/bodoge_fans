@@ -2,6 +2,7 @@ import React from 'react';
 import Slider from 'react-slick';
 import styled from 'styled-components';
 import SliderChild from './SliderChild';
+import SliderPlaceholder from './SliderPlaceholder';
 import { useGlobalState } from '../../global/ContextProvider';
 import Loading from '../../shared/Loading';
 import settings from './sliderSettings';
@@ -10,7 +11,7 @@ const FacilitiesSlider = ({className}) => {
   const [ globalState, dispatch ] = useGlobalState();
   const placeholder = [];
   for(let i = 0; i < 4; i++) {
-    placeholder.push(<SliderChild key={`ph_${i}`} />); 
+    placeholder.push(<SliderPlaceholder key={`ph_${i}`} />); 
   };
   return (
     <div className={className}>

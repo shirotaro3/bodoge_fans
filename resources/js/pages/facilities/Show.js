@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import HeaderContainer from '../../components/facilities/HeaderContainer';
 import FacilityServices from '../../components/shared/FacilityServices';
@@ -9,13 +9,14 @@ import NotFound from '../404';
 const FacilitiesShow = ({match}) => {
   const [globalState, dispatch] = useGlobalState();
   const facilityId = match.params.id;
-
+  const [isNotFound, setIsNotFound] = useState(false);
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(`/api/facilities/${facilityId}`);
         dispatch({ type: 'SET_FACILITIES', data: [response.data]});
       } catch (err) {
+        setIsNotFound(true);
       }
     };
 
@@ -24,6 +25,9 @@ const FacilitiesShow = ({match}) => {
     }
     window.scrollTo({top: 0, left: 0, behavior: 'smooth' });
   }, [facilityId]);
+  if (isNotFound) {
+    return <NotFound />;
+  };
 
   if (globalState.facilities.data[facilityId]) {
     return (

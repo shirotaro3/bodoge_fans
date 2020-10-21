@@ -28,7 +28,9 @@ const Routes = () => {
       {/* Users */}
       <NoAuthRoute exact path='/users/registration' component={UsersRegistration} />
       <NoAuthRoute exact path='/users/login' component={UsersLogin} />
+      {/* TODO: AuthRouteのexactなしに対応する */}
       <AuthRoute exact path='/users/dashboard' component={Dashboard} />
+      <AuthRoute exact path='/users/dashboard/owner' component={Dashboard} />
       <AuthRoute exact path='/users/logout' component={UsersLogout} />
       <AuthRoute exact path='/users/likes' component={UsersLikes} />
 

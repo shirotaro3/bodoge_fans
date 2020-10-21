@@ -56,7 +56,7 @@ export const Container = styled.div`
   display: flex;
   justify-content: center;
   button, a {
-    margin: 0 5px 20px 5px;
+    margin: 0 10px 20px 10px;
   }
 `;
 
@@ -254,6 +254,8 @@ export const Progress = styled(ProgressBase)`
 export const TimePicker = props => {
   return (
     <DatePicker
+      disabledKeyboardNavigation
+      autoComplete={false}
       showTimeSelect
       showTimeSelectOnly
       timeIntervals={15}

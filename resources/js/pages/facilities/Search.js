@@ -45,6 +45,7 @@ const Search = ({location}) => {
                   facilityIds={data.result}
                   paginate={data.paginate}
                   params={params}
+                  path='/facilities/search'
                 /> :
                 <FacilityListPlaceholder />
             }

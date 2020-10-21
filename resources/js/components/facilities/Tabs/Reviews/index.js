@@ -6,7 +6,7 @@ import ReviewItem from '../../../shared/ReviewItem';
 import ReviewForm from './ReviewForm';
 import Pagination from '../../../shared/EasyPagination';
 import { Link } from '../../../shared/Links';
-import { BoxRoundedWhite as Box } from '../../../shared/Boxes';
+import { BoxRoundedWhite as Box, BoxRoundedNegative as BoxNeg } from '../../../shared/Boxes';
 import _ from 'lodash';
 
 const Reviews = ({match, className}) => {
@@ -24,9 +24,9 @@ const Reviews = ({match, className}) => {
           collection={reviews}
           Component={ReviewItem} 
         /> :
-        <div className={`${className}__text`}>
+        <BoxNeg>
           クチコミはまだありません。<br />あなたのクチコミを投稿してみませんか？
-        </div>
+        </BoxNeg>
       }
       {
         globalState.auth.isLoggedIn ?
@@ -51,13 +51,6 @@ const StyledReviews = styled(Reviews)`
   `}
   h3 {
     text-align: center;
-  }
-  &__text {
-    text-align: center;
-    margin: 20px 0;
-    ${media.lessThan('small')`
-      font-size: 14px;
-    `}
   }
 `;
 

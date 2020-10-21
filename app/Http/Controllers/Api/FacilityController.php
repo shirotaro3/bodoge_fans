@@ -17,7 +17,6 @@ class FacilityController extends Controller
     public function index() {
         Log::info('[API_FACILITIES_INDEX_QUERY_START]');
 
-        // APIを叩く回数を減らすため、できる限りまとめてデータを渡す
         $facilities = Facility::with([
             'm_prefecture',
             'm_scale',
@@ -43,13 +42,13 @@ class FacilityController extends Controller
             $facility = new Facility();
             $facility->fill($request->all());
             $facility->user_id = Auth::user()->id;
-
+            
             // ヘッダー画像の保存
             if ($request->file('header_image')){
-                $path = Storage::disk('s3')->putFile('facilities/header', $request->file('header_image'), 'public');
-                $facility->header_image_url = Storage::disk('s3')->url($path);
+                $facility->header_image_path = Storage::disk('s3')->putFile('facilities/header', $request->file('header_image'), 'public');
             }
             $facility->save();
+
             $services = $request->input('m_service_ids');
             $facility->m_services()->sync($services);
 
@@ -117,7 +116,18 @@ class FacilityController extends Controller
             if ($services) {
                 $facility->m_services()->sync($services);
             }
-            $facility->update($request->all());
+            $facility->fill($request->all());
+            // ヘッダー画像の保存
+            if ($request->file('header_image')){
+                // 新しいファイルを保存
+                $facility->header_image_path = Storage::disk('s3')->putFile('facilities/header', $request->file('header_image'), 'public');
+                // 古いファイルを削除
+                $old_file_path = $facility->getOriginal('header_image_path');
+                if ($old_file_path) {
+                    Storage::disk('s3')->delete($old_file_path);
+                }
+            }
+            $facility->save();
 
             return $facility;
         });

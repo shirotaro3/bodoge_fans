@@ -46,7 +46,8 @@ const Likes = ({location}) => {
               <FacilityListPaginate
                 facilityIds={data.result}
                 paginate={data.paginate}
-                params={params}
+                params={{page}}
+                path='/users/likes'
               /> :
               <FacilityListPlaceholder />
           }

@@ -72,6 +72,7 @@ const Components = ({register, watch, errors, onSubmit, control}) => {
           render={({ onChange, value, name }) => (
             <DatePicker
               onChange={date => onChange(date)}
+              disabledKeyboardNavigation
               name={name}
               selected={value}
               autoComplete='off'

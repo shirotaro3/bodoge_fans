@@ -11,33 +11,20 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
-        'name', 'email', 'password', 'birthday', 'sex', 'icon_url'
+        'name', 'email', 'password', 'birthday', 'sex', 'icon_path'
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
     protected $hidden = [
         'password', 'remember_token', 'birthday', 'sex', 'email',
         'created_at', 'updated_at', 'email_verified_at'
     ];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    protected $appends = ['icon_url'];
 
     public function facilities() {
         return $this->hasMany('App\Models\Facility');
@@ -47,5 +34,12 @@ class User extends Authenticatable
     }
     public function reviews() {
         return $this->hasMany('App\Models\Review');
+    }
+
+    // アクセサ
+    public function getIconUrlAttribute()
+    {
+        // pathがあればURLに変換する
+        return $this->icon_path ? Storage::disk('s3')->url($this->icon_path) : '';
     }
 }

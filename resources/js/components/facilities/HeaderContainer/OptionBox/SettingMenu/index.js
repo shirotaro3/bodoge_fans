@@ -9,15 +9,15 @@ const SettingMenu = ({className, facilityId}) => {
   const [globalState, dispatch] = useGlobalState();
   const isOpen = globalState.visibility.facilityMenu;
   const facility = globalState.facilities.data[facilityId];
-  const facilityUserId = facility.user_id;
-  const { id: sessionUserId } = globalState.auth.user;
+  const { id: authUserId } = globalState.auth.user;
+  const isMine = facility.user_id === authUserId;
   const handleClick = () => {
     if (isOpen) {
       return dispatch({type: 'CLOSE_ALL'});
     }
     return dispatch({type: 'FACILITY_MENU_OPEN'});
   };
-  if (facilityUserId === sessionUserId) {
+  if (isMine) {
     return (
       <div className={className}>
         {/* ボタン */}

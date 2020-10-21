@@ -52,6 +52,7 @@ const initialState = {
   searchResults: {},
   likedFacilityResults: {},
   reviewsIndexResults: {},
+  myFacilitiesResults: {}
 }
 
 const Context = React.createContext();
