@@ -13,7 +13,7 @@ const TimeTableEdit = ({className, facilityId, cancel}) => {
   const {
     mon_start: monStart, mon_end: monEnd,
     tue_start: tueStart, tue_end: tueEnd, wed_start: wedStart,
-    wed_start: wedEnd, thu_start: thuStart, thu_end: thuEnd,
+    wed_end: wedEnd, thu_start: thuStart, thu_end: thuEnd,
     fri_start: friStart, fri_end: friEnd, sat_start: satStart,
     sat_end: satEnd, sun_start: sunStart, sun_end: sunEnd, 
     footnote
@@ -21,7 +21,7 @@ const TimeTableEdit = ({className, facilityId, cancel}) => {
   const { phone_number : phoneNumber, address,
     m_prefecture: prefecture, building, hp_url
   } = facility;
-  const { register, handleSubmit, watch, errors, control } = useForm();
+  const { register, handleSubmit, errors, control } = useForm();
   const selectedTime = (time) => {
     // react-datepickerがdatetime型しか受け付けない仕様のため。
     return time && new Date(`2020/11/11 ${time}`);

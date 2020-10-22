@@ -150,7 +150,7 @@ const reducer = (state = {}, action) => {
       return {
         ...state,
         masters: {
-          ...state.selectValues,
+          ...state.masters,
           facilityTypes: formatSelectValue(action.facilityTypes),
           budgets: formatSelectValue(action.budgets),
           scales: formatSelectValue(action.scales),
@@ -193,10 +193,17 @@ const reducer = (state = {}, action) => {
         myFacilitiesResults: {}
       }
     case 'DELETE_FACILITY': {
-        delete state.facilities.data[action.id];
+        const newState = {...state};
+        // ピックアップから削除する　TODO:ピックアップを再取得する仕組み。
+        const index = newState.pickedUpFacilitiesId.data.indexOf(Number(action.id));
+        if (index > -1) {
+          newState.pickedUpFacilitiesId.data.splice(index, 1);
+        };
+        delete newState.facilities.data[action.id];
         return {
-          ...state,
-          myFacilitiesResults: {}
+          ...newState,
+          myFacilitiesResults: {},
+          reviewsIndexResults: {},
         };
       }
     // likes
@@ -217,9 +224,10 @@ const reducer = (state = {}, action) => {
     // facilityTimes
     case 'SET_FACILITY_TIME':
       {
+        const newState = {...state};
         const facilityId = action.data.facility_id;
-        state.facilities.data[facilityId].facility_time = action.data;
-        return state;
+        newState.facilities.data[facilityId].facility_time = action.data;
+        return newState;
       }
 
     // reviews

@@ -15,7 +15,7 @@ const TimeTable = ({className, facilityId}) => {
   const {
     mon_start: monStart, mon_end: monEnd,
     tue_start: tueStart, tue_end: tueEnd, wed_start: wedStart,
-    wed_start: wedEnd, thu_start: thuStart, thu_end: thuEnd,
+    wed_end: wedEnd, thu_start: thuStart, thu_end: thuEnd,
     fri_start: friStart, fri_end: friEnd, sat_start: satStart,
     sat_end: satEnd, sun_start: sunStart, sun_end: sunEnd, 
     footnote

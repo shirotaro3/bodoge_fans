@@ -20,13 +20,14 @@ const FacilitiesSlider = ({className}) => {
         {
           globalState.pickedUpFacilitiesId.resolved &&
           globalState.pickedUpFacilitiesId.data.map((id, i) => {
+            const facility = globalState.facilities.data[id];
             return (
               <SliderChild
                 key={`fs_${i}`}
                 linkPath={`/facilities/${id}`}
-                imgUrl={globalState.facilities.data[id].header_image_url}
-                title={globalState.facilities.data[id].name}
-                body={globalState.facilities.data[id].description}
+                imgUrl={facility && facility.header_image_url}
+                title={facility && facility.name}
+                body={facility && facility.description}
               />
             )
           })

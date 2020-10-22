@@ -13,7 +13,6 @@ const Like = ({className, facilityId}) => {
     try {
       const response = await axios.post('/api/likes', { facility_id: facilityId });
       dispatch({type: 'SET_LIKES', data: response.data});
-      dispatch({type: 'MESSAGE', text: 'お気に入りが変更されました。'});
     } catch (err) {
       console.log(err);
     }

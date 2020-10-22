@@ -163,6 +163,10 @@ class FacilityController extends Controller
             Log::info('[API_FACILITIES_DESTROY_DELETE_FAILURE]');
             abort(400, 'Invalid param');
         }
+        $old_file_path = $facility->header_image_path;
+        if ($old_file_path) {
+            Storage::disk('s3')->delete($old_file_path);
+        }
         $facility->delete();
 
         Log::info('[API_FACILITIES_DESTROY_DELETE_SUCCESS]');
