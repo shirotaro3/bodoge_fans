@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import media from 'styled-media-query';
 import { HashLink } from 'react-router-hash-link';
@@ -11,7 +12,11 @@ const NavTop = ({className}) => {
       <HashLink smooth to='#nav-top' className={`${className}__link`}></HashLink>
     </div>
   );
-}
+};
+
+NavTop.propTypes = {
+  className: PropTypes.string
+};
 
 const StyledNavTop = styled(NavTop)`
   ${divLink}
@@ -26,6 +31,6 @@ const StyledNavTop = styled(NavTop)`
   ${media.lessThan('medium')`
     height: 40px;
   `}
-`
+`;
 
 export default StyledNavTop;

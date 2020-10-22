@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import media from 'styled-media-query';
 
@@ -8,7 +9,11 @@ const Credit = ({className}) => {
       Copyright © BodogeFans All Rights Reserved. 
     </div>
   );
-}
+};
+
+Credit.propTypes = {
+  className: PropTypes.string
+};
 
 const StyledCredit = styled(Credit)`
   width: 100%;
@@ -20,6 +25,6 @@ const StyledCredit = styled(Credit)`
   ${media.lessThan('medium')`
     height: 45px;
   `}
-`
+`;
 
 export default StyledCredit;

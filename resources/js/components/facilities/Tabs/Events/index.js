@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import media from 'styled-media-query';
 
@@ -18,5 +19,9 @@ const StyledEvents = styled(Events)`
     max-width: 800px;
   `}
 `;
+
+Events.propTypes = {
+  className: PropTypes.string
+};
 
 export default StyledEvents;

@@ -1,11 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Icon from '../../../../shared/UserIcon';
 import { useGlobalState } from '../../../../global/ContextProvider';
 import { BsFillCaretDownFill, BsX } from 'react-icons/bs';
 
 const UserIcon = ({className}) => {
-  const [globalState, dispatch] = useGlobalState();
+  const [globalState, ] = useGlobalState();
   const user = globalState.auth.user;
   const isOpen = globalState.visibility.userMenu;
   return (
@@ -14,11 +15,15 @@ const UserIcon = ({className}) => {
       <div className={`${className}__name`}>{user.name}</div>
       {
         isOpen ?
-        <BsX size='10px' className={`${className}__icon`} /> :
-        <BsFillCaretDownFill size='10px' className={`${className}__icon`} />
+          <BsX size='10px' className={`${className}__icon`} /> :
+          <BsFillCaretDownFill size='10px' className={`${className}__icon`} />
       }
     </div>
   );
+};
+
+UserIcon.propTypes = {
+  className: PropTypes.string
 };
 
 const StyledUserIcon = styled(UserIcon)`

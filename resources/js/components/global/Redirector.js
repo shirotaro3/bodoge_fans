@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import { useGlobalState } from './ContextProvider';
 
 const Redirector = () => {
-  const [globalState, dispatch] = useGlobalState();
+  const [globalState,] = useGlobalState();
   // リダイレクト先登録時、リダイレクトする
   if (globalState.redirect.path) {
     return <RedirectWrapper to={globalState.redirect.path} />;
@@ -12,13 +13,17 @@ const Redirector = () => {
 };
 
 const RedirectWrapper = ({to}) => {
-  const [globalState, dispatch] = useGlobalState();
+  const [ , dispatch] = useGlobalState();
   useEffect(() => {
     dispatch({type: 'REDIRECT_OK'});
   }, []);
   return (
     <Redirect to={to} />
   );
+};
+
+RedirectWrapper.propTypes = {
+  to: PropTypes.string
 };
 
 export default Redirector;

@@ -1,11 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Controller } from 'react-hook-form';
 import { FormVertical as Form, Input, Textarea, Select } from '../../../shared/FormParts';
 import { useGlobalState } from '../../../global/ContextProvider';
 import { ButtonWhite as Button } from '../../../shared/Buttons';
 
 const Page1 = ({register, errors, control, next, formValue}) => {
-  const [globalState, dispatch] = useGlobalState();
+  const [globalState, ] = useGlobalState();
   const { facilityTypes, budgets, scales, services } = globalState.masters;
   return (
     <Form onSubmit={next} className='fadein'>
@@ -42,7 +43,7 @@ const Page1 = ({register, errors, control, next, formValue}) => {
         rows={5}
         maxRows={10}
         ref={register({
-          maxLength: { value: 50, message: '「フリーコメント・紹介文」は500文字以内で入力してください。' }
+          maxLength: { value: 500, message: '「フリーコメント・紹介文」は500文字以内で入力してください。' }
         })}
         defaultValue={formValue.introduction || ''}
       />
@@ -100,6 +101,14 @@ const Page1 = ({register, errors, control, next, formValue}) => {
       <Button type='submit'>進む</Button>
     </Form>
   );
+};
+
+Page1.propTypes = {
+  register: PropTypes.func,
+  errors: PropTypes.object,
+  control: PropTypes.object,
+  next: PropTypes.func,
+  formValue: PropTypes.object
 };
 
 export default Page1;
