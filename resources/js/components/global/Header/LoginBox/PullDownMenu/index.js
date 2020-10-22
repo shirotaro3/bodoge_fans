@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import UserIcon from './UserIcon';
 import UserMenu from './UserMenu';
@@ -27,6 +28,10 @@ const PullDownMenu = ({className}) => {
       }
     </div>
   );
+};
+
+PullDownMenu.propTypes = {
+  className: PropTypes.string
 };
 
 const StyledPDM = styled(PullDownMenu)`

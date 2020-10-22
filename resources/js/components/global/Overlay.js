@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useGlobalState } from './ContextProvider';
 
@@ -13,6 +14,10 @@ const Overlay = ({className}) => {
     return <div className={className} onClick={handleClick} />;
   }
   return <></>;
+};
+
+Overlay.propTypes = {
+  className: PropTypes.string
 };
 
 const StyledOverlay = styled(Overlay)`

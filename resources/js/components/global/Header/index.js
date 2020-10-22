@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import media from 'styled-media-query';
 import Logo from './Logo';
@@ -24,6 +25,10 @@ const Header = ({className}) => {
       </nav>
     </header>
   );
+};
+
+Header.propTypes = {
+  className: PropTypes.string
 };
 
 const StyledHeader = styled(Header)`

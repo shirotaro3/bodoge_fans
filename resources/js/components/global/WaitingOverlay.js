@@ -1,10 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Loading from '../shared/Loading';
 import { useGlobalState } from '../global/ContextProvider';
 
 const WaitingOverlay = ({className}) => {
-  const [globalState, dispatch] = useGlobalState();
+  const [globalState, ] = useGlobalState();
   const isShow = globalState.visibility.waiting;
   if (isShow) {
     return (
@@ -14,6 +15,10 @@ const WaitingOverlay = ({className}) => {
     );
   }
   return <></>;
+};
+
+WaitingOverlay.propTypes = {
+  className: PropTypes.string
 };
 
 const StyledWaitingOverlay = styled(WaitingOverlay)`

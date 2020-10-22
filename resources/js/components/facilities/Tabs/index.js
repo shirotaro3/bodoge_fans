@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import media from 'styled-media-query';
 import { Switch, Route, NavLink } from 'react-router-dom';
@@ -9,7 +10,7 @@ import Top from './Top';
 import { useGlobalState } from '../../global/ContextProvider';
 
 const Tabs = ({className, facilityId}) => {
-  const [globalState, dispatch] = useGlobalState();
+  const [globalState, ] = useGlobalState();
   const facility = globalState.facilities.data[facilityId];
   return (
     <div className={className}>
@@ -53,6 +54,11 @@ const Tabs = ({className, facilityId}) => {
       </Switch>
     </div>
   );
+};
+
+Tabs.propTypes = {
+  className: PropTypes.string,
+  facilityId: PropTypes.string
 };
 
 const StyledTabs = styled(Tabs)`

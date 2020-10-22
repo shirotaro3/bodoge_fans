@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import media from 'styled-media-query';
 import { Link } from 'react-router-dom';
@@ -15,8 +16,14 @@ const Logo = ({ className, logoText, subText }) => {
       </p>
       <Link to='/' className={`${className}__link`}> </Link>
     </div>
-  )
-}
+  );
+};
+
+Logo.propTypes = {
+  className: PropTypes.string,
+  logoText: PropTypes.string,
+  subText: PropTypes.string
+};
 
 const StyledLogo = styled(Logo)`
   ${divLink}
@@ -50,6 +57,6 @@ const StyledLogo = styled(Logo)`
       font-size: 8px;
     `}
   }
-`
+`;
 
 export default StyledLogo;

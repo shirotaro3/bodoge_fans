@@ -1,8 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { FormVertical as Form, Input, Container, InputFile } from '../../../shared/FormParts';
 import { ButtonWhite as Button } from '../../../shared/Buttons';
 
-const Page3 = ({register, errors, control, prev, submit}) => {
+const Page3 = ({register, errors, prev, submit}) => {
   return (
     <Form onSubmit={submit} className='fadein'>
       <label>ヘッダー画像</label>
@@ -10,10 +11,10 @@ const Page3 = ({register, errors, control, prev, submit}) => {
         placeholder='選択してください'
         ref={register({
           validate: {
-            filesize: files => files[0]?.size < 3000000 || !files[0],
-            filetype: files => files[0]?.type === 'image/jpeg' ||
-            files[0]?.type === 'image/gif' ||
-            files[0]?.type === 'image/png' ||
+            filesize: files => files[0].size < 3000000 || !files[0],
+            filetype: files => files[0].type === 'image/jpeg' ||
+            files[0].type === 'image/gif' ||
+            files[0].type === 'image/png' ||
             !files[0]
           }
         })}
@@ -71,6 +72,13 @@ const Page3 = ({register, errors, control, prev, submit}) => {
       </Container>
     </Form>
   );
+};
+
+Page3.propTypes = {
+  register: PropTypes.func,
+  errors: PropTypes.object,
+  prev: PropTypes.func,
+  submit: PropTypes.func
 };
 
 export default Page3;
