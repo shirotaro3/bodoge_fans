@@ -1,9 +1,9 @@
 import React, { useState, forwardRef } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import AutosizeTextarea from 'react-autosize-textarea';
 import ReactSelect from 'react-select';
 import DatePicker from 'react-datepicker';
-import { truncate } from 'lodash';
 
 const createObjectURL = (window.URL || window.webkitURL).createObjectURL || window.createObjectURL;
 
@@ -118,7 +118,7 @@ export const Textarea = styled(AutosizeTextarea)`
   }
 `;
 
-const InputFileDiv = forwardRef((props, ref) => {
+const InputFileDiv = (props, ref) => {
   const [imgUrl, setImgUrl] = useState('');
   const [fileName, setFileName] = useState('');
 
@@ -129,15 +129,15 @@ const InputFileDiv = forwardRef((props, ref) => {
     if (file.type != 'image/jpeg' &&
       file.type != 'image/gif' &&
       file.type != 'image/png') {
-        setFileName(file.name);
-        return setImgUrl('');
+      setFileName(file.name);
+      return setImgUrl('');
     }
     if (file.size > 3000000) {
       setFileName(file.name);
       return setImgUrl('');
-    };
-      setFileName(file.name);
-      setImgUrl(createObjectURL(file));
+    }
+    setFileName(file.name);
+    setImgUrl(createObjectURL(file));
   };
 
   return (
@@ -147,9 +147,14 @@ const InputFileDiv = forwardRef((props, ref) => {
       <input {...props} ref={ref} type='file' onChange={handleChange} />
     </div>
   );
-});
+};
 
-export const InputFile = styled(InputFileDiv)`
+InputFileDiv.propTypes = {
+  className: PropTypes.string,
+  placeholder: PropTypes.node
+};
+
+export const InputFile = styled(forwardRef(InputFileDiv))`
   position: relative;
   width: 100%;
   min-height: 40px;
@@ -188,7 +193,7 @@ export const Select = (props) => {
       textAlign: 'left',
       outline: 'none',
     }),
-    control: (provided, state) => ({
+    control: (provided) => ({
       ...provided,
       width: '100%',
       minHeight: '40px',
@@ -209,7 +214,7 @@ export const Select = (props) => {
       ...provided,
       height: '0'
     })
-  }
+  };
   return (
     <ReactSelect {...props}
       autoComplete='off'
@@ -230,10 +235,16 @@ const ProgressBase = ({className, steps, current}) => {
           key={step}
         >
           {step}
-        </span>
+        </span>;
       })}
     </div>    
   );
+};
+
+ProgressBase.propTypes = {
+  className: PropTypes.string,
+  steps: PropTypes.number,
+  current: PropTypes.number
 };
 
 export const Progress = styled(ProgressBase)`

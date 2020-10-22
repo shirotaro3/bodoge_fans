@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import media from 'styled-media-query';
 import { useGlobalState } from '../../../../components/global/ContextProvider';
@@ -6,7 +7,7 @@ import { BsPencilSquare } from 'react-icons/bs';
 import Edit from './Edit';
 
 const NameDescription = ({className, facilityId}) => {
-  const [globalState, dispatch] = useGlobalState();
+  const [globalState, ] = useGlobalState();
   const [isEditing, setIsEditing] = useState(false);
   const facility = globalState.facilities.data[facilityId];
   const authUser = globalState.auth.user;
@@ -20,21 +21,26 @@ const NameDescription = ({className, facilityId}) => {
     <div className={className}>
       {
         isEditing ?
-        <Edit cancel={handleClick} facilityId={facilityId} /> :
-        <div className={`${className}__container`} onClick={handleClick}>
-          <h1 className={`${className}__h1`}>{facility.name}</h1>
-          <p className={`${className}__p`}>{facility.description}</p>
-          <div className={`${className}__edit`}>
-            <BsPencilSquare size='25px' />
+          <Edit cancel={handleClick} facilityId={facilityId} /> :
+          <div className={`${className}__container`} onClick={handleClick}>
+            <h1 className={`${className}__h1`}>{facility.name}</h1>
+            <p className={`${className}__p`}>{facility.description}</p>
+            <div className={`${className}__edit`}>
+              <BsPencilSquare size='25px' />
+            </div>
           </div>
-        </div>
       }
     </div>
   );
 };
 
+NameDescription.propTypes = {
+  className: PropTypes.string,
+  facilityId: PropTypes.string
+};
+
 const StyledND = styled(NameDescription).attrs(props => {
-  const [globalState, dispatch] = useGlobalState();
+  const [globalState, ] = useGlobalState();
   const facility = globalState.facilities.data[props.facilityId];
   const authUser = globalState.auth.user;
   const isMine = authUser.id === facility.user_id;
@@ -68,28 +74,28 @@ const StyledND = styled(NameDescription).attrs(props => {
     position: relative;
   }
   ${
-    props => props.isMine &&
-    `&__container {
-      cursor: pointer;
-      &:hover {
+  props => props.isMine &&
+  `&__container {
+    cursor: pointer;
+    &:hover {
+      background: rgba(255,255,255,.1);
+    }
+  }
+  &__container:hover &__edit {
+    opacity: .6;
+  }`
+}
+  ${
+  props => props.isMine &&
+    media.lessThan('medium')`
+      &__container {
         background: rgba(255,255,255,.1);
       }
-    }
-    &__container:hover &__edit {
-      opacity: .6;
-    }`
-  }
-  ${
-    props => props.isMine &&
-      media.lessThan('medium')`
-        &__container {
-          background: rgba(255,255,255,.1);
-        }
-        &__edit {
-          opacity: .6;
-        }
-      `
-  }
+      &__edit {
+        opacity: .6;
+      }
+    `
+}
 `;
 
 export default StyledND;

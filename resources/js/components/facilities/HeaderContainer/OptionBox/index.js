@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useGlobalState } from '../../../../components/global/ContextProvider';
 import SettingMenu from './SettingMenu';
@@ -6,7 +7,7 @@ import Like from './Like';
 import EditImage from './EditImage';
 
 const OptionBox = ({className, facilityId}) => {
-  const [globalState, dispatch] = useGlobalState();
+  const [globalState, ] = useGlobalState();
   if (globalState.auth.isLoggedIn) {
     return (
       <div className={className}>
@@ -14,9 +15,14 @@ const OptionBox = ({className, facilityId}) => {
         <EditImage facilityId={facilityId} />
         <SettingMenu facilityId={facilityId} />
       </div>
-    )
+    );
   }
-  return <></>
+  return <></>;
+};
+
+OptionBox.propTypes = {
+  className: PropTypes.string,
+  facilityId: PropTypes.string
 };
 
 const StyledOptionBox = styled(OptionBox)`

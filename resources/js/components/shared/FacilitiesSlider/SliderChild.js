@@ -1,9 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { divLink } from '../../shared/mixinCss';
 import { Link } from '../../shared/Links';
 
-const SliderChild = ({className, title, body, linkPath, imgUrl}) => {
+const SliderChild = ({className, title, body, linkPath}) => {
   return (
     <div className={className}>
       <div className={`${className}__child`}>
@@ -13,6 +14,14 @@ const SliderChild = ({className, title, body, linkPath, imgUrl}) => {
       {linkPath && <Link to={linkPath} className={`${className}__link`}></Link>}
     </div>
   );
+};
+
+SliderChild.propTypes = {
+  className: PropTypes.string,
+  title: PropTypes.string,
+  body: PropTypes.strgin,
+  linkPath: PropTypes.string,
+  imgUrl: PropTypes.string
 };
 
 const StyledSliderChild = styled(SliderChild).attrs(props => ({

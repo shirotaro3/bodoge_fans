@@ -18,13 +18,13 @@ const networkService = {
         const status = error.status || error.response.status;
         if (status === 419) {
           onUnauthenticated();
-        };
+        }
         if (status === 401) {
           onUnauthenticated();
-        };
+        }
         if (status === 500) {
           onInternalServerError();
-        };
+        }
         return Promise.reject(error);
       }
     );
@@ -36,7 +36,7 @@ const networkService = {
       error => {
         console.log(error);
       }
-    )
+    );
   }
 };
 

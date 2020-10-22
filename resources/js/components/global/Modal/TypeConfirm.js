@@ -1,9 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { useGlobalState } from '../ContextProvider';
 import styled from 'styled-components';
 
 const TypeConfirm = ({className, callback}) => {
-  const [globalState, dispatch] = useGlobalState();
+  const [ , dispatch] = useGlobalState();
   const ok = async () => {
     dispatch({type: 'CLOSE_ALL'});
     await callback();
@@ -31,6 +32,11 @@ const TypeConfirm = ({className, callback}) => {
       </div>
     </div>
   );
+};
+
+TypeConfirm.propTypes = {
+  className: PropTypes.string,
+  callback: PropTypes.func
 };
 
 const StyledTypeConfirm = styled(TypeConfirm)`

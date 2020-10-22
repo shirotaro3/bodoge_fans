@@ -19,16 +19,23 @@ class Event extends Model
     ];
 
     // belongsTo
-    public function facility() {
+    public function facility()
+    {
         return $this->belongsTo('App\Models\Facility');
     }
-    public function m_scale() {
+
+    public function m_scale()
+    {
         return $this->belongsTo('App\Models\MScale');
     }
-    public function m_budget() {
+
+    public function m_budget()
+    {
         return $this->belongsTo('App\Models\MBudget');
     }
-    public function post() {
+
+    public function post()
+    {
         return $this->belongsTo('App\Models\Post');
     }
 }

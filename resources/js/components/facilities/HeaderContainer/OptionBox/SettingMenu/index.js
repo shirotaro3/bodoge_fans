@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useGlobalState } from '../../../../global/ContextProvider';
 import { BsGear } from 'react-icons/bs';
@@ -32,9 +33,14 @@ const SettingMenu = ({className, facilityId}) => {
           </div>
         }
       </div>
-    )
+    );
   }
   return <></>;
+};
+
+SettingMenu.propTypes = {
+  className: PropTypes.string,
+  facilityId: PropTypes.string
 };
 
 const StyledSettingMenu = styled(SettingMenu)`

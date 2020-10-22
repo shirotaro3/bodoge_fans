@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import media from 'styled-media-query';
 import axios from 'axios';
@@ -6,7 +7,7 @@ import { BsFillTrashFill } from 'react-icons/bs';
 import { formatDate } from './utilities';
 import Icon from './UserIcon';
 import { useGlobalState } from '../global/ContextProvider';
-// ReviewListPaginateに統合予定　こちらは削除
+// ReviewListPaginateに統合予定 こちらは削除
 const ReviewBox = ({className, id, title, body, user, created_at: postedAt}) => {
   const [globalState, dispatch] = useGlobalState();
   const authUser = globalState.auth.user;
@@ -16,6 +17,7 @@ const ReviewBox = ({className, id, title, body, user, created_at: postedAt}) => 
       dispatch({type: 'DELETE_REVIEW', data: response.data});
       dispatch({type: 'MESSAGE', text: '削除しました。'});
     } catch (err) {
+      //
     }
   };
   const handleClick = () => {
@@ -29,7 +31,7 @@ const ReviewBox = ({className, id, title, body, user, created_at: postedAt}) => 
   return (
     <div className={className}>
       <div className={`${className}__user`}>
-        <Icon iconUrl={user?.icon_url} size='30px' />
+        <Icon iconUrl={user.icon_url} size='30px' />
         <div>{user.name}</div>
       </div>
       <div className={`${className}__container`}>      
@@ -45,6 +47,15 @@ const ReviewBox = ({className, id, title, body, user, created_at: postedAt}) => 
       </div>
     </div>
   );
+};
+
+ReviewBox.propTypes = {
+  className: PropTypes.string,
+  id: PropTypes.number,
+  title: PropTypes.string,
+  body: PropTypes.string,
+  user: PropTypes.object,
+  created_at: PropTypes.instanceOf(Date)
 };
 
 const StyledReviewBox = styled(ReviewBox)`

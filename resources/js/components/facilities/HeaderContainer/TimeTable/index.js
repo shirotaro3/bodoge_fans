@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import media from 'styled-media-query';
 import { BsPencilSquare } from 'react-icons/bs';
@@ -7,7 +8,7 @@ import { formatTime } from '../../../shared/utilities';
 import Edit from './Edit';
 
 const TimeTable = ({className, facilityId}) => {
-  const [globalState, dispatch] = useGlobalState();
+  const [globalState, ] = useGlobalState();
   const [isEditing, setIsEditing] = useState(false);
   const facility = globalState.facilities.data[facilityId];
   const sessionUserId = globalState.auth.user.id;
@@ -15,7 +16,7 @@ const TimeTable = ({className, facilityId}) => {
   const {
     mon_start: monStart, mon_end: monEnd,
     tue_start: tueStart, tue_end: tueEnd, wed_start: wedStart,
-    wed_start: wedEnd, thu_start: thuStart, thu_end: thuEnd,
+    wed_end: wedEnd, thu_start: thuStart, thu_end: thuEnd,
     fri_start: friStart, fri_end: friEnd, sat_start: satStart,
     sat_end: satEnd, sun_start: sunStart, sun_end: sunEnd, 
     footnote
@@ -88,8 +89,13 @@ const TimeTable = ({className, facilityId}) => {
   );
 };
 
+TimeTable.propTypes = {
+  className: PropTypes.string,
+  facilityId: PropTypes.string
+};
+
 const StyledTimeTable = styled(TimeTable).attrs(props => {
-  const [globalState, dispatch] = useGlobalState();
+  const [globalState, ] = useGlobalState();
   const facility = globalState.facilities.data[props.facilityId];
   const authUser = globalState.auth.user;
   const isMine = authUser.id === facility.user_id;
@@ -173,7 +179,7 @@ const StyledTimeTable = styled(TimeTable).attrs(props => {
     right: 10px;
   }
   ${
-    props => props.isMine &&
+  props => props.isMine &&
     `&__ul {
       cursor: pointer;
       &:hover {
@@ -183,9 +189,9 @@ const StyledTimeTable = styled(TimeTable).attrs(props => {
     &__ul:hover &__edit {
       opacity: .8;
     }`
-  }
+}
   ${
-    props => props.isMine &&
+  props => props.isMine &&
       media.lessThan('medium')`
         &__ul {
           background: rgba(255,255,255,.1);
@@ -195,7 +201,7 @@ const StyledTimeTable = styled(TimeTable).attrs(props => {
           opacity: .8;
         }
       `
-  }
+}
 `;
 
 export default StyledTimeTable;

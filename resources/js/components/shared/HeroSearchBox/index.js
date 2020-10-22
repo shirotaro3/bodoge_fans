@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import SearchBox from './SearchBox';
 
@@ -8,7 +9,12 @@ const Hero = ({ className, params = {} }) => {
       <SearchBox defaultParams={params} />
     </div>
   );
-}
+};
+
+Hero.propTypes = {
+  className: PropTypes.string,
+  params: PropTypes.object
+};
 
 const StyledHero = styled(Hero)`
   width: 100%;
@@ -17,6 +23,6 @@ const StyledHero = styled(Hero)`
   background-image: url('/img/boardgames.jpg');
   background-position: center;
   background-size: cover;
-`
+`;
 
 export default StyledHero;

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import media from 'styled-media-query';
 
@@ -13,6 +14,10 @@ const FacilityListPlaceholderItem = ({className}) => {
       </div>
     </div>
   );
+};
+
+FacilityListPlaceholderItem.propTypes = {
+  className: PropTypes.string
 };
 
 const StyledFacilityListPlaceholderItem = styled(FacilityListPlaceholderItem)`

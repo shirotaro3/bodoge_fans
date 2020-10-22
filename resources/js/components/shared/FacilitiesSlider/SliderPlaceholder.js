@@ -1,22 +1,23 @@
 import React from 'react';
 import styled from 'styled-components';
-import { divLink } from '../../shared/mixinCss';
-import { Link } from '../../shared/Links';
+import PropTypes from 'prop-types';
 
-const SliderPlaceholder = ({className, title, body, linkPath, imgUrl}) => {
+const SliderPlaceholder = ({className}) => {
   return (
     <div className={className}>
       <div className={`${className}__child`}>
-        <span className={`${className}__title`}>{title}</span><br />
-        <span>{body}</span>
+        <span className={`${className}__title`}></span><br />
+        <span></span>
       </div>
-      {linkPath && <Link to={linkPath} className={`${className}__link`}></Link>}
     </div>
   );
 };
 
+SliderPlaceholder.propTypes = {
+  className: PropTypes.string
+};
+
 const StyledSliderPlaceholder = styled(SliderPlaceholder)`
-  ${divLink}
   height: 250px;
   border-left: 5px solid #555;
   border-right: 5px solid #555;

@@ -40,7 +40,7 @@ class CreateFacilityRequest extends FormRequest
             'twitter' => 'max:25|nullable',
             'instagram' => 'max:25|nullable',
             'line' => 'max:100|nullable',
-            'header_image' => 'nullable'
+            'header_image' => 'nullable',
         ];
     }
 }

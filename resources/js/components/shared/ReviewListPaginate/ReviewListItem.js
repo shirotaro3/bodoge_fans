@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import media from 'styled-media-query';
 import axios from 'axios';
@@ -18,6 +19,7 @@ const ReviewBox = ({className, reviewId}) => {
       dispatch({type: 'DELETE_REVIEW', data: response.data});
       dispatch({type: 'MESSAGE', text: '削除しました。'});
     } catch (err) {
+      //
     }
   };
   const handleClick = () => {
@@ -50,6 +52,11 @@ const ReviewBox = ({className, reviewId}) => {
       </div>
     </div>
   );
+};
+
+ReviewBox.propTypes = {
+  className: PropTypes.string,
+  reviewId: PropTypes.number
 };
 
 const StyledReviewBox = styled(ReviewBox)`

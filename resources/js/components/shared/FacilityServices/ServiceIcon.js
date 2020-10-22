@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import media from 'styled-media-query';
 
@@ -11,6 +12,11 @@ const ServiceIcon = ({className, text}) => {
       <div className={`${className}__window`}>{text}</div>
     </div>
   );
+};
+
+ServiceIcon.propTypes = {
+  className: PropTypes.string,
+  text: PropTypes.string
 };
 
 const StyledServiceIcon = styled(ServiceIcon).attrs(props => ({
