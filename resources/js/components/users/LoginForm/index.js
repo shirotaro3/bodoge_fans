@@ -11,24 +11,24 @@ const UserLoginForm = () => {
 
   // Submit時の処理
   const onSubmit = handleSubmit(async (data) => {
-      try {
-        // LaravelSanctumのCSRF対策
-        const csrf = await axios.get('/sanctum/csrf-cookie');
-        const response = await axios.post('/api/users/login', data);
+    try {
+      // LaravelSanctumのCSRF対策
+      await axios.get('/sanctum/csrf-cookie');
+      const response = await axios.post('/api/users/login', data);
 
-        // ログイン情報の保持とメッセージ通知のアクションを実行する
-        dispatch({type: 'LOGIN', data: response.data});
-        dispatch({type: 'MESSAGE', text: `ログインしました。ようこそ、${response.data.name}さん！`});
+      // ログイン情報の保持とメッセージ通知のアクションを実行する
+      dispatch({type: 'LOGIN', data: response.data});
+      dispatch({type: 'MESSAGE', text: `ログインしました。ようこそ、${response.data.name}さん！`});
 
-        // afterLoginPathが登録されていればそこに、なければダッシュボードにリダイレクトする
-        dispatch({type: 'REDIRECT', to: globalState.tracking.afterLoginPath || defaultRedirectPath});
-      } catch (err) {
-        const status = err.status || err.response.status;
-        if (status === 403) {
-          window.scrollTo({top: 0, left: 0, behavior: 'smooth' });
-          dispatch({type: 'ALERT', text: 'メールアドレスかパスワードが正しくありません。'});
-        };
+      // afterLoginPathが登録されていればそこに、なければダッシュボードにリダイレクトする
+      dispatch({type: 'REDIRECT', to: globalState.tracking.afterLoginPath || defaultRedirectPath});
+    } catch (err) {
+      const status = err.status || err.response.status;
+      if (status === 403) {
+        window.scrollTo({top: 0, left: 0, behavior: 'smooth' });
+        dispatch({type: 'ALERT', text: 'メールアドレスかパスワードが正しくありません。'});
       }
+    }
   });
   return (
     <Form
@@ -37,7 +37,7 @@ const UserLoginForm = () => {
       errors={errors}
       onSubmit={onSubmit}
     />
-  )
+  );
 };
 
 export default UserLoginForm;

@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import axios from 'axios';
 import { useForm }  from 'react-hook-form';
 import { FormVertical as Form, Textarea, Container } from '../../../shared/FormParts';
 import { ButtonWhite as Button } from '../../../shared/Buttons';
@@ -6,7 +8,7 @@ import { useGlobalState } from '../../../global/ContextProvider';
 const Edit = ({cancel, facilityId}) => {
   const [globalState, dispatch] = useGlobalState();
   const facility = globalState.facilities.data[facilityId];
-  const { register, handleSubmit, watch, errors, control, reset } = useForm();
+  const { register, handleSubmit, errors } = useForm();
   const onSubmit = handleSubmit( async (data) => {
     try {
       const response = await axios.put(`/api/facilities/${facilityId}`, data);
@@ -14,6 +16,7 @@ const Edit = ({cancel, facilityId}) => {
       dispatch({type: 'MESSAGE', text: '保存しました。'});
       cancel();
     } catch (err) {
+      //
     }
   });
   return (
@@ -39,6 +42,11 @@ const Edit = ({cancel, facilityId}) => {
       </Container>
     </Form>
   );
+};
+
+Edit.propTypes = {
+  cancel: PropTypes.func,
+  facilityId: PropTypes.string
 };
 
 export default Edit;

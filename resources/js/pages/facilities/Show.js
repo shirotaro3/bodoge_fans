@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 import HeaderContainer from '../../components/facilities/HeaderContainer';
 import FacilityServices from '../../components/shared/FacilityServices';
@@ -27,7 +28,7 @@ const FacilitiesShow = ({match}) => {
   }, [facilityId]);
   if (isNotFound) {
     return <NotFound />;
-  };
+  }
 
   if (globalState.facilities.data[facilityId]) {
     return (
@@ -42,6 +43,10 @@ const FacilitiesShow = ({match}) => {
     );
   }
   return <></>;
+};
+
+FacilitiesShow.propTypes = {
+  match: PropTypes.object
 };
 
 export default FacilitiesShow;

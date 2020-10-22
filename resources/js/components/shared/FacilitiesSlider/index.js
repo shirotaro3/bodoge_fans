@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Slider from 'react-slick';
 import styled from 'styled-components';
 import SliderChild from './SliderChild';
@@ -8,11 +9,11 @@ import Loading from '../../shared/Loading';
 import settings from './sliderSettings';
 
 const FacilitiesSlider = ({className}) => {
-  const [ globalState, dispatch ] = useGlobalState();
+  const [ globalState, ] = useGlobalState();
   const placeholder = [];
   for(let i = 0; i < 4; i++) {
     placeholder.push(<SliderPlaceholder key={`ph_${i}`} />); 
-  };
+  }
   return (
     <div className={className}>
       <Slider {...settings}>
@@ -20,15 +21,16 @@ const FacilitiesSlider = ({className}) => {
         {
           globalState.pickedUpFacilitiesId.resolved &&
           globalState.pickedUpFacilitiesId.data.map((id, i) => {
+            const facility = globalState.facilities.data[id];
             return (
               <SliderChild
                 key={`fs_${i}`}
                 linkPath={`/facilities/${id}`}
-                imgUrl={globalState.facilities.data[id].header_image_url}
-                title={globalState.facilities.data[id].name}
-                body={globalState.facilities.data[id].description}
+                imgUrl={facility && facility.header_image_url}
+                title={facility && facility.name}
+                body={facility && facility.description}
               />
-            )
+            );
           })
         }
 
@@ -39,6 +41,10 @@ const FacilitiesSlider = ({className}) => {
       <Loading resolved={globalState.pickedUpFacilitiesId.resolved} />
     </div>
   );
+};
+
+FacilitiesSlider.propTypes = {
+  className: PropTypes.string
 };
 
 const StyledSlider = styled(FacilitiesSlider)`

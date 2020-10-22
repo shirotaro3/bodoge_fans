@@ -4,11 +4,11 @@ import { useGlobalState } from '../../components/global/ContextProvider';
 import { BoxRoundedBlack as Box } from '../../components/shared/Boxes';
 
 const UsersLogout = () => {
-  const [globalState, dispatch] = useGlobalState();
+  const [ , dispatch] = useGlobalState();
   useEffect(() => {
     async function callApi() {
       try {
-        const response = await axios.post('/api/users/logout');
+        await axios.post('/api/users/logout');
         dispatch({type: 'LOGOUT'});
         dispatch({type: 'MESSAGE', text: 'ログアウトしました。'});
         dispatch({type: 'REDIRECT', to: '/'});

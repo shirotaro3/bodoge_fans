@@ -1,4 +1,6 @@
 import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
+import axios from 'axios';
 import queryString from 'query-string';
 import { useGlobalState } from '../../components/global/ContextProvider';
 import FacilityListPaginate from '../../components/shared/FacilityListPaginate';
@@ -31,6 +33,7 @@ const Likes = ({location}) => {
           data: responseData
         });
       } catch (err) {
+        //
       }
     };
     if (likes.length > 0 && !data) fetchData();
@@ -40,22 +43,26 @@ const Likes = ({location}) => {
       <h1 className='text-center'>{userName}さんのお気に入り</h1>
       {
         likes.length > 0 ?
-        <>
-          {
-            data ?
-              <FacilityListPaginate
-                facilityIds={data.result}
-                paginate={data.paginate}
-                params={{page}}
-                path='/users/likes'
-              /> :
-              <FacilityListPlaceholder />
-          }
-        </> :
-        <Box>お気に入りは登録されていません。</Box>
+          <>
+            {
+              data ?
+                <FacilityListPaginate
+                  facilityIds={data.result}
+                  paginate={data.paginate}
+                  params={{page}}
+                  path='/users/likes'
+                /> :
+                <FacilityListPlaceholder />
+            }
+          </> :
+          <Box>お気に入りは登録されていません。</Box>
       }
     </div>
   );
+};
+
+Likes.propTypes = {
+  location: PropTypes.object
 };
 
 export default Likes;

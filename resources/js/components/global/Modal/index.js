@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import media from 'styled-media-query';
 import { useGlobalState } from '../ContextProvider';
@@ -7,18 +8,18 @@ import TypeConfirm from './TypeConfirm';
 import TypeImageUpload from './TypeImageUpload';
 
 const Modal = ({className}) => {
-  const [globalState, dispatch] = useGlobalState();
+  const [globalState, ] = useGlobalState();
   const isShow = globalState.visibility.modal;
   const { type, title, body, callback } = globalState.modalConfig;
   const modalType = () => {
     switch(type) {
-      case 'CONFIRM': {
-        return <TypeConfirm callback={callback} />;
-      };
-      case 'IMAGE_UPLOAD': {
-        return <TypeImageUpload callback={callback} />;
-      };
-    };
+    case 'CONFIRM': {
+      return <TypeConfirm callback={callback} />;
+    }
+    case 'IMAGE_UPLOAD': {
+      return <TypeImageUpload callback={callback} />;
+    }
+    }
   };
   if (isShow) {
     return (
@@ -30,8 +31,12 @@ const Modal = ({className}) => {
         }
       </div>
     );
-  };
+  }
   return <></>;
+};
+
+Modal.propTypes = {
+  className: PropTypes.string
 };
 
 const StyledModal = styled(Modal)`

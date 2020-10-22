@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import axios from 'axios';
 import { BsFillImageFill } from 'react-icons/bs';
@@ -21,6 +22,7 @@ const EditImage = ({className, facilityId}) => {
       dispatch({type: 'SET_FACILITIES', data: [response.data]});
       dispatch({type: 'MESSAGE', text: 'ヘッダー画像が変更されました。'});
     } catch (err) {
+      //
     }
   };
   const handleClick = () => {
@@ -39,8 +41,13 @@ const EditImage = ({className, facilityId}) => {
         <BsFillImageFill className={`${className}__icon`} onClick={handleClick} />
       </div>
     );
-  };
+  }
   return <></>;
+};
+
+EditImage.propTypes = {
+  className: PropTypes.string,
+  facilityId: PropTypes.string,
 };
 
 const StyledEditImage = styled(EditImage)`
@@ -54,6 +61,6 @@ const StyledEditImage = styled(EditImage)`
       opacity: 1;
     }
   }
-`
+`;
 
 export default StyledEditImage;

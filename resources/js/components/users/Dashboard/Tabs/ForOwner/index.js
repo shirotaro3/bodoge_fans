@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { BsPlusCircle } from 'react-icons/bs';
 import axios from 'axios';
@@ -22,7 +23,7 @@ const ForOwner = ({location, className}) => {
   const placeholder = [];
   for (let i = 0; i < 3; i++) {
     placeholder.push({label: ''});
-  };
+  }
   const convertFacilityIdsToTileValues = (facilityIds) => {
     return facilityIds.map(id => {
       const facility = globalState.facilities.data[id];
@@ -30,7 +31,7 @@ const ForOwner = ({location, className}) => {
         label: facility.name,
         path: `/facilities/${facility.id}`,
         bgImageUrl: facility.header_image_url
-      }
+      };
     });
   };
   useEffect(() => {
@@ -49,11 +50,12 @@ const ForOwner = ({location, className}) => {
           result: resultFacilityIds
         });
       } catch (err) {
-      };
+        //
+      }
     };
     if (!data) {
       fetchData();
-    };
+    }
   }, [location.search]);
   return (
     <div className={`${className} fadein`} id='result-top'>
@@ -72,6 +74,11 @@ const ForOwner = ({location, className}) => {
       }
     </div>
   );
+};
+
+ForOwner.propTypes = {
+  location: PropTypes.object,
+  className: PropTypes.string
 };
 
 const StyledForOwner = styled(ForOwner)`

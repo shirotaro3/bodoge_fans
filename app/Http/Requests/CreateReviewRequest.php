@@ -25,7 +25,7 @@ class CreateReviewRequest extends FormRequest
     {
         return [
             'title' => 'required|max:20',
-            'body' => 'required|min:10|max:250'
+            'body' => 'required|min:10|max:250',
         ];
     }
 }

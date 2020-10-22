@@ -1,8 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { FormVertical as Form, Input, Textarea } from '../../../../shared/FormParts';
 import { ButtonWhite as Button } from '../../../../shared/Buttons';
 
-const Component = ({register, watch, errors, onSubmit}) => {
+const ReviewFormComponent = ({register, errors, onSubmit}) => {
   return (
     <Form onSubmit={onSubmit}>
       <label>タイトル（15文字以内）</label>
@@ -30,4 +31,10 @@ const Component = ({register, watch, errors, onSubmit}) => {
   );
 };
 
-export default Component;
+ReviewFormComponent.propTypes = {
+  register: PropTypes.func,
+  errors: PropTypes.object,
+  onSubmit: PropTypes.func
+};
+
+export default ReviewFormComponent;

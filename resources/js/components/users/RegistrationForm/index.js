@@ -6,23 +6,23 @@ import { useGlobalState } from '../../global/ContextProvider';
 
 const UserRegistrationForm = () => {
   const { register, handleSubmit, watch, errors, control } = useForm();
-  const [globalState, dispatch] = useGlobalState();
+  const [, dispatch] = useGlobalState();
 
   // Submit時の処理
   const onSubmit = handleSubmit(async (data) => {
-      try {
-        const response = await axios.post('/api/users/registration', data);
-        // 登録成功時
-        dispatch({type: 'LOGIN', data: response.data});
-        dispatch({type: 'MESSAGE', text: `登録が完了しました。ようこそ、${response.data.name}さん！`});
-        dispatch({type: 'REDIRECT', to: '/users/dashboard'});
-      } catch (err) {
-        const status = err.status || err.response.status;
-        if (status === 422) {
-          window.scrollTo({top: 0, left: 0, behavior: 'smooth' });
-          dispatch({type: 'ALERT', text: 'そのメールアドレスは既に登録されています。'});
-        };
+    try {
+      const response = await axios.post('/api/users/registration', data);
+      // 登録成功時
+      dispatch({type: 'LOGIN', data: response.data});
+      dispatch({type: 'MESSAGE', text: `登録が完了しました。ようこそ、${response.data.name}さん！`});
+      dispatch({type: 'REDIRECT', to: '/users/dashboard'});
+    } catch (err) {
+      const status = err.status || err.response.status;
+      if (status === 422) {
+        window.scrollTo({top: 0, left: 0, behavior: 'smooth' });
+        dispatch({type: 'ALERT', text: 'そのメールアドレスは既に登録されています。'});
       }
+    }
   });
   return (
     <Form
@@ -32,7 +32,7 @@ const UserRegistrationForm = () => {
       onSubmit={onSubmit}
       control={control}
     />
-  )
+  );
 };
 
 export default UserRegistrationForm;

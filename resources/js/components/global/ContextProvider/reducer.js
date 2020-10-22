@@ -3,350 +3,358 @@ import _ from 'lodash';
 const reducer = (state = {}, action) => {
   switch(action.type) {
 
-    // Authentication
-    case 'LOGIN':
-      return {
-        ...state,
-        auth: {
-          ...state.auth,
-          user: {
-            ...action.data,
-            likes: action.data.likes.map(o=>o.facility_id),
-          },
-          isLoggedIn: true
-        }
-      }
-    case 'LOGOUT':
-      return {
-        ...state,
-        auth: {
-          ...state.auth,
-          user: {},
-          isLoggedIn: false
-        }
-      }
-    case 'AUTH_INITIALIZED':
-      return {
-        ...state,
-        auth: {
-          ...state.auth,
-          initialized: true
-        }
-      }
-
-    // Router
-    case 'REDIRECT':
-      return {
-        ...state,
-        redirect: {
-          path: action.to,
-        }
-      }
-    case 'REDIRECT_OK':
-      return {
-        ...state,
-        redirect: {
-          path: ''
-        }
-      }
-
-    // Notification
-    case 'ALERT':
-      return {
-        ...state,
-        notice: {
-          text: `エラー：${action.text}`,
-          isShow: true,
-          type: 'ALERT',
-          color: '#f55'
-        }
-      }
-    case 'MESSAGE':
-      return {
-        ...state,
-        notice: {
-          text: action.text,
-          isShow: true,
-          type: 'MESSAGE',
-          color: '#fff'
-        }
-      }
-    case 'HIDE_NOTICE':
-      return {
-        ...state,
-        notice: {
-          ...state.notice,
-          isShow: false,
-        }
-      }
-    
-    // ComponentVisibility
-    case 'USER_MENU_OPEN':
-      return {
-        ...state,
-        visibility: {
-          ...state.visibility,
-          userMenu: true,
-          facilityMenu: false,
-          modal: false
-        }
-      }
-    case 'FACILITY_MENU_OPEN':
-      return {
-        ...state,
-        visibility: {
-          ...state.visibility,
-          userMenu: false,
-          facilityMenu: true,
-          modal: false
-        }
-      }
-    case 'MODAL_OPEN':
-      return {
-        ...state,
-        visibility: {
-          ...state.visibility,
-          userMenu: false,
-          facilityMenu: false,
-          modal: true
+  // Authentication
+  case 'LOGIN':
+    return {
+      ...state,
+      auth: {
+        ...state.auth,
+        user: {
+          ...action.data,
+          likes: action.data.likes.map(o=>o.facility_id),
         },
-        modalConfig: {
-          // CONFIRM, IMAGE_UPLOADが利用可能
-          type: action.modalType || 'CONFIRM',
-          title: action.title || '',
-          body: action.body || '',
-          callback: action.callback || function() { return; }
-        }
+        isLoggedIn: true
       }
-    case 'CLOSE_ALL':
-      return {
-        ...state,
-        visibility: {
-          ...state.visibility,
-          userMenu: false,
-          facilityMenu: false,
-          modal: false,
-        }
+    };
+  case 'LOGOUT':
+    return {
+      ...state,
+      auth: {
+        ...state.auth,
+        user: {},
+        isLoggedIn: false
       }
-    case 'API_CALL_START':
-      return {
-        ...state,
-        visibility: {
-          ...state.visibility,
-          waiting: true
-        }
+    };
+  case 'AUTH_INITIALIZED':
+    return {
+      ...state,
+      auth: {
+        ...state.auth,
+        initialized: true
       }
-    case 'API_CALL_END':
-      return {
-        ...state,
-        visibility: {
-          ...state.visibility,
-          waiting: false
-        }
-      }
+    };
 
-    //  MasterData
-    case 'SET_MASTERS':
-      return {
-        ...state,
-        masters: {
-          ...state.selectValues,
-          facilityTypes: formatSelectValue(action.facilityTypes),
-          budgets: formatSelectValue(action.budgets),
-          scales: formatSelectValue(action.scales),
-          prefectures: formatPrefecture(action.prefectures),
-          services: formatService(action.services),
-          resolved: true
-        }
+  // Router
+  case 'REDIRECT':
+    return {
+      ...state,
+      redirect: {
+        path: action.to,
       }
+    };
+  case 'REDIRECT_OK':
+    return {
+      ...state,
+      redirect: {
+        path: ''
+      }
+    };
 
-    // facilitiesPickup
-    case 'SET_FACILITY_PICKUP':
-      return {
-        ...state,
-        pickedUpFacilitiesId: {
-          ...state.pickedUpFacilitiesId,
-          data: action.data.map(v => v.id),
-          resolved: true
+  // Notification
+  case 'ALERT':
+    return {
+      ...state,
+      notice: {
+        text: `エラー：${action.text}`,
+        isShow: true,
+        type: 'ALERT',
+        color: '#f55'
+      }
+    };
+  case 'MESSAGE':
+    return {
+      ...state,
+      notice: {
+        text: action.text,
+        isShow: true,
+        type: 'MESSAGE',
+        color: '#fff'
+      }
+    };
+  case 'HIDE_NOTICE':
+    return {
+      ...state,
+      notice: {
+        ...state.notice,
+        isShow: false,
+      }
+    };
+
+  // ComponentVisibility
+  case 'USER_MENU_OPEN':
+    return {
+      ...state,
+      visibility: {
+        ...state.visibility,
+        userMenu: true,
+        facilityMenu: false,
+        modal: false
+      }
+    };
+  case 'FACILITY_MENU_OPEN':
+    return {
+      ...state,
+      visibility: {
+        ...state.visibility,
+        userMenu: false,
+        facilityMenu: true,
+        modal: false
+      }
+    };
+  case 'MODAL_OPEN':
+    return {
+      ...state,
+      visibility: {
+        ...state.visibility,
+        userMenu: false,
+        facilityMenu: false,
+        modal: true
+      },
+      modalConfig: {
+        // CONFIRM, IMAGE_UPLOADが利用可能
+        type: action.modalType || 'CONFIRM',
+        title: action.title || '',
+        body: action.body || '',
+        callback: action.callback || function() { return; }
+      }
+    };
+  case 'CLOSE_ALL':
+    return {
+      ...state,
+      visibility: {
+        ...state.visibility,
+        userMenu: false,
+        facilityMenu: false,
+        modal: false,
+      }
+    };
+  case 'API_CALL_START':
+    return {
+      ...state,
+      visibility: {
+        ...state.visibility,
+        waiting: true
+      }
+    };
+  case 'API_CALL_END':
+    return {
+      ...state,
+      visibility: {
+        ...state.visibility,
+        waiting: false
+      }
+    };
+
+  //  MasterData
+  case 'SET_MASTERS':
+    return {
+      ...state,
+      masters: {
+        ...state.masters,
+        facilityTypes: formatSelectValue(action.facilityTypes),
+        budgets: formatSelectValue(action.budgets),
+        scales: formatSelectValue(action.scales),
+        prefectures: formatPrefecture(action.prefectures),
+        services: formatService(action.services),
+        resolved: true
+      }
+    };
+
+  // facilitiesPickup
+  case 'SET_FACILITY_PICKUP':
+    return {
+      ...state,
+      pickedUpFacilitiesId: {
+        ...state.pickedUpFacilitiesId,
+        data: action.data.map(v => v.id),
+        resolved: true
+      },
+      facilities: {
+        ...state.facilities,
+        data: {
+          ...state.facilities.data,
+          ..._.keyBy(action.data, 'id')
+        }
+      },
+    };
+
+  // facilitiesのデータをオブジェクトで保持
+  // data: array
+  case 'SET_FACILITIES':
+    return {
+      ...state,
+      facilities: {
+        ...state.facilities,
+        data: {
+          ...state.facilities.data,
+          ..._.keyBy(action.data, 'id')
+        }
+      },
+      myFacilitiesResults: {}
+    };
+  case 'DELETE_FACILITY': {
+    const newState = {...state};
+    // ピックアップから削除する TODO:ピックアップを再取得する仕組み。
+    const index = newState.pickedUpFacilitiesId.data.indexOf(Number(action.id));
+    if (index > -1) {
+      newState.pickedUpFacilitiesId.data.splice(index, 1);
+    }
+    delete newState.facilities.data[action.id];
+    return {
+      ...newState,
+      myFacilitiesResults: {},
+      reviewsIndexResults: {},
+    };
+  }
+  // likes
+  // data: array
+  case 'SET_LIKES':
+    return {
+      ...state,
+      auth: {
+        ...state.auth,
+        user: {
+          ...state.auth.user,
+          likes: action.data.map(o=>o.facility_id),
+        }
+      },
+      likedFacilityResults: {}
+    };
+
+  // facilityTimes
+  case 'SET_FACILITY_TIME':
+  {
+    const newState = {...state};
+    const facilityId = action.data.facility_id;
+    newState.facilities.data[facilityId].facility_time = action.data;
+    return newState;
+  }
+
+  // reviews
+  case 'SET_REVIEW':
+  {
+    const facilityId = action.data.facility_id;
+    const newState = {
+      ...state,
+      reviewsIndexResults: {}
+    };
+    newState.facilities.data[facilityId].reviews.push(
+      {
+        ...action.data
+      });
+    return newState;
+  }
+
+  case 'DELETE_REVIEW':
+  {
+    const facilityId = action.data.facility_id;
+    const id = action.data.id;
+    const newState = {
+      ...state,
+      reviewsIndexResults: {}
+    };
+    newState.facilities.data[facilityId].reviews =
+      newState.facilities.data[facilityId].reviews.filter((o) => {
+        return o.id !== id;
+      });
+    return newState;
+  }
+
+  case 'SET_FACILITIES_SEARCH_RESULT':
+  {
+    const newState = {
+      ...state,
+      facilities: {
+        ...state.facilities,
+        data: {
+          ...state.facilities.data,
+          ..._.keyBy(action.data, 'id')
         },
-        facilities: {
-          ...state.facilities,
-          data: {
-            ...state.facilities.data,
-            ..._.keyBy(action.data, 'id')
-          }
-        },
       }
-    
-    // facilitiesのデータをオブジェクトで保持
-    // data: array
-    case 'SET_FACILITIES':
-      return {
-        ...state,
-        facilities: {
-          ...state.facilities,
-          data: {
-            ...state.facilities.data,
-            ..._.keyBy(action.data, 'id')
-          }
-        },
-        myFacilitiesResults: {}
-      }
-    case 'DELETE_FACILITY': {
-        delete state.facilities.data[action.id];
-        return {
-          ...state,
-          myFacilitiesResults: {}
-        };
-      }
-    // likes
-    // data: array
-    case 'SET_LIKES':
-      return {
-        ...state,
-        auth: {
-          ...state.auth,
-          user: {
-            ...state.auth.user,
-            likes: action.data.map(o=>o.facility_id),
-          }
-        },
-        likedFacilityResults: {}
-      }
+    };
+    const propertyName = action.queryString;
+    newState.searchResults[propertyName] = {
+      result: action.result,
+      paginate: action.paginate
+    };
+    return newState;
+  }
 
-    // facilityTimes
-    case 'SET_FACILITY_TIME':
-      {
-        const facilityId = action.data.facility_id;
-        state.facilities.data[facilityId].facility_time = action.data;
-        return state;
+  case 'SET_USER_LIKES_RESULT':
+  {
+    const newState = {
+      ...state,
+      facilities: {
+        ...state.facilities,
+        data: {
+          ...state.facilities.data,
+          ..._.keyBy(action.data, 'id')
+        }
       }
+    };
+    const propertyName = action.page;
+    newState.likedFacilityResults[propertyName] = {
+      result: action.result,
+      paginate: action.paginate
+    };
+    return newState;
+  }
 
-    // reviews
-    case 'SET_REVIEW':
-      {
-        const facilityId = action.data.facility_id;
-        const newState = {
-          ...state,
-          reviewsIndexResults: {}
-        };
-        newState.facilities.data[facilityId].reviews.push(
-          {
-            ...action.data
-          });
-        return newState;
+  case 'SET_REVIEWS_INDEX_RESULT':
+  {
+    const newState = {
+      ...state,
+      reviews: {
+        ...state.reviews,
+        data: {
+          ...state.reviews.data,
+          ..._.keyBy(action.data, 'id')
+        }
       }
+    };
+    const propertyName = action.page;
+    newState.reviewsIndexResults[propertyName] = {
+      result: action.result,
+      paginate: action.paginate
+    };
+    return newState;
+  }
 
-    case 'DELETE_REVIEW':
-      {
-        const facilityId = action.data.facility_id;
-        const id = action.data.id;
-        const newState = {
-          ...state,
-          reviewsIndexResults: {}
-        };
-        newState.facilities.data[facilityId].reviews =
-          newState.facilities.data[facilityId].reviews.filter((o) => {
-            return o.id !== id;
-        });
-        return newState;
+  case 'SET_MY_FACILITIES_RESULTS':
+  {
+    const newState = {
+      ...state,
+      facilities: {
+        ...state.facilities,
+        data: {
+          ...state.facilities.data,
+          ..._.keyBy(action.data, 'id')
+        }
       }
-    
-    case 'SET_FACILITIES_SEARCH_RESULT':
-      {
-        const newState = {
-          ...state,
-          facilities: {
-            ...state.facilities,
-            data: {
-              ...state.facilities.data,
-              ..._.keyBy(action.data, 'id')
-            },
-          }
-        };
-        const propertyName = action.queryString;
-        newState.searchResults[propertyName] = {
-          result: action.result,
-          paginate: action.paginate
-        };
-        return newState;
-      }
-
-    case 'SET_USER_LIKES_RESULT':
-      {
-        const newState = {
-          ...state,
-          facilities: {
-            ...state.facilities,
-            data: {
-              ...state.facilities.data,
-              ..._.keyBy(action.data, 'id')
-            }
-          }
-        };
-        const propertyName = action.page;
-        newState.likedFacilityResults[propertyName] = {
-          result: action.result,
-          paginate: action.paginate
-        };
-        return newState;
-      }
-  
-    case 'SET_REVIEWS_INDEX_RESULT':
-      {
-        const newState = {
-          ...state,
-          reviews: {
-            ...state.reviews,
-            data: {
-              ...state.reviews.data,
-              ..._.keyBy(action.data, 'id')
-            }
-          }
-        };
-        const propertyName = action.page;
-        newState.reviewsIndexResults[propertyName] = {
-          result: action.result,
-          paginate: action.paginate
-        };
-        return newState;
-      }
-    
-    case 'SET_MY_FACILITIES_RESULTS':
-      {
-        const newState = {
-          ...state,
-          facilities: {
-            ...state.facilities,
-            data: {
-              ...state.facilities.data,
-              ..._.keyBy(action.data, 'id')
-            }
-          }
-        };
-        const propertyName = action.page;
-        newState.myFacilitiesResults[propertyName] = {
-          result: action.result,
-          paginate: action.paginate
-        };
-        return newState;
-      }
+    };
+    const propertyName = action.page;
+    newState.myFacilitiesResults[propertyName] = {
+      result: action.result,
+      paginate: action.paginate
+    };
+    return newState;
+  }
   }
 };
 
 const formatSelectValue = (selectValueArr) => {
   return selectValueArr.map(v => {
-    return { value: v.id, label: v.detail }
+    return { value: v.id, label: v.detail };
   });
 };
 const formatPrefecture = (prefectureArr) => {
   return prefectureArr.map(v => {
-    return { value: v.id, label: v.name}
+    return { value: v.id, label: v.name};
   });
 };
 const formatService = (serviceArr) => {
   return serviceArr.map(v => {
-    return { value: v.id, label: v.detail, iconUrl: v.icon_url }
+    return { value: v.id, label: v.detail, iconUrl: v.icon_url };
   });
 };
 

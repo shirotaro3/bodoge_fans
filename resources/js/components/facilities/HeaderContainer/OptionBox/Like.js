@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import axios from 'axios';
 import { BsStar, BsStarFill } from 'react-icons/bs';
@@ -13,7 +14,6 @@ const Like = ({className, facilityId}) => {
     try {
       const response = await axios.post('/api/likes', { facility_id: facilityId });
       dispatch({type: 'SET_LIKES', data: response.data});
-      dispatch({type: 'MESSAGE', text: 'お気に入りが変更されました。'});
     } catch (err) {
       console.log(err);
     }
@@ -29,6 +29,11 @@ const Like = ({className, facilityId}) => {
       {/* <div className={`${className}__count`}>{likesCount}</div> */}
     </div>
   );
+};
+
+Like.propTypes = {
+  className: PropTypes.string,
+  facilityId: PropTypes.string
 };
 
 const StyledLike = styled(Like)`
@@ -56,6 +61,6 @@ const StyledLike = styled(Like)`
     font-size: 1.5em;
     margin: 0 6px;
   }
-`
+`;
 
 export default StyledLike;

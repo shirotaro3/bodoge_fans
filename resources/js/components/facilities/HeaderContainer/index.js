@@ -1,14 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import media from 'styled-media-query';
-import { useGlobalState } from '../../../components/global/ContextProvider';
 import NameDescription from './NameDescription';
 import TimeTable from './TimeTable';
 import OptionBox from './OptionBox';
 
 const HeaderContainer = ({className, facilityId}) => {
-  const [globalState, dispatch] = useGlobalState();
-  const facilities = globalState.facilities.data[facilityId];
   return (
     <div className={className}>
       <div className={`${className}__container`}>
@@ -18,6 +16,11 @@ const HeaderContainer = ({className, facilityId}) => {
       </div>
     </div>
   );
+};
+
+HeaderContainer.propTypes = {
+  className: PropTypes.string,
+  facilityId: PropTypes.string
 };
 
 const StyledHeaderContainer = styled(HeaderContainer).attrs(props => ({

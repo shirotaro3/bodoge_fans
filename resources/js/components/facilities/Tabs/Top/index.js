@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import media from 'styled-media-query';
 import { BsPencilSquare } from 'react-icons/bs';
@@ -8,7 +9,7 @@ import Sidebar from './Sidebar';
 
 const Top = ({className, match}) => {
   const facilityId = match.params.id;
-  const [globalState, dispatch] = useGlobalState();
+  const [globalState, ] = useGlobalState();
   const [isEditing, setIsEditing] = useState(false);
   const facility = globalState.facilities.data[facilityId];
   const authUser = globalState.auth.user;
@@ -24,13 +25,13 @@ const Top = ({className, match}) => {
         <h2>{facility.name}より</h2>
         {
           isEditing ?
-          <Edit facilityId={facilityId} cancel={handleClick} /> :
-          <div onClick={handleClick} className={`${className}__intr`}>
-            {facility.introduction}
-            <div className={`${className}__edit`}>
-              <BsPencilSquare size='25px' />
+            <Edit facilityId={facilityId} cancel={handleClick} /> :
+            <div onClick={handleClick} className={`${className}__intr`}>
+              {facility.introduction}
+              <div className={`${className}__edit`}>
+                <BsPencilSquare size='25px' />
+              </div>
             </div>
-          </div>
         }
       </div>
       <div className={`${className}__sidebar`}>
@@ -40,9 +41,14 @@ const Top = ({className, match}) => {
   );
 };
 
+Top.propTypes = {
+  className: PropTypes.string,
+  match: PropTypes.object
+};
+
 const StyledTop = styled(Top).attrs(props => {
   const facilityId = props.match.params.id;
-  const [globalState, dispatch] = useGlobalState();
+  const [globalState, ] = useGlobalState();
   const facility = globalState.facilities.data[facilityId];
   const authUser = globalState.auth.user;
   const isMine = authUser.id === facility.user_id;
@@ -85,7 +91,7 @@ const StyledTop = styled(Top).attrs(props => {
     `}
   }
   ${
-    props => props.isMine &&
+  props => props.isMine &&
     `&__intr {
       cursor: pointer;
       &:hover {
@@ -95,9 +101,9 @@ const StyledTop = styled(Top).attrs(props => {
     &__intr:hover &__edit {
       opacity: .6;
     }`
-  }
+}
   ${
-    props => props.isMine &&
+  props => props.isMine &&
       media.lessThan('medium')`
         &__intr {
           background: rgba(0,0,0,.05);
@@ -107,7 +113,7 @@ const StyledTop = styled(Top).attrs(props => {
           opacity: .6;
         }
       `
-  }
+}
 `;
 
 export default StyledTop;

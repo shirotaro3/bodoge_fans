@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import media from 'styled-media-query';
@@ -17,7 +18,14 @@ const NavItem = ({to, children, icon, className}) => {
       ></NavLink>
     </div>
   );
-}
+};
+
+NavItem.propTypes = {
+  to: PropTypes.string,
+  children: PropTypes.node,
+  icon: PropTypes.node,
+  className: PropTypes.string
+};
 
 const StyledNavItem = styled(NavItem)`
   ${divLink}
@@ -48,6 +56,6 @@ const StyledNavItem = styled(NavItem)`
     opacity: .2;
     cursor: default;
   }
-`
+`;
 
 export default StyledNavItem;

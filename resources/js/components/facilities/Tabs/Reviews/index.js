@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import media from 'styled-media-query';
 import { useGlobalState } from '../../../global/ContextProvider';
@@ -11,7 +12,7 @@ import _ from 'lodash';
 
 const Reviews = ({match, className}) => {
   const facilityId = match.params.id;
-  const [globalState, dispatch] = useGlobalState();
+  const [globalState, ] = useGlobalState();
   const facility = globalState.facilities.data[facilityId];
   const reviews = _.orderBy(facility.reviews, ['created_at'], ['desc']);
   return (
@@ -19,27 +20,32 @@ const Reviews = ({match, className}) => {
       <h2>{facility.name}のクチコミ</h2>
       {
         reviews.length > 0 ?
-        <Pagination
-          maxItems={5}
-          collection={reviews}
-          Component={ReviewItem} 
-        /> :
-        <BoxNeg>
-          クチコミはまだありません。<br />あなたのクチコミを投稿してみませんか？
-        </BoxNeg>
+          <Pagination
+            maxItems={5}
+            collection={reviews}
+            Component={ReviewItem} 
+          /> :
+          <BoxNeg>
+            クチコミはまだありません。<br />あなたのクチコミを投稿してみませんか？
+          </BoxNeg>
       }
       {
         globalState.auth.isLoggedIn ?
-        <Box>
-          <h3>クチコミを投稿</h3>
-          <ReviewForm facilityId={facilityId} />
-        </Box> :
-        <div className={`${className}__text`}>
-           今すぐ<Link to='/users/login'>ログイン</Link>して口コミを投稿しましょう。
-        </div>
+          <Box>
+            <h3>クチコミを投稿</h3>
+            <ReviewForm facilityId={facilityId} />
+          </Box> :
+          <div className={`${className}__text`}>
+            今すぐ<Link to='/users/login'>ログイン</Link>して口コミを投稿しましょう。
+          </div>
       }
     </div>
   );
+};
+
+Reviews.propTypes = {
+  match: PropTypes.object,
+  className: PropTypes.string
 };
 
 const StyledReviews = styled(Reviews)`

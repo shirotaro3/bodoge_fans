@@ -18,11 +18,12 @@ class FacilityTime extends Model
         'facility_id', 'mon_start', 'mon_end', 'tue_start', 'tue_end',
         'wed_start', 'wed_end', 'thu_start', 'thu_end', 'fri_start',
         'fri_end', 'sat_start', 'sat_end', 'sun_start', 'sun_end',
-        'hol_start', 'hol_end', 'footnote'
+        'hol_start', 'hol_end', 'footnote',
     ];
 
     // belongsTo
-    public function facility() {
+    public function facility()
+    {
         return $this->belongsTo('App\Models\Facility');
     }
 }

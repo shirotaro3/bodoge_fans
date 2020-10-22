@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import media from 'styled-media-query';
 import { divLink } from '../mixinCss';
@@ -25,10 +26,17 @@ const TileItem = ({className, label, icon, path}) => {
   );
 };
 
+TileItem.propTypes = {
+  className: PropTypes.string,
+  label: PropTypes.string,
+  icon: PropTypes.node,
+  path: PropTypes.string
+};
+
 const StyledTileItem = styled(TileItem).attrs(props => {
   return {
     bgImage: props.bgImageUrl ? `url(${props.bgImageUrl})` : 'none'
-  }
+  };
 })`
   ${divLink}
   display: flex;

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 import FacilitiesEditForm from '../../components/facilities/EditForm';
 import { useGlobalState } from '../../components/global/ContextProvider';
@@ -33,8 +34,8 @@ const FacilitiesEdit = ({match}) => {
   }, [facilityId]);
 
   if (isNotFound) {
-    return <NotFound />
-  };
+    return <NotFound />;
+  }
 
   if (facility && mastersResolved) {
     // facilityデータとマスタデータがあるとき
@@ -44,7 +45,11 @@ const FacilitiesEdit = ({match}) => {
       </div>
     );
   }
-  return <></>
+  return <></>;
+};
+
+FacilitiesEdit.propTypes = {
+  match: PropTypes.object
 };
 
 export default FacilitiesEdit;

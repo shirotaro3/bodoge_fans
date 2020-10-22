@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 import { useGlobalState } from '../../components/global/ContextProvider';
 import queryString from 'query-string';
@@ -26,6 +27,7 @@ const Reviews = ({location}) => {
           data: responseData
         });
       } catch (err) {
+        //
       }
     };
     if (!data) fetchData();
@@ -33,17 +35,21 @@ const Reviews = ({location}) => {
   return (
     <div className='fadein' id='result-top'>
       <Hero />
-        {
-          data ?
-            <ReviewListPaginate
-              reviewIds={data.result}
-              paginate={data.paginate}
-              page={page}
-            /> :
-            <ReviewListPlaceholder />
-        }
+      {
+        data ?
+          <ReviewListPaginate
+            reviewIds={data.result}
+            paginate={data.paginate}
+            page={page}
+          /> :
+          <ReviewListPlaceholder />
+      }
     </div>
   );
+};
+
+Reviews.propTypes = {
+  location: PropTypes.object
 };
 
 export default Reviews;

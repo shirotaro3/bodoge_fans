@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from '../components/shared/Links';
 import styled from 'styled-components';
 import { FaChess } from 'react-icons/fa';
@@ -16,7 +17,11 @@ const NotFound = ({className}) => {
       <Link to='/'>トップページへ戻る</Link>
     </div>
   );
-}
+};
+
+NotFound.propTypes = {
+  className: PropTypes.string
+};
 
 const StyledNotFound = styled(NotFound)`
   text-align: center;
@@ -27,6 +32,6 @@ const StyledNotFound = styled(NotFound)`
   h1 {
     font-size: 30px;
   }
-`
+`;
 
 export default StyledNotFound;

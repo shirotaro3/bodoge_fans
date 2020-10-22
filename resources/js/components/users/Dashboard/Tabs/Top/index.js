@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Tiles from '../../../../shared/Tiles';
 import { BiSearchAlt } from 'react-icons/bi';
@@ -32,6 +33,10 @@ const Top = ({className}) => {
       <Tiles tileValues={tileValues} />
     </div>
   );
+};
+
+Top.propTypes = {
+  className: PropTypes.string
 };
 
 const StyledTop = styled(Top)`

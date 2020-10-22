@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import FacilityListItem from './FacilityListItem';
 import PageInfo from './PageInfo';
@@ -11,7 +12,7 @@ const FacilityListPaginate = ({className, facilityIds, paginate, params, path}) 
       <PageInfo paginate={paginate} />
       {
         facilityIds.map((facilityId, i) => {
-          return <FacilityListItem key={i} facilityId={facilityId} />
+          return <FacilityListItem key={i} facilityId={facilityId} />;
         })
       }
       {
@@ -21,6 +22,14 @@ const FacilityListPaginate = ({className, facilityIds, paginate, params, path}) 
       }
     </div>
   );
+};
+
+FacilityListPaginate.propTypes = {
+  className: PropTypes.string,
+  facilityIds: PropTypes.array,
+  paginate: PropTypes.object,
+  params: PropTypes.object,
+  path: PropTypes.string
 };
 
 const StyledFacilityListPaginate = styled(FacilityListPaginate)`

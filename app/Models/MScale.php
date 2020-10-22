@@ -18,10 +18,13 @@ class MScale extends Model
         'detail',
     ];
 
-    public function facilities() {
+    public function facilities()
+    {
         return $this->hasMany('App\Models\Facility');
     }
-    public function events() {
+
+    public function events()
+    {
         return $this->hasMany('App\Models\Events');
     }
 }

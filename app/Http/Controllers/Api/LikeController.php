@@ -6,12 +6,12 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
-use App\Models\Like;
 
 class LikeController extends Controller
 {
-    public function store(Request $request) {
-        Log::info('[LIKES_API_POST_START] request:'.$request);
+    public function store(Request $request)
+    {
+        Log::info('[LIKES_API_POST_START] request:' . $request);
 
         $facility_id = $request->input('facility_id');
         $existingLike = Auth::user()->likes()->where('facility_id', $facility_id);
