@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -12,12 +11,12 @@ class User extends Authenticatable
     use HasFactory, Notifiable;
 
     protected $fillable = [
-        'name', 'email', 'password', 'birthday', 'sex', 'icon_path'
+        'name', 'email', 'password', 'birthday', 'sex', 'icon_path',
     ];
 
     protected $hidden = [
         'password', 'remember_token', 'birthday', 'sex', 'email',
-        'created_at', 'updated_at', 'email_verified_at'
+        'created_at', 'updated_at', 'email_verified_at',
     ];
 
     protected $casts = [
@@ -26,13 +25,18 @@ class User extends Authenticatable
 
     protected $appends = ['icon_url'];
 
-    public function facilities() {
+    public function facilities()
+    {
         return $this->hasMany('App\Models\Facility');
     }
-    public function likes() {
+
+    public function likes()
+    {
         return $this->hasMany('App\Models\Like');
     }
-    public function reviews() {
+
+    public function reviews()
+    {
         return $this->hasMany('App\Models\Review');
     }
 

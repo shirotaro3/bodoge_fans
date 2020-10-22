@@ -18,11 +18,13 @@ class Review extends Model
         'user_id', 'facility_id', 'title', 'body',
     ];
 
-    public function facility() {
+    public function facility()
+    {
         return $this->belongsTo('App\Models\Facility');
     }
 
-    public function user() {
+    public function user()
+    {
         return $this->belongsTo('App\Models\User');
     }
 }

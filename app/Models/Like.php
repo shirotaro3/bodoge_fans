@@ -18,13 +18,18 @@ class Like extends Model
         'facility_id', 'user_id',
     ];
 
-    public function post() {
+    public function post()
+    {
         return $this->belongsTo('App\Models\Post');
     }
-    public function facility() {
+
+    public function facility()
+    {
         return $this->belongsTo('App\Models\Facility');
     }
-    public function user() {
+
+    public function user()
+    {
         return $this->belongsTo('App\Models\User');
     }
 }

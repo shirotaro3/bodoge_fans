@@ -18,7 +18,8 @@ class MPrefecture extends Model
         'name',
     ];
 
-    public function facilities() {
+    public function facilities()
+    {
         return $this->hasMany('App\Models\Facility');
     }
 }

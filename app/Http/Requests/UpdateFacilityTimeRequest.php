@@ -24,7 +24,7 @@ class UpdateFacilityTimeRequest extends FormRequest
     public function rules()
     {
         return [
-            'footnote' => 'max:20|nullable'
+            'footnote' => 'max:20|nullable',
         ];
     }
 }

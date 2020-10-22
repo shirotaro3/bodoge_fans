@@ -3,15 +3,15 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Http\Requests\CreateReviewRequest;
+use App\Models\Review;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
-use App\Models\Review;
 
 class ReviewController extends Controller
 {
-    public function index () {
+    public function index()
+    {
         Log::info('[API_REVIEWS_INDEX_QUERY_START]');
         $reviews = Review::with(
             'user',
@@ -22,7 +22,8 @@ class ReviewController extends Controller
         return response()->json($reviews);
     }
 
-    public function store (CreateReviewRequest $request) {
+    public function store(CreateReviewRequest $request)
+    {
         Log::info('[API_REVIEWS_STORE_POST_START]');
         $review = new Review;
         $review->fill($request->all());
@@ -33,13 +34,16 @@ class ReviewController extends Controller
         return response()->json($review);
     }
 
-    public function destroy ($id) {
+    public function destroy($id)
+    {
         Log::info('[API_REVIEWS_DESTROY_DELETE_START');
         $review = Review::find($id);
+
         if (!$review->user_id === Auth::user()->id) {
             Log::info('[API_REVIEWS_DESTROY_DELETE_FAILURE');
             abort(403, 'Forbidden.');
         }
+
         if (!$review) {
             return response()->json(false);
         }

@@ -17,14 +17,16 @@ class Post extends Model
     protected $fillable = [
         'title', 'body',
     ];
-    
+
     // hasOne
-    public function event() {
+    public function event()
+    {
         return $this->hasOne('App\Models\Event');
     }
-    
+
     // hasMany
-    public function likes() {
+    public function likes()
+    {
         return $this->hasMany('App\Models\Like');
     }
 }

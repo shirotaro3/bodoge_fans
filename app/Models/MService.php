@@ -15,10 +15,11 @@ class MService extends Model
      * @var array
      */
     protected $fillable = [
-        'detail', 'icon_url'
+        'detail', 'icon_url',
     ];
 
-    public function facilities() {
+    public function facilities()
+    {
         return $this->belongsToMany('App\Models\Facility');
     }
 }
