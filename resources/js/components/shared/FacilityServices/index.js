@@ -5,7 +5,7 @@ import media from 'styled-media-query';
 import ServiceIcon from './ServiceIcon';
 import { useGlobalState } from '../../global/ContextProvider';
 
-const Services = ({className, facilityId}) => {
+const FacilityServices = ({className, facilityId}) => {
   const [globalState, ] = useGlobalState();
   const facility = globalState.facilities.data[facilityId];
   const facilityServicesId = facility.m_services.map(o=>o.id);
@@ -30,12 +30,12 @@ const Services = ({className, facilityId}) => {
   );
 };
 
-Services.propTypes = {
+FacilityServices.propTypes = {
   className: PropTypes.string,
-  facilityId: PropTypes.number
+  facilityId: PropTypes.string
 };
 
-const StyledServices = styled(Services)`
+const StyledServices = styled(FacilityServices)`
   box-shadow: 0 -8px 3px -3px rgba(0,0,0,.5);
   border-bottom: 12px solid #555;
   border-top: 12px solid #555;
@@ -64,7 +64,7 @@ const StyledServices = styled(Services)`
   }
 `;
 
-export const ServicesSearchResult = styled(Services)`
+export const ServicesSearchResult = styled(FacilityServices)`
   border-bottom: 12px solid #555;
   border-top: 12px solid #555;
   background: #555;

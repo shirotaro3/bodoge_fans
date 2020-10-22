@@ -18,7 +18,7 @@ class FacilityController extends Controller
 
     public function index()
     {
-        Log::info('[API_FACILITIES_INDEX_QUERY_START]');
+        Log::info('[FACILITIES_API_INDEX_QUERY_START]');
 
         $facilities = Facility::with([
             'm_prefecture',
@@ -32,7 +32,7 @@ class FacilityController extends Controller
             'likes',
             ])->paginate(5);
 
-        Log::info('[API_FACILITIES_INDEX_QUERY_SUCCESS]');
+        Log::info('[FACILITIES_API_INDEX_QUERY_SUCCESS]');
         return response()->json($facilities);
     }
 
@@ -40,7 +40,7 @@ class FacilityController extends Controller
 
     public function store(CreateFacilityRequest $request)
     {
-        Log::info('[API_FACILITIES_STORE_POST_START]');
+        Log::info('[FACILITIES_API_STORE_POST_START]');
 
         $facility = DB::transaction(function () use ($request) {
             $facility = new Facility();
@@ -72,7 +72,7 @@ class FacilityController extends Controller
             'm_facility_type'
         );
 
-        Log::info('[API_FACILITIES_STORE_POST_SUCCESS]');
+        Log::info('[FACILITIES_API_STORE_POST_SUCCESS]');
         return response()->json($facility);
     }
 
@@ -80,7 +80,7 @@ class FacilityController extends Controller
 
     public function show($id)
     {
-        Log::info('[API_FACILITIES_SHOW_GET_START]');
+        Log::info('[FACILITIES_API_SHOW_GET_START]');
 
         $facility = Facility::with([
             'm_prefecture',
@@ -95,11 +95,11 @@ class FacilityController extends Controller
             ])->find($id);
 
         if (!$facility) {
-            Log::info('[API_FACILITIES_SHOW_GET_FAILURE]');
+            Log::info('[FACILITIES_API_SHOW_GET_FAILURE]');
             abort(404, 'Not found');
         }
 
-        Log::info('[API_FACILITIES_SHOW_GET_SUCCESS]');
+        Log::info('[FACILITIES_API_SHOW_GET_SUCCESS]');
         return response()->json($facility);
     }
 
@@ -107,18 +107,18 @@ class FacilityController extends Controller
 
     public function update(UpdateFacilityRequest $request, $id)
     {
-        Log::info('[API_FACILITIES_UPDATE_START]');
+        Log::info('[FACILITIES_API_UPDATE_START]');
 
         $facility = DB::transaction(function () use ($request, $id) {
             $facility = Facility::find($id);
 
             if (!$facility) {
-                Log::info('[API_FACILITIES_UPDATE_FAILURE]');
+                Log::info('[FACILITIES_API_UPDATE_FAILURE]');
                 abort(400, 'Invalid param');
             }
 
             if ($facility->user_id !== Auth::user()->id) {
-                Log::info('[API_FACILITIES_UPDATE_FAILURE]');
+                Log::info('[FACILITIES_API_UPDATE_FAILURE]');
                 abort(403, 'Forbidden');
             }
             $services = $request->input('m_service_ids');
@@ -139,7 +139,6 @@ class FacilityController extends Controller
                 }
             }
             $facility->save();
-
             return $facility;
         });
         $facility->load(
@@ -154,7 +153,7 @@ class FacilityController extends Controller
             'm_facility_type'
         );
 
-        Log::info('[API_FACILITIES_UPDATE_SUCCESS]');
+        Log::info('[FACILITIES_API_UPDATE_SUCCESS]');
         return response()->json($facility);
     }
 
@@ -162,17 +161,17 @@ class FacilityController extends Controller
 
     public function destroy($id)
     {
-        Log::info('[API_FACILITIES_DESTROY_DELETE_START]');
+        Log::info('[FACILITIES_API_DESTROY_DELETE_START]');
 
         $facility = Facility::find($id);
 
         if ($facility->user_id !== Auth::user()->id) {
-            Log::info('[API_FACILITIES_DESTROY_DELETE_FAILURE]');
+            Log::info('[FACILITIES_API_DESTROY_DELETE_FAILURE]');
             abort(403, 'Forbidden');
         }
 
         if (!$facility) {
-            Log::info('[API_FACILITIES_DESTROY_DELETE_FAILURE]');
+            Log::info('[FACILITIES_API_DESTROY_DELETE_FAILURE]');
             abort(400, 'Invalid param');
         }
         $old_file_path = $facility->header_image_path;
@@ -182,7 +181,7 @@ class FacilityController extends Controller
         }
         $facility->delete();
 
-        Log::info('[API_FACILITIES_DESTROY_DELETE_SUCCESS]');
+        Log::info('[FACILITIES_API_DESTROY_DELETE_SUCCESS]');
         return response()->json($facility);
     }
 
@@ -190,7 +189,7 @@ class FacilityController extends Controller
 
     public function search(Request $request)
     {
-        Log::info('[API_FACILITIES_SEARCH_QUERY_START]');
+        Log::info('[FACILITIES_API_SEARCH_QUERY_START]');
 
         $name = $request->query('name');
         $m_facility_type_id = $request->query('m_facility_type_id');
@@ -238,13 +237,13 @@ class FacilityController extends Controller
             'm_facility_type'
         )->paginate(5);
 
-        Log::info('[API_FACILITIES_SEARCH_QUERY_SUCCESS]');
+        Log::info('[FACILITIES_API_SEARCH_QUERY_SUCCESS]');
         return response()->json($facilities);
     }
 
     public function random_pick()
     {
-        Log::info('[API_FACILITIES_RANDOM_PICK_QUERY_START]');
+        Log::info('[FACILITIES_API_RANDOM_PICK_QUERY_START]');
         $facilities = Facility::with(
             'm_services',
             'facility_time',
@@ -256,7 +255,7 @@ class FacilityController extends Controller
             'm_scale',
             'm_facility_type'
         )->inRandomOrder()->take(5)->get();
-        Log::info('[API_FACILITIES_RANDOM_PICK_QUERY_SUCCESS]');
+        Log::info('[FACILITIES_API_RANDOM_PICK_QUERY_SUCCESS]');
         return response()->json($facilities);
     }
 }

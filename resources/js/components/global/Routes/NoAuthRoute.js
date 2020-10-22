@@ -13,7 +13,7 @@ const NoAuthRoute = ({component, ...props}) => {
 };
 
 NoAuthRoute.propTypes = {
-  component: PropTypes.node,
+  component: PropTypes.func,
   path: PropTypes.string
 };
 

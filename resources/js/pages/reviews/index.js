@@ -31,7 +31,7 @@ const Reviews = ({location}) => {
       }
     };
     if (!data) fetchData();
-  }, [location.search]);
+  }, [location.search, data]);
   return (
     <div className='fadein' id='result-top'>
       <Hero />

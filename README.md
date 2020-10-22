@@ -2,6 +2,10 @@
 
 
 
+<img src="https://user-images.githubusercontent.com/52397893/96912051-b2335000-14dc-11eb-8ba9-47c7c8733270.png" width="200px"> <img src="https://user-images.githubusercontent.com/52397893/96912056-b3fd1380-14dc-11eb-8cd1-1f385aa0e24d.png" width="200px"> <img src="https://user-images.githubusercontent.com/52397893/96912064-b65f6d80-14dc-11eb-8ee8-6d4a4eb0e967.png" width="200px">
+
+
+
 ## 説明・特徴 
 
 BodogeFansはボードゲームを遊べるお店を登録・検索できるソーシャルサイトです。 
@@ -20,14 +24,20 @@ BodogeFansはボードゲームを遊べるお店を登録・検索できるソ�
 
  
 
-### ユーザー登録 
+### 使い方 
 
-まず、利用を開始するためにはユーザー登録を行います。 
+サイト右上のリンクから新規ユーザー登録していただくか、
 
-サイト右上のリンクから登録ページに飛ぶことができます。
+テストユーザーを使用してログインしてください。
 
  [BodogeFans](https://bdg-fans.xyz/)
 
+◆テストユーザー情報
+
+```
+email：　sample@test.com
+password：　testtest
+```
 
 
 ## 主な機能 
@@ -40,11 +50,21 @@ BodogeFansはボードゲームを遊べるお店を登録・検索できるソ�
 
 - GoogleMapAPIを使った地図の表示
 
-- 画像アップロード
+- 画像アップロード（お店ページのヘッダー画像）
 
-- お店のクチコミ閲覧
+- お店のクチコミ閲覧・投稿・削除
 
 - （イベント告知機能→開発中） 
+
+
+
+## アピールポイント
+
+- シングルページアプリケーション
+
+- ESLint、PHPCSでコードの品質を管理
+
+- CircleCIでデプロイ自動化
 
 
 
@@ -102,9 +122,11 @@ BodogeFansはボードゲームを遊べるお店を登録・検索できるソ�
 
 - GoogleMapAPI(JaveScriptAPI, ジオコーダー)
 
-- Apache 
+- ESLint, PHP CS
 
-- linux 
+- CircleCI
+
+- Apache 
 
 - docker, docker-compose 
 
@@ -114,6 +136,6 @@ BodogeFansはボードゲームを遊べるお店を登録・検索できるソ�
 
 ### リファクタリング 
 
-### CIツール  
+### 設計思想の学習
 
-### ESLint導入 
+### ユニットテスト

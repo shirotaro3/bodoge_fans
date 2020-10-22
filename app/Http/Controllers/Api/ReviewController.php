@@ -12,35 +12,35 @@ class ReviewController extends Controller
 {
     public function index()
     {
-        Log::info('[API_REVIEWS_INDEX_QUERY_START]');
+        Log::info('[REVIEWS_API_INDEX_QUERY_START]');
         $reviews = Review::with(
             'user',
             'facility:id,name'
         )->orderBy('created_at', 'desc')->take(18)->paginate(6);
 
-        Log::info('[API_REVIEWS_INDEX_QUERY_SUCCESS]');
+        Log::info('[REVIEWS_API_INDEX_QUERY_SUCCESS]');
         return response()->json($reviews);
     }
 
     public function store(CreateReviewRequest $request)
     {
-        Log::info('[API_REVIEWS_STORE_POST_START]');
+        Log::info('[REVIEWS_API_STORE_POST_START]');
         $review = new Review;
         $review->fill($request->all());
         $review->user_id = Auth::user()->id;
         $review->save();
         $review->load('user');
-        Log::info('[API_REVIEWS_STORE_POST_SUCCESS]');
+        Log::info('[REVIEWS_API_STORE_POST_SUCCESS]');
         return response()->json($review);
     }
 
     public function destroy($id)
     {
-        Log::info('[API_REVIEWS_DESTROY_DELETE_START');
+        Log::info('[REVIEWS_API_DESTROY_DELETE_START');
         $review = Review::find($id);
 
         if (!$review->user_id === Auth::user()->id) {
-            Log::info('[API_REVIEWS_DESTROY_DELETE_FAILURE');
+            Log::info('[REVIEWS_API_DESTROY_DELETE_FAILURE');
             abort(403, 'Forbidden.');
         }
 
@@ -48,7 +48,7 @@ class ReviewController extends Controller
             return response()->json(false);
         }
         $review->delete();
-        Log::info('[API_REVIEWS_DESTROY_DELETE_SUCCESS');
+        Log::info('[REVIEWS_API_DESTROY_DELETE_SUCCESS');
         return response()->json($review);
     }
 }

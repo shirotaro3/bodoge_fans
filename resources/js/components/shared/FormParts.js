@@ -240,7 +240,7 @@ const ProgressBase = ({className, steps, current}) => {
 
 ProgressBase.propTypes = {
   className: PropTypes.string,
-  steps: PropTypes.number,
+  steps: PropTypes.array,
   current: PropTypes.number
 };
 

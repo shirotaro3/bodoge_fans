@@ -29,7 +29,7 @@ const TileItem = ({className, label, icon, path}) => {
 TileItem.propTypes = {
   className: PropTypes.string,
   label: PropTypes.string,
-  icon: PropTypes.node,
+  icon: PropTypes.func,
   path: PropTypes.string
 };
 

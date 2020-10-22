@@ -30,7 +30,7 @@ const Tiles = ({className, tileValues}) => {
 
 Tiles.propTypes = {
   className: PropTypes.string,
-  tileValues: PropTypes.object
+  tileValues: PropTypes.array
 };
 
 const StyledTiles = styled(Tiles)`

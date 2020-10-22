@@ -34,13 +34,13 @@ class CreateFacilityRequest extends FormRequest
             'm_prefecture_id' => 'required|numeric',
             'address' => 'required|max:50',
             'building' => 'max:25|nullable',
-            'phone_number' => 'nullable|max20',
+            'phone_number' => 'nullable|max:20',
             'hp_url' => 'max:50|nullable',
             'facebook' => 'max:25|nullable',
             'twitter' => 'max:25|nullable',
             'instagram' => 'max:25|nullable',
             'line' => 'max:100|nullable',
-            'header_image' => 'nullable',
+            'header_image' => 'nullable|max:3000',
         ];
     }
 }
