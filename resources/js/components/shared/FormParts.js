@@ -118,6 +118,7 @@ export const Textarea = styled(AutosizeTextarea)`
   }
 `;
 
+/* eslint-disable react/prop-types */
 const InputFileDiv = (props, ref) => {
   const [imgUrl, setImgUrl] = useState('');
   const [fileName, setFileName] = useState('');
@@ -148,11 +149,7 @@ const InputFileDiv = (props, ref) => {
     </div>
   );
 };
-
-InputFileDiv.propTypes = {
-  className: PropTypes.string,
-  placeholder: PropTypes.node
-};
+/* eslint-enable react/prop-types */
 
 export const InputFile = styled(forwardRef(InputFileDiv))`
   position: relative;
