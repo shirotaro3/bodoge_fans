@@ -19,7 +19,7 @@ const SliderChild = ({className, title, body, linkPath}) => {
 SliderChild.propTypes = {
   className: PropTypes.string,
   title: PropTypes.string,
-  body: PropTypes.strgin,
+  body: PropTypes.string,
   linkPath: PropTypes.string,
   imgUrl: PropTypes.string
 };

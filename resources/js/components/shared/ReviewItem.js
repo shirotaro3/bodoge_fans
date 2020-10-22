@@ -55,7 +55,7 @@ ReviewBox.propTypes = {
   title: PropTypes.string,
   body: PropTypes.string,
   user: PropTypes.object,
-  created_at: PropTypes.instanceOf(Date)
+  created_at: PropTypes.string
 };
 
 const StyledReviewBox = styled(ReviewBox)`
