@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import media from 'styled-media-query';
 import Icon from '../UserIcon';
@@ -7,7 +8,7 @@ const ReviewListPlaceholder = () => {
   const items = [];
   for (let i = 0; i < 3; i++) {
     items.push(<ReviewListItem key={i} />);
-  };
+  }
   return (
     <div>
       {
@@ -27,6 +28,10 @@ const ReviewListItemBase = ({className}) => {
       </div>
     </div>
   );
+};
+
+ReviewListItemBase.propTypes = {
+  className: PropTypes.string
 };
 
 const ReviewListItem = styled(ReviewListItemBase)`

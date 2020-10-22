@@ -65,7 +65,7 @@
         "fix": [
             "./vendor/bin/php-cs-fixer fix -v --diff --diff-format udiff ./app"
         ],
-        "fix-dry-run": [
+        "fix-diff": [
             "./vendor/bin/php-cs-fixer fix --dry-run -v --diff --diff-format udiff ./app"
         ]
     }

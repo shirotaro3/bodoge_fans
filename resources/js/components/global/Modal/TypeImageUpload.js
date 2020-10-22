@@ -1,11 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import media from 'styled-media-query';
 import { useForm } from 'react-hook-form';
 import { useGlobalState } from '../ContextProvider';
 import { FormVertical as Form, InputFile } from '../../shared/FormParts';
 const TypeUpload = ({className, callback}) => {
-  const [globalState, dispatch] = useGlobalState();
+  const [ , dispatch] = useGlobalState();
   const { register, handleSubmit, errors } = useForm();
   const onSubmit = handleSubmit(async (data) => {
     dispatch({type: 'CLOSE_ALL'});
@@ -23,10 +24,10 @@ const TypeUpload = ({className, callback}) => {
             placeholder='画像を選択（最大3MB）'
             ref={register({
               validate: {
-                filesize: files => files[0]?.size < 3000000 || !files[0],
-                filetype: files => files[0]?.type === 'image/jpeg' ||
-                files[0]?.type === 'image/gif' ||
-                files[0]?.type === 'image/png' ||
+                filesize: files => files[0].size < 3000000 || !files[0],
+                filetype: files => files[0].type === 'image/jpeg' ||
+                files[0].type === 'image/gif' ||
+                files[0].type === 'image/png' ||
                 !files[0]
               }
             })}
@@ -51,6 +52,11 @@ const TypeUpload = ({className, callback}) => {
       </Form>
     </div>
   );
+};
+
+TypeUpload.propTypes = {
+  className: PropTypes.string,
+  callback: PropTypes.func
 };
 
 const StyledTypeUpload = styled(TypeUpload)`

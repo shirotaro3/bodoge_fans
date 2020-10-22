@@ -1,10 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Controller } from 'react-hook-form';
 import DatePicker, { registerLocale } from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css'
+import 'react-datepicker/dist/react-datepicker.css';
 import ja from 'date-fns/locale/ja';
 import { FormVertical as Form, Input, Radio, Container } from '../../shared/FormParts';
-import { ButtonWhite as Button, ButtonWhiteDisabled as ButtonDisabled } from '../../shared/Buttons';
+import { ButtonWhite as Button } from '../../shared/Buttons';
 import { BoxRoundedBlack as Box } from '../../shared/Boxes';
 
 registerLocale('ja', ja);
@@ -19,7 +20,7 @@ const Components = ({register, watch, errors, onSubmit, control}) => {
           placeholder='example@bdg-fans.xyz'
           ref={register({
             required: '必須項目です。',
-            pattern: { value: /^([a-zA-Z0-9])+([a-zA-Z0-9\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\._-]+)+$/, message: '正しいメールアドレスを入力してください。'}
+            pattern: { value: /^([a-zA-Z0-9])+([a-zA-Z0-9._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9._-]+)+$/, message: '正しいメールアドレスを入力してください。'}
           })}
         />
         {errors.email && <span>{errors.email.message}</span>}
@@ -76,7 +77,6 @@ const Components = ({register, watch, errors, onSubmit, control}) => {
               onFocus={e => e.target.readOnly = true}
               name={name}
               selected={value}
-              autoComplete='off'
               placeholderText='日付を選択'
               showMonthDropdown
               showYearDropdown
@@ -115,7 +115,15 @@ const Components = ({register, watch, errors, onSubmit, control}) => {
         <Button type="submit">登録</Button>
       </Form>
     </Box>
-  )
+  );
+};
+
+Components.propTypes = {
+  register: PropTypes.func,
+  watch: PropTypes.func,
+  errors: PropTypes.object,
+  onSubmit: PropTypes.func,
+  control: PropTypes.object
 };
 
 export default Components;

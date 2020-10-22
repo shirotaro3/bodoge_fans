@@ -1,11 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import media from 'styled-media-query';
 import ServiceIcon from './ServiceIcon';
 import { useGlobalState } from '../../global/ContextProvider';
 
 const Services = ({className, facilityId}) => {
-  const [globalState, dispatch] = useGlobalState();
+  const [globalState, ] = useGlobalState();
   const facility = globalState.facilities.data[facilityId];
   const facilityServicesId = facility.m_services.map(o=>o.id);
   const { services, resolved } = globalState.masters;
@@ -27,6 +28,11 @@ const Services = ({className, facilityId}) => {
       <span className={`${className}__headline`}>サービス</span>
     </div>
   );
+};
+
+Services.propTypes = {
+  className: PropTypes.string,
+  facilityId: PropTypes.number
 };
 
 const StyledServices = styled(Services)`
@@ -76,6 +82,6 @@ export const ServicesSearchResult = styled(Services)`
     flex-wrap: wrap;
     height: 48px;
   `}
-`
+`;
 
 export default StyledServices;

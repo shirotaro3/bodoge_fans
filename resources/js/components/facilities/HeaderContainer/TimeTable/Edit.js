@@ -1,8 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import axios from 'axios';
 import styled from 'styled-components';
 import media from 'styled-media-query';
 import { useForm, Controller } from 'react-hook-form';
-import { setHours, setMinutes } from 'date-fns';
 import { useGlobalState } from '../../../global/ContextProvider';
 import { TimePicker, Input, Container } from '../../../shared/FormParts';
 import { ButtonWhite as Button } from '../../../shared/Buttons';
@@ -25,7 +26,7 @@ const TimeTableEdit = ({className, facilityId, cancel}) => {
   const selectedTime = (time) => {
     // react-datepickerがdatetime型しか受け付けない仕様のため。
     return time && new Date(`2020/11/11 ${time}`);
-  }
+  };
   const onSubmit = handleSubmit (async (data) => {
     try {
       const response = await axios.put(`/api/facility_times/${facility.facility_time.id}`, data);
@@ -33,6 +34,7 @@ const TimeTableEdit = ({className, facilityId, cancel}) => {
       dispatch({type: 'MESSAGE', text: '保存しました。'});
       cancel();
     } catch (err) {
+      //
     }
   });
   return (
@@ -56,7 +58,7 @@ const TimeTableEdit = ({className, facilityId, cancel}) => {
               name='sun_start'
               control={control}
               defaultValue={sunStart}
-              render={({ onChange, value, name }) => (
+              render={({ onChange, value }) => (
                 <TimePicker
                   onChange={date => onChange(date && date.toLocaleTimeString())}
                   selected={selectedTime(value)}
@@ -310,6 +312,12 @@ const TimeTableEdit = ({className, facilityId, cancel}) => {
       </form>
     </div>
   );
+};
+
+TimeTableEdit.propTypes = {
+  className: PropTypes.string,
+  facilityId: PropTypes.string,
+  cancel: PropTypes.func
 };
 
 const StyledTimeTableEdit = styled(TimeTableEdit)`

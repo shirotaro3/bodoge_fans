@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { useGlobalState } from './ContextProvider';
 import axios from 'axios';
-import _ from 'lodash';
 import networkService from './services/networkService';
 
 const Initializer = ({children}) => {
@@ -42,26 +42,28 @@ const Initializer = ({children}) => {
     };
 
     // ログインステータスの初期化
+    /* eslint-disable no-undef */
     if (sessionUser && !auth.initialized) {
       dispatch({type: 'LOGIN', data: sessionUser});
-    };
+    }
+    /* eslint-enable no-undef */
     dispatch({type: 'AUTH_INITIALIZED'});
 
     // マスタデータ取得
     if (!masters.resolved) {
       fetchMasterData();
-    };
+    }
 
     // ピックアップが取得されていない状態なら取得する
     if (!pickedUpFacilitiesId.resolved) {
       fetchPickupFacilities();
-    };
+    }
 
     // networkService初期化
     const onUnauthenticated = () => {
       dispatch({type: 'LOGOUT'});
       window.scrollTo({top: 0, left: 0, behavior: 'smooth' });
-      dispatch({type: 'MESSAGE', text: '時間が経過したため、再度ログインしてください。'})
+      dispatch({type: 'MESSAGE', text: '時間が経過したため、再度ログインしてください。'});
     };
     const onInternalServerError = () => {
       window.scrollTo({top: 0, left: 0, behavior: 'smooth' });
@@ -82,6 +84,10 @@ const Initializer = ({children}) => {
   }, []);
   // ログインステータスが初期化されるまでは、アプリを表示しない
   return globalState.auth.initialized ? children : <></>;
+};
+
+Initializer.propTypes = {
+  children: PropTypes.node
 };
 
 export default Initializer;

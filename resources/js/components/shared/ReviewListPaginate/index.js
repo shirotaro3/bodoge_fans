@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import ReviewListItem from './ReviewListItem';
 import Paginate from '../PaginateLinks';
@@ -9,7 +10,7 @@ const ReviewListPaginate = ({className, reviewIds, paginate, params}) => {
     <div className={className}>
       {
         reviewIds.map((reviewId, i) => {
-          return <ReviewListItem key={i} reviewId={reviewId} />
+          return <ReviewListItem key={i} reviewId={reviewId} />;
         })
       }
       {
@@ -19,6 +20,13 @@ const ReviewListPaginate = ({className, reviewIds, paginate, params}) => {
       }
     </div>
   );
+};
+
+ReviewListPaginate.propTypes = {
+  className: PropTypes.string,
+  reviewIds: PropTypes.array,
+  paginate: PropTypes.object,
+  params: PropTypes.object
 };
 
 const StyledReviewListPaginate = styled(ReviewListPaginate)`

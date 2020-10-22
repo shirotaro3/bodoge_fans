@@ -1,6 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import media from 'styled-media-query';
 import { BiSearchAlt } from 'react-icons/bi';
 import { Input, FormVertical as Form, Select, Container } from '../../shared/FormParts';
 import { useForm, Controller } from 'react-hook-form';
@@ -102,7 +102,12 @@ const SearchBox = ({className, defaultParams}) => {
       </Form>
     </div>
   );
-}
+};
+
+SearchBox.propTypes = {
+  className: PropTypes.string,
+  defaultParams: PropTypes.object
+};
 
 const StyledSearchBox = styled(SearchBox)`
   background: rgba(0,0,0,.4);

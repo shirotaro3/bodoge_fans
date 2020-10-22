@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { HashLink } from 'react-router-hash-link';
 import queryString from 'query-string';
@@ -7,8 +8,6 @@ const Paginate = ({className, paginate, params = {}, path}) => {
   const {
     current_page: currentPage,
     last_page: lastPage,
-    per_page: perPage,
-    total
   } = paginate;
   const generatePaginatePath = (pageNumber) => {
     const query = queryString.stringify({
@@ -29,36 +28,43 @@ const Paginate = ({className, paginate, params = {}, path}) => {
         {i + 1}
       </HashLink>
     );
-  };
+  }
   return (
     <div className={className}>
       {
         currentPage === 1 ?
-        <span className={`${className}__disabled`}>{'<'}</span> :
-        <HashLink
-          smooth
-          to={generatePaginatePath(currentPage - 1)+'#result-top'}
-          className={currentPage === 1 ? `${className}__disabled` : `${className}__button`}
-        >
-          {'<'}
-        </HashLink>
+          <span className={`${className}__disabled`}>{'<'}</span> :
+          <HashLink
+            smooth
+            to={generatePaginatePath(currentPage - 1)+'#result-top'}
+            className={currentPage === 1 ? `${className}__disabled` : `${className}__button`}
+          >
+            {'<'}
+          </HashLink>
       }
       {
         pageLinks
       }
       {
         currentPage === lastPage ?
-        <span className={`${className}__disabled`}>{'>'}</span> :
-        <HashLink
-          smooth
-          to={generatePaginatePath(currentPage + 1)+'#result-top'}
-          className={`${className}__button`}
-        >
-          {'>'}
-        </HashLink> 
+          <span className={`${className}__disabled`}>{'>'}</span> :
+          <HashLink
+            smooth
+            to={generatePaginatePath(currentPage + 1)+'#result-top'}
+            className={`${className}__button`}
+          >
+            {'>'}
+          </HashLink> 
       }
     </div>
   );
+};
+
+Paginate.propTypes = {
+  className: PropTypes.string,
+  params: PropTypes.object,
+  paginate: PropTypes.object,
+  path: PropTypes.string
 };
 
 const StyledPaginate = styled(Paginate)`

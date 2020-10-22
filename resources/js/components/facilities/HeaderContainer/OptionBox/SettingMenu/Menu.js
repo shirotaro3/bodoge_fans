@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import media from 'styled-media-query';
 import { Link } from 'react-router-dom';
@@ -6,7 +7,7 @@ import axios from 'axios';
 import { useGlobalState } from '../../../../global/ContextProvider';
 
 const Menu = ({className, facilityId}) => {
-  const [globalState, dispatch] = useGlobalState();
+  const [, dispatch] = useGlobalState();
   const confirmDelete = () => {
     dispatch({
       type: 'MODAL_OPEN',
@@ -18,11 +19,12 @@ const Menu = ({className, facilityId}) => {
   };
   const deleteFacility = async () => {
     try {
-      const response = await axios.delete(`/api/facilities/${facilityId}`);
+      await axios.delete(`/api/facilities/${facilityId}`);
       dispatch({type: 'DELETE_FACILITY', id: facilityId});
       dispatch({type: 'MESSAGE', text: '削除しました。'});
       dispatch({type: 'REDIRECT', to: '/users/dashboard' });
     } catch (err) {
+      //s
     }
   };
 
@@ -36,6 +38,11 @@ const Menu = ({className, facilityId}) => {
       </li>
     </ul>
   );
+};
+
+Menu.propTypes = {
+  className: PropTypes.string,
+  facilityId: PropTypes.string
 };
 
 const StyledMenu = styled(Menu)`

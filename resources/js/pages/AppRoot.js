@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import { BrowserRouter as Router } from 'react-router-dom';
@@ -25,26 +26,30 @@ window.__forceSmoothScrollPolyfill__ = true;
 smoothscroll.polyfill();
 
 const AppRoot = ({className}) => {
-    return (
-        <div className={className}>
-            <ContextProvider>
-                <WaitingOverlay />
-                <Overlay />
-                <Modal />
-                <Initializer>
-                    <Router>
-                        <Redirector />
-                        <Header />
-                        <Notice />
-                        <Routes />
-                        <Footer />
-                    </Router>
-                </Initializer>
-            </ContextProvider>
-            <GlobalStyle />
-        </div>
-    );
-}
+  return (
+    <div className={className}>
+      <ContextProvider>
+        <WaitingOverlay />
+        <Overlay />
+        <Modal />
+        <Initializer>
+          <Router>
+            <Redirector />
+            <Header />
+            <Notice />
+            <Routes />
+            <Footer />
+          </Router>
+        </Initializer>
+      </ContextProvider>
+      <GlobalStyle />
+    </div>
+  );
+};
+
+AppRoot.propTypes = {
+  className: PropTypes.string
+};
 
 const StyledAppRoot = styled(AppRoot)`
     display: flex;
@@ -56,5 +61,5 @@ export default StyledAppRoot;
 
 // DOM element
 if (document.getElementById('app_root')) {
-    ReactDOM.render(<StyledAppRoot />, document.getElementById('app_root'));
+  ReactDOM.render(<StyledAppRoot />, document.getElementById('app_root'));
 }

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const PageInfo = ({className, paginate}) => {
@@ -10,11 +11,16 @@ const PageInfo = ({className, paginate}) => {
     <div className={className}>
       {
         total ?
-        `${total}件中${currentPage}ページ目` :
-        ''
+          `${total}件中${currentPage}ページ目` :
+          ''
       }
     </div>
   );
+};
+
+PageInfo.propTypes = {
+  className: PropTypes.string,
+  paginate: PropTypes.object
 };
 
 const StyledPageInfo = styled(PageInfo)`

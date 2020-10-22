@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import media from 'styled-media-query';
 import NavItem from './NavItem';
@@ -34,13 +35,17 @@ const Navigation = ({className}) => {
                 to={item.to}
                 key={item.to}
                 icon={item.icon}
-              >{item.text}</NavItem>)
+              >{item.text}</NavItem>);
           })
         }
       </IconContext.Provider>
     </div>
   );
-}
+};
+
+Navigation.propTypes = {
+  className: PropTypes.string
+};
 
 const StyledNavigation = styled(Navigation)`
   display: flex;
@@ -49,6 +54,6 @@ const StyledNavigation = styled(Navigation)`
     padding: 10px 0;
     margin: 0;
   `}
-`
+`;
 
 export default StyledNavigation;

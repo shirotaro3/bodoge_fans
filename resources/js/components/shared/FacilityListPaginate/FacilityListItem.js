@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import media from 'styled-media-query';
 import { useGlobalState } from '../../global/ContextProvider';
@@ -7,7 +8,7 @@ import { Link } from 'react-router-dom';
 import { ServicesSearchResult as Services } from '../FacilityServices';
 
 const FacilityListItem = ({className, facilityId}) => {
-  const [globalState, dispatch] = useGlobalState();
+  const [globalState, ] = useGlobalState();
   const facility = globalState.facilities.data[facilityId];
   return (
     <div className={`${className} fadein`}>
@@ -31,13 +32,18 @@ const FacilityListItem = ({className, facilityId}) => {
   );
 };
 
+FacilityListItem.propTypes = {
+  className: PropTypes.string,
+  facilityId: PropTypes.number
+};
+
 const StyledFacilityListItem = styled(FacilityListItem).attrs(props => {
-    const [globalState, dispatch] = useGlobalState();
-    const facility = globalState.facilities.data[props.facilityId];
-    const imgUrl = facility.header_image_url;
-    return ({
-      bgImg: imgUrl ? `url(${imgUrl})` : 'url(/img/boardgames.jpg)'
-    });
+  const [globalState, ] = useGlobalState();
+  const facility = globalState.facilities.data[props.facilityId];
+  const imgUrl = facility.header_image_url;
+  return ({
+    bgImg: imgUrl ? `url(${imgUrl})` : 'url(/img/boardgames.jpg)'
+  });
 })`
   ${divLink}
   margin: 30px 10px;

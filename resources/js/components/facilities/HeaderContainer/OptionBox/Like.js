@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import axios from 'axios';
 import { BsStar, BsStarFill } from 'react-icons/bs';
@@ -30,6 +31,11 @@ const Like = ({className, facilityId}) => {
   );
 };
 
+Like.propTypes = {
+  className: PropTypes.string,
+  facilityId: PropTypes.string
+};
+
 const StyledLike = styled(Like)`
   position: relative;
   &__count {
@@ -55,6 +61,6 @@ const StyledLike = styled(Like)`
     font-size: 1.5em;
     margin: 0 6px;
   }
-`
+`;
 
 export default StyledLike;

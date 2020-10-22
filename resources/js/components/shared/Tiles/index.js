@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import media from 'styled-media-query';
 import TileItem from './TileItem';
@@ -25,6 +26,11 @@ const Tiles = ({className, tileValues}) => {
       </div>
     </div>
   );
+};
+
+Tiles.propTypes = {
+  className: PropTypes.string,
+  tileValues: PropTypes.object
 };
 
 const StyledTiles = styled(Tiles)`

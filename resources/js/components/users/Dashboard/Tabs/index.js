@@ -1,26 +1,25 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import media from 'styled-media-query';
 import { Switch, Route, NavLink } from 'react-router-dom';
 import ForOwner from './ForOwner';
 import Top from './Top';
-import { useGlobalState } from '../../../global/ContextProvider';
 
-const Tabs = ({className, facilityId}) => {
-  const [globalState, dispatch] = useGlobalState();
+const Tabs = ({className}) => {
   return (
     <div className={className}>
       <div className={`${className}__tabs`}>
         <NavLink
           exact
-          to={`/users/dashboard`}
+          to='/users/dashboard'
           className={`${className}__tab`}
           activeClassName={`${className}__active_tab`}
         >
           お店を利用する
         </NavLink>
         <NavLink
-          to={`/users/dashboard/owner`}
+          to='/users/dashboard/owner'
           className={`${className}__tab`}
           activeClassName={`${className}__active_tab`}
         >
@@ -34,6 +33,10 @@ const Tabs = ({className, facilityId}) => {
       </Switch>
     </div>
   );
+};
+
+Tabs.propTypes = {
+  className: PropTypes.string
 };
 
 const StyledTabs = styled(Tabs)`

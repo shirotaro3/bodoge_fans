@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 import { useGlobalState } from '../../components/global/ContextProvider';
-import queryString from 'query-string'
+import queryString from 'query-string';
 import FacilityListPaginate from '../../components/shared/FacilityListPaginate';
 import FacilityListPlaceholder from '../../components/shared/FacilityListPlaceholder';
 import HeroSearchBox from '../../components/shared/HeroSearchBox';
@@ -29,6 +30,7 @@ const Search = ({location}) => {
           data: responseData
         });
       } catch (err) {
+        //
       }
     };
     if (!data) fetchData();
@@ -53,6 +55,10 @@ const Search = ({location}) => {
       }
     </div>
   );
+};
+
+Search.propTypes = {
+  location: PropTypes.object
 };
 
 export default Search;

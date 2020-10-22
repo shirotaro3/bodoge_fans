@@ -1,4 +1,5 @@
 import React, { useReducer, useContext } from 'react';
+import PropTypes from 'prop-types';
 import reducer from './reducer';
 
 const initialState = {
@@ -53,7 +54,7 @@ const initialState = {
   likedFacilityResults: {},
   reviewsIndexResults: {},
   myFacilitiesResults: {}
-}
+};
 
 const Context = React.createContext();
 
@@ -63,7 +64,11 @@ const ContextProvider = ({children}) => {
     <Context.Provider value={{globalState, dispatch}}>
       {children}
     </Context.Provider>
-  )
+  );
+};
+
+ContextProvider.propTypes = {
+  children: PropTypes.node
 };
 
 const useGlobalState = () => {
@@ -71,4 +76,4 @@ const useGlobalState = () => {
   return [globalState, dispatch];
 };
 
-export { ContextProvider, useGlobalState }
+export { ContextProvider, useGlobalState };
