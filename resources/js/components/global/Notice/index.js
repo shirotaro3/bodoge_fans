@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import media from 'styled-media-query';
 import { Transition } from 'react-transition-group';
@@ -11,7 +12,7 @@ const Notice = ({className}) => {
     setTimeout(()=>{
       dispatch({type: 'HIDE_NOTICE'});
     }, 2600);
-  }
+  };
   return (
     <div className={className}>
       <Transition in={globalState.notice.isShow} timeout={200} onEntered={onEntered}>
@@ -23,6 +24,10 @@ const Notice = ({className}) => {
       </Transition>
     </div>
   );
+};
+
+Notice.propTypes = {
+  className: PropTypes.string
 };
 
 const StyledNotice = styled(Notice)`

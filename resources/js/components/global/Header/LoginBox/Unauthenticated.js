@@ -11,6 +11,6 @@ const Unauthenticated = () => {
       <Link to='/users/registration'>新規登録はこちら</Link>
     </div>
   );
-}
+};
 
 export default Unauthenticated;

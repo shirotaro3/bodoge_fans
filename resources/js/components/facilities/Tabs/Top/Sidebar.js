@@ -1,12 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import media from 'styled-media-query';
 import { AiFillTwitterSquare, AiFillInstagram, AiFillFacebook } from 'react-icons/ai';
 import { FaLine } from 'react-icons/fa';
 import { useGlobalState } from '../../../global/ContextProvider';
 
 const Sidebar = ({className, facilityId}) => {
-  const [globalState, dispatch] = useGlobalState();
+  const [globalState, ] = useGlobalState();
   const facility = globalState.facilities.data[facilityId];
   const isShowSns = facility.twitter || facility.instagram || facility.facebook || facility.line;
   return (
@@ -54,6 +54,11 @@ const Sidebar = ({className, facilityId}) => {
       }
     </div>
   );
+};
+
+Sidebar.propTypes = {
+  className: PropTypes.string,
+  facilityId: PropTypes.string
 };
 
 const StyledSidebar = styled(Sidebar)`

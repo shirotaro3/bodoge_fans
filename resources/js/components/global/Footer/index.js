@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import media from 'styled-media-query';
 import NavTop from './NavTop';
@@ -11,7 +12,11 @@ const Footer = ({className}) => {
       <Credit />
     </footer>
   );
-}
+};
+
+Footer.propTypes = {
+  className: PropTypes.string
+};
 
 const StyledFooter = styled(Footer)`
   width: 100%;

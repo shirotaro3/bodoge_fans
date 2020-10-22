@@ -1,11 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Controller } from 'react-hook-form';
-import { FormVertical as Form, Input, Textarea, Select, Container } from '../../../shared/FormParts';
+import { FormVertical as Form, Input, Select, Container } from '../../../shared/FormParts';
 import { useGlobalState } from '../../../global/ContextProvider';
 import { ButtonWhite as Button } from '../../../shared/Buttons';
 
-const Page2 = ({register, watch, errors, control, next, prev, formValue}) => {
-  const [globalState, dispatch] = useGlobalState();
+const Page2 = ({register, errors, control, next, prev, formValue}) => {
+  const [globalState, ] = useGlobalState();
   const { prefectures } = globalState.masters;
   return (
     <Form onSubmit={next} className='fadein'>
@@ -63,6 +64,15 @@ const Page2 = ({register, watch, errors, control, next, prev, formValue}) => {
       </Container>
     </Form>
   );
+};
+
+Page2.propTypes = {
+  register: PropTypes.func,
+  errors: PropTypes.object,
+  control: PropTypes.object,
+  next: PropTypes.func,
+  prev:PropTypes.func,
+  formValue: PropTypes.object
 };
 
 export default Page2;
