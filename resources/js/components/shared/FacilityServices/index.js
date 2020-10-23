@@ -13,6 +13,7 @@ const FacilityServices = ({className, facilityId}) => {
   return (
     <div className={className}>
       {
+        // マスタデータのフェッチが完了していたら表示
         resolved &&
         services.map(s => {
           return (
