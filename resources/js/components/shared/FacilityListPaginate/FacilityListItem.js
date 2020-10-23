@@ -64,7 +64,7 @@ const StyledFacilityListItem = styled(FacilityListItem).attrs(props => {
     width: 100%;
   }
   &__img {
-    height: 180px;
+    height: 200px;
     width: 30%;
     background-image: ${props => props.bgImg};
     background-position: center;
@@ -93,7 +93,7 @@ const StyledFacilityListItem = styled(FacilityListItem).attrs(props => {
     flex: 1;
     display: flex;
     flex-direction: column;
-    height: 180px;
+    height: 200px;
     ${media.lessThan('medium')`
       height: 130px;    
     `}
@@ -111,11 +111,12 @@ const StyledFacilityListItem = styled(FacilityListItem).attrs(props => {
   }
   &__description {
     padding: 10px 20px;
-    flex: 1;
+    height: 70px;
     border-bottom: 1px solid #999;
     ${media.lessThan('medium')`
       padding: 10px 15px;
-      font-size: 14px;    
+      font-size: 14px;
+      flex: 1;
     `}
   }
   &__hidden_tablet {
@@ -128,6 +129,12 @@ const StyledFacilityListItem = styled(FacilityListItem).attrs(props => {
     ${media.lessThan('medium')`
       display: block;
       width: 100%;
+      height: 76px;
+    `}
+    ${media.lessThan('small')`
+      display: block;
+      width: 100%;
+      height: 47px;
     `}
   }
 `;
