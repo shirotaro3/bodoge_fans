@@ -41,7 +41,7 @@ class LoginController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
-            $user = User::with('likes')->where('email', 'aaa@aaa.com')->first();
+            $user = User::with('likes')->where('email', $request->input('email'))->first();
             return response()->json($user, 200);
         }
 
