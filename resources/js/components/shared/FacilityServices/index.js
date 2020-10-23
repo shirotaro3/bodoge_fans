@@ -33,7 +33,7 @@ const FacilityServices = ({className, facilityId}) => {
 
 FacilityServices.propTypes = {
   className: PropTypes.string,
-  facilityId: PropTypes.string
+  facilityId: PropTypes.number
 };
 
 const StyledServices = styled(FacilityServices)`
