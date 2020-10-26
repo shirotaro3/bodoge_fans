@@ -64,6 +64,7 @@ const Initializer = ({children}) => {
       dispatch({type: 'LOGOUT'});
       window.scrollTo({top: 0, left: 0, behavior: 'smooth' });
       dispatch({type: 'MESSAGE', text: '時間が経過したため、再度ログインしてください。'});
+      dispatch({type: 'REDIRECT', to: '/users/login'});
     };
     const onInternalServerError = () => {
       window.scrollTo({top: 0, left: 0, behavior: 'smooth' });
