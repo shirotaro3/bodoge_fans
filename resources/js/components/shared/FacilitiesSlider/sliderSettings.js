@@ -1,13 +1,13 @@
 const settings = {
   dots: false,
   infinite: true,
-  speed: 2000,
-  autoplaySpeed: 3000,
+  speed: 700,
+  autoplaySpeed: 4000,
   slidesToShow: 4,
   slidesToScroll: 1,
   autoplay: true,
   arrows: false,
-  cssEase: 'linear',
+  cssEase: 'ease-in-out',
   lazyLoad: true,
   responsive: [
     {
