@@ -4,19 +4,18 @@ const reviewsReducer = (state = {}, action) => {
   switch (action.type) {
 
   case 'SET_REVIEWS_INDEX_RESULT': {
-    const newState = {
+    return {
       ...state,
       data: {
         ...state.data,
         ..._.keyBy(action.data, 'id')
+      },
+      indexResult: {
+        ...state.indexResult,
+        reviewIds: action.data.map(o=>o.id),
+        paginate: action.paginate
       }
     };
-    const propertyName = action.page;
-    newState.reviewsIndexResults[propertyName] = {
-      result: action.result,
-      paginate: action.paginate
-    };
-    return newState;
   }
 
   default:

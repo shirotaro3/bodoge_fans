@@ -55,7 +55,10 @@ const initialState = {
   },
   reviews: {
     data: {},
-    reviewsIndexResults: {},
+    indexResult: {
+      reviewIds: [],
+      paginate: {}
+    },
   }
 };
 

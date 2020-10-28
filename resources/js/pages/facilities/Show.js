@@ -25,6 +25,11 @@ const FacilitiesShow = ({match}) => {
       fetchData();
     }
     window.scrollTo({top: 0, left: 0, behavior: 'smooth' });
+    // unmount時の処理
+    return () => {
+      // モーダル等を全て閉じる
+      dispatch({type: 'CLOSE_ALL'});
+    };
   }, [facilityId]);
   if (isNotFound) {
     return <NotFound />;
