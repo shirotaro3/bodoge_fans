@@ -46,7 +46,10 @@ const initialState = {
       facilityIds: [],
       resolved: false
     },
-    myFacilitiesResults: {},
+    usersMineResult: {
+      facilityIds: [],
+      paginate: {}
+    },
     usersLikeResult: {
       facilityIds: [],
       paginate: {}

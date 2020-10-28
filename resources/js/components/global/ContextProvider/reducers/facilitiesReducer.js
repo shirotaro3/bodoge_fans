@@ -2,22 +2,7 @@ import _ from 'lodash';
 
 const facilitiesReducer = (state = {}, action) => {
   switch (action.type) {
-  case 'SET_FACILITY_PICKUP':
-    return {
-      ...state,
-      data: {
-        ...state.data,
-        ..._.keyBy(action.data, 'id')
-      },
-      pickedUpResult: {
-        ...state.pickedUpResult,
-        facilityIds: action.data.map(v => v.id),
-        resolved: true
-      },
-    };
-
   // facilitiesのデータをオブジェクトで保持
-  // data: array
   case 'SET_FACILITIES':
     return {
       ...state,
@@ -25,23 +10,18 @@ const facilitiesReducer = (state = {}, action) => {
         ...state.data,
         ..._.keyBy(action.data, 'id')
       },
-      myFacilitiesResults: {}
     };
   case 'DELETE_FACILITY': {
     const newState = {...state};
     // ピックアップから削除する TODO:ピックアップを再取得する仕組み。
-    const index = newState.pickedUpFacilitiesId.data.indexOf(Number(action.id));
+    const index = newState.pickedUpResult.facilityIds.indexOf(Number(action.id));
     if (index > -1) {
-      newState.pickedUpFacilitiesId.data.splice(index, 1);
+      newState.pickedUpResult.facilityIds.splice(index, 1);
     }
     delete newState.data[action.id];
-    return {
-      ...newState,
-      myFacilitiesResults: {},
-      reviewsIndexResults: {},
-    };
+    return newState;
   }
-  // 検索結果の保持
+  // 検索結果
   case 'SET_FACILITIES_SEARCH_RESULT':
     return {
       ...state,
@@ -54,8 +34,8 @@ const facilitiesReducer = (state = {}, action) => {
         paginate: action.paginate
       }
     };
-  // ユーザーのいいね取得結果
-  case 'SET_USERS_LIKE_RESULT':
+  // ユーザーのいいね一覧
+  case 'SET_FACILITY_USERS_LIKE_RESULT':
     return {
       ...state,
       data: {
@@ -70,26 +50,35 @@ const facilitiesReducer = (state = {}, action) => {
   // いいねがセットされたタイミングでいいね取得結果をリセット
   case 'SET_LIKES':
     return {
-      ...state,
-      likedFacilityResults: {}
+      ...state
     };
   // ユーザーの所有するFacilityの一覧
-  case 'SET_MY_FACILITIES_RESULTS':
-  {
-    const newState = {
+  case 'SET_FACILITY_USERS_MINE_RESULT':
+    return {
       ...state,
       data: {
         ...state.data,
         ..._.keyBy(action.data, 'id')
+      },
+      usersMineResult: {
+        facilityIds: action.data.map(o=>o.id),
+        paginate: action.paginate
       }
     };
-    const propertyName = action.page;
-    newState.myFacilitiesResults[propertyName] = {
-      result: action.result,
-      paginate: action.paginate
+  // ピックアップの一覧
+  case 'SET_FACILITY_PICKUP':
+    return {
+      ...state,
+      data: {
+        ...state.data,
+        ..._.keyBy(action.data, 'id')
+      },
+      pickedUpResult: {
+        ...state.pickedUpResult,
+        facilityIds: action.data.map(v => v.id),
+        resolved: true
+      },
     };
-    return newState;
-  }
 
   // facilityTimeの更新
   case 'SET_FACILITY_TIME': {

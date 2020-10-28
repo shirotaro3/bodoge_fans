@@ -21,7 +21,7 @@ const Likes = ({location}) => {
         const { current_page, last_page, per_page, total, data: responseData } = response.data;
         const paginate = { current_page, last_page, per_page, total };
         dispatch({
-          type: 'SET_USERS_LIKE_RESULT',
+          type: 'SET_FACILITY_USERS_LIKE_RESULT',
           paginate: paginate,
           data: responseData
         });
