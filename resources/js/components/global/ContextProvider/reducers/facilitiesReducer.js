@@ -22,7 +22,7 @@ const facilitiesReducer = (state = {}, action) => {
     return newState;
   }
   // 検索結果
-  case 'SET_FACILITIES_SEARCH_RESULT':
+  case 'SET_FACILITY_SEARCH_RESULT':
     return {
       ...state,
       data: {
@@ -87,6 +87,23 @@ const facilitiesReducer = (state = {}, action) => {
     newState.data[facilityId].facility_time = action.data;
     return newState;
   }
+
+  case 'CLEAR_RESULTS':
+    return {
+      ...state,
+      usersLikeResult: {
+        facilityIds: [],
+        paginate: {}
+      },
+      usersMineResult: {
+        facilityIds: [],
+        paginate: {}
+      },
+      searchResult: {
+        facilityIds: [],
+        paginate: {}
+      }
+    };
   default:
     return state;
   }

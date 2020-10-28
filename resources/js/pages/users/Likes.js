@@ -30,6 +30,10 @@ const Likes = ({location}) => {
       }
     };
     fetchData();
+    // willUnmount
+    return () => {
+      dispatch({type: 'CLEAR_RESULTS'});
+    };
   }, [location.search]);
   return (
     <div className='fadein' id='result-top'>

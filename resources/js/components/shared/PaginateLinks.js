@@ -17,17 +17,30 @@ const Paginate = ({className, paginate, params = {}, path}) => {
     return `${path}?${query}`;
   };
   const pageLinks = [];
-  for (let i = 0; i < lastPage; i++) {
-    pageLinks.push(
-      <HashLink
-        smooth
-        to={generatePaginatePath(i + 1)+'#result-top'}
-        className={currentPage ===  i + 1 ? `${className}__disabled` : `${className}__button`}
-        key={`${i}_page`}
-      >
-        {i + 1}
-      </HashLink>
-    );
+  for (let i = 1; i <= lastPage; i++) {
+    if (currentPage === i) {
+      pageLinks.push(
+        // 現在のページのリンクは無効とする
+        <span
+          className={`${className}__disabled`}
+          key={i}
+        >
+          {i}
+        </span>
+      );
+    } else {
+      pageLinks.push(
+        // ページ数分だけ配列にリンクを追加
+        <HashLink
+          smooth
+          to={generatePaginatePath(i)+'#result-top'}
+          className={`${className}__button`}
+          key={i}
+        >
+          {i}
+        </HashLink>
+      );
+    }
   }
   return (
     <div className={className}>

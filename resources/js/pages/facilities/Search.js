@@ -19,7 +19,7 @@ const Search = ({location}) => {
         const { current_page, last_page, per_page, total, data: responseData } = response.data;
         const paginate = { current_page, last_page, per_page, total };
         dispatch({
-          type: 'SET_FACILITIES_SEARCH_RESULT',
+          type: 'SET_FACILITY_SEARCH_RESULT',
           paginate: paginate,
           data: responseData,
         });
@@ -28,6 +28,10 @@ const Search = ({location}) => {
       }
     };
     fetchData();
+    // willUnmount
+    return () => {
+      dispatch({type: 'CLEAR_RESULTS'});
+    };
   }, [location.search]);
   return (
     <div className='fadein' id='result-top'>

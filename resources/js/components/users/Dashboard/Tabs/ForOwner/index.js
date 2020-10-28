@@ -52,6 +52,10 @@ const ForOwner = ({location, className}) => {
       }
     };
     fetchData();
+    // willUnmount
+    return () => {
+      dispatch({type: 'CLEAR_RESULTS'});
+    };
   }, [location.search]);
   return (
     <div className={`${className} fadein`} id='result-top'>
