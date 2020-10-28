@@ -42,8 +42,8 @@ const initialState = {
   },
   facilities: {
     data: {},
-    pickedUpFacilitiesId: {
-      data: [],
+    pickedUpResult: {
+      facilityIds: [],
       resolved: false
     },
     myFacilitiesResults: {},

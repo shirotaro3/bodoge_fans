@@ -20,8 +20,8 @@ const FacilitiesSlider = ({className}) => {
       <Slider {...settings}>
         {/* resolve後にデータを表示 */}
         {
-          facilities.pickedUpFacilitiesId.resolved &&
-          facilities.pickedUpFacilitiesId.data.map((id, i) => {
+          facilities.pickedUpResult.resolved &&
+          facilities.pickedUpResult.facilityIds.map((id, i) => {
             const facility = facilities.data[id];
             return (
               <SliderChild
@@ -36,10 +36,10 @@ const FacilitiesSlider = ({className}) => {
         }
 
         {/* placeholder */}
-        { facilities.pickedUpFacilitiesId.resolved || placeholder }
+        { facilities.pickedUpResult.resolved || placeholder }
       </Slider>
       <h2 className={`${className}__pickup_text`}>Pickup!</h2>
-      <Loading resolved={facilities.pickedUpFacilitiesId.resolved} />
+      <Loading resolved={facilities.pickedUpResult.resolved} />
     </div>
   );
 };

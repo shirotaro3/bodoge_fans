@@ -9,9 +9,9 @@ const facilitiesReducer = (state = {}, action) => {
         ...state.data,
         ..._.keyBy(action.data, 'id')
       },
-      pickedUpFacilitiesId: {
+      pickedUpResult: {
         ...state.pickedUpFacilitiesId,
-        data: action.data.map(v => v.id),
+        facilityIds: action.data.map(v => v.id),
         resolved: true
       },
     };
