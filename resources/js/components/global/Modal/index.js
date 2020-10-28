@@ -10,7 +10,7 @@ import TypeImageUpload from './TypeImageUpload';
 const Modal = ({className}) => {
   const [globalState, ] = useGlobalState();
   const isShow = globalState.visibility.modal;
-  const { type, title, body, callback } = globalState.modalConfig;
+  const { type, title, body, callback } = globalState.visibility.modalConfig;
   const modalType = () => {
     switch(type) {
     case 'CONFIRM': {

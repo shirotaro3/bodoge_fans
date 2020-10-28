@@ -22,7 +22,7 @@ const OptionBox = ({className, facilityId}) => {
 
 OptionBox.propTypes = {
   className: PropTypes.string,
-  facilityId: PropTypes.string
+  facilityId: PropTypes.number
 };
 
 const StyledOptionBox = styled(OptionBox)`

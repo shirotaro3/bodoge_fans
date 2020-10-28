@@ -55,7 +55,7 @@ const Edit = ({cancel, facilityId}) => {
 
 Edit.propTypes = {
   cancel: PropTypes.func,
-  facilityId: PropTypes.string
+  facilityId: PropTypes.number
 };
 
 export default Edit;

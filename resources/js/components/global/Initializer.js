@@ -6,7 +6,7 @@ import networkService from './services/networkService';
 
 const Initializer = ({children}) => {
   const [globalState, dispatch] = useGlobalState();
-  const pickedUpFacilitiesId = globalState.pickedUpFacilitiesId;
+  const pickedUpFacilitiesId = globalState.facilities.pickedUpFacilitiesId;
   const masters = globalState.masters;
   const auth = globalState.auth;
   useEffect(() => {

@@ -47,7 +47,7 @@ const EditImage = ({className, facilityId}) => {
 
 EditImage.propTypes = {
   className: PropTypes.string,
-  facilityId: PropTypes.string,
+  facilityId: PropTypes.number,
 };
 
 const StyledEditImage = styled(EditImage)`

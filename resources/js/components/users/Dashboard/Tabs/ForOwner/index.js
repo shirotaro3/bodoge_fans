@@ -12,7 +12,7 @@ import PaginateLinks from '../../../../shared/PaginateLinks';
 const ForOwner = ({location, className}) => {
   const { page } = queryString.parse(location.search);
   const [globalState, dispatch] = useGlobalState();
-  const data = globalState.myFacilitiesResults[page || 1];
+  const data = globalState.facilities.myFacilitiesResults[page || 1];
   const tileValues = [
     {
       label: 'お店を登録',

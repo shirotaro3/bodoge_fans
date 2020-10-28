@@ -1,6 +1,6 @@
 import React, { useReducer, useContext } from 'react';
 import PropTypes from 'prop-types';
-import reducer from './reducer';
+import reducer from './reducers';
 
 const initialState = {
   auth: {
@@ -21,13 +21,13 @@ const initialState = {
     userMenu: false,
     facilityMenu: false,
     modal: false,
+    modalConfig: {
+      type: 'CONFIRM',
+      title: '',
+      body: '',
+      callback: () => {}
+    },
     waiting: false,
-  },
-  modalConfig: {
-    type: 'CONFIRM',
-    title: '',
-    body: '',
-    callback: function() { return; }
   },
   tracking: {
     afterLoginPath: '',
@@ -40,20 +40,23 @@ const initialState = {
     services: [{value: '', label: '', iconUrl: ''}],
     resolved: false
   },
-  pickedUpFacilitiesId: {
-    data: [],
-    resolved: false
-  },
   facilities: {
-    data: {}
+    data: {},
+    pickedUpFacilitiesId: {
+      data: [],
+      resolved: false
+    },
+    myFacilitiesResults: {},
+    likedFacilityResults: {},
+    searchResult: {
+      facilityIds: [],
+      paginate: {}
+    },
   },
   reviews: {
-    data: {}
-  },
-  searchResults: {},
-  likedFacilityResults: {},
-  reviewsIndexResults: {},
-  myFacilitiesResults: {}
+    data: {},
+    reviewsIndexResults: {},
+  }
 };
 
 const Context = React.createContext();

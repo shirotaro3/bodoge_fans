@@ -42,7 +42,7 @@ const Menu = ({className, facilityId}) => {
 
 Menu.propTypes = {
   className: PropTypes.string,
-  facilityId: PropTypes.string
+  facilityId: PropTypes.number
 };
 
 const StyledMenu = styled(Menu)`

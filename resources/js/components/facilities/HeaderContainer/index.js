@@ -20,7 +20,7 @@ const HeaderContainer = ({className, facilityId}) => {
 
 HeaderContainer.propTypes = {
   className: PropTypes.string,
-  facilityId: PropTypes.string
+  facilityId: PropTypes.number
 };
 
 const StyledHeaderContainer = styled(HeaderContainer).attrs(props => ({

@@ -10,6 +10,7 @@ import settings from './sliderSettings';
 
 const FacilitiesSlider = ({className}) => {
   const [ globalState, ] = useGlobalState();
+  const facilities = globalState.facilities;
   const placeholder = [];
   for(let i = 0; i < 4; i++) {
     placeholder.push(<SliderPlaceholder key={`ph_${i}`} />); 
@@ -19,9 +20,9 @@ const FacilitiesSlider = ({className}) => {
       <Slider {...settings}>
         {/* resolve後にデータを表示 */}
         {
-          globalState.pickedUpFacilitiesId.resolved &&
-          globalState.pickedUpFacilitiesId.data.map((id, i) => {
-            const facility = globalState.facilities.data[id];
+          facilities.pickedUpFacilitiesId.resolved &&
+          facilities.pickedUpFacilitiesId.data.map((id, i) => {
+            const facility = facilities.data[id];
             return (
               <SliderChild
                 key={`fs_${i}`}
@@ -35,10 +36,10 @@ const FacilitiesSlider = ({className}) => {
         }
 
         {/* placeholder */}
-        { globalState.pickedUpFacilitiesId.resolved || placeholder }
+        { facilities.pickedUpFacilitiesId.resolved || placeholder }
       </Slider>
       <h2 className={`${className}__pickup_text`}>Pickup!</h2>
-      <Loading resolved={globalState.pickedUpFacilitiesId.resolved} />
+      <Loading resolved={facilities.pickedUpFacilitiesId.resolved} />
     </div>
   );
 };

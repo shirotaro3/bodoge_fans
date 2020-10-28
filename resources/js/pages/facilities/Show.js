@@ -9,7 +9,7 @@ import NotFound from '../404';
 
 const FacilitiesShow = ({match}) => {
   const [globalState, dispatch] = useGlobalState();
-  const facilityId = match.params.id;
+  const facilityId = Number(match.params.id);
   const [isNotFound, setIsNotFound] = useState(false);
   useEffect(() => {
     const fetchData = async () => {

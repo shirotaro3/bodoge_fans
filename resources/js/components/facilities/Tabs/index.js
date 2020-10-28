@@ -58,7 +58,7 @@ const Tabs = ({className, facilityId}) => {
 
 Tabs.propTypes = {
   className: PropTypes.string,
-  facilityId: PropTypes.string
+  facilityId: PropTypes.number
 };
 
 const StyledTabs = styled(Tabs)`

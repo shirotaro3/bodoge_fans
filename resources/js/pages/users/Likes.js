@@ -13,7 +13,7 @@ const Likes = ({location}) => {
   const { page } = queryString.parse(location.search);
   const { likes, name: userName } = globalState.auth.user;
   const params = { page, id: likes };
-  const data = globalState.likedFacilityResults[page || 1];
+  const data = globalState.facilities.likedFacilityResults[page || 1];
   useEffect(() => {
     const fetchData = async () => {
       try {

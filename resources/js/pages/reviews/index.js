@@ -10,7 +10,7 @@ import ReviewListPlaceholder from '../../components/shared/ReviewListPlaceholder
 const Reviews = ({location}) => {
   const [globalState, dispatch] = useGlobalState();
   const { page } = queryString.parse(location.search);
-  const data = globalState.reviewsIndexResults[page || 1];
+  const data = globalState.reviews.reviewsIndexResults[page || 1];
   useEffect(() => {
     const fetchData = async () => {
       try {
