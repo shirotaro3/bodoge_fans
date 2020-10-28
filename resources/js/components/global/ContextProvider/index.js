@@ -47,7 +47,10 @@ const initialState = {
       resolved: false
     },
     myFacilitiesResults: {},
-    likedFacilityResults: {},
+    usersLikeResult: {
+      facilityIds: [],
+      paginate: {}
+    },
     searchResult: {
       facilityIds: [],
       paginate: {}

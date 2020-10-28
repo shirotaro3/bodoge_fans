@@ -10,7 +10,7 @@ const facilitiesReducer = (state = {}, action) => {
         ..._.keyBy(action.data, 'id')
       },
       pickedUpResult: {
-        ...state.pickedUpFacilitiesId,
+        ...state.pickedUpResult,
         facilityIds: action.data.map(v => v.id),
         resolved: true
       },
@@ -42,7 +42,7 @@ const facilitiesReducer = (state = {}, action) => {
     };
   }
   // 検索結果の保持
-  case 'SET_FACILITIES_SEARCH_RESULT': {
+  case 'SET_FACILITIES_SEARCH_RESULT':
     return {
       ...state,
       data: {
@@ -54,24 +54,19 @@ const facilitiesReducer = (state = {}, action) => {
         paginate: action.paginate
       }
     };
-  }
   // ユーザーのいいね取得結果
-  case 'SET_USER_LIKES_RESULT':
-  {
-    const newState = {
+  case 'SET_USERS_LIKE_RESULT':
+    return {
       ...state,
       data: {
         ...state.data,
         ..._.keyBy(action.data, 'id')
+      },
+      usersLikeResult: {
+        facilityIds: action.data.map(o=>o.id),
+        paginate: action.paginate
       }
     };
-    const propertyName = action.page;
-    newState.likedFacilityResults[propertyName] = {
-      result: action.result,
-      paginate: action.paginate
-    };
-    return newState;
-  }
   // いいねがセットされたタイミングでいいね取得結果をリセット
   case 'SET_LIKES':
     return {
