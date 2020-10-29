@@ -46,7 +46,7 @@ const StyledNavItem = styled(NavItem)`
   }
   ${media.lessThan('medium')`
     font-size: 10px;
-    width: 33%;
+    width: 33.3%;
     border-radius: 0;
     border-top: 5px solid #999;
     border-bottom: 0;
