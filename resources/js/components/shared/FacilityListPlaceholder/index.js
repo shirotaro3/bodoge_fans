@@ -5,7 +5,7 @@ import PlaceholderItem from './FacilityListPlaceholderItem';
 
 const FacilityListPlaceholder = ({className}) => {
   const items = [];
-  for (let i = 0; i < 3; i++) {
+  for (let i = 0; i < 5; i++) {
     items.push(<PlaceholderItem key={i} />);
   }
   return (
