@@ -17,6 +17,7 @@ const UserRegistrationForm = () => {
       dispatch({type: 'MESSAGE', text: `登録が完了しました。ようこそ、${response.data.name}さん！`});
       dispatch({type: 'REDIRECT', to: '/users/dashboard'});
     } catch (err) {
+      console.log(err);
       const status = err.status || err.response.status;
       if (status === 422) {
         window.scrollTo({top: 0, left: 0, behavior: 'smooth' });

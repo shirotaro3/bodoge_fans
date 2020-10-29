@@ -8,7 +8,7 @@ const Dashboard = () => {
       <Slider />
       <DashBox />
     </div>
-  )
+  );
 };
 
 export default Dashboard;

@@ -5,7 +5,6 @@ import media from 'styled-media-query';
 import { divLink } from '../mixinCss';
 import { Link } from 'react-router-dom';
 
-// collection: [{ label, icon, path }]
 const TileItem = ({className, label, icon, path}) => {
   const Icon = icon;
   return (

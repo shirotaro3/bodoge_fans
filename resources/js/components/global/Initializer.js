@@ -6,7 +6,7 @@ import networkService from './services/networkService';
 
 const Initializer = ({children}) => {
   const [globalState, dispatch] = useGlobalState();
-  const pickedUpFacilitiesId = globalState.pickedUpFacilitiesId;
+  const pickedUpResult = globalState.facilities.pickedUpResult;
   const masters = globalState.masters;
   const auth = globalState.auth;
   useEffect(() => {
@@ -55,7 +55,7 @@ const Initializer = ({children}) => {
     }
 
     // ピックアップが取得されていない状態なら取得する
-    if (!pickedUpFacilitiesId.resolved) {
+    if (!pickedUpResult.resolved) {
       fetchPickupFacilities();
     }
 

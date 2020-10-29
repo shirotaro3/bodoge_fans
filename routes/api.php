@@ -22,7 +22,7 @@ Route::prefix('users')->group(function () {
     Route::post('/login', 'App\Http\Controllers\Auth\LoginController@login');
     Route::post('/logout', 'App\Http\Controllers\Auth\LoginController@logout');
     // users facility
-    Route::get('/{id}/facilities', 'App\Http\Controllers\Api\UsersFacilityController@index');
+    Route::get('/{user_id}/facilities', 'App\Http\Controllers\Api\UsersFacilityController@index');
 });
 
 // facilities
@@ -31,6 +31,8 @@ Route::prefix('facilities')->group(function () {
     Route::get('/search', 'App\Http\Controllers\Api\FacilityController@search');
     Route::get('/pickup', 'App\Http\Controllers\Api\FacilityController@random_pick');
     Route::get('/{id}', 'App\Http\Controllers\Api\FacilityController@show');
+    // facilities review
+    Route::get('/{facility_id}/reviews', 'App\Http\Controllers\Api\FacilitiesReviewController@index');
 });
 
 // reviews

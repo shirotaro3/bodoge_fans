@@ -23,6 +23,7 @@ const UserLoginForm = () => {
       // afterLoginPathが登録されていればそこに、なければダッシュボードにリダイレクトする
       dispatch({type: 'REDIRECT', to: globalState.tracking.afterLoginPath || defaultRedirectPath});
     } catch (err) {
+      console.log(err);
       const status = err.status || err.response.status;
       if (status === 403) {
         window.scrollTo({top: 0, left: 0, behavior: 'smooth' });

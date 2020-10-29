@@ -91,7 +91,7 @@ const TimeTable = ({className, facilityId}) => {
 
 TimeTable.propTypes = {
   className: PropTypes.string,
-  facilityId: PropTypes.string
+  facilityId: PropTypes.number
 };
 
 const StyledTimeTable = styled(TimeTable).attrs(props => {

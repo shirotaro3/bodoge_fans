@@ -33,7 +33,7 @@ const Like = ({className, facilityId}) => {
 
 Like.propTypes = {
   className: PropTypes.string,
-  facilityId: PropTypes.string
+  facilityId: PropTypes.number
 };
 
 const StyledLike = styled(Like)`

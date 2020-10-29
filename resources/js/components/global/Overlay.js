@@ -20,13 +20,19 @@ Overlay.propTypes = {
   className: PropTypes.string
 };
 
-const StyledOverlay = styled(Overlay)`
+const StyledOverlay = styled(Overlay).attrs(() => {
+  const [globalState, ] = useGlobalState();
+  return {
+    isShowingModal: globalState.visibility.modal
+  };
+})`
   position: fixed;
   left: 0;
   top: 0;
   height: 100%;
   width: 100%;
   z-index: 20;
+  background: ${props => props.isShowingModal ? 'rgba(0,0,0,.5)': 'none'};
 `;
 
 export default StyledOverlay;

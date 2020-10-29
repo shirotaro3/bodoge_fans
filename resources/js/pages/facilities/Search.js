@@ -10,30 +10,28 @@ import HeroSearchBox from '../../components/shared/HeroSearchBox';
 const Search = ({location}) => {
   const [globalState, dispatch] = useGlobalState();
   const params = queryString.parse(location.search);
-  const data = globalState.searchResults[location.search];
+  const searchResult = globalState.facilities.searchResult;
+  const isLoading = globalState.visibility.waiting > 0;
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get('/api/facilities/search', { params });
         const { current_page, last_page, per_page, total, data: responseData } = response.data;
         const paginate = { current_page, last_page, per_page, total };
-        // 検索結果としてfacilityIDの配列を作成
-        const searchResult =
-          responseData.length > 0 ?
-            responseData.map(o => o.id) :
-            [];
         dispatch({
-          type: 'SET_FACILITIES_SEARCH_RESULT',
-          queryString: location.search,
-          result: searchResult,
+          type: 'SET_FACILITY_SEARCH_RESULT',
           paginate: paginate,
-          data: responseData
+          data: responseData,
         });
       } catch (err) {
-        //
+        console.log(err);
       }
     };
-    if (!data) fetchData();
+    fetchData();
+    // willUnmount
+    return () => {
+      dispatch({type: 'CLEAR_RESULTS'});
+    };
   }, [location.search]);
   return (
     <div className='fadein' id='result-top'>
@@ -42,14 +40,14 @@ const Search = ({location}) => {
           <>
             <HeroSearchBox params={params} />
             {
-              data ?
+              isLoading ?
+                <FacilityListPlaceholder /> :
                 <FacilityListPaginate
-                  facilityIds={data.result}
-                  paginate={data.paginate}
+                  facilityIds={searchResult.facilityIds}
+                  paginate={searchResult.paginate}
                   params={params}
                   path='/facilities/search'
-                /> :
-                <FacilityListPlaceholder />
+                />
             }
           </>
       }

@@ -34,7 +34,7 @@ const TimeTableEdit = ({className, facilityId, cancel}) => {
       dispatch({type: 'MESSAGE', text: '保存しました。'});
       cancel();
     } catch (err) {
-      //
+      console.log(err);
     }
   });
   return (
@@ -316,7 +316,7 @@ const TimeTableEdit = ({className, facilityId, cancel}) => {
 
 TimeTableEdit.propTypes = {
   className: PropTypes.string,
-  facilityId: PropTypes.string,
+  facilityId: PropTypes.number,
   cancel: PropTypes.func
 };
 
