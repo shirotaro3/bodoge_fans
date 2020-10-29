@@ -28,7 +28,8 @@ const Reviews = ({match, location, className}) => {
         dispatch({
           type: 'SET_REVIEW_FACILITIES_SHOW_RESULT',
           paginate: paginate,
-          data: responseData
+          data: responseData,
+          facilityId: facilityId
         });
       } catch (err) {
         console.log(err);

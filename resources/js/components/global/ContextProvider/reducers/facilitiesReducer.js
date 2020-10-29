@@ -90,10 +90,9 @@ const facilitiesReducer = (state = {}, action) => {
 
   // レビューカウントの更新
   case 'SET_REVIEW_FACILITIES_SHOW_RESULT': {
-    const facilityId = action.data[0].facility_id;
     const newState = {...state};
-    if (newState.data[facilityId]) {
-      newState.data[facilityId].reviews_count = action.paginate.total;
+    if (newState.data[action.facilityId]) {
+      newState.data[action.facilityId].reviews_count = action.paginate.total;
     }
     return newState;
   }
