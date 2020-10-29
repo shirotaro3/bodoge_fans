@@ -1,6 +1,6 @@
 {
   "name": "BodogeFans",
-  "short_name": "BodogeFans",
+  "short_name": "BdgFans",
   "theme_color": "#333333",
   "background_color": "#555555",
   "display": "standalone",
@@ -11,7 +11,8 @@
     {
       "src": "icon.png",
       "type": "image/png",
-      "sizes": "192x192"
+      "sizes": "192x192",
+      "purpose": "any maskable"
     }
   ]
 }
