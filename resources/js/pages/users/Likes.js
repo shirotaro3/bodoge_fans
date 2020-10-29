@@ -11,7 +11,7 @@ const Likes = ({location}) => {
   const [globalState, dispatch] = useGlobalState();
   const { page } = queryString.parse(location.search);
   const { likes, name: userName } = globalState.auth.user;
-  const isLoading = globalState.visibility.waiting;
+  const isLoading = globalState.visibility.waiting > 0;
   const params = { page, id: likes };
   const data = globalState.facilities.usersLikeResult;
   useEffect(() => {

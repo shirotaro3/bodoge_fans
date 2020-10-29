@@ -16,10 +16,10 @@ class FacilitiesReviewController extends Controller
         
         $reviews = Review::with(
             'user',
-            'facility:id,name'
+            'facility:id,name',
         )->where('facility_id', $facility_id)
             ->orderBy('created_at', 'desc')
-            ->paginate(5);
+            ->paginate(3);
 
         Log::info('[FACILITIES_API_REVIEWS_INDEX_QUERY_SUCCESS]');
         return response()->json($reviews);

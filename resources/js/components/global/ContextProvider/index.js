@@ -27,7 +27,7 @@ const initialState = {
       body: '',
       callback: () => {}
     },
-    waiting: false,
+    waiting: 0,
   },
   tracking: {
     afterLoginPath: '',
@@ -42,6 +42,7 @@ const initialState = {
   },
   facilities: {
     data: {},
+    update: 0,
     pickedUpResult: {
       facilityIds: [],
       resolved: false
@@ -61,6 +62,7 @@ const initialState = {
   },
   reviews: {
     data: {},
+    update: 0,
     indexResult: {
       reviewIds: [],
       paginate: {}
@@ -72,6 +74,7 @@ const initialState = {
   },
   events: {
     data: {},
+    update: 0,
     indexResult: {
       eventIds: [],
       paginate: {}

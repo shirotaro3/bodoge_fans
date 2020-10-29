@@ -88,6 +88,16 @@ const facilitiesReducer = (state = {}, action) => {
     return newState;
   }
 
+  // レビューカウントの更新
+  case 'SET_REVIEW_FACILITIES_SHOW_RESULT': {
+    const facilityId = action.data[0].facility_id;
+    const newState = {...state};
+    if (newState.data[facilityId]) {
+      newState.data[facilityId].reviews_count = action.paginate.total;
+    }
+    return newState;
+  }
+
   case 'CLEAR_RESULTS':
     return {
       ...state,

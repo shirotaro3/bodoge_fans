@@ -6,7 +6,7 @@ import { useGlobalState } from '../global/ContextProvider';
 
 const WaitingOverlay = ({className}) => {
   const [globalState, ] = useGlobalState();
-  const isShow = globalState.visibility.waiting;
+  const isShow = globalState.visibility.waiting > 0;
   if (isShow) {
     return (
       <div className={className}>

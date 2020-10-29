@@ -11,7 +11,7 @@ const Search = ({location}) => {
   const [globalState, dispatch] = useGlobalState();
   const params = queryString.parse(location.search);
   const searchResult = globalState.facilities.searchResult;
-  const isLoading = globalState.visibility.waiting;
+  const isLoading = globalState.visibility.waiting > 0;
   useEffect(() => {
     const fetchData = async () => {
       try {

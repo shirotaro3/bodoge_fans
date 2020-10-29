@@ -19,9 +19,8 @@ const ReviewForm = ({facilityId}) => {
           facility_id: facilityId
         };
         const response = await axios.post('/api/reviews',submitData);
-        console.log(response);
         reset();
-        dispatch({type: 'SET_REVIEWS', data: [response.data]});
+        dispatch({type: 'REFRESH_REVIEW', data: response.data});
         dispatch({type: 'MESSAGE', text: 'レビューを投稿しました。'});
       } catch (err) {
         console.log(err);

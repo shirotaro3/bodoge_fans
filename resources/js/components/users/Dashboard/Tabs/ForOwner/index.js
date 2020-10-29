@@ -13,7 +13,7 @@ const ForOwner = ({location, className}) => {
   const { page } = queryString.parse(location.search);
   const [globalState, dispatch] = useGlobalState();
   const data = globalState.facilities.usersMineResult;
-  const isLoading = globalState.visibility.waiting;
+  const isLoading = globalState.visibility.waiting > 0;
   const tileValues = [
     {
       label: 'お店を登録',

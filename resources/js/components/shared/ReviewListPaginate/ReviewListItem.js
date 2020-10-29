@@ -9,14 +9,15 @@ import Icon from '../UserIcon';
 import { useGlobalState } from '../../global/ContextProvider';
 import { Link } from '../Links';
 
-const ReviewBox = ({className, reviewId}) => {
+const ReviewListItem = ({className, reviewId}) => {
   const [globalState, dispatch] = useGlobalState();
   const authUser = globalState.auth.user;
   const review = globalState.reviews.data[reviewId];
   const deleteReview = async () => {
     try {
+      window.scrollTo({top: 0, left: 0, behavior: 'smooth' });
       const response = await axios.delete(`/api/reviews/${reviewId}`);
-      dispatch({type: 'DELETE_REVIEW', data: response.data});
+      dispatch({type: 'REFRESH_REVIEW', data: response.data});
       dispatch({type: 'MESSAGE', text: '削除しました。'});
     } catch (err) {
       console.log(err);
@@ -54,12 +55,12 @@ const ReviewBox = ({className, reviewId}) => {
   );
 };
 
-ReviewBox.propTypes = {
+ReviewListItem.propTypes = {
   className: PropTypes.string,
   reviewId: PropTypes.number
 };
 
-const StyledReviewBox = styled(ReviewBox)`
+const StyledReviewListItem = styled(ReviewListItem)`
   padding: 20px 0;
   display: flex;
   align-items: center;
@@ -138,4 +139,4 @@ const StyledReviewBox = styled(ReviewBox)`
   }
 `;
 
-export default StyledReviewBox;
+export default StyledReviewListItem;

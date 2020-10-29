@@ -18,7 +18,7 @@ const Reviews = ({match, location, className}) => {
   const [globalState, dispatch] = useGlobalState();
   const facility = globalState.facilities.data[facilityId];
   const data = globalState.reviews.facilitiesShowResult;
-  const isLoading = globalState.visibility.waiting;
+  const isLoading = globalState.visibility.waiting > 0;
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -39,7 +39,7 @@ const Reviews = ({match, location, className}) => {
     return () => {
       dispatch({type: 'CLEAR_RESULTS'});
     };
-  }, [location.search]);
+  }, [location.search, globalState.reviews.update]);
   return (
     <div className={`${className} fadein`} id='result-top'>
       <h2>{facility.name}のクチコミ</h2>

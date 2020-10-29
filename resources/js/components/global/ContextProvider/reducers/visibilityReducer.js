@@ -39,12 +39,12 @@ const visibilityReducer = (state = {}, action) => {
   case 'API_CALL_START':
     return {
       ...state,
-      waiting: true
+      waiting: state.waiting + 1
     };
   case 'API_CALL_END':
     return {
       ...state,
-      waiting: false
+      waiting: state.waiting - 1
     };
   default:
     return state;

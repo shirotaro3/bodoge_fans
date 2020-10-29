@@ -29,7 +29,10 @@ class ReviewController extends Controller
         $review->fill($request->all());
         $review->user_id = Auth::user()->id;
         $review->save();
-        $review->load('user');
+        $review->load(
+            'user',
+            'facility:id,name'
+        );
         Log::info('[REVIEWS_API_STORE_POST_SUCCESS]');
         return response()->json($review);
     }

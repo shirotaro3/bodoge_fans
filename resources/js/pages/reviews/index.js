@@ -11,7 +11,7 @@ const Reviews = ({location}) => {
   const [globalState, dispatch] = useGlobalState();
   const { page } = queryString.parse(location.search);
   const data = globalState.reviews.indexResult;
-  const isLoading = globalState.visibility.waiting;
+  const isLoading = globalState.visibility.waiting > 0;
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -19,7 +19,7 @@ const Reviews = ({location}) => {
         const { current_page, last_page, per_page, total, data: responseData } = response.data;
         const paginate = { current_page, last_page, per_page, total };
         dispatch({
-          type: 'SET_REVIEWS_INDEX_RESULT',
+          type: 'SET_REVIEW_INDEX_RESULT',
           paginate: paginate,
           data: responseData
         });
@@ -28,7 +28,7 @@ const Reviews = ({location}) => {
       }
     };
     fetchData();
-  }, [location.search]);
+  }, [location.search, globalState.reviews.update]);
   return (
     <div className='fadein' id='result-top'>
       <Hero />
