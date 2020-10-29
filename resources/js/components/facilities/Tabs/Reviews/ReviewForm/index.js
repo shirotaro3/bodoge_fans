@@ -13,17 +13,17 @@ const ReviewForm = ({facilityId}) => {
   const onSubmit = handleSubmit((data) => {
     const postReview = async () => {
       try {
+        window.scrollTo({top: 0, left: 0, behavior: 'smooth' });
         const submitData = {
           ...data,
           facility_id: facilityId
         };
         const response = await axios.post('/api/reviews',submitData);
         reset();
-        dispatch({type: 'SET_REVIEW', data: response.data});
-        window.scrollTo({top: 0, left: 0, behavior: 'smooth' });
+        dispatch({type: 'REFRESH_REVIEW', data: response.data});
         dispatch({type: 'MESSAGE', text: 'レビューを投稿しました。'});
       } catch (err) {
-        //
+        console.log(err);
       }
     };
     const modalText = <div>

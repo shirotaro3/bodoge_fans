@@ -10,39 +10,37 @@ import ReviewListPlaceholder from '../../components/shared/ReviewListPlaceholder
 const Reviews = ({location}) => {
   const [globalState, dispatch] = useGlobalState();
   const { page } = queryString.parse(location.search);
-  const data = globalState.reviewsIndexResults[page || 1];
+  const data = globalState.reviews.indexResult;
+  const isLoading = globalState.visibility.waiting > 0;
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get('/api/reviews', { params: { page } });
         const { current_page, last_page, per_page, total, data: responseData } = response.data;
         const paginate = { current_page, last_page, per_page, total };
-        // 検索結果としてreviewIDの配列を作成
-        const searchResult = responseData.map(o => o.id);
         dispatch({
-          type: 'SET_REVIEWS_INDEX_RESULT',
-          page: page || 1,
-          result: searchResult,
+          type: 'SET_REVIEW_INDEX_RESULT',
           paginate: paginate,
           data: responseData
         });
       } catch (err) {
-        //
+        console.log(err);
       }
     };
-    if (!data) fetchData();
-  }, [location.search, data]);
+    fetchData();
+  }, [location.search, globalState.reviews.update]);
   return (
     <div className='fadein' id='result-top'>
       <Hero />
       {
-        data ?
+        isLoading ?
+          <ReviewListPlaceholder /> :
           <ReviewListPaginate
-            reviewIds={data.result}
+            reviewIds={data.reviewIds}
             paginate={data.paginate}
             page={page}
-          /> :
-          <ReviewListPlaceholder />
+            path='/reviews'
+          />
       }
     </div>
   );

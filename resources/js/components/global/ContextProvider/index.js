@@ -1,6 +1,6 @@
 import React, { useReducer, useContext } from 'react';
 import PropTypes from 'prop-types';
-import reducer from './reducer';
+import reducer from './reducers';
 
 const initialState = {
   auth: {
@@ -21,13 +21,13 @@ const initialState = {
     userMenu: false,
     facilityMenu: false,
     modal: false,
-    waiting: false,
-  },
-  modalConfig: {
-    type: 'CONFIRM',
-    title: '',
-    body: '',
-    callback: function() { return; }
+    modalConfig: {
+      type: 'CONFIRM',
+      title: '',
+      body: '',
+      callback: () => {}
+    },
+    waiting: 0,
   },
   tracking: {
     afterLoginPath: '',
@@ -40,20 +40,46 @@ const initialState = {
     services: [{value: '', label: '', iconUrl: ''}],
     resolved: false
   },
-  pickedUpFacilitiesId: {
-    data: [],
-    resolved: false
-  },
   facilities: {
-    data: {}
+    data: {},
+    update: 0,
+    pickedUpResult: {
+      facilityIds: [],
+      resolved: false
+    },
+    usersMineResult: {
+      facilityIds: [],
+      paginate: {}
+    },
+    usersLikeResult: {
+      facilityIds: [],
+      paginate: {}
+    },
+    searchResult: {
+      facilityIds: [],
+      paginate: {}
+    },
   },
   reviews: {
-    data: {}
+    data: {},
+    update: 0,
+    indexResult: {
+      reviewIds: [],
+      paginate: {}
+    },
+    facilitiesShowResult: {
+      reviewIds: [],
+      paginate: {}
+    }
   },
-  searchResults: {},
-  likedFacilityResults: {},
-  reviewsIndexResults: {},
-  myFacilitiesResults: {}
+  events: {
+    data: {},
+    update: 0,
+    indexResult: {
+      eventIds: [],
+      paginate: {}
+    }
+  }
 };
 
 const Context = React.createContext();

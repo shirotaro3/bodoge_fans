@@ -35,7 +35,7 @@ const Tabs = ({className, facilityId}) => {
           className={`${className}__tab`}
           activeClassName={`${className}__active_tab`}
         >
-          クチコミ({facility.reviews.length})
+          クチコミ({facility.reviews_count})
         </NavLink>
         <NavLink
           to={`/facilities/${facilityId}/access`}
@@ -58,7 +58,7 @@ const Tabs = ({className, facilityId}) => {
 
 Tabs.propTypes = {
   className: PropTypes.string,
-  facilityId: PropTypes.string
+  facilityId: PropTypes.number
 };
 
 const StyledTabs = styled(Tabs)`

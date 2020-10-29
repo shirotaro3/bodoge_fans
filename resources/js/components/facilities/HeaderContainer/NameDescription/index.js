@@ -36,7 +36,7 @@ const NameDescription = ({className, facilityId}) => {
 
 NameDescription.propTypes = {
   className: PropTypes.string,
-  facilityId: PropTypes.string
+  facilityId: PropTypes.number
 };
 
 const StyledND = styled(NameDescription).attrs(props => {

@@ -24,7 +24,7 @@ const Menu = ({className, facilityId}) => {
       dispatch({type: 'MESSAGE', text: '削除しました。'});
       dispatch({type: 'REDIRECT', to: '/users/dashboard' });
     } catch (err) {
-      //s
+      console.log(err);
     }
   };
 
@@ -42,7 +42,7 @@ const Menu = ({className, facilityId}) => {
 
 Menu.propTypes = {
   className: PropTypes.string,
-  facilityId: PropTypes.string
+  facilityId: PropTypes.number
 };
 
 const StyledMenu = styled(Menu)`

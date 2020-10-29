@@ -17,7 +17,7 @@ const Edit = ({cancel, facilityId}) => {
       dispatch({type: 'MESSAGE', text: '保存しました。'});
       cancel();
     } catch (err) {
-      //
+      console.log(err);
     }
   });
   return (
@@ -55,7 +55,7 @@ const Edit = ({cancel, facilityId}) => {
 
 Edit.propTypes = {
   cancel: PropTypes.func,
-  facilityId: PropTypes.string
+  facilityId: PropTypes.number
 };
 
 export default Edit;

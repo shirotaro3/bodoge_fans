@@ -9,7 +9,7 @@ import NotFound from '../404';
 
 const FacilitiesShow = ({match}) => {
   const [globalState, dispatch] = useGlobalState();
-  const facilityId = match.params.id;
+  const facilityId = Number(match.params.id);
   const [isNotFound, setIsNotFound] = useState(false);
   useEffect(() => {
     const fetchData = async () => {
@@ -25,6 +25,11 @@ const FacilitiesShow = ({match}) => {
       fetchData();
     }
     window.scrollTo({top: 0, left: 0, behavior: 'smooth' });
+    // unmount時の処理
+    return () => {
+      // モーダル等を全て閉じる
+      dispatch({type: 'CLOSE_ALL'});
+    };
   }, [facilityId]);
   if (isNotFound) {
     return <NotFound />;

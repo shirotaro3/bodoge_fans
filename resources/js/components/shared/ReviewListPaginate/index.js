@@ -4,8 +4,9 @@ import styled from 'styled-components';
 import ReviewListItem from './ReviewListItem';
 import Paginate from '../PaginateLinks';
 import { BoxRoundedNegative as Box } from '../Boxes';
+import propTypes from 'prop-types';
 
-const ReviewListPaginate = ({className, reviewIds, paginate, params}) => {
+const ReviewListPaginate = ({className, reviewIds, paginate, params, path}) => {
   return (
     <div className={className}>
       {
@@ -16,7 +17,7 @@ const ReviewListPaginate = ({className, reviewIds, paginate, params}) => {
       {
         reviewIds.length === 0 ?
           <Box>クチコミはまだありません。</Box> :
-          <Paginate paginate={paginate} path='/reviews' params={params} />
+          <Paginate paginate={paginate} path={path} params={params} />
       }
     </div>
   );
@@ -26,7 +27,8 @@ ReviewListPaginate.propTypes = {
   className: PropTypes.string,
   reviewIds: PropTypes.array,
   paginate: PropTypes.object,
-  params: PropTypes.object
+  params: PropTypes.object,
+  path: propTypes.string
 };
 
 const StyledReviewListPaginate = styled(ReviewListPaginate)`

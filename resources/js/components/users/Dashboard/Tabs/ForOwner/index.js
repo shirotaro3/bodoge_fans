@@ -12,7 +12,8 @@ import PaginateLinks from '../../../../shared/PaginateLinks';
 const ForOwner = ({location, className}) => {
   const { page } = queryString.parse(location.search);
   const [globalState, dispatch] = useGlobalState();
-  const data = globalState.myFacilitiesResults[page || 1];
+  const data = globalState.facilities.usersMineResult;
+  const isLoading = globalState.visibility.waiting > 0;
   const tileValues = [
     {
       label: 'お店を登録',
@@ -41,36 +42,35 @@ const ForOwner = ({location, className}) => {
         const response = await axios.get(`/api/users/${userId}/facilities`, { params: { page } });
         const { current_page, last_page, per_page, total, data: responseData } = response.data;
         const paginate = { current_page, last_page, per_page, total };
-        const resultFacilityIds = responseData.map(o => o.id);
         dispatch({
-          type: 'SET_MY_FACILITIES_RESULTS',
-          page: page || 1,
+          type: 'SET_FACILITY_USERS_MINE_RESULT',
           data: responseData,
           paginate: paginate,
-          result: resultFacilityIds
         });
       } catch (err) {
-        //
+        console.log(err);
       }
     };
-    if (!data) {
-      fetchData();
-    }
+    fetchData();
+    // willUnmount
+    return () => {
+      dispatch({type: 'CLEAR_RESULTS'});
+    };
   }, [location.search]);
   return (
     <div className={`${className} fadein`} id='result-top'>
       {
-        data ?
+        isLoading ?
+          <Tiles tileValues={[...tileValues, ...placeholder]} /> :
           <>
             <Tiles
-              tileValues={[...tileValues, ...convertFacilityIdsToTileValues(data.result)]}
+              tileValues={[...tileValues, ...convertFacilityIdsToTileValues(data.facilityIds)]}
             />
             <PaginateLinks
               path='/users/dashboard/owner'
               paginate={data.paginate}
             />
-          </> :
-          <Tiles tileValues={[...tileValues, ...placeholder]} />
+          </>
       }
     </div>
   );

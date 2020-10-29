@@ -9,34 +9,31 @@ import { BoxRoundedNegative as Box } from '../../components/shared/Boxes';
 
 const Likes = ({location}) => {
   const [globalState, dispatch] = useGlobalState();
-  // pageだけ使用
   const { page } = queryString.parse(location.search);
   const { likes, name: userName } = globalState.auth.user;
+  const isLoading = globalState.visibility.waiting > 0;
   const params = { page, id: likes };
-  const data = globalState.likedFacilityResults[page || 1];
+  const data = globalState.facilities.usersLikeResult;
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get('/api/facilities/search', { params });
         const { current_page, last_page, per_page, total, data: responseData } = response.data;
         const paginate = { current_page, last_page, per_page, total };
-        // facilityIDの配列を作成
-        const searchResult =
-          responseData.length > 0 ?
-            responseData.map(o => o.id) :
-            [];
         dispatch({
-          type: 'SET_USER_LIKES_RESULT',
-          page: page || 1,
-          result: searchResult,
+          type: 'SET_FACILITY_USERS_LIKE_RESULT',
           paginate: paginate,
           data: responseData
         });
       } catch (err) {
-        //
+        console.log(err);
       }
     };
-    if (likes.length > 0 && !data) fetchData();
+    fetchData();
+    // willUnmount
+    return () => {
+      dispatch({type: 'CLEAR_RESULTS'});
+    };
   }, [location.search]);
   return (
     <div className='fadein' id='result-top'>
@@ -45,14 +42,14 @@ const Likes = ({location}) => {
         likes.length > 0 ?
           <>
             {
-              data ?
+              isLoading ?
+                <FacilityListPlaceholder /> :
                 <FacilityListPaginate
-                  facilityIds={data.result}
+                  facilityIds={data.facilityIds}
                   paginate={data.paginate}
                   params={{page}}
                   path='/users/likes'
-                /> :
-                <FacilityListPlaceholder />
+                />
             }
           </> :
           <Box>お気に入りは登録されていません。</Box>

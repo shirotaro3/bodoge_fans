@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Log;
 
 class UsersFacilityController extends Controller
 {
-    public function index($id)
+    public function index($user_id)
     {
         Log::info('[USERS_API_FACILITIES_INDEX_QUERY_START]');
         $facilities = Facility::with([
@@ -18,10 +18,10 @@ class UsersFacilityController extends Controller
             'm_facility_type',
             'm_services',
             'facility_time',
-            'events',
-            'reviews.user',
             'likes',
-            ])->where('user_id', $id)->paginate(5);
+            ])->withCount('reviews')
+                ->where('user_id', $user_id)
+                ->paginate(5);
 
         Log::info('[USERS_API_FACILITIES_INDEX_QUERY_SUCCESS]');
         return response()->json($facilities);
