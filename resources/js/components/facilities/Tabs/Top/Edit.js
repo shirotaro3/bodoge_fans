@@ -16,7 +16,7 @@ const Edit = ({cancel, facilityId}) => {
       dispatch({type: 'MESSAGE', text: '保存しました。'});
       cancel();
     } catch (err) {
-      //
+      console.log(err);
     }
   });
   return (

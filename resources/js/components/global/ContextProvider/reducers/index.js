@@ -5,6 +5,7 @@ import mastersReducer from './mastersReducer';
 import visibilityReducer from './visibilityReducer';
 import redirectReducer from './redirectReducer';
 import noticeReducer from './noticeReducer';
+import trackingReducer from './trackingReducer';
 
 const rootReducer = (state = {}, action) => {
   return {
@@ -15,39 +16,8 @@ const rootReducer = (state = {}, action) => {
     visibility: visibilityReducer(state.visibility, action),
     redirect: redirectReducer(state.redirect, action),
     notice: noticeReducer(state.notice, action),
+    tracking: trackingReducer(state.tracking, action)
   };
-
-  
-  // likes
-  // data: array
-
-  // // reviews
-  // case 'SET_REVIEW': {
-  //   const facilityId = action.data.facility_id;
-  //   const newState = {
-  //     ...state,
-  //     reviewsIndexResults: {}
-  //   };
-  //   newState.facilities.data[facilityId].reviews.push(
-  //     {
-  //       ...action.data
-  //     });
-  //   return newState;
-  // }
-
-  // case 'DELETE_REVIEW': {
-  //   const facilityId = action.data.facility_id;
-  //   const id = action.data.id;
-  //   const newState = {
-  //     ...state,
-  //     reviewsIndexResults: {}
-  //   };
-  //   newState.facilities.data[facilityId].reviews =
-  //     newState.facilities.data[facilityId].reviews.filter((o) => {
-  //       return o.id !== id;
-  //     });
-  //   return newState;
-  // }
 };
 
 export default rootReducer;

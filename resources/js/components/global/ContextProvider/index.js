@@ -65,6 +65,10 @@ const initialState = {
       reviewIds: [],
       paginate: {}
     },
+    facilitiesShowResult: {
+      reviewIds: [],
+      paginate: {}
+    }
   },
   events: {
     data: {},

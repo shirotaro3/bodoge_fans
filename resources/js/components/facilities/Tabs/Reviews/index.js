@@ -1,33 +1,65 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import media from 'styled-media-query';
+import axios from 'axios';
+import queryString from 'query-string';
 import { useGlobalState } from '../../../global/ContextProvider';
-import ReviewItem from '../../../shared/ReviewItem';
 import ReviewForm from './ReviewForm';
-import Pagination from '../../../shared/EasyPagination';
 import { Link } from '../../../shared/Links';
 import { BoxRoundedWhite as Box, BoxRoundedNegative as BoxNeg } from '../../../shared/Boxes';
-import _ from 'lodash';
+import ReviewListPaginate from '../../../shared/ReviewListPaginate';
+import ReviewListPlaceholder from '../../../shared/ReviewListPlaceholder';
 
-const Reviews = ({match, className}) => {
+
+const Reviews = ({match, location, className}) => {
   const facilityId = match.params.id;
-  const [globalState, ] = useGlobalState();
+  const { page } = queryString.parse(location.search);
+  const [globalState, dispatch] = useGlobalState();
   const facility = globalState.facilities.data[facilityId];
-  const reviews = _.orderBy(facility.reviews, ['created_at'], ['desc']);
+  const data = globalState.reviews.facilitiesShowResult;
+  const isLoading = globalState.visibility.waiting;
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`/api/facilities/${facilityId}/reviews`, { params: { page } });
+        const { current_page, last_page, per_page, total, data: responseData } = response.data;
+        const paginate = { current_page, last_page, per_page, total };
+        dispatch({
+          type: 'SET_REVIEW_FACILITIES_SHOW_RESULT',
+          paginate: paginate,
+          data: responseData
+        });
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchData();
+    // willUnmount
+    return () => {
+      dispatch({type: 'CLEAR_RESULTS'});
+    };
+  }, [location.search]);
   return (
-    <div className={`${className} page`}>
+    <div className={`${className} fadein`} id='result-top'>
       <h2>{facility.name}のクチコミ</h2>
       {
-        reviews.length > 0 ?
-          <Pagination
-            maxItems={5}
-            collection={reviews}
-            Component={ReviewItem} 
-          /> :
-          <BoxNeg>
-            クチコミはまだありません。<br />あなたのクチコミを投稿してみませんか？
-          </BoxNeg>
+        isLoading ?
+          <ReviewListPlaceholder /> :
+          <>
+            {
+              data.reviewIds.length > 0 ?
+                <ReviewListPaginate
+                  reviewIds={data.reviewIds}
+                  paginate={data.paginate}
+                  page={page}
+                  path={`/facilities/${facilityId}/reviews`}
+                /> :
+                <BoxNeg>
+                  クチコミはまだありません。<br />あなたのクチコミを投稿してみませんか？
+                </BoxNeg>
+            }
+          </>
       }
       {
         globalState.auth.isLoggedIn ?
@@ -45,7 +77,8 @@ const Reviews = ({match, className}) => {
 
 Reviews.propTypes = {
   match: PropTypes.object,
-  className: PropTypes.string
+  className: PropTypes.string,
+  location: PropTypes.object
 };
 
 const StyledReviews = styled(Reviews)`
@@ -57,6 +90,10 @@ const StyledReviews = styled(Reviews)`
   `}
   h3 {
     text-align: center;
+  }
+  &__text {
+    text-align: center;
+    padding: 20px 0;
   }
 `;
 

@@ -34,7 +34,7 @@ const TimeTableEdit = ({className, facilityId, cancel}) => {
       dispatch({type: 'MESSAGE', text: '保存しました。'});
       cancel();
     } catch (err) {
-      //
+      console.log(err);
     }
   });
   return (

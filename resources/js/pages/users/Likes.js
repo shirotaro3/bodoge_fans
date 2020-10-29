@@ -26,7 +26,7 @@ const Likes = ({location}) => {
           data: responseData
         });
       } catch (err) {
-        //
+        console.log(err);
       }
     };
     fetchData();

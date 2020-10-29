@@ -48,7 +48,7 @@ const ForOwner = ({location, className}) => {
           paginate: paginate,
         });
       } catch (err) {
-        //
+        console.log(err);
       }
     };
     fetchData();

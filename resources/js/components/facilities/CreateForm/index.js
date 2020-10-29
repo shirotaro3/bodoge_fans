@@ -46,7 +46,7 @@ const FacilityCreateEditForm = () => {
       dispatch({type: 'MESSAGE', text: '登録しました。'});
       dispatch({type: 'REDIRECT', to: '/users/dashboard/owner'});
     } catch (err) {
-      //
+      console.log(err);
     }
   });
   return (

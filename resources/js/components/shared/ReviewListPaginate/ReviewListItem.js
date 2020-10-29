@@ -19,7 +19,7 @@ const ReviewBox = ({className, reviewId}) => {
       dispatch({type: 'DELETE_REVIEW', data: response.data});
       dispatch({type: 'MESSAGE', text: '削除しました。'});
     } catch (err) {
-      //
+      console.log(err);
     }
   };
   const handleClick = () => {

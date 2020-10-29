@@ -24,7 +24,7 @@ const Reviews = ({location}) => {
           data: responseData
         });
       } catch (err) {
-        //
+        console.log(err);
       }
     };
     fetchData();
@@ -39,6 +39,7 @@ const Reviews = ({location}) => {
             reviewIds={data.reviewIds}
             paginate={data.paginate}
             page={page}
+            path='/reviews'
           />
       }
     </div>

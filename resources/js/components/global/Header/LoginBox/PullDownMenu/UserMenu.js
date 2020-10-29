@@ -3,8 +3,20 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import media from 'styled-media-query';
 import { Link } from 'react-router-dom';
+import { useGlobalState } from '../../../ContextProvider';
 
 const UserMenu = ({className}) => {
+  const [ , dispatch] = useGlobalState();
+  const handleClick = (e) => {
+    dispatch({
+      type: 'MODAL_OPEN',
+      title: 'ログアウト',
+      body: 'ログアウトしてもよろしいですか？',
+      callback: () => dispatch({type: 'REDIRECT', to: '/users/logout'})
+    });
+    // ClickEventの伝播を停止 モーダルが開くと同時にオーバーレイをクリックするのを防ぐ
+    e.stopPropagation();
+  };
   return (
     <ul className={className}>
       <li className={`${className}__li`}>
@@ -14,7 +26,7 @@ const UserMenu = ({className}) => {
         <Link  to='/users/likes' className={`${className}__link`}>お気に入り</Link>
       </li>
       <li className={`${className}__li`}>
-        <Link to='/users/logout' className={`${className}__link`}>ログアウト</Link>
+        <span onClick={handleClick} className={`${className}__link`}>ログアウト</span>
       </li>
     </ul>
   );
@@ -50,6 +62,7 @@ const StyledUserMenu = styled(UserMenu)`
     display: block;
     padding: 8px 0;
     text-align: center;
+    cursor: pointer;
   }
 `;
 

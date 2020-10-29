@@ -22,7 +22,7 @@ const EditImage = ({className, facilityId}) => {
       dispatch({type: 'SET_FACILITIES', data: [response.data]});
       dispatch({type: 'MESSAGE', text: 'ヘッダー画像が変更されました。'});
     } catch (err) {
-      //
+      console.log(err);
     }
   };
   const handleClick = () => {

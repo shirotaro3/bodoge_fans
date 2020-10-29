@@ -13,6 +13,7 @@ const UsersLogout = () => {
         dispatch({type: 'MESSAGE', text: 'ログアウトしました。'});
         dispatch({type: 'REDIRECT', to: '/'});
       } catch (err) {
+        console.log(err);
         dispatch({type: 'REDIRECT', to: '/'});
       }
     }

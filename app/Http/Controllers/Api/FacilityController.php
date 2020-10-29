@@ -27,10 +27,9 @@ class FacilityController extends Controller
             'm_facility_type',
             'm_services',
             'facility_time',
-            'events',
-            'reviews.user',
             'likes',
-            ])->paginate(5);
+            ])->withCount('reviews')
+            ->paginate(5);
 
         Log::info('[FACILITIES_API_INDEX_QUERY_SUCCESS]');
         return response()->json($facilities);
@@ -64,13 +63,11 @@ class FacilityController extends Controller
             'm_services',
             'facility_time',
             'likes',
-            'reviews.user',
-            'events',
             'm_budget',
             'm_prefecture',
             'm_scale',
             'm_facility_type'
-        );
+        )->loadCount('reviews');
 
         Log::info('[FACILITIES_API_STORE_POST_SUCCESS]');
         return response()->json($facility);
@@ -89,10 +86,9 @@ class FacilityController extends Controller
             'm_facility_type',
             'm_services',
             'facility_time',
-            'events',
-            'reviews.user',
             'likes',
-            ])->find($id);
+            ])->withCount('reviews')
+            ->find($id);
 
         if (!$facility) {
             Log::info('[FACILITIES_API_SHOW_GET_FAILURE]');
@@ -145,13 +141,11 @@ class FacilityController extends Controller
             'm_services',
             'facility_time',
             'likes',
-            'reviews.user',
-            'events',
             'm_budget',
             'm_prefecture',
             'm_scale',
             'm_facility_type'
-        );
+        )->loadCount('reviews');
 
         Log::info('[FACILITIES_API_UPDATE_SUCCESS]');
         return response()->json($facility);
@@ -229,13 +223,12 @@ class FacilityController extends Controller
             'm_services',
             'facility_time',
             'likes',
-            'reviews.user',
-            'events',
             'm_budget',
             'm_prefecture',
             'm_scale',
             'm_facility_type'
-        )->paginate(5);
+        )->withCount('reviews')
+            ->paginate(5);
 
         Log::info('[FACILITIES_API_SEARCH_QUERY_SUCCESS]');
         return response()->json($facilities);
@@ -248,13 +241,14 @@ class FacilityController extends Controller
             'm_services',
             'facility_time',
             'likes',
-            'reviews.user',
-            'events',
             'm_budget',
             'm_prefecture',
             'm_scale',
             'm_facility_type'
-        )->inRandomOrder()->take(5)->get();
+        )->withCount('reviews')
+            ->inRandomOrder()
+            ->take(5)
+            ->get();
         Log::info('[FACILITIES_API_RANDOM_PICK_QUERY_SUCCESS]');
         return response()->json($facilities);
     }
