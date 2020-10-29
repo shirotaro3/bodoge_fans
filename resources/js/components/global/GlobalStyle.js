@@ -1,9 +1,13 @@
 import { createGlobalStyle } from 'styled-components';
+import media from 'styled-media-query';
 import { fade } from '../shared/keyframes';
 
 const GlobalStyle = createGlobalStyle`
   body {
     background: #ccc;
+    ${media.lessThan('medium')`
+      font-size: 14px;
+    `}
   }
   input:-webkit-autofill {
     /* オートコンプリートから入力時、色がつかないようにする */

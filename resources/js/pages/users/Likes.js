@@ -36,7 +36,7 @@ const Likes = ({location}) => {
     };
   }, [location.search]);
   return (
-    <div className='fadein' id='result-top'>
+    <div className='fadein' style={{'minHeight': '100vh'}} id='result-top'>
       <h1 className='text-center'>{userName}さんのお気に入り</h1>
       {
         likes.length > 0 ?

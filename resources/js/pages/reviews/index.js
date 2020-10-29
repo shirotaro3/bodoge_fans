@@ -27,7 +27,10 @@ const Reviews = ({location}) => {
         console.log(err);
       }
     };
-    fetchData();
+    fetchData();// willUnmount
+    return () => {
+      dispatch({type: 'CLEAR_RESULTS'});
+    };
   }, [location.search, globalState.reviews.update]);
   return (
     <div className='fadein' id='result-top'>

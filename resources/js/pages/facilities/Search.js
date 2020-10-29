@@ -34,21 +34,23 @@ const Search = ({location}) => {
     };
   }, [location.search]);
   return (
-    <div className='fadein' id='result-top'>
+    <div className='fadein'>
       {
         globalState.masters.resolved &&
           <>
             <HeroSearchBox params={params} />
-            {
-              isLoading ?
-                <FacilityListPlaceholder /> :
-                <FacilityListPaginate
-                  facilityIds={searchResult.facilityIds}
-                  paginate={searchResult.paginate}
-                  params={params}
-                  path='/facilities/search'
-                />
-            }
+            <div id='result-top' style={{'minHeight':'100vh'}}>
+              {
+                isLoading ?
+                  <FacilityListPlaceholder /> :
+                  <FacilityListPaginate
+                    facilityIds={searchResult.facilityIds}
+                    paginate={searchResult.paginate}
+                    params={params}
+                    path='/facilities/search'
+                  />
+              }
+            </div>
           </>
       }
     </div>

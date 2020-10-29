@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 const TileItem = ({className, label, icon, path}) => {
   const Icon = icon;
   return (
-    <div className={className} role='button'>
+    <div className={`${className} fadein`} role='button'>
       <div className={`${className}__liner`} />
       {
         icon &&

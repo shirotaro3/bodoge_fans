@@ -5,6 +5,7 @@ import { BsPlusCircle } from 'react-icons/bs';
 import axios from 'axios';
 import queryString from 'query-string';
 import Tiles from '../../../../shared/Tiles';
+import TilesPlaceholder from '../../../../shared/TilesPlaceholder';
 import { useGlobalState } from '../../../../global/ContextProvider';
 import PaginateLinks from '../../../../shared/PaginateLinks';
 
@@ -21,10 +22,6 @@ const ForOwner = ({location, className}) => {
       path: '/facilities/create'
     }
   ];
-  const placeholder = [];
-  for (let i = 0; i < 3; i++) {
-    placeholder.push({label: ''});
-  }
   const convertFacilityIdsToTileValues = (facilityIds) => {
     return facilityIds.map(id => {
       const facility = globalState.facilities.data[id];
@@ -61,7 +58,7 @@ const ForOwner = ({location, className}) => {
     <div className={`${className} fadein`} id='result-top'>
       {
         isLoading ?
-          <Tiles tileValues={[...tileValues, ...placeholder]} /> :
+          <TilesPlaceholder /> :
           <>
             <Tiles
               tileValues={[...tileValues, ...convertFacilityIdsToTileValues(data.facilityIds)]}

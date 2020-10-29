@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Controller } from 'react-hook-form';
-import { FormVertical as Form, Input, Textarea, Select } from '../../../shared/FormParts';
+import { FormVertical as Form, Input, Textarea, Select, Container } from '../../../shared/FormParts';
 import { useGlobalState } from '../../../global/ContextProvider';
 import { ButtonWhite as Button } from '../../../shared/Buttons';
+import { LinkButtonWhite as LinkButton } from '../../../shared/Links';
 
 const Page1 = ({register, errors, control, next, formValue}) => {
   const [globalState, ] = useGlobalState();
@@ -98,7 +99,10 @@ const Page1 = ({register, errors, control, next, formValue}) => {
       />
       {errors.services && <span>必須項目です。</span>}
 
-      <Button type='submit'>進む</Button>
+      <Container>
+        <Button type='submit'>進む</Button>
+        <LinkButton to='/users/dashboard/owner'>キャンセル</LinkButton>
+      </Container>
     </Form>
   );
 };
