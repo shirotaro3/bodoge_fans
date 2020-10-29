@@ -8,7 +8,6 @@ import NoAuthRoute from './NoAuthRoute';
 import Home from '../../../pages/Home';
 import UsersRegistration from '../../../pages/users/Registration';
 import UsersLogin from '../../../pages/users/Login';
-import UsersLogout from '../../../pages/users/Logout';
 import UsersLikes from '../../../pages/users/Likes';
 import Dashboard from '../../../pages/users/Dashboard';
 import Events from '../../../pages/events';
@@ -31,7 +30,6 @@ const Routes = () => {
       {/* TODO: AuthRouteのexactなしに対応する */}
       <AuthRoute exact path='/users/dashboard' component={Dashboard} />
       <AuthRoute exact path='/users/dashboard/owner' component={Dashboard} />
-      <AuthRoute exact path='/users/logout' component={UsersLogout} />
       <AuthRoute exact path='/users/likes' component={UsersLikes} />
 
       {/* Events */}
