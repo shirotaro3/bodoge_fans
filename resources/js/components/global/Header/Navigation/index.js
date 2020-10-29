@@ -49,10 +49,17 @@ Navigation.propTypes = {
 
 const StyledNavigation = styled(Navigation)`
   display: flex;
+  justify-content: center;
   margin-left: 20px;
+  background: #555;
   ${media.lessThan('medium')`
     padding: 10px 0;
     margin: 0;
+  `}
+  ${media.lessThan('small')`
+    padding: 0;
+    margin: 0;
+  background: #333;
   `}
 `;
 

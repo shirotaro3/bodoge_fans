@@ -24,6 +24,9 @@ const StyledFooter = styled(Footer)`
   ${media.lessThan('medium')`
     font-size: 12px;
   `}
+  ${media.lessThan('small')`
+    margin-bottom: 59px;
+  `}
 `;
 
 export default StyledFooter;
