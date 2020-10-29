@@ -21,7 +21,7 @@ class UsersFacilityController extends Controller
             'likes',
             ])->withCount('reviews')
                 ->where('user_id', $user_id)
-                ->paginate(5);
+                ->paginate(3);
 
         Log::info('[USERS_API_FACILITIES_INDEX_QUERY_SUCCESS]');
         return response()->json($facilities);

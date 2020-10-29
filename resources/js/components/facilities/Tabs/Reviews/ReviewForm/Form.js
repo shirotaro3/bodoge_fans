@@ -6,22 +6,22 @@ import { ButtonWhite as Button } from '../../../../shared/Buttons';
 const ReviewFormComponent = ({register, errors, onSubmit}) => {
   return (
     <Form onSubmit={onSubmit}>
-      <label>タイトル（15文字以内）</label>
+      <label>タイトル（25文字以内）</label>
       <Input name='title'
         ref={register({
           required: '「タイトル」を入力してください。',
-          maxLength: { value: 20, message: '「タイトル」は20文字以内で入力してください。' }
+          maxLength: { value: 25, message: '「タイトル」は25文字以内で入力してください。' }
         })}
       />
       {errors.title && <span>{errors.title.message}</span>}
 
-      <label>本文（250文字以内）</label>
+      <label>本文（300文字以内）</label>
       <Textarea name='body'
         rows={5}
         maxRows={10}
         ref={register({
           required: '「本文」を入力してください。',
-          maxLength: { value: 250, message: '「本文」は250文字以内で入力してください。' },
+          maxLength: { value: 300, message: '「本文」は300文字以内で入力してください。' },
           minLength: { value: 10, message: '「本文」は10文字以上お書きください。' }
         })}
       />

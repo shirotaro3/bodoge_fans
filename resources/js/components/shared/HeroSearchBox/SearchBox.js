@@ -27,6 +27,7 @@ const SearchBox = ({className, defaultParams}) => {
     if (facilityType) params.m_facility_type_id = facilityType.value;
     if (budget) params.m_budget_id = budget.value;
     const query = queryString.stringify(params);
+    window.scrollTo({top: 0, left: 0, behavior: 'smooth' });
     dispatch({type: 'REDIRECT', to: `/facilities/search?${query}`});
   });
 
