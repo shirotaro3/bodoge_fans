@@ -43,15 +43,20 @@ const StyledHeader = styled(Header)`
     padding: 10px 0;
   `}
   ${media.lessThan('small')`
-    height: 66px;
-    padding: 10px 0;
-  `}
-  ${media.lessThan('321px')`
-    height: 135px;
+    height: 0;
+    padding: 0;
+    margin-top: 60px;
   `}
   &__flex {
     display: flex;
     align-items: center;
+    ${media.lessThan('small')`
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 5px 0;
+      background: #333;
+    `}
   }
   &__strech {
     ${isHiddenMobile}
