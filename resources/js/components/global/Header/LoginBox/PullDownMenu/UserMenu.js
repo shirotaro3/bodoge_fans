@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import media from 'styled-media-query';
@@ -12,10 +13,21 @@ const UserMenu = ({className}) => {
       type: 'MODAL_OPEN',
       title: 'ログアウト',
       body: 'ログアウトしてもよろしいですか？',
-      callback: () => dispatch({type: 'REDIRECT', to: '/users/logout'})
+      callback: logout
     });
     // ClickEventの伝播を停止 モーダルが開くと同時にオーバーレイをクリックするのを防ぐ
     e.stopPropagation();
+  };
+  const logout = async () => {
+    try {
+      await axios.post('/api/users/logout');
+      dispatch({type: 'LOGOUT'});
+      dispatch({type: 'MESSAGE', text: 'ログアウトしました。'});
+      dispatch({type: 'REDIRECT', to: '/'});
+    } catch (err) {
+      console.log(err);
+      dispatch({type: 'REDIRECT', to: '/'});
+    }
   };
   return (
     <ul className={className}>
