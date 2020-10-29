@@ -31,6 +31,9 @@ const StyledNavTop = styled(NavTop)`
   ${media.lessThan('medium')`
     height: 40px;
   `}
+  ${media.lessThan('small')`
+    display: none;
+  `}
 `;
 
 export default StyledNavTop;
