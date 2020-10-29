@@ -49,7 +49,11 @@ const StyledNavItem = styled(NavItem)`
     width: 33%;
     border-radius: 0;
     border-top: 5px solid #999;
-    border-bottom: none;
+    border-bottom: 0;
+  `}
+  ${media.lessThan('small')`
+    padding-bottom: 6px;
+    padding-top: 11px;
   `}
   &__activeLink {
     background: #fff;

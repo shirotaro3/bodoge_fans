@@ -43,7 +43,7 @@ const StyledHeader = styled(Header)`
     padding: 10px 0;
   `}
   ${media.lessThan('small')`
-    height: 120px;
+    height: 66px;
     padding: 10px 0;
   `}
   ${media.lessThan('321px')`
@@ -68,6 +68,11 @@ const StyledHeader = styled(Header)`
     display: none;
     ${media.lessThan('medium')`
       display: block;
+    `}
+    ${media.lessThan('small')`
+      position: fixed;
+      bottom: 0;
+      width: 100%;
     `}
   }
 `;

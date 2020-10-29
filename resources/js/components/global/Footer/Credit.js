@@ -25,6 +25,9 @@ const StyledCredit = styled(Credit)`
   ${media.lessThan('medium')`
     height: 45px;
   `}
+  ${media.lessThan('small')`
+    display:none;
+  `}
 `;
 
 export default StyledCredit;
