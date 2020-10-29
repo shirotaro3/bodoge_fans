@@ -1,0 +1,17 @@
+{
+  "name": "BodogeFans",
+  "short_name": "BodogeFans",
+  "theme_color": "#333333",
+  "background_color": "#555555",
+  "display": "standalone",
+  "orientation": "portrait",
+  "scope": "/",
+  "start_url": "/",
+  "icons": [
+    {
+      "src": "icon.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    }
+  ]
+}
