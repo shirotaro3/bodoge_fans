@@ -1,4 +1,5 @@
 import React from 'react';
+import media from 'styled-media-query';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -20,6 +21,9 @@ const StyledTilesPlaceholderItem = styled(TilesPlaceholderItem)`
   border-radius: 10px;
   border: 2px solid #aaa;
   background: #666;
+  ${media.lessThan('small')`
+    height: 90px;
+    `}
 `;
 
 export default StyledTilesPlaceholderItem;
