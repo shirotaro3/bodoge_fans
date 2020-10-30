@@ -45,6 +45,7 @@ const SearchBox = ({className, defaultParams}) => {
             maxLength: { value: 20, message: '20文字以内で入力してください。' }
           })}
           defaultValue={defaultParams.name || ''}
+          autoComplete='off'
         />
 
         <Container>

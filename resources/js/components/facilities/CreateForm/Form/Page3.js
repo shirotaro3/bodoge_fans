@@ -11,11 +11,11 @@ const Page3 = ({register, errors, prev, submit}) => {
         placeholder='選択してください'
         ref={register({
           validate: {
-            filesize: files => files[0].size < 3000000 || !files[0],
-            filetype: files => files[0].type === 'image/jpeg' ||
+            filesize: files => !files[0] || files[0].size < 3000000,
+            filetype: files => !files[0] ||
+            files[0].type === 'image/jpeg' ||
             files[0].type === 'image/gif' ||
-            files[0].type === 'image/png' ||
-            !files[0]
+            files[0].type === 'image/png'
           }
         })}
       />
