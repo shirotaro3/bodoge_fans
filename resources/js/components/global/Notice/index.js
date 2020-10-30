@@ -43,7 +43,7 @@ const StyledNotice = styled(Notice)`
     font-size: 11px;
   `}
   ${media.lessThan('small')`
-    top: -16px;
+    top: -20px;
     font-size: 11px;
     position: fixed;
   `}

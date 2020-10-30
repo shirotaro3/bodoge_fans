@@ -126,7 +126,10 @@ const InputFileDiv = (props, ref) => {
   const handleChange = (e) => {
     // エラーを初期化
     const file = e.target.files[0];
-    if (!file) return;
+    if (!file) {
+      setFileName('');
+      return setImgUrl('');
+    }
     if (file.type != 'image/jpeg' &&
       file.type != 'image/gif' &&
       file.type != 'image/png') {

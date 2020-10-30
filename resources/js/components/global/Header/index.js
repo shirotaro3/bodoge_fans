@@ -81,6 +81,10 @@ const StyledHeader = styled(Header)`
       position: fixed;
       bottom: 0;
       width: 100%;
+      /* androidソフトウェアキーボードに対応 */
+      @media(max-height: 500px) {
+        display: none;
+      }
     `}
   }
 `;
