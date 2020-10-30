@@ -48,7 +48,6 @@ const StyledTileItem = styled(TileItem).attrs(props => {
   margin: 2px;
   transition: .3s;
   border-radius: 10px;
-  border: 2px solid #aaa;
   background: linear-gradient( to right, rgba(0,0,0,.3),  rgba(0,0,0,.3) ), ${props => props.bgImage};
   background-size: cover;
   background-position: center;

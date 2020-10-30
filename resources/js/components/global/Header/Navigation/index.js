@@ -51,7 +51,6 @@ const StyledNavigation = styled(Navigation)`
   display: flex;
   justify-content: center;
   margin-left: 20px;
-  background: #555;
   ${media.lessThan('medium')`
     padding-top: 10px;
     margin: 0;

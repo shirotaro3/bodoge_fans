@@ -17,6 +17,13 @@ const GlobalStyle = createGlobalStyle`
     font-size: 1em;
     margin: 10px 0;
   }
+  #result-top {
+    /* ヘッダー固定によるページ内リンクのズレを防止する */
+    ${media.lessThan('small')`
+      margin-top: -58px;
+      padding-top: 58px;
+    `}
+  }
   .fadein {
     animation: ${fade} .7s 1;
   }

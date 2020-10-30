@@ -2,7 +2,7 @@
   "name": "BodogeFans",
   "short_name": "BdgFans",
   "theme_color": "#333333",
-  "background_color": "#555555",
+  "background_color": "#444444",
   "display": "standalone",
   "orientation": "portrait",
   "scope": "/",

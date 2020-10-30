@@ -19,7 +19,6 @@ const StyledTilesPlaceholderItem = styled(TilesPlaceholderItem)`
   width: calc(50% - 4px);
   margin: 2px;
   border-radius: 10px;
-  border: 2px solid #aaa;
   background: #666;
   ${media.lessThan('small')`
     height: 90px;
