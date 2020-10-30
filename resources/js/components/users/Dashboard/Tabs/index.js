@@ -23,7 +23,7 @@ const Tabs = ({className}) => {
           className={`${className}__tab`}
           activeClassName={`${className}__active_tab`}
         >
-          お店を管理する
+          お店を登録する
         </NavLink>
       </div>
       {/* tabルート */}
