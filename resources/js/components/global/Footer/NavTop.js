@@ -2,14 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import media from 'styled-media-query';
-import { HashLink } from 'react-router-hash-link';
-import { divLink } from '../../shared/mixinCss';
 
+const onClickScroll = () => {
+  window.scrollTo({top: 0, left: 0, behavior: 'smooth' });
+};
 const NavTop = ({className}) => {
   return (
-    <div className={className}>
+    <div className={className} role='button' onClick={onClickScroll}>
       ページ上部へ戻る
-      <HashLink smooth to='#nav-top' className={`${className}__link`}></HashLink>
     </div>
   );
 };
@@ -19,12 +19,12 @@ NavTop.propTypes = {
 };
 
 const StyledNavTop = styled(NavTop)`
-  ${divLink}
   height: 47px;
   background: #444;
   color: #fff;
   text-align: center;
   padding: 13px 10px;
+  cursor: pointer;
   &:hover {
     background: #555;
   }

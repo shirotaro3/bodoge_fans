@@ -34,15 +34,17 @@ const StyledLogo = styled(Logo)`
   border-radius: 4px;
   transition: .6s;
   cursor: pointer;
+  ${media.greaterThan('medium')`
+    &:hover {
+      background: #555;
+      color: #fc7;
+      border-color: #ff9;
+    }
+  `}
   ${media.lessThan('small')`
     flex: 1;
     width: auto;
   `}
-  ${StyledLogo}:hover&{
-    background: #555;
-    color: #fc7;
-    border-color: #ff9;
-  }
   &__mainText {
     font-size: 24px;
     margin: 0;

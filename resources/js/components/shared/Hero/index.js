@@ -2,15 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import media from 'styled-media-query';
-import { BsChatDots } from 'react-icons/bs';
 
-const Hero = ({className}) => {
+const Hero = ({className, icon, text}) => {
+  const Icon = icon;
   return (
     <div className={className}>
       <div className={`${className}__innerbox`}>
         <div className={`${className}__heading`}>
-          <BsChatDots size='30px' />
-          <h1>新着のクチコミ</h1>
+          <Icon size='30px' />
+          <h1>{text}</h1>
         </div>
       </div>
     </div>
@@ -18,12 +18,18 @@ const Hero = ({className}) => {
 };
 
 Hero.propTypes = {
-  className: PropTypes.string
+  className: PropTypes.string,
+  icon: PropTypes.func,
+  text: PropTypes.string
 };
 
-const StyledHero = styled(Hero)` 
+const StyledHero = styled(Hero).attrs(props => {
+  return ({
+    bgImage: props.imageUrl ? `url(${props.imageUrl})` : 'none'
+  });
+})` 
   height: 300px;
-  background-image: url(/img/dice.jpg);
+  background-image: ${props => props.bgImage};
   background-size: cover;
   background-position: center;
   border-bottom: 5px solid #555;

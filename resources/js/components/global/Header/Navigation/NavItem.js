@@ -4,10 +4,16 @@ import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import media from 'styled-media-query';
 import { divLink } from '../../../shared/mixinCss';
+import { useGlobalState } from '../../../global/ContextProvider';
 
 const NavItem = ({to, children, icon, className}) => {
+  const [, dispatch] = useGlobalState();
+  const onClickItem = () => {
+    window.scrollTo({top: 0, left: 0, behavior: 'smooth' });
+    dispatch({type: 'CLOSE_ALL'});
+  };
   return (
-    <div className={className}>
+    <div className={className} onClick={onClickItem}>
       <div>{icon}</div>
       {children}
       <NavLink
@@ -38,12 +44,6 @@ const StyledNavItem = styled(NavItem)`
   border-top: 7px solid #999;
   border-bottom: 2px solid #777;
   border-radius: 7px;
-  &:hover{
-    background: #555;
-    color: #5ae;
-    border-top-color: #6be;
-    border-bottom-color: #6be;
-  }
   ${media.lessThan('medium')`
     font-size: 10px;
     width: 33.3%;

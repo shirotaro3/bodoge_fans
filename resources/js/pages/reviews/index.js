@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import { BsChatDots } from 'react-icons/bs';
 import { useGlobalState } from '../../components/global/ContextProvider';
 import queryString from 'query-string';
 import ReviewListPaginate from '../../components/shared/ReviewListPaginate';
-import Hero from '../../components/reviews/Hero';
+import Hero from '../../components/shared/Hero';
 import ReviewListPlaceholder from '../../components/shared/ReviewListPlaceholder';
 
 const Reviews = ({location}) => {
@@ -34,7 +35,11 @@ const Reviews = ({location}) => {
   }, [location.search, globalState.reviews.update]);
   return (
     <div className='fadein' id='result-top'>
-      <Hero />
+      <Hero
+        icon={BsChatDots}
+        text='新着のクチコミ'
+        imageUrl='/img/dice.jpg'
+      />
       {
         isLoading ?
           <ReviewListPlaceholder /> :

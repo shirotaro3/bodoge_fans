@@ -9,7 +9,7 @@ import { isHiddenTablet, isHiddenMobile } from '../../shared/mixinCss';
 
 const Header = ({className}) => {
   return (
-    <header className={className} id='nav-top'>
+    <header className={className}>
       <nav>
         <div className={`${className}__flex`}>
           <Logo logoText="BodogeFans" subText="ボードゲームを愛する人とお店のポータルサイト" />
@@ -44,8 +44,11 @@ const StyledHeader = styled(Header)`
   `}
   ${media.lessThan('small')`
     height: 0;
-    padding: 0;
-    margin-top: 60px;
+    padding: 58px 0 0 0;
+  `}
+  ${media.lessThan('324px')`
+    height: 0;
+    padding: 73px 0 0 0;
   `}
   &__flex {
     display: flex;
