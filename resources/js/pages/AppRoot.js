@@ -8,7 +8,6 @@ import dayjs from 'dayjs';
 // components
 import GlobalStyle from '../components/global/GlobalStyle';
 import Routes from '../components/global/Routes';
-import Redirector from '../components/global/Redirector';
 import Initializer from '../components/global/Initializer';
 import { ContextProvider } from '../components/global/ContextProvider';
 import Header from '../components/global/Header';
@@ -21,9 +20,14 @@ import smoothscroll from 'smoothscroll-polyfill';
 
 // dayjsのi18n対応
 dayjs.locale('ja');
-// SmoothScrollPolyfill
-window.__forceSmoothScrollPolyfill__ = true;
 smoothscroll.polyfill();
+const setFillHeight = () => {
+  const vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty('--vh', `${vh}px`);
+};
+window.addEventListener('resize', setFillHeight);
+
+setFillHeight();
 
 const AppRoot = ({className}) => {
   return (
@@ -34,7 +38,6 @@ const AppRoot = ({className}) => {
         <Modal />
         <Initializer>
           <Router>
-            <Redirector />
             <Header />
             <Notice />
             <Routes />

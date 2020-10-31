@@ -1,7 +1,6 @@
 import React from 'react';
-import 'react-datepicker/dist/react-datepicker.css'
-import { FormVertical as Form, Input, Radio, Container } from '../../shared/FormParts';
-import { ButtonWhite as Button, ButtonWhiteDisabled as ButtonDisabled } from '../../shared/Buttons';
+import { FormVertical as Form, Input } from '../../shared/FormParts';
+import { ButtonWhite as Button } from '../../shared/Buttons';
 import { BoxRoundedBlack as Box } from '../../shared/Boxes';
 
 const Components = ({register, watch, errors, onSubmit}) => {

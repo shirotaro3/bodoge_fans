@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 import { useGlobalState } from './ContextProvider';
 import axios from 'axios';
 import networkService from './services/networkService';
 
 const Initializer = ({children}) => {
   const [globalState, dispatch] = useGlobalState();
+  const history = useHistory();
   const pickedUpResult = globalState.facilities.pickedUpResult;
   const masters = globalState.masters;
   const auth = globalState.auth;
@@ -62,12 +64,12 @@ const Initializer = ({children}) => {
     // networkService初期化
     const onUnauthenticated = () => {
       dispatch({type: 'LOGOUT'});
-      window.scrollTo({top: 0, left: 0, behavior: 'smooth' });
+      document.getElementById('app_root').scrollTo({top: 0, left: 0, behavior: 'smooth' });
       dispatch({type: 'MESSAGE', text: '時間が経過したため、再度ログインしてください。'});
-      dispatch({type: 'REDIRECT', to: '/users/login'});
+      history.push('/users/login');
     };
     const onInternalServerError = () => {
-      window.scrollTo({top: 0, left: 0, behavior: 'smooth' });
+      document.getElementById('app_root').scrollTo({top: 0, left: 0, behavior: 'smooth' });
       dispatch({type: 'ALERT', text: 'サーバーの処理に失敗しました。'});
     };
     const onRequest = () => {

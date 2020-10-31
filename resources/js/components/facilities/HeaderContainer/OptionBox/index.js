@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { useGlobalState } from '../../../../components/global/ContextProvider';
+import { useGlobalState } from '../../../global/ContextProvider';
 import SettingMenu from './SettingMenu';
 import Like from './Like';
 import EditImage from './EditImage';
@@ -33,22 +33,6 @@ const StyledOptionBox = styled(OptionBox)`
   top: 0;
   right: 0;
   color: #fff;
-  &__icon {
-    cursor: pointer;
-    color: #fff;
-    font-size: 1.5em;
-    margin: 0 6px;
-    opacity: .7;
-    &:hover {
-      opacity: 1;
-    }
-  }
-  &__iconLiked {
-    cursor: pointer;
-    color: #ff9;
-    font-size: 1.5em;
-    margin: 0 6px;
-  }
 `;
 
 export default StyledOptionBox;

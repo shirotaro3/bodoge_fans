@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import media from 'styled-media-query';
 
 const onClickScroll = () => {
-  window.scrollTo({top: 0, left: 0, behavior: 'smooth' });
+  document.getElementById('app_root').scrollTo({top: 0, left: 0, behavior: 'smooth' });
 };
 const NavTop = ({className}) => {
   return (

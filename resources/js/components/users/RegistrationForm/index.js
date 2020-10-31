@@ -1,5 +1,6 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import Form from './Form';
 import { useGlobalState } from '../../global/ContextProvider';
@@ -7,6 +8,7 @@ import { useGlobalState } from '../../global/ContextProvider';
 const UserRegistrationForm = () => {
   const { register, handleSubmit, watch, errors, control } = useForm();
   const [, dispatch] = useGlobalState();
+  const history = useHistory();
 
   // Submit時の処理
   const onSubmit = handleSubmit(async (data) => {
@@ -15,12 +17,12 @@ const UserRegistrationForm = () => {
       // 登録成功時
       dispatch({type: 'LOGIN', data: response.data});
       dispatch({type: 'MESSAGE', text: `登録が完了しました。ようこそ、${response.data.name}さん！`});
-      dispatch({type: 'REDIRECT', to: '/users/dashboard'});
+      history.push('/users/dashboard');
     } catch (err) {
       console.log(err);
       const status = err.status || err.response.status;
       if (status === 422) {
-        window.scrollTo({top: 0, left: 0, behavior: 'smooth' });
+        document.getElementById('app_root').scrollTo({top: 0, left: 0, behavior: 'smooth' });
         dispatch({type: 'ALERT', text: 'そのメールアドレスは既に登録されています。'});
       }
     }

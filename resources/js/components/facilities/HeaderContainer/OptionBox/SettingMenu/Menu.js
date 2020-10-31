@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { useHistory } from 'react-router-dom';
 import media from 'styled-media-query';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
@@ -8,6 +9,7 @@ import { useGlobalState } from '../../../../global/ContextProvider';
 
 const Menu = ({className, facilityId}) => {
   const [, dispatch] = useGlobalState();
+  const history = useHistory();
   const confirmDelete = () => {
     dispatch({
       type: 'MODAL_OPEN',
@@ -22,7 +24,7 @@ const Menu = ({className, facilityId}) => {
       await axios.delete(`/api/facilities/${facilityId}`);
       dispatch({type: 'DELETE_FACILITY', id: facilityId});
       dispatch({type: 'MESSAGE', text: '削除しました。'});
-      dispatch({type: 'REDIRECT', to: '/users/dashboard' });
+      history.pushState('/users/dashboard');
     } catch (err) {
       console.log(err);
     }

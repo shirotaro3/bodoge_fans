@@ -33,8 +33,8 @@ Header.propTypes = {
 
 const StyledHeader = styled(Header)`
   color: #fff;
-  background: #333;
   padding: 10px 20px;
+  background: #333;
   height: 80px;
   margin: 0;
   z-index: 30;
@@ -44,7 +44,8 @@ const StyledHeader = styled(Header)`
   `}
   ${media.lessThan('small')`
     height: 0;
-    padding: 58px 0 0 0;
+    padding: 57px 0 0 0;
+    background: none;
   `}
   ${media.lessThan('324px')`
     height: 0;
@@ -81,6 +82,7 @@ const StyledHeader = styled(Header)`
       position: fixed;
       bottom: 0;
       width: 100%;
+      background: none;
       /* androidソフトウェアキーボードに対応 */
       @media(max-height: 500px) {
         display: none;

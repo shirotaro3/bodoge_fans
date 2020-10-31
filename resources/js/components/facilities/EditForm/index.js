@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 import { useForm, Controller } from 'react-hook-form';
 import _ from 'lodash';
 import { FormVertical as Form, Input, Select, Container } from '../../shared/FormParts';
@@ -11,6 +12,7 @@ import { useGlobalState } from '../../global/ContextProvider';
 
 const EditForm = ({facilityId}) => {
   const [globalState, dispatch] = useGlobalState();
+  const history = useHistory();
   const { register, handleSubmit, errors, control } = useForm();
   const { facilityTypes, budgets, scales, services, prefectures } = globalState.masters;
   const facility = globalState.facilities.data[facilityId];
@@ -31,8 +33,8 @@ const EditForm = ({facilityId}) => {
       };
       const response = await axios.put(`/api/facilities/${facilityId}`, submitData);
       dispatch({type: 'SET_FACILITIES', data: [response.data]});
-      dispatch({type: 'REDIRECT', to: `/facilities/${facilityId}`});
       dispatch({type: 'MESSAGE', text: '保存しました。'});
+      history.push(`/facilities/${facilityId}`);
     } catch (err) {
       console.log(err);
     }

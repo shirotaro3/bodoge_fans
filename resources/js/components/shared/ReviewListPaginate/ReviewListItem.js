@@ -15,7 +15,7 @@ const ReviewListItem = ({className, reviewId}) => {
   const review = globalState.reviews.data[reviewId];
   const deleteReview = async () => {
     try {
-      window.scrollTo({top: 0, left: 0, behavior: 'smooth' });
+      document.getElementById('app_root').scrollTo({top: 0, left: 0, behavior: 'smooth' });
       const response = await axios.delete(`/api/reviews/${reviewId}`);
       dispatch({type: 'REFRESH_REVIEW', data: response.data});
       dispatch({type: 'MESSAGE', text: '削除しました。'});

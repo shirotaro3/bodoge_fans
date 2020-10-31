@@ -94,9 +94,6 @@ const StyledTop = styled(Top).attrs(props => {
   props => props.isMine &&
     `&__intr {
       cursor: pointer;
-      &:hover {
-        background: rgba(0,0,0,.1);
-      }
     }
     &__intr:hover &__edit {
       opacity: .6;
@@ -105,10 +102,6 @@ const StyledTop = styled(Top).attrs(props => {
   ${
   props => props.isMine &&
       media.lessThan('medium')`
-        &__intr {
-          background: rgba(0,0,0,.05);
-          width: 100%;
-        }
         &__edit {
           opacity: .6;
         }

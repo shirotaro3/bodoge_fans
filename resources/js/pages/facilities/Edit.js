@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 import FacilitiesEditForm from '../../components/facilities/EditForm';
 import { useGlobalState } from '../../components/global/ContextProvider';
 import NotFound from '../404';
 
 const FacilitiesEdit = ({match}) => {
   const [globalState, dispatch] = useGlobalState();
+  const history = useHistory();
   const [isNotFound, setIsNotFound] = useState(false);
   const facilityId = match.params.id;
   const facility = globalState.facilities.data[facilityId];
@@ -28,7 +30,7 @@ const FacilitiesEdit = ({match}) => {
       fetchData();
     } else if (!isMine) {
       // facilityがあるが、他ユーザーの所有するfacilityの時
-      dispatch({type: 'REDIRECT', to: `/facilities/${facilityId}`});
+      history.push(`/facilities/${facilityId}`);
       dispatch({type: 'MESSAGE', text: 'アクセス権限がありません。'});
     }
   }, [facilityId]);

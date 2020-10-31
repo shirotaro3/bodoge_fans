@@ -8,9 +8,6 @@ const initialState = {
     isLoggedIn: false,
     initialized: false,
   },
-  redirect: {
-    path: '',
-  },
   notice: {
     text: '',
     isShow: false,
@@ -28,9 +25,6 @@ const initialState = {
       callback: () => {}
     },
     waiting: 0,
-  },
-  tracking: {
-    afterLoginPath: '',
   },
   masters: {
     facilityTypes: [{value: '', label: ''}],

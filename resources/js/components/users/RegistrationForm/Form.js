@@ -74,7 +74,7 @@ const Components = ({register, watch, errors, onSubmit, control}) => {
             <DatePicker
               onChange={date => onChange(date)}
               autoComplete='off'
-              onFocus={e => e.target.readOnly = true}
+              onFocus={e => {e.target.readOnly = true;e.target.blur();}}
               name={name}
               selected={value}
               placeholderText='日付を選択'
