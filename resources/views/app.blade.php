@@ -7,6 +7,16 @@
         <title>{{ config('app.name') }}</title>
 
         <link rel="manifest" href="manifest.json" />
+        <link rel="apple-touch-icon" sizes="128x128" href="/img/icons/128.png" />
+        <link rel="apple-touch-icon" sizes="144x144" href="/img/icons/144.png" />
+        <link rel="apple-touch-icon" sizes="152x152" href="/img/icons/152.png" />
+        <link rel="apple-touch-icon" sizes="192x192" href="/img/icons/192.png" />
+        <link rel="apple-touch-startup-image" href="/img/splash/640x1136.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" />
+        <link rel="apple-touch-startup-image" href="/img/splash/750x1334.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" />
+        <link rel="apple-touch-startup-image" href="/img/splash/1242x2208.png" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" />
+        <link rel="apple-touch-startup-image" href="/img/splash/1125x2436.png" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" />
+        <link rel="apple-touch-startup-image" href="/img/splash/828x1792.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
     </head>
     <body>
         

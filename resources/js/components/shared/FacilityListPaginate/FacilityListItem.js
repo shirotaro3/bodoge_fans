@@ -118,6 +118,9 @@ const StyledFacilityListItem = styled(FacilityListItem).attrs(props => {
       font-size: 14px;
       flex: 1;
     `}
+    ${media.lessThan('small')`
+      font-size: 13px;
+    `}
   }
   &__hidden_tablet {
     ${media.lessThan('medium')`
