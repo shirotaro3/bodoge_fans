@@ -13,7 +13,7 @@ const ReviewForm = ({facilityId}) => {
   const onSubmit = handleSubmit((data) => {
     const postReview = async () => {
       try {
-        window.scrollTo({top: 0, left: 0, behavior: 'smooth' });
+        document.getElementById('app_root').scrollTo({top: 0, left: 0, behavior: 'smooth' });
         const submitData = {
           ...data,
           facility_id: facilityId

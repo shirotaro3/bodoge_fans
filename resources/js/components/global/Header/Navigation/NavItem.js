@@ -9,12 +9,13 @@ import { useGlobalState } from '../../../global/ContextProvider';
 const NavItem = ({to, children, icon, className}) => {
   const [, dispatch] = useGlobalState();
   const onClickItem = () => {
-    window.scrollTo({top: 0, left: 0, behavior: 'smooth' });
+    document.getElementById('app_root').scrollTo({top: 0, left: 0});
     dispatch({type: 'CLOSE_ALL'});
   };
+  const Icon = icon;
   return (
     <div className={className} onClick={onClickItem}>
-      <div>{icon}</div>
+      <Icon size='18px' style={{'margin': '0 auto 4px auto'}} />
       {children}
       <NavLink
         exact
@@ -29,7 +30,7 @@ const NavItem = ({to, children, icon, className}) => {
 NavItem.propTypes = {
   to: PropTypes.string,
   children: PropTypes.node,
-  icon: PropTypes.node,
+  icon: PropTypes.func,
   className: PropTypes.string
 };
 
@@ -54,6 +55,7 @@ const StyledNavItem = styled(NavItem)`
   ${media.lessThan('small')`
     padding-bottom: 6px;
     padding-top: 11px;
+    width: 26%;
   `}
   &__activeLink {
     background: #fff;

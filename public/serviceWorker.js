@@ -1,7 +1,9 @@
 var CACHE_NAME  = 'BDGFANS202010';
 
 var urlsToCache = [
+  '/',
   'js/app.js',
+  'api/masters',
   'img/boardgames.jpg',
   'img/dice.jpg',
   'img/event.jpg',
@@ -20,7 +22,6 @@ var urlsToCache = [
   'https://fonts.gstatic.com/s/nunito/v14/XRXV3I6Li01BKofINeaBTMnFcQ.woff2',
   'https://fonts.gstatic.com/s/nunito/v14/XRXW3I6Li01BKofAjsOUYevIWzgPDA.woff2'
 ];
-
 self.addEventListener('install', function(event) {
   event.waitUntil(
     caches

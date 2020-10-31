@@ -182,9 +182,6 @@ const StyledTimeTable = styled(TimeTable).attrs(props => {
   props => props.isMine &&
     `&__ul {
       cursor: pointer;
-      &:hover {
-        background: rgba(255,255,255,.1);
-      }
     }
     &__ul:hover &__edit {
       opacity: .8;
@@ -193,10 +190,6 @@ const StyledTimeTable = styled(TimeTable).attrs(props => {
   ${
   props => props.isMine &&
       media.lessThan('medium')`
-        &__ul {
-          background: rgba(255,255,255,.1);
-          width: 100%;
-        }
         &__edit {
           opacity: .8;
         }

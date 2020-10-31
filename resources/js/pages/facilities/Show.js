@@ -24,7 +24,7 @@ const FacilitiesShow = ({match}) => {
     if (!globalState.facilities.data[facilityId]) {
       fetchData();
     }
-    window.scrollTo({top: 0, left: 0, behavior: 'smooth' });
+    document.getElementById('app_root').scrollTo({top: 0, left: 0, behavior: 'smooth' });
     // unmount時の処理
     return () => {
       // モーダル等を全て閉じる

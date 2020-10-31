@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 import Form from './Form';
 import { useGlobalState } from '../../global/ContextProvider';
 
 const FacilityCreateEditForm = () => {
   const { register, handleSubmit, watch, errors, control } = useForm();
   const [, dispatch] = useGlobalState();
+  const history = useHistory();
   // ページ切り替え時にセットする
   const [formValue, setFormValue] = useState(false);
 
@@ -44,7 +46,7 @@ const FacilityCreateEditForm = () => {
       );
       dispatch({type: 'SET_FACILITIES', data: [response.data]});
       dispatch({type: 'MESSAGE', text: '登録しました。'});
-      dispatch({type: 'REDIRECT', to: '/users/dashboard/owner'});
+      history.push('/users/dashboard/owner');
     } catch (err) {
       console.log(err);
     }

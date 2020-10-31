@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import media from 'styled-media-query';
 import { Link } from 'react-router-dom';
@@ -8,6 +9,7 @@ import { useGlobalState } from '../../../ContextProvider';
 
 const UserMenu = ({className}) => {
   const [ , dispatch] = useGlobalState();
+  const history = useHistory();
   const handleClick = (e) => {
     dispatch({
       type: 'MODAL_OPEN',
@@ -23,10 +25,10 @@ const UserMenu = ({className}) => {
       await axios.post('/api/users/logout');
       dispatch({type: 'LOGOUT'});
       dispatch({type: 'MESSAGE', text: 'ログアウトしました。'});
-      dispatch({type: 'REDIRECT', to: '/'});
+      history.push('/');
     } catch (err) {
       console.log(err);
-      dispatch({type: 'REDIRECT', to: '/'});
+      history.push('/');
     }
   };
   return (

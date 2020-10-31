@@ -3,9 +3,7 @@ import facilitiesReducer from './facilitiesReducer';
 import reviewsReducer from './reviewsReducer';
 import mastersReducer from './mastersReducer';
 import visibilityReducer from './visibilityReducer';
-import redirectReducer from './redirectReducer';
 import noticeReducer from './noticeReducer';
-import trackingReducer from './trackingReducer';
 import eventsReducer from './eventsReducer';
 
 const rootReducer = (state = {}, action) => {
@@ -16,9 +14,7 @@ const rootReducer = (state = {}, action) => {
     events: eventsReducer(state.events, action),
     masters: mastersReducer(state.masters, action),
     visibility: visibilityReducer(state.visibility, action),
-    redirect: redirectReducer(state.redirect, action),
     notice: noticeReducer(state.notice, action),
-    tracking: trackingReducer(state.tracking, action)
   };
 };
 

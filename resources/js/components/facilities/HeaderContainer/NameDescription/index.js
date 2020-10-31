@@ -77,9 +77,6 @@ const StyledND = styled(NameDescription).attrs(props => {
   props => props.isMine &&
   `&__container {
     cursor: pointer;
-    &:hover {
-      background: rgba(255,255,255,.1);
-    }
   }
   &__container:hover &__edit {
     opacity: .6;
@@ -88,9 +85,6 @@ const StyledND = styled(NameDescription).attrs(props => {
   ${
   props => props.isMine &&
     media.lessThan('medium')`
-      &__container {
-        background: rgba(255,255,255,.1);
-      }
       &__edit {
         opacity: .6;
       }

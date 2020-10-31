@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { BiSearchAlt } from 'react-icons/bi';
+import { useHistory } from 'react-router-dom';
 import { Input, FormVertical as Form, Select, Container } from '../../shared/FormParts';
 import { useForm, Controller } from 'react-hook-form';
 import { useGlobalState } from '../../global/ContextProvider';
@@ -10,8 +11,9 @@ import queryString from 'query-string';
 import { findMasterById } from '../../shared/utilities';
 
 const SearchBox = ({className, defaultParams}) => {
+  const history = useHistory();
   const { register, handleSubmit, control } = useForm();
-  const [globalState, dispatch] = useGlobalState();
+  const [globalState, ] = useGlobalState();
   const { prefectures, budgets, facilityTypes, scales } = globalState.masters;
   const getMasterDefaultValue = (masterCollection, defaultParam) => {
     const defaultValue = findMasterById(masterCollection, defaultParam);
@@ -27,8 +29,7 @@ const SearchBox = ({className, defaultParams}) => {
     if (facilityType) params.m_facility_type_id = facilityType.value;
     if (budget) params.m_budget_id = budget.value;
     const query = queryString.stringify(params);
-    window.scrollTo({top: 0, left: 0, behavior: 'smooth' });
-    dispatch({type: 'REDIRECT', to: `/facilities/search?${query}`});
+    history.push(`/facilities/search?${query}`);
   });
 
   return (

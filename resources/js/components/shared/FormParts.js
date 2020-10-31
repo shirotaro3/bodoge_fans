@@ -218,7 +218,8 @@ export const Select = (props) => {
   return (
     <ReactSelect {...props}
       autoComplete='off'
-      onFocus={e => e.target.readOnly = true}
+      readOnly={true}
+      onFocus={e => {e.target.readOnly = true;}}
       styles={customStyles}
     />
   );

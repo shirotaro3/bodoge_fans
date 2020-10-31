@@ -16,6 +16,7 @@ const Search = ({location}) => {
     const fetchData = async () => {
       try {
         const response = await axios.get('/api/facilities/search', { params });
+        document.getElementById('result-top').scrollIntoView({block: 'start', behavior: 'smooth' });
         const { current_page, last_page, per_page, total, data: responseData } = response.data;
         const paginate = { current_page, last_page, per_page, total };
         dispatch({
@@ -39,7 +40,7 @@ const Search = ({location}) => {
         globalState.masters.resolved &&
           <>
             <HeroSearchBox params={params} />
-            <div id='result-top' style={{'minHeight':'100vh'}}>
+            <div id='result-top' style={{'minHeight':'calc(var(--vh, 1vh) * 100 - 58px)'}}>
               {
                 isLoading ?
                   <FacilityListPlaceholder /> :
