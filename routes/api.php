@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/masters', 'App\Http\Controllers\Api\MasterController@index');
+Route::get('/app/init', 'App\Http\Controllers\Api\AppController@init');
 
 // users
 Route::prefix('users')->group(function () {

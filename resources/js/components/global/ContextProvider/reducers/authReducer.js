@@ -16,7 +16,7 @@ const authReducer = (state = {}, action) => {
       user: {},
       isLoggedIn: false
     };
-  case 'AUTH_INITIALIZED':
+  case 'AUTH_INIT':
     return {
       ...state,
       initialized: true
