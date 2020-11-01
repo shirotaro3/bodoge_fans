@@ -31,7 +31,6 @@
 
         <script src="{{ asset('js/app.js') }}" defer></script>
         <script>
-            var sessionUser = @json($user);
             navigator.serviceWorker.register('/serviceWorker.js')
                 .then(registration => {
                     registration.onupdatefound = function() {
