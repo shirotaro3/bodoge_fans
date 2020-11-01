@@ -24,9 +24,7 @@ const StyledSliderPlaceholder = styled(SliderPlaceholder)`
   position: relative;
   transition: .3s;
   outline: none;
-  background-image: #888;
-  background-size: cover;
-  background-position: center;
+  background: #888;
   font-size: 14px;
   &__child {
     position: absolute;

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import { spin } from './keyframes';
 
 // 親要素にposition: relativeが必要
@@ -12,7 +13,12 @@ const Loading = ({resolved = false, className}) => {
         </div>
       )}
     </>
-  )
+  );
+};
+
+Loading.propTypes = {
+  resolved: PropTypes.bool,
+  className: PropTypes.string
 };
 
 const StyledLoading = styled(Loading).attrs(props => ({

@@ -3,7 +3,6 @@ var CACHE_NAME  = 'BDGFANS202010';
 var urlsToCache = [
   '/',
   'js/app.js',
-  'api/masters',
   'img/boardgames.jpg',
   'img/dice.jpg',
   'img/event.jpg',

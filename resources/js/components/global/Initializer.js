@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { useGlobalState } from './ContextProvider';
 import axios from 'axios';
 import networkService from './services/networkService';
+import SplashLoader from './SplashLoader';
 
 const Initializer = ({children}) => {
   const [globalState, dispatch] = useGlobalState();
@@ -12,12 +13,19 @@ const Initializer = ({children}) => {
   const masters = globalState.masters;
   const auth = globalState.auth;
   useEffect(() => {
-    const fetchMasterData = async () => {
-      // マスタデータのフェッチ
+    const fetchInitialData = async () => {
+      // InitialDataのフェッチ
       try {
-        const response = await axios.get('/api/masters');
-        const { facilityTypes, budgets, scales, prefectures, services } = response.data;
-        // 値をセット
+        const response = await axios.get('/api/app/init');
+        const {
+          facilityTypes,
+          budgets,
+          scales,
+          prefectures,
+          services,
+          user
+        } = response.data;
+        // マスターデータをセット
         dispatch({
           type: 'SET_MASTERS',
           facilityTypes,
@@ -26,6 +34,14 @@ const Initializer = ({children}) => {
           prefectures,
           services
         });
+
+        // ログインステータスの初期化
+        if (!auth.initialized) {
+          if (user) {
+            dispatch({type: 'LOGIN', data: user});
+          }
+          dispatch({type: 'AUTH_INIT'});
+        }
       } catch (err) {
         dispatch({type: 'ALERT', text: 'サイトの読み込みに失敗しました。'});
       }
@@ -43,22 +59,14 @@ const Initializer = ({children}) => {
       }
     };
 
-    // ログインステータスの初期化
-    /* eslint-disable no-undef */
-    if (sessionUser && !auth.initialized) {
-      dispatch({type: 'LOGIN', data: sessionUser});
-    }
-    /* eslint-enable no-undef */
-    dispatch({type: 'AUTH_INITIALIZED'});
-
-    // マスタデータ取得
-    if (!masters.resolved) {
-      fetchMasterData();
-    }
-
     // ピックアップが取得されていない状態なら取得する
     if (!pickedUpResult.resolved) {
       fetchPickupFacilities();
+    }
+
+    // 初期データ取得
+    if (!masters.resolved) {
+      fetchInitialData();
     }
 
     // networkService初期化
@@ -86,7 +94,7 @@ const Initializer = ({children}) => {
     });
   }, []);
   // ログインステータスが初期化されるまでは、アプリを表示しない
-  return globalState.auth.initialized ? children : <></>;
+  return globalState.auth.initialized ? children : <SplashLoader />;
 };
 
 Initializer.propTypes = {
