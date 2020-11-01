@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { useGlobalState } from './ContextProvider';
 import axios from 'axios';
 import networkService from './services/networkService';
+import SplashLoader from './SplashLoader';
 
 const Initializer = ({children}) => {
   const [globalState, dispatch] = useGlobalState();
@@ -58,6 +59,16 @@ const Initializer = ({children}) => {
       }
     };
 
+    // ピックアップが取得されていない状態なら取得する
+    if (!pickedUpResult.resolved) {
+      fetchPickupFacilities();
+    }
+
+    // 初期データ取得
+    if (!masters.resolved) {
+      fetchInitialData();
+    }
+
     // networkService初期化
     const onUnauthenticated = () => {
       dispatch({type: 'LOGOUT'});
@@ -81,19 +92,9 @@ const Initializer = ({children}) => {
       onRequest,
       onResponse
     });
-
-    // 初期データ取得
-    if (!masters.resolved) {
-      fetchInitialData();
-    }
-
-    // ピックアップが取得されていない状態なら取得する
-    if (!pickedUpResult.resolved) {
-      fetchPickupFacilities();
-    }
   }, []);
   // ログインステータスが初期化されるまでは、アプリを表示しない
-  return globalState.auth.initialized ? children : <></>;
+  return globalState.auth.initialized ? children : <SplashLoader />;
 };
 
 Initializer.propTypes = {
