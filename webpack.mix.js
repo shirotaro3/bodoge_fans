@@ -1,8 +1,11 @@
 const mix = require('laravel-mix');
+const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin');
+const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
+const CompressionPlugin = require('compression-webpack-plugin');
 require('laravel-mix-bundle-analyzer');
 
 // bundleAnalyzer
-if (!mix.inProduction()) {
+if (mix.inProduction()) {
   mix.bundleAnalyzer({
     // ビルドの度にアナライザーが開かないようにする
     openAnalyzer: false,
@@ -11,13 +14,21 @@ if (!mix.inProduction()) {
   });
 }
 
-// // カスタム設定のmerge
-// mix.webpackConfig({
-//   resolve: {
-//     mainFields: ['module', 'main'],
-//     extensions: ['.ts', '.tsx', '.js', '.mjs'],
-//   }
-// });
+// カスタム設定のmerge
+mix.webpackConfig({
+  plugins: [
+    new DuplicatePackageCheckerPlugin(),
+    new LodashModuleReplacementPlugin({
+      collections: true,
+      chaining: true,
+      shorthands: true
+    }),
+    new CompressionPlugin({
+      test: /\.js$/,
+      filename: '[path].gz[query]'
+    })
+  ]
+});
 
 /*
  |--------------------------------------------------------------------------
