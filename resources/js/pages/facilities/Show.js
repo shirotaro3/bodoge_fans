@@ -10,6 +10,7 @@ import NotFound from '../404';
 const FacilitiesShow = ({match}) => {
   const [globalState, dispatch] = useGlobalState();
   const facilityId = Number(match.params.id);
+  const facility = globalState.facilities.data[facilityId];
   const [isNotFound, setIsNotFound] = useState(false);
   useEffect(() => {
     const fetchData = async () => {
@@ -20,8 +21,7 @@ const FacilitiesShow = ({match}) => {
         setIsNotFound(true);
       }
     };
-
-    if (!globalState.facilities.data[facilityId]) {
+    if (!facility) {
       fetchData();
     }
     document.getElementById('app_root').scrollTo({top: 0, left: 0, behavior: 'smooth' });
@@ -35,12 +35,12 @@ const FacilitiesShow = ({match}) => {
     return <NotFound />;
   }
 
-  if (globalState.facilities.data[facilityId]) {
+  if (facility) {
     return (
       <div className='fadein'>
         <HeaderContainer
           facilityId={facilityId}
-          imgUrl={globalState.facilities.data[facilityId].header_image_url}
+          imgUrl={facility.header_image_url}
         />
         <FacilityServices facilityId={facilityId} />
         <Tabs facilityId={facilityId} />

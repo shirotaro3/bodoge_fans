@@ -5,7 +5,8 @@ services:
     container_name: web
     build: ./docker
     ports:
-      - 80:80
+      - "80:80"
+      - "8888:8888"
     privileged: true
     volumes:
       - .:/var/www/html:delegated
@@ -14,7 +15,7 @@ services:
     image: postgres:12.4-alpine
     container_name: postgresql
     ports:
-      - 5433:5432
+      - "5433:5432"
     volumes:
       - ./docker/pgsql/data:/var/lib/pgsql:delegated
     environment:
@@ -40,7 +41,7 @@ services:
     image: dpage/pgadmin4
     container_name: pgadmin4
     ports:
-      - 8080:80
+      - "8080:80"
     volumes:
       - ./docker/pgadmin:/var/lib/pgadmin/storage:delegated
     environment:
