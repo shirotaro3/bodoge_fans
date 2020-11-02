@@ -1,4 +1,23 @@
 const mix = require('laravel-mix');
+require('laravel-mix-bundle-analyzer');
+
+// bundleAnalyzer
+if (!mix.inProduction()) {
+  mix.bundleAnalyzer({
+    // ビルドの度にアナライザーが開かないようにする
+    openAnalyzer: false,
+    // docker環境でも開けるようにホストを変更
+    analyzerHost: '0.0.0.0'
+  });
+}
+
+// // カスタム設定のmerge
+// mix.webpackConfig({
+//   resolve: {
+//     mainFields: ['module', 'main'],
+//     extensions: ['.ts', '.tsx', '.js', '.mjs'],
+//   }
+// });
 
 /*
  |--------------------------------------------------------------------------
@@ -11,5 +30,4 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.react('resources/js/app.js', 'public/js')
-    .sass('resources/sass/app.scss', 'public/css');
+mix.react('resources/js/app.js', 'public/js');
