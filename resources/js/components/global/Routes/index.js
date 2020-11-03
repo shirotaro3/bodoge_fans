@@ -31,7 +31,7 @@ const Routes = () => {
       'page_path': `${location.pathname}${location.search}`,
       'custom_map': {'dimension1': userId}
     });
-  });
+  }, [location.pathname, location.search]);
   return (
     <Switch>
       {/* Common */}
