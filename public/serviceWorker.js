@@ -1,4 +1,4 @@
-var CACHE_NAME  = 'BDGFANS202010';
+var CACHE_NAME  = 'BDGFANS_V3';
 
 var urlsToCache = [
   '/',
@@ -40,6 +40,20 @@ self.addEventListener('fetch', function(event) {
           return response;
         }
         return fetch(event.request);
+      })
+  );
+});
+
+self.addEventListener('activate', function(event) {
+  event.waitUntil(
+    caches
+      .keys()
+      .then(function(names){
+        return Promise.all(names.map(function(name) {
+          if (CACHE_NAME !== name) {
+            return caches.delete(name);
+          }
+        }));
       })
   );
 });
