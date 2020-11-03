@@ -30,4 +30,8 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'ga' => [
+        'id' => env('MIX_GA_MEASUREMENT_ID')
+    ]
+
 ];

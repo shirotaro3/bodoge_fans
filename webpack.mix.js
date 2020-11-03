@@ -5,7 +5,7 @@ const CompressionPlugin = require('compression-webpack-plugin');
 require('laravel-mix-bundle-analyzer');
 
 // bundleAnalyzer
-if (mix.inProduction()) {
+if (!mix.inProduction()) {
   mix.bundleAnalyzer({
     // ビルドの度にアナライザーが開かないようにする
     openAnalyzer: false,
