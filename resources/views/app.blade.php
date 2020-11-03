@@ -33,7 +33,6 @@
         <link rel="apple-touch-startup-image" href="/img/splash/828x1792.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" />
     </head>
     <body>
-        
         <div id="app_root">
         </div>
 
