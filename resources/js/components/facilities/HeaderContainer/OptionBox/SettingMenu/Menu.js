@@ -22,9 +22,9 @@ const Menu = ({className, facilityId}) => {
   const deleteFacility = async () => {
     try {
       await axios.delete(`/api/facilities/${facilityId}`);
+      history.push('/users/dashboard');
       dispatch({type: 'DELETE_FACILITY', id: facilityId});
       dispatch({type: 'MESSAGE', text: '削除しました。'});
-      history.pushState('/users/dashboard');
     } catch (err) {
       console.log(err);
     }

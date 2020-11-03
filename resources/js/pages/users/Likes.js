@@ -29,7 +29,9 @@ const Likes = ({location}) => {
         console.log(err);
       }
     };
-    fetchData();
+    if (likes.length > 0) {
+      fetchData();
+    }
     // willUnmount
     return () => {
       dispatch({type: 'CLEAR_RESULTS'});
