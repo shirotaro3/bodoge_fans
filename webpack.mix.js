@@ -24,8 +24,8 @@ mix.webpackConfig({
       shorthands: true
     }),
     new CompressionPlugin({
+      filename: '[path][base].gz[query]',
       test: /\.js$/,
-      filename: '[path].gz[query]'
     })
   ]
 });
