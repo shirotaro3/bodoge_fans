@@ -1,4 +1,4 @@
-var CACHE_NAME  = 'BDGFANS_V3';
+var CACHE_NAME  = 'BDGFANS_V5';
 
 var urlsToCache = [
   '/',
@@ -22,6 +22,7 @@ var urlsToCache = [
   'https://fonts.gstatic.com/s/nunito/v14/XRXW3I6Li01BKofAjsOUYevIWzgPDA.woff2'
 ];
 self.addEventListener('install', function(event) {
+  self.skipWaiting();
   event.waitUntil(
     caches
       .open(CACHE_NAME)
@@ -29,6 +30,22 @@ self.addEventListener('install', function(event) {
         return cache.addAll(urlsToCache);
       })
   );
+});
+
+self.addEventListener('activate', function(event) {
+  console.log('ServiceWorker is activated.');
+  event.waitUntil(
+    caches
+      .keys()
+      .then(function(names){
+        return Promise.all(names.map(function(name) {
+          if (CACHE_NAME !== name) {
+            return caches.delete(name);
+          }
+        }));
+      })
+  );
+  return self.clients.claim();
 });
 
 self.addEventListener('fetch', function(event) {
@@ -40,20 +57,6 @@ self.addEventListener('fetch', function(event) {
           return response;
         }
         return fetch(event.request);
-      })
-  );
-});
-
-self.addEventListener('activate', function(event) {
-  event.waitUntil(
-    caches
-      .keys()
-      .then(function(names){
-        return Promise.all(names.map(function(name) {
-          if (CACHE_NAME !== name) {
-            return caches.delete(name);
-          }
-        }));
       })
   );
 });

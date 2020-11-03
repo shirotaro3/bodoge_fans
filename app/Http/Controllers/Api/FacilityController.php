@@ -11,6 +11,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\File;
+use Carbon\Carbon;
+use \InterventionImage;
 
 class FacilityController extends Controller
 {
@@ -45,10 +48,17 @@ class FacilityController extends Controller
             $facility = new Facility();
             $facility->fill($request->all());
             $facility->user_id = Auth::user()->id;
-
+            $file = $request->file('header_image');
             // ヘッダー画像の保存
-            if ($request->file('header_image')) {
-                $facility->header_image_path = Storage::disk('s3')->putFile('facilities/header', $request->file('header_image'), 'public');
+            if ($file) {
+                $fileName = $file->hashName();
+                $filePath = 'facilities/header/'.$fileName;
+                $image = InterventionImage::make($file)
+                ->resize(1800, null, function($constraint){
+                    $constraint->aspectRatio();
+                })->resizeCanvas(null, 800)->stream('jpg', 70);
+                Storage::disk('s3')->put('facilities/header/'.$fileName, $image);
+                $facility->header_image_path = $filePath;
             }
             $facility->save();
 
@@ -123,13 +133,20 @@ class FacilityController extends Controller
                 $facility->m_services()->sync($services);
             }
             $facility->fill($request->all());
+            $file = $request->file('header_image');
             // ヘッダー画像の保存
-            if ($request->file('header_image')) {
-                // 新しいファイルを保存
-                $facility->header_image_path = Storage::disk('s3')->putFile('facilities/header', $request->file('header_image'), 'public');
+            if ($file) {
+                $fileName = $file->hashName();
+                $filePath = 'facilities/header/'.$fileName;
+                $image = InterventionImage::make($file)
+                ->resize(1800, null, function($constraint){
+                    $constraint->aspectRatio();
+                })->resizeCanvas(null, 800)->stream('jpg', 70);
+                Storage::disk('s3')->put('facilities/header/'.$fileName, $image);
+                $facility->header_image_path = $filePath;
+                
                 // 古いファイルを削除
                 $old_file_path = $facility->getOriginal('header_image_path');
-
                 if ($old_file_path) {
                     Storage::disk('s3')->delete($old_file_path);
                 }
