@@ -1,5 +1,5 @@
-import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Route, Switch, useLocation } from 'react-router-dom';
 
 import AuthRoute from './AuthRoute';
 import NoAuthRoute from './NoAuthRoute';
@@ -18,7 +18,20 @@ import FacilitiesEdit from '../../../pages/facilities/Edit';
 import FacilitiesSearch from '../../../pages/facilities/Search';
 import NotFound from '../../../pages/404';
 
+import { useGlobalState } from '../ContextProvider';
+
 const Routes = () => {
+  const [globalState, ] = useGlobalState();
+  const userId = globalState.auth.isLoggedIn ? globalState.auth.user.id : 'Guest';
+  const location = useLocation();
+
+  useEffect(() => {
+    window.gtag('config', process.env.MIX_GA_MEASUREMENT_ID, {
+      'user_id': userId,
+      'page_path': `${location.pathname}${location.search}`,
+      'custom_map': {'dimension1': userId}
+    });
+  });
   return (
     <Switch>
       {/* Common */}

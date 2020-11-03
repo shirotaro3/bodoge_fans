@@ -7,7 +7,7 @@ const apiKey = process.env.MIX_GOOGLEMAP_API_KEY;
 
 const GoogleMap = ({address, markerName}) => {
   const [geocode, setGeocode] = useState({lat: 10, lng: 10});
-  const [globalState, dispatch] = useGlobalState();
+  const [ , dispatch] = useGlobalState();
   const defaultCenter = {
     lat: 50,
     lng: 50
@@ -35,7 +35,7 @@ const GoogleMap = ({address, markerName}) => {
 
   return (
     // Important! Always set the container height explicitly
-    <div style={{ height: '40vh', width: '100%' }}>
+    <div style={{ height: '50vh', width: '100%' }}>
       <GoogleMapReact
         bootstrapURLKeys={{ key: apiKey }}
         defaultCenter={defaultCenter}
