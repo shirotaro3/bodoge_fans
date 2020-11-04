@@ -71,10 +71,8 @@ const Initializer = ({children}) => {
 
     // networkService初期化
     const onUnauthenticated = () => {
-      dispatch({type: 'LOGOUT'});
       document.getElementById('app_root').scrollTo({top: 0, left: 0, behavior: 'smooth' });
-      dispatch({type: 'MESSAGE', text: '時間が経過したため、再度ログインしてください。'});
-      history.push('/users/login');
+      history.go(0);
     };
     const onInternalServerError = () => {
       document.getElementById('app_root').scrollTo({top: 0, left: 0, behavior: 'smooth' });

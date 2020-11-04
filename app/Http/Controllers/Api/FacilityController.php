@@ -57,7 +57,7 @@ class FacilityController extends Controller
                 ->resize(1800, null, function($constraint){
                     $constraint->aspectRatio();
                 })->resizeCanvas(null, 800)->stream('jpg', 70);
-                Storage::disk('s3')->put('facilities/header/'.$fileName, $image);
+                Storage::disk('s3')->put('facilities/header/'.$fileName, $image, 'public');
                 $facility->header_image_path = $filePath;
             }
             $facility->save();
@@ -142,7 +142,7 @@ class FacilityController extends Controller
                 ->resize(1800, null, function($constraint){
                     $constraint->aspectRatio();
                 })->resizeCanvas(null, 800)->stream('jpg', 70);
-                Storage::disk('s3')->put('facilities/header/'.$fileName, $image);
+                Storage::disk('s3')->put('facilities/header/'.$fileName, $image, 'public');
                 $facility->header_image_path = $filePath;
                 
                 // 古いファイルを削除
